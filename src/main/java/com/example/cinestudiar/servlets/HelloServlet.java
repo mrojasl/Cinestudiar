@@ -1,4 +1,4 @@
-package com.example.cinestudiar;
+package com.example.cinestudiar.servlets;
 
 import java.io.*;
 import javax.servlet.http.*;
@@ -8,9 +8,7 @@ import javax.servlet.annotation.*;
 public class HelloServlet extends HttpServlet {
     private String message;
 
-    public void init() {
-        message = "Hello World!";
-    }
+    public void init() {message = "Hello World!";}
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");

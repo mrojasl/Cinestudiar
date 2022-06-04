@@ -1,4 +1,4 @@
-package com.example.cinestudiar;
+package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BUser;
 import com.example.cinestudiar.daos.AdminDao;
@@ -13,11 +13,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet",""})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         /*try(PrintWriter printWriter = response.getWriter()) {
             printWriter.println("Hola Mundo");
         }*/
