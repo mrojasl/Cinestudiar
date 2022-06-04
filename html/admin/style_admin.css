@@ -1,0 +1,157 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+.supbarblue{
+    background-color: #597eaa;
+    height: 50px;
+}
+.topmargin{
+    margin-top: 30px;
+    color: white;
+}
+.shortwidthform{
+    width: 300px;
+
+}
+.shortwidth{
+    width: 100px;
+}
+.margintopsala{
+    margin-top: 10px;
+}
+.topsidetxt{
+    margin-left: 200px;
+}
+.topside{
+    background-color: #012154;
+}
+.desc2back{
+    color: black;
+    background-color: #e5e5e5;
+    height: auto;
+}
+.desc1back{
+    color: white;
+    background-color: #45698a;
+    height: auto;
+}
+.buttonswipe{
+    text-align: right;
+}
+.rigthup{
+    float:left;
+}
+.leftfinal{
+    text-align: center;
+    color: white;
+}
+.spaceleft{
+    margin-left: 25px;
+    color: #989898;
+}
+.leftrighttext{
+    margin-left: 270px;
+}
+.leftlefttext{
+    width: 200px;
+    height: 20px;float: left;
+}
+.textchoosereserv{
+    color: white;
+    margin-left: 20px;
+}
+.centradoleftstar{
+    margin-left: 105px;
+}
+.centradoleft{
+    margin-left: 75px;
+}
+.buttonsize{
+    width: 250px;
+    height: 40px;
+    margin-bottom: 10px;
+
+}
+.boxfuncion{
+    color: white;
+    text-align: center;
+    background-color: #111523;
+    width: 250px;
+}
+.funcionestxt{
+    height: 80px;
+    color: white;
+    padding:20px;
+    margin-left: 40px;
+}
+.sugerencia {
+    background-color: #111523;
+    height: 80px;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.rightside{
+    float: right;
+    background-color: #2b2e31;
+    height: 1100px;
+    width: 1200px;
+}
+.leftside{
+    float: left;
+    background-color: #012154;
+    height: 1100px;
+    width: 400px;
+}
+div#general{
+    margin: auto;
+    margin-top: 85px;
+    width: 1600px;
+    height: 700px;
+
+}
+body {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: #2b2e31;
+}
+
+header{
+    position: center;
+    background-color: #003f9e;
+    width: 102%;
+    height: 9vh;
+    color: white;
+    margin-top: -4px;
+    margin-left: -35px;
+
+}
+header h2{
+    position: absolute;
+    margin-top: 25px;
+    left: 10%;
+    height: 100%;
+}
+.nav{
+    position: absolute;
+    min-width: 100%;
+}
+.nav a{
+    position: relative;
+    left:55%;
+    margin-top: 35px;
+    color:white;
+    text-decoration: none;
+    margin-right: 18px;
+}
+
+p.emptytxt{
+    margin-top: 45px;
+    font-size:20px;
+    color:white;
+    font-weight: bold;
+
+}
