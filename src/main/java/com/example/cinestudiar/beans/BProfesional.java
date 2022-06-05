@@ -8,6 +8,7 @@ public class BProfesional {
     private String apellido;
     private String rol;
     private Blob foto;
+    private float calificacion;
 
     public int getIdProfesional() {
         return idProfesional;
@@ -47,5 +48,13 @@ public class BProfesional {
 
     public void setFoto(Blob foto) {
         this.foto = foto;
+    }
+
+    public float getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(float calificacion) {
+        this.calificacion = calificacion;
     }
 }
