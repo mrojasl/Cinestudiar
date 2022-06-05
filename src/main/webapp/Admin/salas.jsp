@@ -25,7 +25,7 @@
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="style_admin.css">
+        <link rel="stylesheet" href="Admin/style_admin.css">
     </head>
     <body class='snippet-body'>
         <jsp:include page="cabecera_admin.jsp"/>
