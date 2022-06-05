@@ -32,16 +32,16 @@
 
         <ul class="nav nav-tabs topside">
             <li class="nav-item topsidetxt">
-                <a class="nav-link" aria-current="page" href="admin_salas.html">Salas</a>
+                <a class="nav-link" aria-current="page" href="salas.jsp">Salas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin_operadores.html">Operadores</a>
+                <a class="nav-link" href="operadores.jsp">Operadores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin_clientes.html">Clientes</a>
+                <a class="nav-link" href="clientes.jsp">Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="admin_actores.html">Actores/Directores</a>
+                <a class="nav-link active" href="actoresydirectores.jsp">Actores/Directores</a>
             </li>
         </ul>
         <div id="general">
