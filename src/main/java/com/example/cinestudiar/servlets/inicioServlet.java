@@ -16,7 +16,7 @@ import java.io.IOException;
 public class inicioServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher requestDispatcher =request.getRequestDispatcher("sin_sesion.jsp");
+        RequestDispatcher requestDispatcher =request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request,response);
 
     }
