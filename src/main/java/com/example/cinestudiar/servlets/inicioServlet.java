@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "inicioServlet", urlPatterns = {"/inicio-servlet",""})
+@WebServlet(name = "inicioServlet", urlPatterns = {"/inicio",""})
 public class inicioServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

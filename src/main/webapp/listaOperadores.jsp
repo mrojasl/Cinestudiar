@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%ArrayList<BUser> listaOperadores=(ArrayList<BUser>) request.getAttribute("listaOperadores");%>
+<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BUser>" scope="request" id="listaOperadores"/>
 <!DOCTYPE html>
 <html>
     <head>
