@@ -13,17 +13,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/admin"})
 public class AdminServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         /*try(PrintWriter printWriter = response.getWriter()) {
             printWriter.println("Hola Mundo");
         }*/
-        ArrayList<BUser> listaOperadores = AdminDao.obtenerOperadores();
+        RequestDispatcher requestDispatcher =request.getRequestDispatcher("Admin/salas.jsp");
+        requestDispatcher.forward(request,response);
+
+        /*ArrayList<BUser> listaOperadores = AdminDao.obtenerOperadores();
         request.setAttribute("listaOperadores",listaOperadores);
         RequestDispatcher view = request.getRequestDispatcher("listaOperadores.jsp");
-        view.forward(request,response);
+        view.forward(request,response);*/
 
 
 
