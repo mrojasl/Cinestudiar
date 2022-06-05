@@ -35,7 +35,7 @@
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="carritocomprasvacio.css" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="Inicio_new/inicio_style.css">
+        <link rel="stylesheet" href="Usuario/inicio_style.css">
 
     </head>
     <body>

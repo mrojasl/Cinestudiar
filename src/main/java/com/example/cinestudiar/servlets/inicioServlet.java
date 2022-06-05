@@ -18,7 +18,5 @@ public class inicioServlet extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher requestDispatcher =request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request,response);
-
     }
-
 }
