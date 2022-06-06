@@ -39,6 +39,7 @@
             <a href="#" class="my-1 mx-1">Mi perfil⠀<i class="bi bi-person-circle"></i></a>
             <a href="../Inicio_new/in_sin_sesion.html" class="my-1 mx-1">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
         </div>
+    </div>
 </header>
 <div id="general">
     <div class="leftside">
