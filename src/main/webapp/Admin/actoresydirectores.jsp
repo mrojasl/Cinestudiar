@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.cinestudiar.beans.BProfesional" %><%--
   Created by IntelliJ IDEA.
   User: Jon
   Date: 5/06/2022
@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BProfesional>" scope="request" id="listaProfesionales"/>
 <html lang="en">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -25,7 +26,7 @@
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="style_admin.css">
+        <link rel="stylesheet" href="Admin/style_admin.css">
     </head>
     <body class='snippet-body'>
         <jsp:include page="cabecera_admin.jsp"/>
@@ -126,15 +127,20 @@
             </div>
             <div class="topmargin">
 
+
+                <%for (BProfesional p: listaProfesionales){
+                String rol;
+                if (p.getRol().equalsIgnoreCase("a")){
+                    rol= "Actor";
+                }else{rol= "Director";}%>
                 <div>
-
                     <div class="row">
                         <div class="input-group mb-3 col">
                             <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Director</h6>
+                            <h6>Nombre:<br> <%= p.getNombre()%>    <%= p.getApellido()%> <br><br> <%= rol%> </h6>
                         </div>
                         <div class="input-group mb-3 col">
                         </div>
@@ -167,221 +173,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Director</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-
-
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Información
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color: black" class="modal-title" id="exampleModalLabel">Información</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <p><Strong>Obras</Strong><br>
-                                                Obra1<br>Obra2<br><br><strong>Calificación promedio</strong><br>4 estrellas</p>
-                                            <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                            <input type="file" class="form-control">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Director</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-
-
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Información
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color: black" class="modal-title" id="exampleModalLabel">Información</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <p><Strong>Obras</Strong><br>
-                                                Obra1<br>Obra2<br><br><strong>Calificación promedio</strong><br>4 estrellas</p>
-                                            <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                            <input type="file" class="form-control">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Director</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-
-
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Información
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color: black" class="modal-title" id="exampleModalLabel">Información</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <p><Strong>Obras</Strong><br>
-                                                Obra1<br>Obra2<br><br><strong>Calificación promedio</strong><br>4 estrellas</p>
-                                            <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                            <input type="file" class="form-control">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Director</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-
-
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Información
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color: black" class="modal-title" id="exampleModalLabel">Información</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <p><Strong>Obras</Strong><br>
-                                                Obra1<br>Obra2<br><br><strong>Calificación promedio</strong><br>4 estrellas</p>
-                                            <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                            <input type="file" class="form-control">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
                         </div>
                         <div class="input-group mb-3 col">
                             <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
@@ -390,6 +181,8 @@
                         <hr>
                     </div>
                 </div>
+                <%}%>
+
             </div>
         </div>
     </body>
