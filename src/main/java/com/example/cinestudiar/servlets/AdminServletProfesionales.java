@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "AdminServletProfesionales", urlPatterns = {"/adminprofesionales"})
+@WebServlet(name = "AdminServletProfesionales", urlPatterns = {"/adminprofesional"})
 public class AdminServletProfesionales extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -33,16 +33,16 @@
 
         <ul class="nav nav-tabs topside">
             <li class="nav-item topsidetxt">
-                <a class="nav-link" aria-current="page" href="salas.jsp">Salas</a>
+                <a class="nav-link" aria-current="page" href="adminsala">Salas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="operadores.jsp">Operadores</a>
+                <a class="nav-link" href="adminoperador">Operadores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="clientes.jsp">Clientes</a>
+                <a class="nav-link" href="admincliente">Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="actoresydirectores.jsp">Actores/Directores</a>
+                <a class="nav-link active" href="adminprofesional">Actores/Directores</a>
             </li>
         </ul>
         <div id="general">

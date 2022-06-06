@@ -1,4 +1,4 @@
-package com.example.cinestudiar.beans;
+/*package com.example.cinestudiar.beans;
 
 public class Bcomprafunciones extends BCompra implements BFuncion {
     private int cantidad_por_funcion;
@@ -32,3 +32,4 @@ public class Bcomprafunciones extends BCompra implements BFuncion {
         this.calificacion = calificacion;
     }
 }
+*/

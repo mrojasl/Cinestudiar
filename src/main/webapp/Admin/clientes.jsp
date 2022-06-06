@@ -34,7 +34,7 @@
 
         <ul class="nav nav-tabs topside">
             <li class="nav-item topsidetxt">
-                <a class="nav-link" aria-current="page" href="adminsalas">Salas</a>
+                <a class="nav-link" aria-current="page" href="adminsala">Salas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="adminoperador">Operadores</a>
@@ -43,7 +43,7 @@
                 <a class="nav-link active" href="admincliente">Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="adminprofesionales">Actores/Directores</a>
+                <a class="nav-link" href="adminprofesional">Actores/Directores</a>
             </li>
         </ul>
         <div id="general">
