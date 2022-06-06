@@ -9,7 +9,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>" scope="request" id="listaSedesYSalas"/>
-
+<%
+    ArrayList<String> listaSedes = new ArrayList<>();
+    for (BSedeYSala se : listaSedesYSalas) {
+        listaSedes.add(se.getSede());
+    }
+    ArrayList<String> listaSedesSinRepetir = Operaciones.quitarDuplicados(listaSedes);
+%>
 <html lang="en">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -70,22 +76,15 @@
 
                                 <div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Nombre</span>
-                                        <input type="text" class="form-control" placeholder="Nombre de Sala"
-                                               aria-label="Sala 1"
-                                               aria-describedby="button-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
                                         <span class="input-group-text">Aforo</span>
                                         <input placeholder="1-100" type="number" name="tentacles" min="1" max="100">
                                     </div>
                                     <div class="input-group mb-3 ">
                                         <label class="input-group-text" for="inputGroupSelect01">Sede</label>
                                         <select class="form-select" id="inputGroupSelect01">
-                                            <option selected>San Miguel</option>
-                                            <option value="1">Surco</option>
-                                            <option value="2">Miraflores</option>
-                                            <option value="3">Pueblo Libre</option>
+                                            <%for (String se3 : listaSedesSinRepetir) {%>
+                                            <option><%=se3%></option>
+                                            <%}%>
                                         </select>
                                     </div>
                                     <div class="input-group mb-3 ">
@@ -104,13 +103,7 @@
                 </div>
                 <div class="margintopsala">
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <%
-                            ArrayList<String> listaSedes = new ArrayList<>();
-                            for (BSedeYSala se : listaSedesYSalas) {
-                                listaSedes.add(se.getSede());
-                        }
-                            ArrayList<String> listaSedesSinRepetir = Operaciones.quitarDuplicados(listaSedes);
-                        %>
+
                         <%for (String se : listaSedesSinRepetir) {%>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -130,23 +123,20 @@
                                         <div class="row">
                                             <h4 class="shortwidth">Sala <%=sa.getIdSala()%></h4>
                                             <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 1"
-                                                       aria-label="Sala 1"
-                                                       aria-describedby="button-addon1">
                                             </div>
                                             <div class="input-group mb-3 col">
                                                 <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
+                                                <input placeholder="<%=sa.getAforoAdministrador()%>" type="number" name="tentacles" min="1"
                                                        max="100">
                                             </div>
                                             <div class="input-group mb-3 col">
                                                 <label class="input-group-text" for="inputGroupSelect01">Sede</label>
                                                 <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>San Miguel</option>
-                                                    <option value="1">Surco</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
+                                                    <option selected><%=se%></option>
+                                                    <%for (String se2 : listaSedesSinRepetir) {
+                                                    if (!se2.equals(se)) {%>
+                                                    <option><%=se2%></option>
+                                                    <%}}%>
                                                 </select>
                                             </div>
                                             <div class="input-group mb-3 col">

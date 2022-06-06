@@ -1,7 +1,6 @@
 package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BSedeYSala;
-import com.example.cinestudiar.beans.BUser;
 import com.example.cinestudiar.daos.AdminDao;
 
 import javax.servlet.RequestDispatcher;
@@ -11,11 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet(name = "AdminServlet", urlPatterns = {"/admin"})
-public class AdminServlet extends HttpServlet {
+@WebServlet(name = "AdminServlet", urlPatterns = {"/adminsalas"})
+public class AdminServletSalas extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
