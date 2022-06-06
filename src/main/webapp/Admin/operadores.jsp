@@ -1,3 +1,4 @@
+<%@ page import="com.example.cinestudiar.beans.BUser" %>
 <%--
   Created by IntelliJ IDEA.
   User: Jon
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BUser>" scope="request" id="listaOperadores"/>
 <html lang="en">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -25,17 +27,17 @@
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="style_admin.css">
+        <link rel="stylesheet" href="Admin/style_admin.css">
     </head>
     <body class='snippet-body'>
         <jsp:include page="cabecera_admin.jsp"/>
 
         <ul class="nav nav-tabs topside">
             <li class="nav-item topsidetxt">
-                <a class="nav-link" aria-current="page" href="salas.jsp">Salas</a>
+                <a class="nav-link" aria-current="page" href="adminsalas">Salas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="operadores.jsp">Operadores</a>
+                <a class="nav-link active" href="adminoperador">Operadores</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="clientes.jsp">Clientes</a>
@@ -111,17 +113,17 @@
             <div class="topmargin">
 
                 <div>
-
+                    <%for (BUser op : listaOperadores) {%>
                     <div class="row">
                         <div class="input-group mb-3 col">
                             <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
+                            <h6>Nombre:<br><%=op.getNombres()%> <br><br>Código PUCP:<br><%=op.getCodigoPucp()%> </h6>
                         </div>
                         <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>operador@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
+                            <h6>Correo PUCP:<br><%=op.getCodigoPucp()%> <br><br>Celular:<br><%=op.getTelefono()%></h6>
                         </div>
                         <div class="input-group mb-3 col">
                         </div>
@@ -130,89 +132,18 @@
                             </button>
                         </div>
                         <hr>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>operador@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>operador@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
-                        </div>
-                        <hr>
+                        <%}%>
                     </div>
 
 
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>operador@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
 
 
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
 
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>operador@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
+
+
+
+
+
                 </div>
             </div>
         </div>

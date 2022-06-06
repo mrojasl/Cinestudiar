@@ -1,0 +1,28 @@
+package com.example.cinestudiar.servlets;
+
+import com.example.cinestudiar.beans.BSedeYSala;
+import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.daos.AdminDao;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+import java.util.ArrayList;
+
+@WebServlet(name = "AdminOperadoresServlet", value = "/adminoperador")
+public class AdminOperadoresServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        ArrayList<BUser> listaOperadores=AdminDao.obtenerOperadores();
+        request.setAttribute("listaOperadores",listaOperadores);
+        RequestDispatcher rd =request.getRequestDispatcher("Admin/operadores.jsp");
+        rd.forward(request,response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+}
