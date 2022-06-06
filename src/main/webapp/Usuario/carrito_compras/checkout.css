@@ -94,7 +94,7 @@ textarea {
     border: 1px solid #F3E5F5;
     font-size: 15px !important;
     color: #000 !important;
-    font-weight: 5px;
+    /*font-weight: 5px*/
 }
 
 input:focus,
@@ -128,7 +128,7 @@ button:focus {
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
     -o-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
+    /*-ms-filter: grayscale(100%);*/
     filter: grayscale(100%);
     color: #E0E0E0
 }
