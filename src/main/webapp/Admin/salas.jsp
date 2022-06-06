@@ -1,4 +1,6 @@
-<%--
+<%@ page import="com.example.cinestudiar.beans.BSedeYSala" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.cinestudiar.funciones.Operaciones" %><%--
   Created by IntelliJ IDEA.
   User: Jon
   Date: 5/06/2022
@@ -6,6 +8,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>" scope="request" id="listaSedesYSalas"/>
+<%
+    ArrayList<String> listaSedes = new ArrayList<>();
+    for (BSedeYSala se : listaSedesYSalas) {
+        listaSedes.add(se.getSede());
+    }
+    ArrayList<String> listaSedesSinRepetir = Operaciones.quitarDuplicados(listaSedes);
+%>
 <html lang="en">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -66,22 +76,15 @@
 
                                 <div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Nombre</span>
-                                        <input type="text" class="form-control" placeholder="Nombre de Sala"
-                                               aria-label="Sala 1"
-                                               aria-describedby="button-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
                                         <span class="input-group-text">Aforo</span>
                                         <input placeholder="1-100" type="number" name="tentacles" min="1" max="100">
                                     </div>
                                     <div class="input-group mb-3 ">
                                         <label class="input-group-text" for="inputGroupSelect01">Sede</label>
                                         <select class="form-select" id="inputGroupSelect01">
-                                            <option selected>San Miguel</option>
-                                            <option value="1">Surco</option>
-                                            <option value="2">Miraflores</option>
-                                            <option value="3">Pueblo Libre</option>
+                                            <%for (String se3 : listaSedesSinRepetir) {%>
+                                            <option><%=se3%></option>
+                                            <%}%>
                                         </select>
                                     </div>
                                     <div class="input-group mb-3 ">
@@ -99,41 +102,42 @@
                     </div>
                 </div>
                 <div class="margintopsala">
+
                     <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <%for (String se : listaSedesSinRepetir) {
+                            int i = 1;%>
+
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <h2 class="accordion-header" id="panelsStayOpen-heading<%=i%>">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseOne">
-                                    San Miguel
+                                        data-bs-target="#panelsStayOpen-collapse<%=i%>" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapse<%=i%>">
+                                    <%=se%>
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
-                                 aria-labelledby="panelsStayOpen-headingOne">
+                            <div id="panelsStayOpen-collapse<%=i%>" class="accordion-collapse collapse"
+                                 aria-labelledby="panelsStayOpen-heading<%=i%>">
                                 <div class="accordion-body">
 
                                     <div>
-
+                                        <%for (BSedeYSala sa : listaSedesYSalas) {
+                                        if(sa.getSede().equals(se)) {%>
                                         <div class="row">
-                                            <h4 class="shortwidth">Sala 1</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 1"
-                                                       aria-label="Sala 1"
-                                                       aria-describedby="button-addon1">
-                                            </div>
+                                            <h4 class="shortwidth">Sala</h4>
+                                            <h4 class="shortwidth"><%=sa.getIdSala()%></h4>
                                             <div class="input-group mb-3 col">
                                                 <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
+                                                <input placeholder="<%=sa.getAforoAdministrador()%>" type="number" name="tentacles" min="1"
                                                        max="100">
                                             </div>
                                             <div class="input-group mb-3 col">
                                                 <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>San Miguel</option>
-                                                    <option value="1">Surco</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
+                                                <select class="form-select">
+                                                    <option selected><%=se%></option>
+                                                    <%for (String se2 : listaSedesSinRepetir) {
+                                                    if (!se2.equals(se)) {%>
+                                                    <option><%=se2%></option>
+                                                    <%}}%>
                                                 </select>
                                             </div>
                                             <div class="input-group mb-3 col">
@@ -148,624 +152,16 @@
                                             <hr>
                                         </div>
 
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 2</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 2"
-                                                       aria-label="Sala 2"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>San Miguel</option>
-                                                    <option value="1">Surco</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 3</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 3"
-                                                       aria-label="Sala 3"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>San Miguel</option>
-                                                    <option value="1">Surco</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 4</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 4"
-                                                       aria-label="Sala 4"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>San Miguel</option>
-                                                    <option value="1">Surco</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 5</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 5"
-                                                       aria-label="Sala 5"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>San Miguel</option>
-                                                    <option value="1">Surco</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
+                                        <%}}%>
                                     </div>
-
 
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseTwo">
-                                    Miraflores
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
-                                 aria-labelledby="panelsStayOpen-headingTwo">
-                                <div class="accordion-body">
-
-                                    <div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 1</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 1"
-                                                       aria-label="Sala 1"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Miraflores</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Surco</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 2</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 2"
-                                                       aria-label="Sala 2"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Miraflores</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Surco</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 3</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 3"
-                                                       aria-label="Sala 3"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Miraflores</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Surco</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 4</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 4"
-                                                       aria-label="Sala 4"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Miraflores</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Surco</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseThree">
-                                    Surco
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
-                                 aria-labelledby="panelsStayOpen-headingThree">
-                                <div class="accordion-body">
-                                    <div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 1</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 1"
-                                                       aria-label="Sala 1"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Surco</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 2</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 2"
-                                                       aria-label="Sala 2"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Surco</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 3</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 3"
-                                                       aria-label="Sala 3"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Surco</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 4</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 4"
-                                                       aria-label="Sala 4"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Surco</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Miraflores</option>
-                                                    <option value="3">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseFour">
-                                    Pueblo Libre
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
-                                 aria-labelledby="panelsStayOpen-headingFour">
-                                <div class="accordion-body">
-
-
-                                    <div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 1</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 1"
-                                                       aria-label="Sala 1"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Pueblo Libre</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Surco</option>
-                                                    <option value="3">Miraflores</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 2</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 2"
-                                                       aria-label="Sala 2"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Pueblo Libre</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Surco</option>
-                                                    <option value="3">Miraflores</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 3</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 3"
-                                                       aria-label="Sala 3"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Pueblo Libre</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Surco</option>
-                                                    <option value="3">Miraflores</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala 4</h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Nombre</span>
-                                                <input type="text" class="form-control" placeholder="Sala 4"
-                                                       aria-label="Sala 4"
-                                                       aria-describedby="button-addon1">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="20" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Pueblo Libre</option>
-                                                    <option value="1">San Miguel</option>
-                                                    <option value="2">Surco</option>
-                                                    <option value="3">Miraflores</option>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
-
-
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
+                        <%i++;
+                        }%>
                     </div>
+
                 </div>
             </div>
         </div>
