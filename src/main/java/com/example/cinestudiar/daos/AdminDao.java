@@ -15,7 +15,7 @@ public class AdminDao {
             String pass = "root";
             String url = "jdbc:mysql://localhost:3306/mysystem4";
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql = "select codigo_pucp,nombre,apellido,dni from usuarios where rol='operador' order by codigo_pucp;";
+            String sql = "select codigo_pucp,nombre,apellido,dni,correo,telefono from usuarios where rol='operador' order by codigo_pucp;";
             Connection conn = DriverManager.getConnection(url,user,pass);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -26,6 +26,9 @@ public class AdminDao {
                 op.setNombres(rs.getString(2));
                 op.setApellidos(rs.getString(3));
                 op.setDni(rs.getString(4));
+                op.setCorreo(rs.getString(5));
+                op.setTelefono(rs.getString(6));
+
 
                 listaOperadores.add(op);
             }
