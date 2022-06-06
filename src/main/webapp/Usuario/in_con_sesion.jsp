@@ -31,14 +31,11 @@
 <body class='snippet-body'>
 <header>
     <h2>Cinestudiar</h2>
-    <div class="d-flex justify-content pt-5">
-        <h2 class="p-0 m-0">Cinestudiar</h2>
-        <div class="elementos">
-            <a href="../Inicio_new/in_con_sesion.html" class="my-1 mx-1">Inicio⠀<i class="bi bi-house-fill"></i> </a>
-            <a href="../carrito/checkout.html" class="my-1 mx-1">Carrito de compras⠀<i class="bi bi-cart-fill"></i></a>
-            <a href="#" class="my-1 mx-1">Mi perfil⠀<i class="bi bi-person-circle"></i></a>
-            <a href="../Inicio_new/in_sin_sesion.html" class="my-1 mx-1">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
-        </div>
+    <div class="nav">
+        <a href="in_con_sesion.html">Inicio⠀<i class="bi bi-house-fill"></i> </a>
+        <a href="../carrito/checkout.html">Carrito de compras⠀<i class="bi bi-cart-fill"></i></a>
+        <a href="../PerfilUsuario/ClientePerfilNuevo.htmll">Mi Perfil <i class="bi bi-person-circle"></i></a>
+        <a href="in_sin_sesion.html">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
     </div>
 </header>
 <div id="general">
