@@ -1,5 +1,6 @@
 package com.example.cinestudiar.servlets;
 
+import com.example.cinestudiar.beans.BSedeYSala;
 import com.example.cinestudiar.beans.BUser;
 import com.example.cinestudiar.daos.AdminDao;
 
@@ -21,8 +22,10 @@ public class AdminServlet extends HttpServlet {
         /*try(PrintWriter printWriter = response.getWriter()) {
             printWriter.println("Hola Mundo");
         }*/
-        RequestDispatcher requestDispatcher =request.getRequestDispatcher("Admin/salas.jsp");
-        requestDispatcher.forward(request,response);
+        ArrayList<BSedeYSala> listaSedesYSalas = AdminDao.obtenerSedesySalas();
+        request.setAttribute("listaSedesYSalas",listaSedesYSalas);
+        RequestDispatcher rd =request.getRequestDispatcher("Admin/salas.jsp");
+        rd.forward(request,response);
 
         /*ArrayList<BUser> listaOperadores = AdminDao.obtenerOperadores();
         request.setAttribute("listaOperadores",listaOperadores);
