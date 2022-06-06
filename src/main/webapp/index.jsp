@@ -48,7 +48,7 @@
                 <div class="centradoleft">
                     <div class="boxfuncion">
                         <h5>El Hombre Araña 2</h5>
-                        <img src="Inicio_new/imag_inicio/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
+                        <img src="Usuario/imag_inicio/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
                     </div>
                     <button type="button" class="btn btn-secondary buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Más información</button>
 
@@ -89,11 +89,11 @@
 
 
                 <div class="centradoleftstar">
-                    <img src="Inicio_new/imag_inicio/estrella.png" height="35px" width="35px">
-                    <img src="Inicio_new/imag_inicio/estrella.png" height="35px" width="35px">
-                    <img src="Inicio_new/imag_inicio/estrella.png" height="35px" width="35px">
-                    <img src="Inicio_new/imag_inicio/estrella.png" height="35px" width="35px">
-                    <img src="Inicio_new/imag_inicio/estrella.png" height="35px" width="35px">
+                    <img src="Usuario/imag_inicio/estrella.png" height="35px" width="35px">
+                    <img src="Usuario/imag_inicio/estrella.png" height="35px" width="35px">
+                    <img src="Usuario/imag_inicio/estrella.png" height="35px" width="35px">
+                    <img src="Usuario/imag_inicio/estrella.png" height="35px" width="35px">
+                    <img src="Usuario/imag_inicio/estrella.png" height="35px" width="35px">
                 </div>
                 <br>
                 <div>
@@ -158,7 +158,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>Doctor Strange 2</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -166,7 +166,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>El Hombre Araña 2</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -174,7 +174,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>Los Cazafantasmas</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie2.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie2.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -184,7 +184,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>Halloween</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie3.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie3.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -192,7 +192,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>Titanic</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie4.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie4.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -200,7 +200,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>King Kong</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie5.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie5.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -216,7 +216,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>Viernes 13</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie6.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie6.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -224,7 +224,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>Scream</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie8.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie8.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -232,7 +232,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>El Aro 3</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie9.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie9.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -242,7 +242,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>SAW VIII</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie10.webp" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie10.webp" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -250,7 +250,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>Soy Leyenda</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie11.webp" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie11.webp" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
@@ -258,7 +258,7 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5>Destino Final</h5>
-                                            <img src="Inicio_new/imag_inicio/poster_movie12.jpg" alt="poster_movie" width="250px" height="380px">
+                                            <img src="Usuario/imag_inicio/poster_movie12.jpg" alt="poster_movie" width="250px" height="380px">
                                         </div>
                                         <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>

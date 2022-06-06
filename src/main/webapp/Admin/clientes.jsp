@@ -82,7 +82,7 @@
                     <%for (BUser cl : listaClientes) {%>
                     <div class="row">
                         <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
+                            <img src="Admin/perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
                         </div>
 
                         <div class="input-group mb-3 col">
