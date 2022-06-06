@@ -35,20 +35,7 @@
 </head>
 <body oncontextmenu='xd' class='snippet-body'>
 
-<header >
-    <div class="d-flex justify-content pt-5">
-        <h2 class="p-0 m-0">Cinestudiar</h2>
-        <div class="elementos">
-
-            <a href="../Inicio_new/in_con_sesion.html" class="my-1 mx-1">Inicio⠀<i class="bi bi-house-fill"></i> </a>
-            <a href="../carrito/checkout.html" class="my-1 mx-1">Carrito de compras⠀<i class="bi bi-cart-fill"></i></a>
-            <a href="../PerfilUsuario/ClientePerfilNuevo.html" class="my-1 mx-1">Your Name⠀<i class="bi bi-person-circle"></i></a>
-            <a href="../Inicio_new/in_sin_sesion.html" class="my-1 mx-1">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
-        </div>
-    </div>
-
-
-</header>
+<jsp:include page="cabecera_usuario.jsp"/>
 
 
 

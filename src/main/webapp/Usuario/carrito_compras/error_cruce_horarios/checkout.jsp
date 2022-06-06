@@ -40,38 +40,7 @@
 <body oncontextmenu='xd' class='snippet-body'>
 
 
-<header >
-    <div class="d-flex justify-content pt-5">
-        <h2 class="p-0 m-0">Cinestudiar</h2>
-        <div class="elementos">
-
-            <a href="#" class="my-1 mx-1">Inicio⠀<i class="bi bi-house-fill"></i> </a>
-            <a href="#" class="my-1 mx-1">Carrito de compras⠀<i class="bi bi-cart-fill"></i></a>
-            <a href="#" class="my-1 mx-1">Your Name⠀<i class="bi bi-person-circle"></i></a>
-            <a href="#" class="my-1 mx-1">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
-        </div>
-    </div>
-
-
-</header>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<jsp:include page="cabecera_usuario.jsp"/>
 
 
 <div class="container px-4 py-5 mx-auto">
