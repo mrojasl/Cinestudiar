@@ -115,7 +115,7 @@ public class AdminDao {
                 pr.setIdProfesional(rs.getInt(1));
                 pr.setNombre(rs.getString(2));
                 pr.setApellido(rs.getString(3));
-
+                pr.setRol(rs.getString(4));
                 listaProfesionales.add(pr);
             }
 
