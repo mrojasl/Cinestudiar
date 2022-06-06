@@ -102,28 +102,29 @@
                     </div>
                 </div>
                 <div class="margintopsala">
-                    <div class="accordion" id="accordionPanelsStayOpenExample">
 
-                        <%for (String se : listaSedesSinRepetir) {%>
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <%for (String se : listaSedesSinRepetir) {
+                            int i = 1;%>
+
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <h2 class="accordion-header" id="panelsStayOpen-heading<%=i%>">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseOne">
+                                        data-bs-target="#panelsStayOpen-collapse<%=i%>" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapse<%=i%>">
                                     <%=se%>
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
-                                 aria-labelledby="panelsStayOpen-headingOne">
+                            <div id="panelsStayOpen-collapse<%=i%>" class="accordion-collapse collapse"
+                                 aria-labelledby="panelsStayOpen-heading<%=i%>">
                                 <div class="accordion-body">
 
                                     <div>
                                         <%for (BSedeYSala sa : listaSedesYSalas) {
                                         if(sa.getSede().equals(se)) {%>
                                         <div class="row">
-                                            <h4 class="shortwidth">Sala <%=sa.getIdSala()%></h4>
-                                            <div class="input-group mb-3 col">
-                                            </div>
+                                            <h4 class="shortwidth">Sala</h4>
+                                            <h4 class="shortwidth"><%=sa.getIdSala()%></h4>
                                             <div class="input-group mb-3 col">
                                                 <span class="input-group-text">Aforo</span>
                                                 <input placeholder="<%=sa.getAforoAdministrador()%>" type="number" name="tentacles" min="1"
@@ -131,7 +132,7 @@
                                             </div>
                                             <div class="input-group mb-3 col">
                                                 <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select" id="inputGroupSelect01">
+                                                <select class="form-select">
                                                     <option selected><%=se%></option>
                                                     <%for (String se2 : listaSedesSinRepetir) {
                                                     if (!se2.equals(se)) {%>
@@ -157,8 +158,10 @@
                                 </div>
                             </div>
                         </div>
-                        <%}%>
+                        <%i++;
+                        }%>
                     </div>
+
                 </div>
             </div>
         </div>
