@@ -10,11 +10,10 @@ header{
     width: auto;
     height: 11vh;
     color: white;
-
 }
 header h2{
     position: absolute;
-    left: 20%;
+    left: 10%;
     top:4%;
 }
 .elementos{
@@ -23,19 +22,20 @@ header h2{
 }
 .elementos a{
     position: relative;
-    left:90%;
+    left:65%;
     top:0%;
     color:white;
     text-decoration: none;
     margin-right: 5px;
 }
-.administrador{
-    background-color: #7e7878;
-    width: auto;
-    height: 6vh;
-}
-.administrador h3{
-    position: absolute;
-    color: #ece9e9;
-    left: 50%;
+
+
+
+
+p.emptytxt{
+    margin-top: 45px;
+    font-size:20px;
+    color:white;
+    font-weight: bold;
+
 }
