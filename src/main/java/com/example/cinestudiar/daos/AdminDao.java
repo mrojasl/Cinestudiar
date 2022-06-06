@@ -161,4 +161,37 @@ public class AdminDao {
         }
         return listaClientesPorSede;
     }
+
+    public static ArrayList<BUser> obtenerClientesPorFuncion(){
+        ArrayList<BUser> listaClientesPorFuncion= new ArrayList<>();
+        try {
+            String user = "root";
+            String pass = "root";
+            String url = "jdbc:mysql://localhost:3306/mysystem4";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String sql ="select f.fecha ,c.pago_total ,co.cantidad_por_funcion,u.codigo_pucp"+
+                    " from funciones f inner join compradefunciones co on (f.idfuncion=co.idfuncion)"+
+                     "inner join compras c on (c.idcompra=co.idcompra)"+
+                    "inner join usuarios u on (u.codigo_pucp=c.codigo_pucp)"+
+            "group by f.idfuncion,u.codigo_pucp;";
+
+            Connection conn = DriverManager.getConnection(url,user,pass);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()){
+                BUser cl = new BUser();
+                cl.setCodigoPucp(rs.getString(1));
+                cl.setNombres(rs.getString(2));
+                cl.setApellidos(rs.getString(3));
+                cl.setDni(rs.getString(4));
+
+                listaClientesPorFuncion.add(cl);
+            }
+
+        } catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
+        return listaClientesPorFuncion;
+    }
 }
