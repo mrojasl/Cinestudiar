@@ -1,0 +1,40 @@
+body {
+    background-image: url("https://drive.google.com/uc?export=view&id=1zlb3YXP4dZ4HlsdaAeRdUn9v7psnJVpL");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+header{
+    background-color: #003f9e;
+    width: auto;
+    height: 11vh;
+    color: white;
+}
+header h2{
+    position: absolute;
+    left: 10%;
+    top:4%;
+}
+.elementos{
+    position: absolute;
+    left: 25%;
+}
+.elementos a{
+    position: relative;
+    left:65%;
+    top:0%;
+    color:white;
+    text-decoration: none;
+    margin-right: 5px;
+}
+.administrador{
+    background-color: #7e7878;
+    width: auto;
+    height: 6vh;
+}
+.administrador h3{
+    position: absolute;
+    color: #ece9e9;
+    left: 50%;
+}
