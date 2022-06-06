@@ -28,8 +28,6 @@ public class AdminDao {
                 op.setDni(rs.getString(4));
                 op.setCorreo(rs.getString(5));
                 op.setTelefono(rs.getString(6));
-
-
                 listaOperadores.add(op);
             }
 

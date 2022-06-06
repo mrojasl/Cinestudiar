@@ -1,3 +1,4 @@
+<%@ page import="com.example.cinestudiar.beans.BUser" %>
 <%--
   Created by IntelliJ IDEA.
   User: Jon
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BUser>" scope="request" id="listaClientes"/>
 <html lang="en">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -25,23 +27,23 @@
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="style_admin.css">
+        <link rel="stylesheet" href="Admin/style_admin.css">
     </head>
     <body class='snippet-body'>
         <jsp:include page="cabecera_admin.jsp"/>
 
         <ul class="nav nav-tabs topside">
             <li class="nav-item topsidetxt">
-                <a class="nav-link" aria-current="page" href="salas.jsp">Salas</a>
+                <a class="nav-link" aria-current="page" href="adminsalas">Salas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="operadores.jsp">Operadores</a>
+                <a class="nav-link" href="adminoperador">Operadores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="clientes.jsp">Clientes</a>
+                <a class="nav-link active" href="admincliente">Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="actoresydirectores.jsp">Actores/Directores</a>
+                <a class="nav-link" href="adminprofesionales">Actores/Directores</a>
             </li>
         </ul>
         <div id="general">
@@ -77,17 +79,17 @@
             <div class="topmargin">
 
                 <div>
-
+                    <%for (BUser cl : listaClientes) {%>
                     <div class="row">
                         <div class="input-group mb-3 col">
                             <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
+                            <h6>Nombre:<br><%=cl.getNombres()+""+cl.getApellidos()%> <br><br>Código PUCP:<br><%=cl.getCodigoPucp()%></h6>
                         </div>
                         <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>cliente@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
+                            <h6>Correo PUCP:<br><%=cl.getCorreo()%> <br><br>Celular:<br><%=cl.getTelefono()%></h6>
                         </div>
                         <div class="input-group mb-3 col">
                         </div>
@@ -174,356 +176,11 @@
                         </div>
                         <hr>
                     </div>
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>cliente@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Historial de compras
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color:black;" class="modal-title" id="exampleModalLabel2">Historia de compras</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <h5><Strong>NombreFuncion1</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion2</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion3</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion4</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion5</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion6</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion7</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion8</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion9</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion10</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion11</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion12</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion13</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion14</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion15</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion16</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>cliente@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Historial de compras
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color:black;" class="modal-title" id="exampleModalLabel2">Historia de compras</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <h5><Strong>NombreFuncion1</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion2</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion3</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion4</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion5</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion6</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion7</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion8</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion9</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion10</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion11</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion12</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion13</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion14</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion15</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion16</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
+                    <%}%>
 
 
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>cliente@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Historial de compras
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color:black;" class="modal-title" id="exampleModalLabel2">Historia de compras</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <h5><Strong>NombreFuncion1</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion2</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion3</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion4</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion5</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion6</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion7</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion8</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion9</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion10</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion11</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion12</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion13</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion14</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion15</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion16</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
 
 
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Nombre nombre Apellido apellido <br><br>Código PUCP:<br>20100000</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br>cliente@pucp.edu.pe <br><br>Celular:<br>987654321</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Historial de compras
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color:black;" class="modal-title" id="exampleModalLabel2">Historia de compras</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <h5><Strong>NombreFuncion1</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion2</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion3</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion4</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion5</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion6</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion7</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion8</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion9</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion10</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion11</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion12</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion13</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion14</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion15</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion16</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
                 </div>
             </div>
         </div>
