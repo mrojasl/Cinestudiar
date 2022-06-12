@@ -1,14 +1,9 @@
 <%@ page import="com.example.cinestudiar.beans.BSedeYSala" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.cinestudiar.funciones.Operaciones" %><%--
-  Created by IntelliJ IDEA.
-  User: Jon
-  Date: 5/06/2022
-  Time: 15:04
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.cinestudiar.funciones.Operaciones" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>" scope="request" id="listaSedesYSalas"/>
+
 <%
     ArrayList<String> listaSedes = new ArrayList<>();
     for (BSedeYSala se : listaSedesYSalas) {
@@ -42,16 +37,16 @@
 
         <ul class="nav nav-tabs topside">
             <li class="nav-item topsidetxt">
-                <a class="nav-link active" aria-current="page" href="adminsala">Salas</a>
+                <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/ServAdmin">Salas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="adminoperador">Operadores</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=operador">Operadores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admincliente">Clientes</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=cliente">Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="adminprofesional">Actores/Directores</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=profesional">Actores/Directores</a>
             </li>
         </ul>
         <div id="general">

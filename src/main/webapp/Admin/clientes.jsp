@@ -34,16 +34,16 @@
 
         <ul class="nav nav-tabs topside">
             <li class="nav-item topsidetxt">
-                <a class="nav-link" aria-current="page" href="adminsala">Salas</a>
+                <a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/ServAdmin">Salas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="adminoperador">Operadores</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=operador">Operadores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="admincliente">Clientes</a>
+                <a class="nav-link active" href="<%=request.getContextPath()%>/ServAdmin?admin=cliente">Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="adminprofesional">Actores/Directores</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=profesional">Actores/Directores</a>
             </li>
         </ul>
         <div id="general">
