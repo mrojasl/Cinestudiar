@@ -75,7 +75,7 @@ public class AdminDao {
             String pass = "root";
             String url = "jdbc:mysql://localhost:3306/mysystem4";
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql = "select se.nombre_sede,sa.idsala,sa.aforo_administrador\n" +
+            String sql = "select se.nombre_sede,sa.idsala,sa.aforo_administrador,sa.aforo_operador\n" +
                     "from sedes se inner join salas sa\n" +
                     "on (se.nombre_sede=sa.nombre_sede)\n" +
                     "order by se.nombre_sede,sa.idsala;";
@@ -88,6 +88,7 @@ public class AdminDao {
                 sa.setSede(rs.getString(1));
                 sa.setIdSala(rs.getInt(2));
                 sa.setAforoAdministrador(rs.getString(3));
+                sa.setAforoOperador(rs.getString(4));
 
                 listaSedesySalas.add(sa);
             }
