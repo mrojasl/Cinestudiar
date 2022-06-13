@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.ArrayList;
 
 @WebServlet(name = "ServAdmin", value = "/ServAdmin")
@@ -71,9 +72,11 @@ public class ServAdmin extends HttpServlet {
 
 
             case "crearprofesinal":
-
-
-
+                String nombreyapellido = request.getParameter("nombreyapellido");
+                String profesion = request.getParameter("profesion");
+                Blob fotodeperfil = null;
+                AdminDao.crearProfesional(nombreyapellido,  profesion, fotodeperfil);
+                response.sendRedirect(request.getContextPath() + "/ServAdmin");
         }
 
     }

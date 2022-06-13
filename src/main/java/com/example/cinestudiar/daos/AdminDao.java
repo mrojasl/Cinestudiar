@@ -194,4 +194,35 @@ public class AdminDao {
         }
         return listaClientesPorFuncion;
     }
+    public static void crearProfesional(String nombreyapellido, String profesion, Blob fotodeperfil) {
+        String[] nombreyapellido_sepa= nombreyapellido.split(" ");
+        if(profesion.equalsIgnoreCase("Actor")){
+            profesion= "a";
+        }else profesion= "d";
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/hr";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "INSERT INTO profesionales (nombre, apellido,rol,foto) VALUES (?,?,?,?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, nombreyapellido_sepa[0]);
+            pstmt.setString(2, nombreyapellido_sepa[1]);
+            pstmt.setString(3, profesion);
+            pstmt.setBlob(4, fotodeperfil);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
+
