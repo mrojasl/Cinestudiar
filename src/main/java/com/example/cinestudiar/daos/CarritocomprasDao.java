@@ -37,11 +37,8 @@ public class CarritocomprasDao {
 
 
             }
-            System.out.println(carritoCliente.get(1).getNombres());
-            System.out.println(carritoCliente.get(1).getNombres());
-            System.out.println(carritoCliente.get(1).getNombres());
-            System.out.println(carritoCliente.get(1).getNombres());
-            System.out.println(carritoCliente.get(1).getNombres());
+
+
 
         } catch (ClassNotFoundException | SQLException e){
             e.printStackTrace();
