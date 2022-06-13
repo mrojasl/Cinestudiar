@@ -88,7 +88,7 @@
                                 </div>
                                 <br>
 
-                                <form class="user" >
+                                <form class="user" action="<%=request.getContextPath()%>/UsuarioServlet?a=crear" >
                                     <!-- Nombre completo-->
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
@@ -135,7 +135,7 @@
                                         <input type="password" class="form-control form-control-user"
                                                id="exampleRepeatPassword" placeholder="Repita su contraseña">
                                     </div>
-                                    <a href="../Inicio_new/in_con_sesion.html" class="btn btn-primary btn-user btn-block">
+                                    <a href="<%=request.getContextPath()%>/UsuarioServlet" class="btn btn-primary btn-user btn-block">
                                         Crear usuario
                                     </a>
                                     <hr>
