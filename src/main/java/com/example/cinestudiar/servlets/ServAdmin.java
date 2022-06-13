@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.ArrayList;
 
 @WebServlet(name = "ServAdmin", value = "/ServAdmin")
@@ -61,6 +62,47 @@ public class ServAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("admin") == null? "sala" : request.getParameter("admin");
 
+
+        switch (action) {
+            case "crearsala" -> {
+                int aforo = Integer.parseInt(request.getParameter("aforo"));
+                String sede = request.getParameter("sede");
+                AdminDao.crearSala(aforo, sede);
+                response.sendRedirect(request.getContextPath() + "/ServAdmin");
+                break;
+            }
+
+            case "editaroborrarsala" -> {
+                int aforo2 = Integer.parseInt(request.getParameter("aforo2"));
+                String sede2 = request.getParameter("sede2");
+                int id = Integer.parseInt(request.getParameter("id"));
+                int aforo_op=Integer.parseInt(request.getParameter("aforo_op"));
+
+                if (request.getParameter("editar")!=null){
+                    AdminDao.editarSala(id,aforo2,aforo_op,sede2);
+                } else if (request.getParameter("borrar")!=null){
+                    AdminDao.borrarSala(id);
+                }
+                response.sendRedirect(request.getContextPath() + "/ServAdmin");
+                break;
+            }
+
+            case "crearprofesional" -> {
+                String nombreyapellido = request.getParameter("nombreyapellido");
+                String profesion = request.getParameter("profesion");
+                Blob fotodeperfil = null;
+                String[] nombreyapellido_sepa = nombreyapellido.split(" ");
+                if (profesion.equalsIgnoreCase("Actor")) {
+                    profesion = "a";
+                } else profesion = "d";
+                AdminDao.crearProfesional(nombreyapellido_sepa[0], nombreyapellido_sepa[1], profesion, fotodeperfil);
+                response.sendRedirect(request.getContextPath() + "/ServAdmin");
+                break;
+            }
+
+
+        }
     }
 }

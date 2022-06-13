@@ -68,30 +68,31 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=crearsala">
+                                    <div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Aforo</span>
+                                            <input placeholder="1-100" type="number" name="aforo" min="1" max="100">
+                                        </div>
+                                        <div class="input-group mb-3 ">
+                                            <label class="input-group-text" for="inputGroupSelect01">Sede</label>
+                                            <select name="sede" class="form-select" id="inputGroupSelect01">
+                                                <%for (String se3 : listaSedesSinRepetir) {%>
+                                                <option><%=se3%></option>
+                                                <%}%>
+                                            </select>
+                                        </div>
+                                        <div class="input-group mb-3 ">
 
-                                <div>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Aforo</span>
-                                        <input placeholder="1-100" type="number" name="tentacles" min="1" max="100">
-                                    </div>
-                                    <div class="input-group mb-3 ">
-                                        <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                        <select class="form-select" id="inputGroupSelect01">
-                                            <%for (String se3 : listaSedesSinRepetir) {%>
-                                            <option><%=se3%></option>
-                                            <%}%>
-                                        </select>
-                                    </div>
-                                    <div class="input-group mb-3 ">
+                                        </div>
 
                                     </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button type="button" class="btn btn-primary">Guardar</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -117,35 +118,39 @@
                                     <div>
                                         <%for (BSedeYSala sa : listaSedesYSalas) {
                                         if(sa.getSede().equals(se)) {%>
-                                        <div class="row">
-                                            <h4 class="shortwidth">Sala</h4>
-                                            <h4 class="shortwidth"><%=sa.getIdSala()%></h4>
-                                            <div class="input-group mb-3 col">
-                                                <span class="input-group-text">Aforo</span>
-                                                <input placeholder="<%=sa.getAforoAdministrador()%>" type="number" name="tentacles" min="1"
-                                                       max="100">
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                <select class="form-select">
-                                                    <option selected><%=se%></option>
-                                                    <%for (String se2 : listaSedesSinRepetir) {
-                                                    if (!se2.equals(se)) {%>
-                                                    <option><%=se2%></option>
-                                                    <%}}%>
-                                                </select>
-                                            </div>
-                                            <div class="input-group mb-3 col">
+                                        <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=editaroborrarsala&id=<%=sa.getIdSala()%>">
+                                            <input type="hidden" name="aforo_op" value="<%=sa.getAforoOperador()%>" />
+                                            <div class="row">
+                                                    <h4 class="shortwidth">Sala</h4>
+                                                    <h4 class="shortwidth"><%=sa.getIdSala()%></h4>
+                                                    <div class="input-group mb-3 col">
+                                                        <span class="input-group-text">Aforo</span>
+                                                        <input value="<%=sa.getAforoAdministrador()%>" type="number" name="aforo2" min="1"
+                                                               max="100">
+                                                    </div>
+                                                    <div class="input-group mb-3 col">
+                                                        <label class="input-group-text" for="inputGroupSelect01">Sede</label>
+                                                        <select name="sede2" class="form-select">
+                                                            <option selected><%=se%></option>
+                                                            <%for (String se2 : listaSedesSinRepetir) {
+                                                            if (!se2.equals(se)) {%>
+                                                            <option><%=se2%></option>
+                                                            <%}}%>
+                                                        </select>
+                                                    </div>
+                                                    <div class="input-group mb-3 col">
 
+                                                    </div>
+                                                    <div class="input-group mb-3 col">
+                                                        <button name="editar" type="submit" class="btn btn-success">Guardar</button>
+                                                    </div>
+                                                    <div class="input-group mb-3 col">
+                                                        <button name="borrar" type="submit" class="btn btn-danger">Borrar</button>
+                                                    </div>
+                                                    <hr>
                                             </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-success">Guardar</button>
-                                            </div>
-                                            <div class="input-group mb-3 col">
-                                                <button type="button" class="btn btn-danger">Borrar</button>
-                                            </div>
-                                            <hr>
-                                        </div>
+                                        </form>
+
 
                                         <%}}%>
                                     </div>
