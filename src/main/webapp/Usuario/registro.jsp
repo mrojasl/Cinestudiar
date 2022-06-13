@@ -88,56 +88,60 @@
                                 </div>
                                 <br>
 
-                                <form class="user" >
+                                <form method="POST" class="user" action="<%=request.getContextPath()%>/UsuarioServlet?a=crear"  >
                                     <!-- Nombre completo-->
+                                    <label for="start">Nombre:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                               placeholder="Nombres completos">
+                                        <input type="text" class="form-control form-control-user" name="nombre">
+                                    </div>
+                                    <!-- Apellido completo-->
+                                    <label for="start">Apellido:</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="apellido">
                                     </div>
                                     <!-- DNI--->
+                                    <label for="start">DNI:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleDNI"
-                                               placeholder="DNI">
+                                        <input type="text" class="form-control form-control-user" dni="dni">
                                     </div>
                                     <!-- Código-->
+                                    <label for="start">Codigo:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleCodigo"
-                                               placeholder="Código PUCP">
+                                        <input type="text" class="form-control form-control-user" name="codigoPucp">
                                     </div>
                                     <!-- Correo-->
+                                    <label for="start">Correo:</label>
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                               placeholder="Correo">
+                                        <input type="email" class="form-control form-control-user" name="correo">
                                     </div>
                                     <!-- Dirección de domicilio-->
+                                    <label for="start">Direccion de domicilio:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                               placeholder="Dirección de domicilio">
+                                        <input type="text" class="form-control form-control-user" name="direccion">
                                     </div>
                                     <!-- Número de Celular-->
+                                    <label for="start">Numero de Celular:</label>
                                     <div class="form-group">
                                         <input type="integrity" class="form-control form-control-user"
-                                               id="exampleInputNumber" placeholder="Numero de Celular">
+                                             name="telefono">
                                     </div>
                                     <!-- Fecha de nacimiento-->
                                     <label for="start">Fecha de Nacimiento:</label>
 
-                                    <input type="date" id="start" name="trip-start"
+                                    <input type="date" id="start" name="fechaNacimiento"
                                            value="--/--/--"
                                            min="1950-01-01" max="2003-01-01">
                                     <!-- Contraseña-->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Contraseña">
+                                               id="exampleInputPassword" placeholder="Contraseña" name="contrasena">
                                     </div>
                                     <!-- Repetir contraseña-->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleRepeatPassword" placeholder="Repita su contraseña">
+                                               name="contrasena">
                                     </div>
-                                    <a href="../Inicio_new/in_con_sesion.html" class="btn btn-primary btn-user btn-block">
-                                        Crear usuario
-                                    </a>
+                                    <button type="submit" class="btn btn-primary">Crear Trabajo</button>a>
                                     <hr>
                                 </form>
                                 <hr>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet(name = "UsuarioServlet", value = "/UsuarioServlet")
@@ -33,10 +34,6 @@ public class UsuarioServlet extends HttpServlet {
 
 
 
-            case "crear":
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Usuario/registro.jsp");
-                requestDispatcher.forward(request, response);
-
             case "profesional":
 
         }
@@ -51,22 +48,25 @@ public class UsuarioServlet extends HttpServlet {
         BUser cliente = new BUser();
         switch (action) {
             case "crear" -> {
-                String codigoPucp= cliente.getCodigoPucp();
-                String nombres=cliente.getNombres();
-                String apellidos= cliente.getApellidos();
-                String rol= cliente.getRol();
-                String dni= cliente.getDni();
-                String telefono= cliente.getTelefono();
-                String correo= cliente.getCorreo();
-                String contrasena= cliente.getContrasena();
-                String fechaNacimiento= cliente.getFechaNacimiento();
-                String direccion= cliente.getDireccion();
-                Blob foto= cliente.getFoto();
-                String datosTarjeta= cliente.getDatosTarjeta();
 
-                UsuariosDao.añadir(codigoPucp,nombres,apellidos,rol,dni,telefono,correo,contrasena,fechaNacimiento,direccion,foto,datosTarjeta);
+                    String codigoPucp= cliente.getCodigoPucp();
+                    String nombres=cliente.getNombres();
+                    String apellidos= cliente.getApellidos();
+                    String rol= cliente.getRol();
+                    String dni= cliente.getDni();
+                    String telefono= cliente.getTelefono();
+                    String correo= cliente.getCorreo();
+                    String contrasena= cliente.getContrasena();
+                    String fechaNacimiento= cliente.getFechaNacimiento();
+                    String direccion= cliente.getDireccion();
+                    Blob foto= cliente.getFoto();
+                    String datosTarjeta= cliente.getDatosTarjeta();
 
-                response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
+                    UsuariosDao.añadir(codigoPucp,nombres,apellidos,rol,dni,telefono,correo,contrasena,fechaNacimiento,direccion,foto,datosTarjeta);
+
+                    response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
+
+
 
             }
             case "buscar" -> {
