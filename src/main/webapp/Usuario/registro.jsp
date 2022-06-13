@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -87,7 +88,7 @@
                                 </div>
                                 <br>
 
-                                <form class="user">
+                                <form class="user" >
                                     <!-- Nombre completo-->
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"

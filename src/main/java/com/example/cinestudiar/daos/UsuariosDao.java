@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class UsuariosDao {
 
-    public static void actualizar(BUser cliente) {
+    public static void añadir(String codigo_pucp, String nombre, String apellido, String rol, String dni, String telefono, String correo, String contraseña, String fecha_nacimiento, String direccion, Blob foto, String tarjeta) {
 
         String user = "root";
         String pass = "root";
@@ -23,22 +23,23 @@ public class UsuariosDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "update usuarios set codigo_pucp=?,nombre=?,apellido=?,telefono = ?" +
-                ", direccion =?,rol=?,tarjeta=?,correo=?,fecha_nacimiento=?;";
+        String sql = "INSERT INTO usuarios (codigo_pucp, nombre, apellido, rol,dni, telefono, correo, contraseña, fecha_nacimiento, direccion, foto, tarjeta) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
-            pstmt.setString(1, cliente.getCodigoPucp());
-            pstmt.setString(2, cliente.getNombres());
-            pstmt.setString(3, cliente.getApellidos());
-            pstmt.setString(4, cliente.getTelefono());
-            pstmt.setString(5, cliente.getDireccion());
-            pstmt.setString(6, cliente.getRol());
-            pstmt.setString(7, cliente.getCorreo());
-            pstmt.setString(8, cliente.getFechaNacimiento());
-
-
+            pstmt.setString(1, codigo_pucp);
+            pstmt.setString(2, nombre);
+            pstmt.setString(3, apellido);
+            pstmt.setString(4, rol);
+            pstmt.setString(5, dni);
+            pstmt.setString(6,telefono );
+            pstmt.setString(7, correo);
+            pstmt.setString(8, contraseña);
+            pstmt.setString(9, fecha_nacimiento);
+            pstmt.setString(10,direccion);
+            pstmt.setBlob(11,foto);
+            pstmt.setString(12,tarjeta);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

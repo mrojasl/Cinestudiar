@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.ArrayList;
 
 @WebServlet(name = "UsuarioServlet", value = "/UsuarioServlet")
@@ -46,13 +47,27 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
+        String action = request.getParameter("u") == null ? "Listar" : request.getParameter("u");
         BUser cliente = new BUser();
         switch (action) {
-            case "actualizar" -> {
-                BUser usario = crearUsario(request);
-                UsuariosDao.actualizar(cliente);
+            case "crear" -> {
+                String codigoPucp= cliente.getCodigoPucp();
+                String nombres=cliente.getNombres();
+                String apellidos= cliente.getApellidos();
+                String rol= cliente.getRol();
+                String dni= cliente.getDni();
+                String telefono= cliente.getTelefono();
+                String correo= cliente.getCorreo();
+                String contrasena= cliente.getContrasena();
+                String fechaNacimiento= cliente.getFechaNacimiento();
+                String direccion= cliente.getDireccion();
+                Blob foto= cliente.getFoto();
+                String datosTarjeta= cliente.getDatosTarjeta();
+
+                UsuariosDao.añadir(codigoPucp,nombres,apellidos,rol,dni,telefono,correo,contrasena,fechaNacimiento,direccion,foto,datosTarjeta);
+
                 response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
+
             }
             case "buscar" -> {
 
