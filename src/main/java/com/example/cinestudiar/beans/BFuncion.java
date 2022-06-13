@@ -15,6 +15,8 @@ public class BFuncion extends BSedeYSala{
     private float calificacion;
     private float asistencia;
 
+
+
     public int getIdFuncion() {
         return idFuncion;
     }
