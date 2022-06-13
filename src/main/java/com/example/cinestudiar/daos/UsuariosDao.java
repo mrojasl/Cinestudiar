@@ -38,4 +38,34 @@ public class UsuariosDao {
 
         return listaFunciones;
     }
+
+
+    public static void actualizar(BCompra compra) {
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "UPDATE compradefunciones SET  idfuncion= ?, cantidad_por_funcion = ?, asistencia = ? ";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, compra.get);
+            pstmt.setInt(2, job.getMinSalary());
+            pstmt.setInt(3, job.getMaxSalary());
+            pstmt.setString(4, job.getJobId());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
