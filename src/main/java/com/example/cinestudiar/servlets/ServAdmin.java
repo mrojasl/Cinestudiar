@@ -42,12 +42,14 @@ public class ServAdmin extends HttpServlet {
                 RequestDispatcher rd3 =request.getRequestDispatcher("Admin/clientes.jsp");
                 rd3.forward(request,response);
 
+
             case "profesional":
                 ArrayList<BProfesional> listaProfesionales= AdminDao.obtenerProfesionales();
                 request.setAttribute("listaProfesionales",listaProfesionales);
 
                 RequestDispatcher rd4 =request.getRequestDispatcher("Admin/actoresydirectores.jsp");
                 rd4.forward(request,response);
+
 
         }
 
@@ -67,16 +69,23 @@ public class ServAdmin extends HttpServlet {
 
         switch(action) {
             case "crearsala":
-                String aforo = request.getParameter("aforo");
+                int aforo = Integer.parseInt(request.getParameter("aforo"));
                 String sede = request.getParameter("sede");
+                AdminDao.crearSala(aforo,sede);
+                response.sendRedirect(request.getContextPath()+"/ServAdmin");
+                break;
 
-
-            case "crearprofesinal":
+            case "crearprofesional":
                 String nombreyapellido = request.getParameter("nombreyapellido");
                 String profesion = request.getParameter("profesion");
                 Blob fotodeperfil = null;
-                AdminDao.crearProfesional(nombreyapellido,  profesion, fotodeperfil);
+                String[] nombreyapellido_sepa= nombreyapellido.split(" ");
+                if(profesion.equalsIgnoreCase("Actor")){
+                    profesion= "a";
+                }else profesion= "d";
+                AdminDao.crearProfesional(nombreyapellido_sepa[0],nombreyapellido_sepa[1], profesion, fotodeperfil);
                 response.sendRedirect(request.getContextPath() + "/ServAdmin");
+                break;
         }
 
     }

@@ -194,14 +194,11 @@ public class AdminDao {
         }
         return listaClientesPorFuncion;
     }
-    public static void crearProfesional(String nombreyapellido, String profesion, Blob fotodeperfil) {
-        String[] nombreyapellido_sepa= nombreyapellido.split(" ");
-        if(profesion.equalsIgnoreCase("Actor")){
-            profesion= "a";
-        }else profesion= "d";
+   public static void crearProfesional(String nombre,String apellido, String profesion, Blob fotodeperfil) {
+
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/hr";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -213,10 +210,36 @@ public class AdminDao {
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
-            pstmt.setString(1, nombreyapellido_sepa[0]);
-            pstmt.setString(2, nombreyapellido_sepa[1]);
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, apellido);
             pstmt.setString(3, profesion);
             pstmt.setBlob(4, fotodeperfil);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public static void crearSala(int aforo, String sede) {
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "INSERT INTO salas (aforo_administrador,aforo_operador,nombre_sede) VALUES (?,?,?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, aforo);
+            pstmt.setInt(2, aforo);
+            pstmt.setString(3, sede);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

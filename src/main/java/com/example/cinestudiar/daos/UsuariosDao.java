@@ -1,3 +1,4 @@
+/*
 package com.example.cinestudiar.daos;
 
 import com.example.cinestudiar.beans.BFuncion;
@@ -69,3 +70,4 @@ public class UsuariosDao {
 
     }
 }
+*/

@@ -1,4 +1,4 @@
-package com.example.cinestudiar.servlets;
+/*package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BCompra;
 import com.example.cinestudiar.beans.BUser;
@@ -94,3 +94,4 @@ public class UsuariosServlet extends HttpServlet {
 
     }
 }
+*/
