@@ -31,6 +31,7 @@ public class UsuarioServlet extends HttpServlet {
             case "agregar":
 
 
+
             case "crear":
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Usuario/registro.jsp");
                 requestDispatcher.forward(request, response);
@@ -47,8 +48,45 @@ public class UsuarioServlet extends HttpServlet {
 
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         BUser cliente = new BUser();
+        switch (action) {
+            case "actualizar" -> {
+                BUser usario = crearUsario(request);
+                UsuariosDao.actualizar(cliente);
+                response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
+            }
+            case "buscar" -> {
 
+            }
+        }
+    }
 
+    public static BUser crearUsario(HttpServletRequest requestUsuario){
+        BUser cliente= new BUser();
+        String nombre = requestUsuario.getParameter("nombre");
+        String apellido = requestUsuario.getParameter("apellido");
+        String codigoPucp = requestUsuario.getParameter("codigoPucp");
+        String rol = requestUsuario.getParameter("rol");
+        String dni = requestUsuario.getParameter("dni");
+        String telefono = requestUsuario.getParameter("telefono");
+        String correo = requestUsuario.getParameter("correo");
+        String contrasena = requestUsuario.getParameter("contrasena");
+        String fechaNacimiento = requestUsuario.getParameter("fechaNacimiento");
+        String direccion = requestUsuario.getParameter("direccion");
+        /*Blod foto = requestUsuario.getParameter("foto");*/
+        String datosTarjeta = requestUsuario.getParameter("datosTarjeta");
 
+        cliente.setNombres("nombre");
+        cliente.setApellidos("apellido");
+        cliente.setCodigoPucp("codigoPucp");
+        cliente.setRol("rol");
+        cliente.setDni("dni");
+        cliente.setTelefono("telefono");
+        cliente.setCorreo("correo");
+        cliente.setContrasena("contraseña");
+        cliente.setFechaNacimiento("fechaNacimiento");
+        cliente.setDireccion("direccion");
+        /*cliente.setFoto("foto");*/
+        cliente.setDatosTarjeta("datosTarjeta");
+        return cliente;
     }
 }

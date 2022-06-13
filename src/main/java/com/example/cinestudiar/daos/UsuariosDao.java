@@ -10,35 +10,44 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class UsuariosDao {
-    public static BUser crearUsario(HttpServletRequest requestUsuario){
-        BUser cliente= new BUser();
-        String nombre = requestUsuario.getParameter("nombre");
-        String apellido = requestUsuario.getParameter("apellido");
-        String codigoPucp = requestUsuario.getParameter("codigoPucp");
-        String rol = requestUsuario.getParameter("rol");
-        String dni = requestUsuario.getParameter("dni");
-        String telefono = requestUsuario.getParameter("telefono");
-        String correo = requestUsuario.getParameter("correo");
-        String contrasena = requestUsuario.getParameter("contrasena");
-        String fechaNacimiento = requestUsuario.getParameter("fechaNacimiento");
-        String direccion = requestUsuario.getParameter("direccion");
-        /*Blod foto = requestUsuario.getParameter("foto");*/
-        String datosTarjeta = requestUsuario.getParameter("datosTarjeta");
 
-        cliente.setNombres("nombre");
-        cliente.setApellidos("apellido");
-        cliente.setCodigoPucp("codigoPucp");
-        cliente.setRol("rol");
-        cliente.setDni("dni");
-        cliente.setTelefono("telefono");
-        cliente.setCorreo("correo");
-        cliente.setContrasena("contraseña");
-        cliente.setFechaNacimiento("fechaNacimiento");
-        cliente.setDireccion("direccion");
-        /*cliente.setFoto("foto");*/
-        cliente.setDatosTarjeta("datosTarjeta");
-        return cliente;
+    public static void actualizar(BUser cliente) {
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "update usuarios set codigo_pucp=?,nombre=?,apellido=?,telefono = ?" +
+                ", direccion =?,rol=?,tarjeta=?,correo=?,fecha_nacimiento=?;";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, cliente.getCodigoPucp());
+            pstmt.setString(2, cliente.getNombres());
+            pstmt.setString(3, cliente.getApellidos());
+            pstmt.setString(4, cliente.getTelefono());
+            pstmt.setString(5, cliente.getDireccion());
+            pstmt.setString(6, cliente.getRol());
+            pstmt.setString(7, cliente.getCorreo());
+            pstmt.setString(8, cliente.getFechaNacimiento());
+
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
+
     public static ArrayList<BFuncion> obtenerFunciones(){
         ArrayList<BFuncion> listaFunciones= new ArrayList<>();
         try {
