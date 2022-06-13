@@ -61,6 +61,20 @@ public class ServAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("admin") == null? "sala" : request.getParameter("admin");
+
+
+        switch(action) {
+            case "crearsala":
+                String aforo = request.getParameter("aforo");
+                String sede = request.getParameter("sede");
+
+
+            case "crearprofesinal":
+
+
+
+        }
 
     }
 }
