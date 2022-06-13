@@ -69,29 +69,31 @@
                             </div>
                             <div class="modal-body">
 
-                                <div>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Aforo</span>
-                                        <input placeholder="1-100" type="number" name="tentacles" min="1" max="100">
-                                    </div>
-                                    <div class="input-group mb-3 ">
-                                        <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                        <select class="form-select" id="inputGroupSelect01">
-                                            <%for (String se3 : listaSedesSinRepetir) {%>
-                                            <option><%=se3%></option>
-                                            <%}%>
-                                        </select>
-                                    </div>
-                                    <div class="input-group mb-3 ">
+                                <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=crearsala">
+                                    <div>
 
-                                    </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Aforo</span>
+                                            <input placeholder="1-100" type="number" name="aforo" min="1" max="100">
+                                        </div>
+                                        <div class="input-group mb-3 ">
+                                            <label class="input-group-text" for="inputGroupSelect01">Sede</label>
+                                            <select class="form-select" id="inputGroupSelect01" name="sede">
+                                                <%for (String se3 : listaSedesSinRepetir) {%>
+                                                <option><%=se3%></option>
+                                                <%}%>
+                                            </select>
+                                        </div>
+                                        <div class="input-group mb-3 ">
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button type="button" class="btn btn-primary">Guardar</button>
-                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
