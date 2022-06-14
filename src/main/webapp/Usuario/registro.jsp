@@ -41,7 +41,7 @@
         <div id="id01" class="modal">
 
             <form class="modal-content animate" action="/action_page.php" method="post">
-                <div class="imgcontainer">
+                <div class=" imgcontainer">
                     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>
                 <div class="container align-content-center w-75 mt-5 rounded">
@@ -88,7 +88,11 @@
                                 </div>
                                 <br>
 
+<<<<<<< HEAD
                                 <form method="POST" class="user" action="<%=request.getContextPath()%>/UsuarioServlet?a=crear"  >
+=======
+                                <form class="user" action="<%=request.getContextPath()%>/UsuarioServlet?a=crear" >
+>>>>>>> ad2fab7e9936de993eb18746b169818e62302b4a
                                     <!-- Nombre completo-->
                                     <label for="start">Nombre:</label>
                                     <div class="form-group">
@@ -141,7 +145,13 @@
                                         <input type="password" class="form-control form-control-user"
                                                name="contrasena">
                                     </div>
+<<<<<<< HEAD
                                     <button type="submit" class="btn btn-primary">Crear Trabajo</button>a>
+=======
+                                    <a href="<%=request.getContextPath()%>/UsuarioServlet" class="btn btn-primary btn-user btn-block">
+                                        Crear usuario
+                                    </a>
+>>>>>>> ad2fab7e9936de993eb18746b169818e62302b4a
                                     <hr>
                                 </form>
                                 <hr>
