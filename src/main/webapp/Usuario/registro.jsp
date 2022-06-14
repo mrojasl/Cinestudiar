@@ -45,7 +45,7 @@
                     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>
                 <div class="container align-content-center w-75 mt-5 rounded">
-                    <p class="text-center" style="color: black; font-size: 40px" ><b>Iniciar sesión</b></p>
+                    <p class=" text-center" style="color: black; font-size: 40px" ><b>Iniciar sesión</b></p>
                     <label for="uname"><b>Username</b></label>
                     <input type="text" placeholder="Ingrese usuario" name="uname" required>
 
