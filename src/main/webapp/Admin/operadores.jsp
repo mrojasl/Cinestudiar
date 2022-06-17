@@ -106,7 +106,7 @@
                     <h5 class="col" style="padding: 14px;color: white;width: 250px">Buscar por nombre:</h5>
                 </div>
                 <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
-                    <input class="form-control" type="text" placeholder="Nombre de Operador"
+                    <input name="txtbuscar" class="form-control" type="text" placeholder="Nombre de Operador"
                            aria-label="default input example">
                 </div>
             </div>

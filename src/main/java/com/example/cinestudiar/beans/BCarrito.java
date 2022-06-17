@@ -2,6 +2,8 @@ package com.example.cinestudiar.beans;
 
 import java.io.File;
 import java.sql.Blob;
+import java.sql.Date;
+import java.sql.Time;
 
 public class BCarrito {
 
@@ -17,6 +19,13 @@ public class BCarrito {
 
     private int idcompra;
     private int aforoOperador;
+
+    public BCarrito(String nombre, int cantidadxfuncion, String nombrepelicula, Date diafuncion, Time horafuncion, int precioxticket) {
+    }
+
+    public BCarrito() {
+
+    }
 
     public int getAforoOperador() {
         return aforoOperador;

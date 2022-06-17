@@ -102,6 +102,10 @@ public class ServAdmin extends HttpServlet {
                 break;
             }
 
+            case "buscaroperador" ->{
+                String txtbuscar = request.getParameter("txtbuscar");
+
+            }
 
         }
     }
