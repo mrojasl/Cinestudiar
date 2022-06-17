@@ -1,43 +1,45 @@
 package com.example.cinestudiar.beans;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.io.File;
+import java.sql.Blob;
 
 public class BCarrito {
 
-    private String nombres;
-    private int cantidad_por_funcion;
+
     private String nombre_pelicula;
-    private Date dia_funcion;
-    private Time hora_funcion;
-    private int precioxticket;
+    private String fecha;
+    private String hora;
+    private String nombre_sede;
+    private int cantidad_funcion;
+    private int precio_ticket;
+    private String imagen;
+    private String codigoEstudiante;
 
+    private int idcompra;
+    private int aforoOperador;
 
-    public BCarrito(String nombres, int cantidad_por_funcion, String nombre_pelicula, Date dia_funcion, Time hora_funcion, int precioxticket) {
-        this.nombres = nombres;
-        this.cantidad_por_funcion = cantidad_por_funcion;
-        this.nombre_pelicula = nombre_pelicula;
-        this.dia_funcion = dia_funcion;
-        this.hora_funcion = hora_funcion;
-        this.precioxticket = precioxticket;
+    public int getAforoOperador() {
+        return aforoOperador;
     }
 
-
-
-    public String getNombres() {
-        return nombres;
+    public void setAforoOperador(int aforoOperador) {
+        this.aforoOperador = aforoOperador;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public int getIdcompra() {
+        return idcompra;
     }
 
-    public int getCantidad_por_funcion() {
-        return cantidad_por_funcion;
+    public void setIdcompra(int idcompra) {
+        this.idcompra = idcompra;
     }
 
-    public void setCantidad_por_funcion(int cantidad_por_funcion) {
-        this.cantidad_por_funcion = cantidad_por_funcion;
+    public String getCodigoEstudiante() {
+        return codigoEstudiante;
+    }
+
+    public void setCodigoEstudiante(String codigoEstudiante) {
+        this.codigoEstudiante = codigoEstudiante;
     }
 
     public String getNombre_pelicula() {
@@ -48,28 +50,51 @@ public class BCarrito {
         this.nombre_pelicula = nombre_pelicula;
     }
 
-    public Date getDia_funcion() {
-        return dia_funcion;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setDia_funcion(Date dia_funcion) {
-        this.dia_funcion = dia_funcion;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public Time getHora_funcion() {
-        return hora_funcion;
+    public String getHora() {
+        return hora;
     }
 
-    public void setHora_funcion(Time hora_funcion) {
-        this.hora_funcion = hora_funcion;
-
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
-    public int getPrecioxticket() {
-        return precioxticket;
+    public String getNombre_sede() {
+        return nombre_sede;
     }
 
-    public void setPrecioxticket(int precioxticket) {
-        this.precioxticket = precioxticket;
+    public void setNombre_sede(String nombre_sede) {
+        this.nombre_sede = nombre_sede;
+    }
+
+    public int getCantidad_funcion() {
+        return cantidad_funcion;
+    }
+
+    public void setCantidad_funcion(int cantidad_funcion) {
+        this.cantidad_funcion = cantidad_funcion;
+    }
+
+    public int getPrecio_ticket() {
+        return precio_ticket;
+    }
+
+    public void setPrecio_ticket(int precio_ticket) {
+        this.precio_ticket = precio_ticket;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

@@ -1,24 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jesus
-  Date: 5/06/2022
-  Time: 22:34
-  To change this template use File | Settings | File Templates.
---%>
 
 
+<%@ page import="com.example.cinestudiar.beans.BCarrito"%>
+<%@ page import="static java.util.Objects.toString" %>
+<%@ page import="java.io.File" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Objects" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import="com.example.cinestudiar.beans.BCarrito" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BCarrito>" scope="request" id="carritoCliente"/>
+<jsp:useBean id="carritoDcompras" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BCarrito>" />
 <html>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <head>
-
-
-
 
     <meta charset='utf-8'>
     <link rel = "icon" href =
@@ -27,188 +21,143 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Checkout-CinEstudiar</title>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="Usuario/carrito_compras/chekout.css">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
-    <link rel="stylesheet" href="chekout.css" media="screen" title="no title" charset="utf-8">
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-
-
-
-
-
-
-
-
+    <style>
+        .titulo{
+            color:white;
+            font-weight: bold;
+            font-size: 35px;
+            margin-top:20px;
+        }
+    </style>
 </head>
-<body oncontextmenu='xd' class='snippet-body'>
-
-
-
+<body>
 <jsp:include page="cabecera_usuario.jsp"/>
-
-
-
-<div class="container px-4 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-5">
-            <h4 class="heading" style="color:white">Carrito de Compras</h4>
-        </div>
-        <div class="col-7">
-            <div class="row text-right">
-                <div class="col-4">
-                    <h6 class="mt-2" style="color:white">Sede</h6>
-                </div>
-                <div class="col-4">
-                    <h6 class="mt-2" style="color:white">Entradas</h6>
-                </div>
-                <div class="col-4">
-                    <h6 class="mt-2" style="color:white">Precio</h6>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-center border-top">
-        <div class="col-5">
-            <div class="row d-flex">
-                <div class="book"> <img src="https://pics.filmaffinity.com/Wi_aypacha-927144275-large.jpg" class="book-img"> </div>
-                <div class="col-5">
-                    <br>
-                    <h6 class="mob-text" >Wiñaypacha</h6>
-
-                    <p>Óscar Catacora</p>
-                    <p>Miércoles 20/04/2022</p>
-                    <p>14:00 - 16:30</p>
-                </div>
-            </div>
-        </div>
-        <div class="my-auto col-7">
-            <div class="row text-right">
-                <div class="col-4">
-                    <p class="mob-text">San Miguel</p>
-                </div>
-                <div class="col-4">
-                    <div class="row d-flex justify-content-end px-3">
-
-                        <div class="input-group">
-
-                            <input value="1" type="number" name="ticket" min="1" max="999">
-                        </div>
-
-
-
-                    </div>
-                </div>
-                <div class="col-4">
-                    <h6 class="mob-text">S/60<br><br><button type="button" class="btn btn-danger">Borrar Reserva</button></h6>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <% int contador_carrito=0;%>
+    <div class="d-flex flex-row bd-highlight mb-1">
+        <p class="titulo">Carrito de Compras</p>
     </div>
 
+    <hr/>
+    <% ArrayList<String> fechacompleta = new ArrayList<String>();
+
+        int fechaigual=0;
+        for (BCarrito carrito1 : carritoDcompras) {
+            fechacompleta.add(carrito1.getFecha()+carrito1.getHora());
+        }
+
+        for (int i = 0; i < fechacompleta.size(); i++) {
+            for (int k = i + 1; k < fechacompleta.size(); k++) {
+                if (Objects.equals(fechacompleta.get(i), fechacompleta.get(k))) {
+                    fechaigual = 1;
+                    break;
+                }
+            }
+        }
 
 
 
+    %>
 
-
-
-    <div class="row d-flex justify-content-center border-top">
-        <div class="col-5">
-            <div class="row d-flex">
-                <div class="book"> <img src="https://image.tmdb.org/t/p/w500/2rMFY3ubIQFqPLVWO9N9Sg6vm48.jpg" class="book-img"> </div>
-                <div class="col-5">
-                    <br>
-
-                    <h6 class="mob-text">Paloma de Papel</h6>
-                    <p>Fabrizio Aguilar</p>
-                    <p>Jueves 21/04/2022</p>
-                    <p>18:00 - 19:30</p>
-                </div>
-            </div>
-        </div>
-        <div class="my-auto col-7">
-            <div class="row text-right">
-                <div class="col-4">
-                    <p class="mob-text">Miraflores</p>
-                </div>
-                <div class="col-4">
-                    <div class="row d-flex justify-content-end px-3">
-                        <div class="input-group">
-
-                            <input value="1" type="number" name="ticket" min="1" max="999">
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-4">
-                    <h6 class="mob-text">S/35<br><br><button type="button" class="btn btn-danger">Borrar Reserva</button></h6>
-                </div>
-            </div>
+    <% if (fechaigual==1){ %>
+    <div class="alert alert-danger d-flex justify-content-start" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+            ERROR: existe un cruce de horarios en su compra, por favor, revise su orden.
         </div>
     </div>
+    <%}%>
+    <table class="table">
+        <thead>
+        <tr class="titulos">
+            <th style="color:White ">Película(s)</th>
+            <th style="color:White ">Sede</th>
+            <th style="color:White ">Entradas</th>
+            <th style="color:White ">Precio</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            double preciototal = 0;
+            int i=0;
+
+            for (BCarrito carrito : carritoDcompras) {
+
+                preciototal = preciototal + carrito.getPrecio_ticket() * carrito.getCantidad_funcion();%>
+        <tr>
+            <td><div class="book"> <img src="<%=carrito.getImagen()%>" class="book-img" alt=""> </div>
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    <div class="p-2 bd-highlight" style="color:White;font-size: 20px "><%=carrito.getNombre_pelicula()%></div>
+                    <div class="p-2 bd-highlight" style="color:White "><%=carrito.getFecha()%></div>
+                    <div class="p-2 bd-highlight" style="color:White "><%=carrito.getHora()%></div>
+                    <% contador_carrito++;%>
+                </div></td>
+            <td style="color:White ">
+                <%=carrito.getNombre_sede()%>
+            </td>
+            <td>
+                <form method="POST" action="<%=request.getContextPath()%>/Checkout?a=actualizar">
+                    <input type="hidden" name="nombre_pelicula" value="<%=carrito.getNombre_pelicula()%>" />
+                    <input type="hidden" name="fecha" value="<%=carrito.getFecha()%>" />
+                    <input type="hidden" name="hora" value="<%=carrito.getHora()%>" />
+                    <input type="hidden" name="nombre_sede" value="<%=carrito.getNombre_sede()%>" />
+                    <input type="hidden" name="precio_ticket" value="<%=carrito.getPrecio_ticket()%>" />
+                    <input type="hidden" name="imagen" value="<%=carrito.getImagen()%>" />
+                    <input type="hidden" name="codigoEstudiante" value="<%=carrito.getCodigoEstudiante()%>" />
+                    <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=carrito.getIdcompra()%>" >
+                    <p STYLE="color: White"> Maximo aforo: <%=carrito.getAforoOperador()%></p>
+                    <input type="number" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" min="1" max="<%=carrito.getAforoOperador()%>" value="<%=carrito.getCantidad_funcion()%>" >
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </form>
+            </td>
+            <td style="color:White ">
+
+                <%="S/." + carrito.getPrecio_ticket() * carrito.getCantidad_funcion()%>
+            </td>
+            <td><a href="<%=request.getContextPath()%>/Checkout?a=borrar&id=<%=carrito.getIdcompra()%>" class="btn btn-danger">Eliminar Reserva</a></td>
+
+        <%
+            i++;} %>
+        <% if (contador_carrito==0){ %>
+        <td STYLE="color: White; font-size: 15px">Usted no ha agregado nada al carrito </td>
+
+<%}%>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+
+    <% if (contador_carrito!=0 && fechaigual==0){ %>
+    <div class="d-flex justify-content-end" style="color:White;font-size: 25px;margin-top: 0px" >Total a pagar: S/<%=preciototal%></div>
+
+    <div class="d-flex justify-content-start" style="margin-top: -35px"><button type="button"  class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#extraLargeModal">Procesar Compra</button></div>
+    <%}%>
+
+
+
+    <% if (contador_carrito==0) { %>
+    <div class="d-flex justify-content-end" style="color:White;font-size: 25px;margin-top: 0px" >Total a pagar: S/<%=preciototal%></div>
+
+    <div class="d-flex justify-content-start" style="margin-top: -35px"><button type="button"  class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#extraLargeModal" disabled>Procesar Compra</button></div>
+    <%}%>
 
 
 
 
 
 
-    <div class="row d-flex justify-content-center border-top">
 
-
-        <h6 class="sumatotal">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀Total a pagar: S/95</h6>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="procedepago">
-
-        <button type="button"  class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#extraLargeModal">Procesar Compra</button>
-    </div>
 
     <div class="modal fade " id="extraLargeModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl">
@@ -241,11 +190,11 @@
                                     <div class="col-lg-4 mt-2">
                                         <div class="row d-flex justify-content-between px-4" id="tax">
                                             <p class="mb-1 text-left">Total a pagar</p>
-                                            <div class="numerototalpagar"><b>S/95</b></div>
+                                            <div class="numerototalpagar"><b>S/<%=preciototal%></b></div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn-block btn-blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <span> <span id="checkout">Pagar</span> <span id="check-amt">S/95</span> </span>
+                                        <button class="btn-block btn-blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <span> <span id="checkout">Pagar</span> <span id="check-amt">S/<%=preciototal%></span> </span>
 
                                         </button>
 
@@ -305,7 +254,7 @@
                 Los Datos de ingreso han sido enviados a su correo electrónico =)
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" href="compras_menuresumenvacio.html" role="button">Regresar a mi carrito de Compras</a>
+                <a class="btn btn-primary" href="/Checkout" role="button">Regresar a mi carrito de Compras</a>
 
             </div>
         </div>
@@ -317,7 +266,9 @@
 
 
 
-
-
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 </body>
 </html>
