@@ -67,12 +67,7 @@
                             <div class="modal-body">
 
                                 <div>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Nombre</span>
-                                        <input type="text" class="form-control" placeholder="Nombre y Apellidos"
-                                               aria-label="Sala 1"
-                                               aria-describedby="button-addon1">
-                                    </div>
+                                    
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Codigo PUCP</span>
                                         <input type="text" class="form-control" placeholder="Código PUCP"

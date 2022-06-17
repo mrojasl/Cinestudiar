@@ -77,9 +77,12 @@
                                         <div class="input-group mb-3 ">
                                             <label class="input-group-text" for="inputGroupSelect01">Sede</label>
                                             <select name="sede" class="form-select" id="inputGroupSelect01">
-                                                <%for (String se3 : listaSedesSinRepetir) {%>
-                                                <option><%=se3%></option>
-                                                <%}%>
+
+                                                <option>Lima Cercado</option>
+                                                <option>Pueblo Libre</option>
+                                                <option>San Borja</option>
+                                                <option>San Miguel</option>
+
                                             </select>
                                         </div>
                                         <div class="input-group mb-3 ">

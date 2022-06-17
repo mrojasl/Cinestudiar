@@ -310,5 +310,60 @@ public class AdminDao {
 
     }
 
+    public static void AsignarOperador(String codigo){
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "update usuarios set rol='operador' where rol='cliente' and codigo_pucp = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, codigo);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public static void EliminarOperador(String codigo){
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "update usuarios set rol='cliente' where rol='operador' and codigo_pucp = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, codigo);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
 }
