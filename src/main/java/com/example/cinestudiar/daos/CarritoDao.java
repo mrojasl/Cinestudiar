@@ -8,9 +8,13 @@ import java.security.SecureRandom;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Random;
 
 public class CarritoDao {
 
+    Random rn = new Random();
+    int range = 50000 - 10 + 1;
+    int compraunidocomprafuncion =  rn.nextInt(range) + 10;
 
 
     public ArrayList<BCarrito> listarUsuario(){
@@ -28,7 +32,7 @@ public class CarritoDao {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador from usuarios u\n" +
+             ResultSet rs = stmt.executeQuery("select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador,cf.idfuncion from usuarios u\n" +
                      "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
                      "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
                      "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
@@ -47,6 +51,7 @@ public class CarritoDao {
                 bCarrito.setCodigoEstudiante(rs.getString(8));
                 bCarrito.setIdcompra(rs.getInt(9));
                 bCarrito.setAforoOperador(rs.getInt(10));
+                bCarrito.setIdfuncion(rs.getInt(11));
                 listausuarios.add(bCarrito);
             }
         } catch (SQLException e) {
@@ -98,7 +103,7 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "delete from compradefunciones where idcompra = ?;";
+        String sql = "delete from compradefunciones where idfuncion = ?;";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -125,7 +130,7 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "INSERT INTO compras(qr,cantidad_tickets,pago_total,fecha_compra,hora_compra,codigo_pucp) VALUES (?,?,?,now(),now(),?);";
+        String sql = "INSERT INTO compras(qr,cantidad_tickets,pago_total,fecha_compra,hora_compra,codigo_pucp,asistencia) VALUES (?,?,?,now(),now(),?,?);";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -133,6 +138,7 @@ public class CarritoDao {
             pstmt.setInt(2, cantidad_tickets);
             pstmt.setDouble(3, pago_total);
             pstmt.setString(4, codigo_pucp);
+            pstmt.setInt(5,compraunidocomprafuncion);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -153,12 +159,12 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "UPDATE compradefunciones set asistencia=5 where idcompra=?;";
+        String sql = "UPDATE compradefunciones set asistencia=? where idcompra=?;";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setInt(1, idcompra.getIdcompra());
+            pstmt.setInt(1,compraunidocomprafuncion);
+            pstmt.setInt(2, idcompra.getIdcompra());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

@@ -17,6 +17,16 @@ public class BCarrito {
     private String imagen;
     private String codigoEstudiante;
 
+    private int idfuncion;
+
+    public int getIdfuncion() {
+        return idfuncion;
+    }
+
+    public void setIdfuncion(int idfuncion) {
+        this.idfuncion = idfuncion;
+    }
+
     private int idcompra;
     private int aforoOperador;
 

@@ -128,7 +128,7 @@
 
                 <%="S/." + carrito.getPrecio_ticket() * carrito.getCantidad_funcion()%>
             </td>
-            <td><a href="<%=request.getContextPath()%>/Checkout?a=borrar&id=<%=carrito.getIdcompra()%>" class="btn btn-danger">Eliminar Reserva</a></td>
+            <td><a href="<%=request.getContextPath()%>/Checkout?a=borrar&id=<%=carrito.getIdfuncion()%>" class="btn btn-danger">Eliminar Reserva</a></td>
 
         <%
             i++;} %>
