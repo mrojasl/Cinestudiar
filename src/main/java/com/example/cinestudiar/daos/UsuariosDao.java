@@ -81,6 +81,51 @@ public class UsuariosDao {
         return listaFunciones;
     }
 
+    public BUser buscarPorId(String id) {
+        BUser buser = null;
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/hr";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select * from usuarios where codigo_pucp = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    buser = new BUser();
+                    buser.setCodigoPucp(rs.getString(1));
+                    buser.setNombres(rs.getString(2));
+                    buser.setApellidos(rs.getString((3));
+                    buser.setRol(rs.getString(4));
+                    buser.setDni(rs.getInt(5));
+                    buser.setTelefono(rs.getString(6));
+                    buser.setCorreo(rs.getString(7));
+                    buser.setContrasena(rs.getString(8));
+                    buser.setFechaNacimiento(rs.getDate(9));
+                    buser.setDireccion(rs.getString(10));
+                    buser.setFoto(rs.getBlob(11));
+                    buser.setDatosTarjeta(rs.getString(12));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return buser;
+    }
+
 
     public  void actualizar(BComprafuncion comprafuncion) {
 
