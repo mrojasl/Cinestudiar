@@ -1,4 +1,5 @@
 <%@ page import="com.example.cinestudiar.beans.BUser" %>
+<%@ page import="com.example.cinestudiar.servlets.ServAdmin" %>
 <%--
   Created by IntelliJ IDEA.
   User: Jon
@@ -8,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BUser>" scope="request" id="listaOperadores"/>
+<jsp:useBean type="java.lang.String" scope="request" id="txtbuscado" class="java.lang.String"/>
 <html lang="en">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -66,23 +68,27 @@
                             </div>
                             <div class="modal-body">
 
-                                <div>
-                                    
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Codigo PUCP</span>
-                                        <input type="text" class="form-control" placeholder="Código PUCP"
-                                               aria-label="Sala 1"
-                                               aria-describedby="button-addon1">
-                                    </div>
-                                    <div class="input-group mb-3 ">
-                                    </div>
+                                <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=crearoperador">
+                                    <div>
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button type="button" class="btn btn-primary">Guardar</button>
-                                </div>
+                                        <div class="input-group mb-3">
+
+                                            <span class="input-group-text">Codigo PUCP</span>
+                                            <input name="operadorcodigo" type="text" class="form-control" placeholder="Código PUCP"
+                                                   aria-label="Sala 1"
+                                                   aria-describedby="button-addon1">
+
+                                        </div>
+                                        <div class="input-group mb-3 ">
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -100,10 +106,14 @@
                 <div class="input-group mb-3 col">
                     <h5 class="col" style="padding: 14px;color: white;width: 250px">Buscar por nombre:</h5>
                 </div>
-                <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
-                    <input name="txtbuscar" class="form-control" type="text" placeholder="Nombre de Operador"
-                           aria-label="default input example">
-                </div>
+                    <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
+                        <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=buscaroperador">
+
+                        <input name="txtbuscar" class="form-control" type="text" placeholder="Buscar por nombre"
+                               aria-label="default input example" value="<%=txtbuscado%>">
+                        </form>
+
+                    </div>
             </div>
             <div class="topmargin">
 
@@ -123,8 +133,8 @@
                         <div class="input-group mb-3 col">
                         </div>
                         <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
+                            <a href="<%=request.getContextPath()%>/ServAdmin?admin=borraroperador&opcodigo=<%=op.getCodigoPucp()%>"><button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
+                            </button></a>
                         </div>
                         <hr>
                         <%}%>
