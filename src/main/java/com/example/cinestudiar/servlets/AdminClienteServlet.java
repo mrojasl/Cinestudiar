@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class AdminClienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
             throws ServletException, IOException {
         ArrayList<BUser> listaClientes= AdminDao.obtenerClientes();
         request.setAttribute("listaClientes",listaClientes);

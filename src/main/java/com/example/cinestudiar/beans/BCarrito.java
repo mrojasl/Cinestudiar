@@ -19,6 +19,13 @@ public class BCarrito {
 
     private int idfuncion;
 
+    public BCarrito(String nombre, int cantidadxfuncion, String nombrepelicula, Date diafuncion, Time horafuncion, int precioxticket) {
+    }
+
+    public BCarrito() {
+
+    }
+
     public int getIdfuncion() {
         return idfuncion;
     }

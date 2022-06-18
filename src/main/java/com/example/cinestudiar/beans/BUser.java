@@ -1,17 +1,18 @@
 package com.example.cinestudiar.beans;
 
 import java.sql.Blob;
+import java.util.Date;
 
 public class BUser {
     private String codigoPucp;
     private String nombres;
     private String apellidos;
     private String rol;
-    private String dni;
+    private int dni;
     private String telefono;
     private String correo;
     private String contrasena;
-    private String fechaNacimiento;
+    private Date fechaNacimiento;
     private String direccion;
     private Blob foto;
     private String datosTarjeta;
@@ -48,11 +49,11 @@ public class BUser {
         this.rol = rol;
     }
 
-    public String getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
@@ -84,7 +85,7 @@ public class BUser {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

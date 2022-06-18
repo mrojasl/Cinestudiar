@@ -1,12 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jesus
-  Date: 5/06/2022
-  Time: 22:09
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.cinestudiar.beans.BFuncion" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+
+<jsp:useBean id="obtenerFuncion" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -143,7 +139,19 @@
 <div class="container">
     <div class="row ">
         <section class=" d-flex justify-content-around modificar-barra pb-2 pt-2 mt-0 border border-dark">
-            <h5 class="mt-2"><spam>Funcion1</spam></h5>
+            <tbody>
+            <% int i = 1;
+                for (BFuncion funcion : obtenerFuncion) { %>
+                <td class="mt-2"><%=funcion.getIdFuncion()%></td>
+                <h5><tr class="mt-2"><%=funcion.getPelicula()%> </tr></h5>
+            <tr>
+               <td><%=funcion.getFecha() %></td>
+                <td><%=funcion.getHora()%></td>
+                <td><%=funcion.getSede() %></td>
+                <td><%=funcion.getIdSala()%></td>
+            </tr>
+            </tbody>
+
             <div>
                 <span>20/04/2021</span><br>
                 <spam>14:00-20:30</spam>
@@ -165,65 +173,13 @@
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
             </div>
+            <% i++;
+            } %>
+
             <!-- Large modal -->
 
         </section>
     </div>
-    <div class="row ">
-        <section class=" d-flex justify-content-around modificar-barra pb-2 pt-2 mt-0 border border-dark">
-            <h5 class="mt-2"><spam>Funcion2</spam></h5>
-            <div>
-                <span>20/04/2021</span><br>
-                <spam>14:00-20:30</spam>
-            </div>
-            <div>
-                <spam>La Molina-Sala:1</spam><br>
-                <spam>Precio:$50</spam>
-            </div>
-            <div>
-                <spam>Genero</spam><br>
-                <spam>Asistencia:%50</spam>
-            </div>
-
-            <div>
-                <spam>Calificación promedio</spam><br>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <!-- Large modal -->
-        </section>
-    </div>
-    <div class="row ">
-        <section class=" d-flex justify-content-around modificar-barra pb-2 pt-2 mt-0 border border-dark">
-            <h5 class="mt-2"><spam>Funcion3</spam></h5>
-            <div>
-                <span>20/04/2021</span><br>
-                <spam>14:00-20:30</spam>
-            </div>
-            <div>
-                <spam>La Molina-Sala:1</spam><br>
-                <spam>Precio:$50</spam>
-            </div>
-            <div>
-                <spam>Genero</spam><br>
-                <spam>Asistencia:%50</spam>
-            </div>
-
-            <div>
-                <spam>Calificación promedio</spam><br>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <!-- Large modal -->
-        </section>
-    </div>
-
 </div>
 
 

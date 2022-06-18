@@ -364,6 +364,45 @@ public class AdminDao {
 
 
     }
+    public static ArrayList<BUser> BuscarOperadorPorNombre(String txtBuscar) {
+        ArrayList<BUser> listaOperadores = new ArrayList<>();
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select codigo_pucp,nombre,apellido,dni,correo,telefono from usuarios where rol='operador' and (lower(usuarios.nombre) like ? or lower(usuarios.apellido) like ?) order by codigo_pucp";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+
+            preparedStatement.setString(1, "%" + txtBuscar.toLowerCase() + "%");
+            preparedStatement.setString(2, "%" + txtBuscar.toLowerCase() + "%");
+
+            try (ResultSet rs = preparedStatement.executeQuery();) {
+                while (rs.next()) {
+                    BUser op = new BUser();
+                    op.setCodigoPucp(rs.getString(1));
+                    op.setNombres(rs.getString(2));
+                    op.setApellidos(rs.getString(3));
+                    op.setDni(rs.getString(4));
+                    op.setCorreo(rs.getString(5));
+                    op.setTelefono(rs.getString(6));
+                    listaOperadores.add(op);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaOperadores;
+    }
 
 
 }

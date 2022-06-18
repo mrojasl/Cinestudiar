@@ -27,11 +27,18 @@ public class UsuarioServlet extends HttpServlet {
                 ArrayList<BFuncion> listarPeliculas = UsuariosDao.obtenerFunciones();
                 request.setAttribute("listarPeliculas",listarPeliculas);
 
-                RequestDispatcher rd1 =request.getRequestDispatcher("Usuario/inicio_sin_sesion.jsp");
+                RequestDispatcher rd1 =request.getRequestDispatcher("Usuario/in_sin_sesion.jsp");
                 rd1.forward(request,response);
 
             case "agregar":
-
+                String id = request.getParameter("id");
+                BUser buser = UsuariosDao.buscarPorId(id);
+                if (buser != null) {
+                    request.setAttribute("bUser", buser);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("jobs/editar.jsp");
+                    requestDispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/JobServlet");
 
 
             case "profesional":

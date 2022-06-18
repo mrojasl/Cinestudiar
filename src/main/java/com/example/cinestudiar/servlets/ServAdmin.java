@@ -49,12 +49,14 @@ public class ServAdmin extends HttpServlet {
                 RequestDispatcher rd4 =request.getRequestDispatcher("Admin/actoresydirectores.jsp");
                 rd4.forward(request,response);
 
+            case "borraroperador":
+                String opcodigo = request.getParameter("opcodigo");
+                AdminDao.EliminarOperador(opcodigo);
+                response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=operador");
+
+
+
         }
-
-
-
-
-
 
 
     }
@@ -71,7 +73,7 @@ public class ServAdmin extends HttpServlet {
                 String sede = request.getParameter("sede");
                 AdminDao.crearSala(aforo, sede);
                 response.sendRedirect(request.getContextPath() + "/ServAdmin");
-                break;
+
             }
 
             case "editaroborrarsala" -> {
@@ -86,7 +88,7 @@ public class ServAdmin extends HttpServlet {
                     AdminDao.borrarSala(id);
                 }
                 response.sendRedirect(request.getContextPath() + "/ServAdmin");
-                break;
+
             }
 
             case "crearprofesional" -> {
@@ -99,13 +101,23 @@ public class ServAdmin extends HttpServlet {
                 } else profesion = "d";
                 AdminDao.crearProfesional(nombreyapellido_sepa[0], nombreyapellido_sepa[1], profesion, fotodeperfil);
                 response.sendRedirect(request.getContextPath() + "/ServAdmin");
-                break;
+
             }
 
             case "buscaroperador" ->{
                 String txtbuscar = request.getParameter("txtbuscar");
+                request.setAttribute("listaOperadores",AdminDao.BuscarOperadorPorNombre(txtbuscar));
+                request.setAttribute("txtbuscado",txtbuscar);
+                RequestDispatcher rd2 =request.getRequestDispatcher("Admin/operadores.jsp");
+                rd2.forward(request,response);
 
             }
+            case "crearoperador" ->{
+                String operadorcodigo = request.getParameter("operadorcodigo");
+                AdminDao.AsignarOperador(operadorcodigo);
+                response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=operador");
+            }
+
 
         }
     }
