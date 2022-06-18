@@ -41,6 +41,28 @@ public class CarritoServlet extends HttpServlet {
             carritoDao.actualiza(bCarrito);
             response.sendRedirect(request.getContextPath() + "/Checkout");
         }
+
+        if ("comprar".equals(action)) {
+            String cantidad_ticketsStr = request.getParameter("cantidad_ticketsStr");
+            String pago_totalStr = request.getParameter("pago_totalStr");
+            String codigo_pucp = request.getParameter("codigo_pucp");
+
+
+            try {
+                int cantidad_tickets = Integer.parseInt(cantidad_ticketsStr);
+                double pago_total=Double.parseDouble(pago_totalStr);
+
+                carritoDao.compra(cantidad_tickets,pago_total,codigo_pucp);
+                response.sendRedirect(request.getContextPath() + "/ola");
+
+            } catch (NumberFormatException e) {
+                System.out.println("error al parsear");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Usuario/carrito_compras/checkout.jsp");
+                requestDispatcher.forward(request, response);
+            }
+        }
+
+
     }
 
 

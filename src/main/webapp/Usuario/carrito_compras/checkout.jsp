@@ -39,6 +39,9 @@
 </head>
 <body>
 <jsp:include page="cabecera_usuario.jsp"/>
+<%  double preciototal = 0;
+    int totaldetickets=0;
+    String codigo_puke="";%>
 <div class="container">
     <% int contador_carrito=0;%>
     <div class="d-flex flex-row bd-highlight mb-1">
@@ -87,10 +90,11 @@
         </thead>
         <tbody>
         <%
-            double preciototal = 0;
+
             int i=0;
 
             for (BCarrito carrito : carritoDcompras) {
+                codigo_puke=carrito.getCodigoEstudiante();
 
                 preciototal = preciototal + carrito.getPrecio_ticket() * carrito.getCantidad_funcion();%>
         <tr>
@@ -116,6 +120,7 @@
                     <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=carrito.getIdcompra()%>" >
                     <p STYLE="color: White"> Maximo aforo: <%=carrito.getAforoOperador()%></p>
                     <input type="number" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" min="1" max="<%=carrito.getAforoOperador()%>" value="<%=carrito.getCantidad_funcion()%>" >
+                    <%totaldetickets=totaldetickets+carrito.getCantidad_funcion();%>
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
             </td>
@@ -139,6 +144,7 @@
 
 
     <% if (contador_carrito!=0 && fechaigual==0){ %>
+
     <div class="d-flex justify-content-end" style="color:White;font-size: 25px;margin-top: 0px" >Total a pagar: S/<%=preciototal%></div>
 
     <div class="d-flex justify-content-start" style="margin-top: -35px"><button type="button"  class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#extraLargeModal">Procesar Compra</button></div>
@@ -194,9 +200,16 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn-block btn-blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <span> <span id="checkout">Pagar</span> <span id="check-amt">S/<%=preciototal%></span> </span>
+                                        <form method="POST" action="<%=request.getContextPath()%>/Checkout?a=comprar">
 
-                                        </button>
+                                            <input type="hidden" class="form-control" name="cantidad_ticketsStr" id="cantidad_ticketsStr" value="<%=totaldetickets%>">
+                                            <label for="pago_totalStr" class="form-label"></label>
+                                            <input type="hidden" class="form-control" name="pago_totalStr" id="pago_totalStr" value="<%=preciototal%>">
+                                            <label for="codigo_pucp" class="form-label"></label>
+                                            <input type="hidden" class="form-control" name="codigo_pucp" id="codigo_pucp" value="<%=codigo_puke%>">
+                                            <button type="submit" class="btn btn-primary" >Pagar</button>
+                                        </form>
+
 
 
 
