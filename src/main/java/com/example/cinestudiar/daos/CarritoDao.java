@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class CarritoDao {
 
+
     Random rn = new Random();
     int range = 50000 - 10 + 1;
     int compraunidocomprafuncion =  rn.nextInt(range) + 10;
@@ -149,6 +150,7 @@ public class CarritoDao {
 
     public void yacompro(BCarrito idcompra) {
 
+
         String user = "root";
         String pass = "root";
         String url = "jdbc:mysql://localhost:3306/mysystem4";
@@ -159,12 +161,14 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "UPDATE compradefunciones set asistencia=? where idcompra=?;";
+        String sql = "UPDATE compradefunciones set asistencia=?,idcompra=? where idfuncion=? and usuarios_codigo_pucp=20190421;";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
             pstmt.setInt(1,5);
-            pstmt.setInt(2, idcompra.getIdcompra());
+            pstmt.setInt(2,idcompra.getIdcompra());
+
+            pstmt.setInt(3, idcompra.getIdfuncion());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

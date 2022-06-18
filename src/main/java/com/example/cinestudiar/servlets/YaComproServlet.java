@@ -37,6 +37,7 @@ public class YaComproServlet extends HttpServlet {
         int cantidad_funcion= Integer.parseInt(request.getParameter("cantidad_funcion"));
         int precio_ticket= Integer.parseInt(request.getParameter("precio_ticket"));
         String imagen=request.getParameter("imagen");
+        int funcion= Integer.parseInt(request.getParameter("idfuncion"));
         String codigoEstudiante=request.getParameter("codigoEstudiante");
         int idcompra= Integer.parseInt(request.getParameter("idcompra"));
 
@@ -49,6 +50,7 @@ public class YaComproServlet extends HttpServlet {
         bCarrito.setCantidad_funcion(cantidad_funcion);
         bCarrito.setPrecio_ticket(precio_ticket);
         bCarrito.setImagen(imagen);
+        bCarrito.setIdfuncion(funcion);
         bCarrito.setCodigoEstudiante(codigoEstudiante);
         bCarrito.setIdcompra(idcompra);
 

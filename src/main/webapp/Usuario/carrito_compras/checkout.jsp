@@ -41,6 +41,7 @@
 <jsp:include page="cabecera_usuario.jsp"/>
 <%  double preciototal = 0;
     int totaldetickets=0;
+
     String codigo_puke="";%>
 <div class="container">
     <% int contador_carrito=0;
@@ -61,9 +62,6 @@
                     }
                     application.setAttribute("hitCounter", hitsCount);
                 %>
-
-
-    <p><%=hitsCount%></p>
 
     </div>
 
@@ -152,7 +150,7 @@
             <td><a href="<%=request.getContextPath()%>/Checkout?a=borrar&id=<%=carrito.getIdfuncion()%>" class="btn btn-danger">Eliminar Reserva</a></td>
 
         <%
-            i++;} %>
+            } %>
         <% if (contador_carrito==0){ %>
         <td STYLE="color: White; font-size: 15px">Usted no ha agregado nada al carrito </td>
 

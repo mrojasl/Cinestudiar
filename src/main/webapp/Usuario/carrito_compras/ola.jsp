@@ -14,8 +14,39 @@
 </head>
 <body>
 
+<% int contador_carrito=0;
+    Integer hitsCount = (Integer)application.getAttribute("hitCounter");
+    Integer hitsCountresta = (Integer)application.getAttribute("hitCounterresta"); %>
 
 
+<%
+
+    if( hitsCount ==null || hitsCount == 0 )
+    {
+        /* First visit */
+        hitsCount = 3;
+    }
+    else
+    {
+        hitsCount += 1;
+    }
+    application.setAttribute("hitCounter", hitsCount);
+%>
+
+<%
+
+    if( hitsCountresta ==null || hitsCountresta == 0 )
+    {
+        /* First visit */
+        hitsCountresta = 1000;
+    }
+    else
+    {
+        hitsCountresta += 1;
+    }
+    application.setAttribute("hitCounterresta", hitsCountresta);
+%>
+<p STYLE="font-size: 50px"> <%=hitsCountresta%>></p>
 <!-- Button trigger modal -->
 <script>
     $(document).ready(function(){
@@ -23,6 +54,7 @@
     });
 </script>
 <% int contador= carritodecompras.size(); %>
+
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -35,6 +67,7 @@
 
             <div class="modal-footer">
 
+
                 <% if (contador!=0) {%>
                 <div class="modal-body">
                     Se está procesando su orden, NO CIERRE ESTA VENTANA!!
@@ -44,7 +77,9 @@
 
                 <div class="modal-body">
                     --Orden Procesada--
+                    <% hitsCountresta=0;%>
                     <br>
+                    <%=hitsCountresta%>
                     Se ha realizado la compra con éxito.<br>
                     Puedes ver tus tickets en el perfil de usuario.<br>
                     Los Datos de ingreso han sido enviados a su correo electrónico =)
@@ -56,27 +91,32 @@
 
                 <%for (BCarrito carrito : carritodecompras) { %>
 
+
+
                 <form method="POST" action="<%=request.getContextPath()%>/ola?a=yacompro">
                     <input type="hidden" name="nombre_pelicula" value="<%=carrito.getNombre_pelicula()%>" />
                     <input type="hidden" name="fecha" value="<%=carrito.getFecha()%>" />
                     <input type="hidden" name="hora" value="<%=carrito.getHora()%>" />
+                    <input type="hidden" name="idfuncion" value="<%=carrito.getIdfuncion()%>" />
                     <input type="hidden" name="nombre_sede" value="<%=carrito.getNombre_sede()%>" />
                     <input type="hidden" name="precio_ticket" value="<%=carrito.getPrecio_ticket()%>" />
                     <input type="hidden" name="imagen" value="<%=carrito.getImagen()%>" />
                     <input type="hidden" name="codigoEstudiante" value="<%=carrito.getCodigoEstudiante()%>" />
 
+
                     <input type="hidden" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" value="<%=carrito.getCantidad_funcion()%>" >
-                    <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=carrito.getIdcompra()%>" >
+                    <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=hitsCount-hitsCountresta%>" >
 
                     <button id= "cambios" type="submit" class="btn btn-outline-light" STYLE="height: 0px; width: 0px; color: transparent"></button>
                     <script>window.onload = function(){
                         var button = document.getElementById('cambios');
                         setInterval(function(){
                             button.click();
-                        },50);  // this will make it click again every 50 miliseconds
+                        },100);  // this will make it click again every 50 miliseconds
                     };</script>
                 </form>
                 <%
+
                    contador--; }%>
             </div>
 

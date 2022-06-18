@@ -23,7 +23,7 @@ public class UsuariosDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "INSERT INTO usuarios (codigo_pucp, nombre, apellido, rol,dni, telefono, correo, contraseña, fecha_nacimiento, direccion, foto, tarjeta) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios (codigo_pucp, nombre, apellido, rol,dni, telefono, correo, contraseña, fecha_nacimiento, direccion, foto, datos_tarjeta) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -107,7 +107,7 @@ public class UsuariosDao {
                     buser = new BUser();
                     buser.setCodigoPucp(rs.getString(1));
                     buser.setNombres(rs.getString(2));
-                    buser.setApellidos(rs.getString((3));
+                    buser.setApellidos(rs.getString(3));
                     buser.setRol(rs.getString(4));
                     buser.setDni(rs.getInt(5));
                     buser.setTelefono(rs.getString(6));
