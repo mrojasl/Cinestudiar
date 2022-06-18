@@ -43,9 +43,28 @@
     int totaldetickets=0;
     String codigo_puke="";%>
 <div class="container">
-    <% int contador_carrito=0;%>
+    <% int contador_carrito=0;
+        Integer hitsCount = (Integer)application.getAttribute("hitCounter");  %>
     <div class="d-flex flex-row bd-highlight mb-1">
         <p class="titulo">Carrito de Compras</p>
+
+                <%
+
+                    if( hitsCount ==null || hitsCount == 0 )
+                    {
+                        /* First visit */
+                        hitsCount = 1;
+                    }
+                    else
+                    {
+                        hitsCount += 1;
+                    }
+                    application.setAttribute("hitCounter", hitsCount);
+                %>
+
+
+    <p><%=hitsCount%></p>
+
     </div>
 
     <hr/>
@@ -113,6 +132,8 @@
                     <input type="hidden" name="nombre_pelicula" value="<%=carrito.getNombre_pelicula()%>" />
                     <input type="hidden" name="fecha" value="<%=carrito.getFecha()%>" />
                     <input type="hidden" name="hora" value="<%=carrito.getHora()%>" />
+                    <input type="hidden" name="idfuncion" value="<%=carrito.getIdfuncion()%>" />
+                    <input type="hidden" name="contadorfuncion" value="<%=hitsCount%>" />
                     <input type="hidden" name="nombre_sede" value="<%=carrito.getNombre_sede()%>" />
                     <input type="hidden" name="precio_ticket" value="<%=carrito.getPrecio_ticket()%>" />
                     <input type="hidden" name="imagen" value="<%=carrito.getImagen()%>" />

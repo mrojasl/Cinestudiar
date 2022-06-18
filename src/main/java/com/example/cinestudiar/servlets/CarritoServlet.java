@@ -42,6 +42,12 @@ public class CarritoServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/Checkout");
         }
 
+        if ("setId00".equals(action)) {
+            BCarrito bCarrito = leerParametrosRequest1(request);
+            carritoDao.setId00(bCarrito);
+            response.sendRedirect(request.getContextPath() + "/Checkout");
+        }
+
         if ("comprar".equals(action)) {
             String cantidad_ticketsStr = request.getParameter("cantidad_ticketsStr");
             String pago_totalStr = request.getParameter("pago_totalStr");
@@ -73,6 +79,7 @@ public class CarritoServlet extends HttpServlet {
          String nombre_sede=request.getParameter("nombre_sede");
          int cantidad_funcion= Integer.parseInt(request.getParameter("cantidad_funcion"));
          int precio_ticket= Integer.parseInt(request.getParameter("precio_ticket"));
+         int idfuncion= Integer.parseInt(request.getParameter("idfuncion"));
          String imagen=request.getParameter("imagen");
         String codigoEstudiante=request.getParameter("codigoEstudiante");
         int idcompra= Integer.parseInt(request.getParameter("idcompra"));
@@ -86,8 +93,36 @@ public class CarritoServlet extends HttpServlet {
         bCarrito.setCantidad_funcion(cantidad_funcion);
         bCarrito.setPrecio_ticket(precio_ticket);
         bCarrito.setImagen(imagen);
+        bCarrito.setIdfuncion(idfuncion);
         bCarrito.setCodigoEstudiante(codigoEstudiante);
         bCarrito.setIdcompra(idcompra);
+
+
+        return bCarrito;
+    }
+    public BCarrito leerParametrosRequest1(HttpServletRequest request) {
+        String nombre_pelicula=request.getParameter("nombre_pelicula");
+        String fecha=request.getParameter("fecha");
+        String hora=request.getParameter("hora");
+        String nombre_sede=request.getParameter("nombre_sede");
+        int cantidad_funcion= Integer.parseInt(request.getParameter("cantidad_funcion"));
+        int precio_ticket= Integer.parseInt(request.getParameter("precio_ticket"));
+        String imagen=request.getParameter("imagen");
+        String codigoEstudiante=request.getParameter("codigoEstudiante");
+        int idcompranuevo= Integer.parseInt(request.getParameter("contadorfuncion"));
+        int idfuncion=Integer.parseInt(request.getParameter("idfuncion"));
+
+        BCarrito bCarrito= new BCarrito();
+
+        bCarrito.setNombre_pelicula(nombre_pelicula);
+        bCarrito.setFecha(fecha);
+        bCarrito.setHora(hora);
+        bCarrito.setNombre_sede(nombre_sede);
+        bCarrito.setCantidad_funcion(cantidad_funcion);
+        bCarrito.setPrecio_ticket(precio_ticket);
+        bCarrito.setImagen(imagen);
+        bCarrito.setCodigoEstudiante(codigoEstudiante);
+        bCarrito.setIdcompra(idcompranuevo);
 
 
         return bCarrito;

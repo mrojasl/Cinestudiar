@@ -18,6 +18,7 @@ public class CarritoDao {
 
 
     public ArrayList<BCarrito> listarUsuario(){
+
         ArrayList<BCarrito> listausuarios = new ArrayList<>();
 
         String user = "root";
@@ -74,14 +75,14 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "UPDATE compradefunciones set cantidad_por_funcion=? where idcompra=?;";
+        String sql = "UPDATE compradefunciones set cantidad_por_funcion=? where idfuncion=?;";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
 
             pstmt.setInt(1, idfuncion.getCantidad_funcion());
-            pstmt.setInt(2, idfuncion.getIdcompra());
+            pstmt.setInt(2, idfuncion.getIdfuncion());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -130,7 +131,7 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "INSERT INTO compras(qr,cantidad_tickets,pago_total,fecha_compra,hora_compra,codigo_pucp,asistencia) VALUES (?,?,?,now(),now(),?,?);";
+        String sql = "INSERT INTO compras(qr,cantidad_tickets,pago_total,fecha_compra,hora_compra,codigo_pucp) VALUES (?,?,?,now(),now(),?);";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -138,7 +139,6 @@ public class CarritoDao {
             pstmt.setInt(2, cantidad_tickets);
             pstmt.setDouble(3, pago_total);
             pstmt.setString(4, codigo_pucp);
-            pstmt.setInt(5,compraunidocomprafuncion);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -163,7 +163,7 @@ public class CarritoDao {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
-            pstmt.setInt(1,compraunidocomprafuncion);
+            pstmt.setInt(1,5);
             pstmt.setInt(2, idcompra.getIdcompra());
             pstmt.executeUpdate();
 
@@ -172,12 +172,43 @@ public class CarritoDao {
         }
 
     }
+
+
     public static String generateRandomBase64Token(int byteLength) {
         SecureRandom secureRandom = new SecureRandom();
         byte[] token = new byte[byteLength];
         secureRandom.nextBytes(token);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(token);
     }
+
+
+    public void setId00 ( BCarrito carrito){
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "UPDATE compradefunciones set idcompra=? where idfuncion=?;";
+
+
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+            pstmt.setInt(1,carrito.getIdcompra());
+            pstmt.setInt(2,carrito.getIdfuncion() );
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 
 }
