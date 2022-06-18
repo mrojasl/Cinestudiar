@@ -46,7 +46,6 @@
     }
     application.setAttribute("hitCounterresta", hitsCountresta);
 %>
-<p STYLE="font-size: 50px"> <%=hitsCountresta%>></p>
 <!-- Button trigger modal -->
 <script>
     $(document).ready(function(){
@@ -79,7 +78,7 @@
                     --Orden Procesada--
                     <% hitsCountresta=0;%>
                     <br>
-                    <%=hitsCountresta%>
+
                     Se ha realizado la compra con éxito.<br>
                     Puedes ver tus tickets en el perfil de usuario.<br>
                     Los Datos de ingreso han sido enviados a su correo electrónico =)
