@@ -40,6 +40,7 @@ public class YaComproServlet extends HttpServlet {
         int funcion= Integer.parseInt(request.getParameter("idfuncion"));
         String codigoEstudiante=request.getParameter("codigoEstudiante");
         int idcompra= Integer.parseInt(request.getParameter("idcompra"));
+        int historialcompra=Integer.parseInt(request.getParameter("historialcompra"));
 
         BCarrito bCarrito= new BCarrito();
 
@@ -53,6 +54,7 @@ public class YaComproServlet extends HttpServlet {
         bCarrito.setIdfuncion(funcion);
         bCarrito.setCodigoEstudiante(codigoEstudiante);
         bCarrito.setIdcompra(idcompra);
+        bCarrito.setHistorialcompra(historialcompra);
 
 
         return bCarrito;

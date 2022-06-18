@@ -34,7 +34,7 @@ public class CarritoDao {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador,cf.idfuncion from usuarios u\n" +
+             ResultSet rs = stmt.executeQuery("select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador,cf.idfuncion,cf.idhistorialdecompras from usuarios u\n" +
                      "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
                      "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
                      "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
@@ -54,6 +54,7 @@ public class CarritoDao {
                 bCarrito.setIdcompra(rs.getInt(9));
                 bCarrito.setAforoOperador(rs.getInt(10));
                 bCarrito.setIdfuncion(rs.getInt(11));
+                bCarrito.setHistorialcompra(rs.getInt(12));
                 listausuarios.add(bCarrito);
             }
         } catch (SQLException e) {
@@ -161,14 +162,13 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "UPDATE compradefunciones set asistencia=?,idcompra=? where idfuncion=? and usuarios_codigo_pucp=20190421;";
+        String sql = "UPDATE compradefunciones set asistencia=?,idcompra=? where idhistorialdecompras=? and usuarios_codigo_pucp=20190421;";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
             pstmt.setInt(1,5);
             pstmt.setInt(2,idcompra.getIdcompra());
-
-            pstmt.setInt(3, idcompra.getIdfuncion());
+            pstmt.setInt(3, idcompra.getHistorialcompra());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

@@ -18,6 +18,15 @@ public class BCarrito {
     private String codigoEstudiante;
 
     private int idfuncion;
+    private int historialcompra;
+
+    public int getHistorialcompra() {
+        return historialcompra;
+    }
+
+    public void setHistorialcompra(int historialcompra) {
+        this.historialcompra = historialcompra;
+    }
 
     public BCarrito(String nombre, int cantidadxfuncion, String nombrepelicula, Date diafuncion, Time horafuncion, int precioxticket) {
     }

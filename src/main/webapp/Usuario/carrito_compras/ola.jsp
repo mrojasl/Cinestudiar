@@ -100,9 +100,8 @@
                     <input type="hidden" name="nombre_sede" value="<%=carrito.getNombre_sede()%>" />
                     <input type="hidden" name="precio_ticket" value="<%=carrito.getPrecio_ticket()%>" />
                     <input type="hidden" name="imagen" value="<%=carrito.getImagen()%>" />
+                    <input type="hidden" name="historialcompra" value="<%=carrito.getHistorialcompra()%>" />
                     <input type="hidden" name="codigoEstudiante" value="<%=carrito.getCodigoEstudiante()%>" />
-
-
                     <input type="hidden" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" value="<%=carrito.getCantidad_funcion()%>" >
                     <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=hitsCount-hitsCountresta%>" >
 
