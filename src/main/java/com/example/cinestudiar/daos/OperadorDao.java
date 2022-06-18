@@ -34,7 +34,7 @@ public class OperadorDao {
             Connection conn = DriverManager.getConnection(url,user,pass);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-
+            System.out.println("Aqui hola");
             while (rs.next()){
                 BFuncion fu = new BFuncion();
                 fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
@@ -44,6 +44,7 @@ public class OperadorDao {
                 fu.setSede(rs.getString(5));
                 fu.setIdSala(rs.getInt(6));
 
+                System.out.println(fu.getPelicula());
 
                 obtenerFuncion.add(fu);
             }

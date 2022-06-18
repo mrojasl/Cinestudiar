@@ -1,3 +1,4 @@
+/*
 package com.example.cinestudiar.daos;
 
 import com.example.cinestudiar.beans.BCompra;
@@ -154,3 +155,4 @@ public class UsuariosDao {
 
     }
 }
+*/

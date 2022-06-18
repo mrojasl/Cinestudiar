@@ -55,7 +55,7 @@
 
 </section>
 <section>
-    <div class="d-flex bd-highlight mb-3 mx-5 ">
+        <div class="d-flex bd-highlight mb-3 mx-5 ">
         <div class="p-2 bd-highlight topnav">
             <a class="mx-2" href="Ordenar%20funciones.html">Ordenar Funciones</a>
             <a class="mx-2" href="Ordenar%20Directores.html">Ordenar Directores</a>
@@ -138,47 +138,45 @@
 </div>
 <div class="container">
     <div class="row ">
-        <section class=" d-flex justify-content-around modificar-barra pb-2 pt-2 mt-0 border border-dark">
+        <table class="table">
+            <head>
+                <tr>
+                    <th>IdFunción</th>
+                    <th>Película</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Sede</th>
+                    <th>Sala</th>
+                    <th>Precio</th>
+                    <th>Calificacion Promedio</th>
+
+                </tr>
+            </head>
             <tbody>
-            <% int i = 1;
+            <%
                 for (BFuncion funcion : obtenerFuncion) { %>
-                <td class="mt-2"><%=funcion.getIdFuncion()%></td>
-                <h5><tr class="mt-2"><%=funcion.getPelicula()%> </tr></h5>
+
             <tr>
-               <td><%=funcion.getFecha() %></td>
+                <td><%=funcion.getIdFuncion()%></td>
+                <td><%=funcion.getPelicula()%> </td>
+                <td><%=funcion.getFecha()%></td>
                 <td><%=funcion.getHora()%></td>
                 <td><%=funcion.getSede() %></td>
                 <td><%=funcion.getIdSala()%></td>
+                <td>Precio:$50</td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star"></td>
+                <td class="fa fa-star"></td>
             </tr>
-            </tbody>
 
-            <div>
-                <span>20/04/2021</span><br>
-                <spam>14:00-20:30</spam>
-            </div>
-            <div>
-                <spam>La Molina-Sala:1</spam><br>
-                <spam>Precio:$50</spam>
-            </div>
-            <div>
-                <spam>Genero</spam><br>
-                <spam>Asistencia:%50</spam>
-            </div>
-
-            <div>
-                <spam>Calificación promedio</spam><br>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </div>
-            <% i++;
+            <%
             } %>
 
             <!-- Large modal -->
 
-        </section>
+        </table>
     </div>
 </div>
 
