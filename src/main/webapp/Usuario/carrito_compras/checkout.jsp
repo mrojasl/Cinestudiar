@@ -255,31 +255,9 @@
 
 <!-- Modal -->
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Compra Realizada con Éxito</h5>
-            </div>
-            <div class="modal-body">
-                Se ha realizado la compra con éxito.<br>
-                Puedes ver tus tickets en el perfil de usuario.<br>
-                Los Datos de ingreso han sido enviados a su correo electrónico =)
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" href="/Checkout" role="button">Regresar a mi carrito de Compras</a>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
-
-
-
-</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>

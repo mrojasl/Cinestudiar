@@ -31,7 +31,7 @@ public class CarritoDao {
                      "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
                      "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
                      "                     inner join salas sala on (sala.idsala=f.idsala)\n" +
-                     "                     where u.codigo_pucp=20195957 AND cf.asistencia=4;");) {
+                     "                     where u.codigo_pucp=20190421 AND cf.asistencia=4;");) {
 
             while(rs.next()){
                 BCarrito bCarrito = new BCarrito();
