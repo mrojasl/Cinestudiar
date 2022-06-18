@@ -8,17 +8,23 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class OperadorDao {
-    public static ArrayList<BFuncion> obtenerFunciones(){
-        ArrayList<BFuncion> listaFunciones = new ArrayList<>();
+    public ArrayList<BFuncion> obtenerFunciones(){
+        ArrayList<BFuncion> obtenerFuncion = new ArrayList<>();
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
         try {
-            String user = "root";
-            String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4";
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql = "select se.nombre_sede as `Sede`,\n" +
-                    "sa.idsala as `Sala`,\n" +
-                    "p.nombre as `Título de Película`,\n" +
-                    "f.fecha,f.hora\n" +
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            String sql = "select f.idfuncion as 'IdFunción',p.nombre as `Título de Película`,\n" +
+                    "f.fecha,f.hora,\n" +
+                    "se.nombre_sede as `Sede`,\n" +
+                    "sa.idsala as `Sala`\n" +
                     "from funciones f\n" +
                     "inner join salas sa on (f.idsala=sa.idsala)\n" +
                     "inner join sedes se on (sa.nombre_sede=se.nombre_sede)\n" +
@@ -31,19 +37,21 @@ public class OperadorDao {
 
             while (rs.next()){
                 BFuncion fu = new BFuncion();
-                fu.setSede(rs.getString(1));
-                fu.setIdSala(rs.getInt(2));
-                fu.setPelicula(rs.getString(3));
-                fu.setFecha(rs.getString(4));
-                fu.setHora(rs.getString(5));
+                fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                fu.setPelicula(rs.getString(2));
+                fu.setFecha(rs.getString(3));
+                fu.setHora(rs.getString(4));
+                fu.setSede(rs.getString(5));
+                fu.setIdSala(rs.getInt(6));
 
-                listaFunciones.add(fu);
+
+                obtenerFuncion.add(fu);
             }
-        } catch (ClassNotFoundException | SQLException e){
-            e.printStackTrace();
+        } catch (SQLException e){
+            throw new RuntimeException(e);
         }
 
-        return listaFunciones;
+        return obtenerFuncion;
     }
     public static ArrayList<BProfesional> obtenerProfesionalesMejorCalificados(){
         ArrayList<BProfesional> listaProMejorCalif = new ArrayList<>();
