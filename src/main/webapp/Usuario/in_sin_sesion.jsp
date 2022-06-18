@@ -84,7 +84,7 @@
 
 
 
-        <a href="../registro/registro.html">Registrarse⠀<i class="bi bi-book"></i></a>
+        <a href="UsuarioServlet">Registrarse⠀<i class="bi bi-book"></i></a>
 
     </div>
 </header>

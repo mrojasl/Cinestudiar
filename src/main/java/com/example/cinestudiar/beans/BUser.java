@@ -1,7 +1,6 @@
 package com.example.cinestudiar.beans;
 
 
-import java.sql.Blob;
 import java.util.Date;
 
 public class BUser {
@@ -16,13 +15,33 @@ public class BUser {
     private String telefono;
     private String correo;
     private String contrasena;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
 
 
     private String direccion;
-    private Blob foto;
+    private String foto;
     private String datosTarjeta;
+
+    public BUser() {
+
+    }
+
+
+    public BUser(String codigoPucp, String nombres, String apellidos, String rol, String dni, String telefono, String correo, String contrasena, String fechaNacimiento, String direccion, String foto, String datosTarjeta) {
+        this.codigoPucp = codigoPucp;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.rol = rol;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.fechaNacimiento = fechaNacimiento;
+        this.direccion = direccion;
+        this.foto = foto;
+        this.datosTarjeta = datosTarjeta;
+    }
 
     public String getCodigoPucp() {
         return codigoPucp;
@@ -56,6 +75,14 @@ public class BUser {
         this.rol = rol;
     }
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
     public String getTelefono() {
         return telefono;
     }
@@ -80,7 +107,13 @@ public class BUser {
         this.contrasena = contrasena;
     }
 
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
 
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
     public String getDireccion() {
         return direccion;
@@ -90,11 +123,11 @@ public class BUser {
         this.direccion = direccion;
     }
 
-    public Blob getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(Blob foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
@@ -104,21 +137,5 @@ public class BUser {
 
     public void setDatosTarjeta(String datosTarjeta) {
         this.datosTarjeta = datosTarjeta;
-    }
-
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
     }
 }

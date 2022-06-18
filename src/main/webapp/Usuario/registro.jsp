@@ -28,7 +28,7 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
     <link rel="stylesheet" href="carritocomprasvacio.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="inicio_style.css">
+    <link rel="stylesheet" href="Usuario/inicio_style.css">
 </head>
 <body background="fondo_registro.jpg">
 <!-- Navbar -->
@@ -88,70 +88,63 @@
                                 </div>
                                 <br>
 
-<<<<<<< HEAD
-                                <form method="POST" class="user" action="<%=request.getContextPath()%>/UsuarioServlet?a=crear"  >
-=======
-                                <form class="user" action="<%=request.getContextPath()%>/UsuarioServlet?a=crear" >
->>>>>>> ad2fab7e9936de993eb18746b169818e62302b4a
+                                <form class="user" method="POST" action="<%=request.getContextPath()%>/UsuarioServlet?action=añadir" enctype="multipart/form-data">
                                     <!-- Nombre completo-->
-                                    <label for="start">Nombre:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="nombre">
+                                        <input type="text" class="form-control form-control-user" id="nombre"
+                                               placeholder="Nombres" name="nombre">
                                     </div>
                                     <!-- Apellido completo-->
-                                    <label for="start">Apellido:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="apellido">
+                                        <input type="text" class="form-control form-control-user" id="apellidos"
+                                               placeholder="Apellidos" name="apellido">
                                     </div>
                                     <!-- DNI--->
-                                    <label for="start">DNI:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" dni="dni">
+                                        <input type="text" class="form-control form-control-user" id="exampleDNI"
+                                               placeholder="DNI" name="dni">
                                     </div>
                                     <!-- Código-->
-                                    <label for="start">Codigo:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="codigoPucp">
+                                        <input type="text" class="form-control form-control-user" id="exampleCodigo"
+                                               placeholder="Código PUCP" name="codigo_pucp">
                                     </div>
                                     <!-- Correo-->
-                                    <label for="start">Correo:</label>
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" name="correo">
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                               placeholder="Correo" name="correo">
                                     </div>
                                     <!-- Dirección de domicilio-->
-                                    <label for="start">Direccion de domicilio:</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="direccion">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                               placeholder="Dirección de domicilio" name="direccion">
                                     </div>
                                     <!-- Número de Celular-->
-                                    <label for="start">Numero de Celular:</label>
                                     <div class="form-group">
                                         <input type="integrity" class="form-control form-control-user"
-                                             name="telefono">
+                                               id="exampleInputNumber" placeholder="Numero de Celular"
+                                               name="telefono">
                                     </div>
                                     <!-- Fecha de nacimiento-->
                                     <label for="start">Fecha de Nacimiento:</label>
 
-                                    <input type="date" id="start" name="fechaNacimiento"
+                                    <input type="date" id="start" name="fecha_nacimiento"
                                            value="--/--/--"
                                            min="1950-01-01" max="2003-01-01">
                                     <!-- Contraseña-->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Contraseña" name="contrasena">
+                                               id="exampleInputPassword" placeholder="Contraseña" name="password">
                                     </div>
                                     <!-- Repetir contraseña-->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               name="contrasena">
+                                               name="password">
                                     </div>
-<<<<<<< HEAD
-                                    <button type="submit" class="btn btn-primary">Crear Trabajo</button>a>
-=======
-                                    <a href="<%=request.getContextPath()%>/UsuarioServlet" class="btn btn-primary btn-user btn-block">
-                                        Crear usuario
-                                    </a>
->>>>>>> ad2fab7e9936de993eb18746b169818e62302b4a
+                                    <div class="form-group">
+                                        <input type="file"  class="btn btn-primary" name="foto">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Crear Usuario</button>
                                     <hr>
                                 </form>
                                 <hr>
