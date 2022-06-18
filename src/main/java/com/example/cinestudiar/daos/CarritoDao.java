@@ -4,8 +4,10 @@ import com.example.cinestudiar.beans.BCarrito;
 
 
 import java.io.File;
+import java.security.SecureRandom;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Base64;
 
 public class CarritoDao {
 
@@ -115,6 +117,7 @@ public class CarritoDao {
         String user = "root";
         String pass = "root";
         String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String unique_qr=generateRandomBase64Token(16);
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -122,14 +125,14 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "INSERT INTO compras(qr,cantidad_tickets,pago_total,fecha_compra,hora_compra,codigo_pucp) VALUES ('ABCDEFGHIJK',?,?,now(),now(),?);";
+        String sql = "INSERT INTO compras(qr,cantidad_tickets,pago_total,fecha_compra,hora_compra,codigo_pucp) VALUES (?,?,?,now(),now(),?);";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setInt(1, cantidad_tickets);
-            pstmt.setDouble(2, pago_total);
-            pstmt.setString(3, codigo_pucp);
+            pstmt.setString(1,unique_qr);
+            pstmt.setInt(2, cantidad_tickets);
+            pstmt.setDouble(3, pago_total);
+            pstmt.setString(4, codigo_pucp);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -162,6 +165,12 @@ public class CarritoDao {
             throw new RuntimeException(e);
         }
 
+    }
+    public static String generateRandomBase64Token(int byteLength) {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] token = new byte[byteLength];
+        secureRandom.nextBytes(token);
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(token);
     }
 
 
