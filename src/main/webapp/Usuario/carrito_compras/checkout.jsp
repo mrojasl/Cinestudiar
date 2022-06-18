@@ -110,7 +110,7 @@
         <tbody>
         <%
 
-            int i=0;
+
 
             for (BCarrito carrito : carritoDcompras) {
                 codigo_puke=carrito.getCodigoEstudiante();

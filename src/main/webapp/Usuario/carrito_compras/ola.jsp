@@ -37,7 +37,6 @@
 
                 <% if (contador!=0) {%>
                 <div class="modal-body">
-
                     Se está procesando su orden, NO CIERRE ESTA VENTANA!!
                 </div>
                 <% } %>
@@ -74,7 +73,7 @@
                         var button = document.getElementById('cambios');
                         setInterval(function(){
                             button.click();
-                        },50);  // this will make it click again every 1000 miliseconds
+                        },50);  // this will make it click again every 50 miliseconds
                     };</script>
                 </form>
                 <%
