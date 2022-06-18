@@ -38,7 +38,7 @@
     if( hitsCountresta ==null || hitsCountresta == 0 )
     {
         /* First visit */
-        hitsCountresta = 1000;
+        hitsCountresta = 50;
     }
     else
     {
