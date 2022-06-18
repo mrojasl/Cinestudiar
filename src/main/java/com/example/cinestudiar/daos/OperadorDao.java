@@ -2,7 +2,7 @@ package com.example.cinestudiar.daos;
 
 import com.example.cinestudiar.beans.BFuncion;
 import com.example.cinestudiar.beans.BProfesional;
-import com.example.cinestudiar.beans.BUser;
+/*import com.example.cinestudiar.beans.BUser;*/
 
 import java.sql.*;
 import java.util.ArrayList;
