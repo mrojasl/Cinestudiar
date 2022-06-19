@@ -1,5 +1,6 @@
 package com.example.cinestudiar.servlets;
 
+import com.example.cinestudiar.beans.BCompra;
 import com.example.cinestudiar.beans.BProfesional;
 import com.example.cinestudiar.beans.BSedeYSala;
 import com.example.cinestudiar.beans.BUser;
@@ -38,6 +39,8 @@ public class ServAdmin extends HttpServlet {
             case "cliente":
                 ArrayList<BUser> listaClientes= AdminDao.obtenerClientes();
                 request.setAttribute("listaClientes",listaClientes);
+                ArrayList<BCompra> historialesCompras = AdminDao.ObtenerHistorialCompra();
+                request.setAttribute("historialdecompracliente",historialesCompras);
 
                 RequestDispatcher rd3 =request.getRequestDispatcher("Admin/clientes.jsp");
                 rd3.forward(request,response);
@@ -124,6 +127,8 @@ public class ServAdmin extends HttpServlet {
                 } else{
                     request.setAttribute("listaClientes",AdminDao.FiltrarClientePorSede(parametro));
                     RequestDispatcher rd3 =request.getRequestDispatcher("Admin/clientes.jsp");
+                    ArrayList<BCompra> historialesCompras = AdminDao.ObtenerHistorialCompra();
+                    request.setAttribute("historialdecompracliente",historialesCompras);
                     rd3.forward(request,response);
 
                 }
@@ -131,8 +136,8 @@ public class ServAdmin extends HttpServlet {
             case "ordenarcliente" ->{
                 String parametro = request.getParameter("ordencliente");
 
-
             }
+
 
         }
     }

@@ -1,4 +1,5 @@
 <%@ page import="com.example.cinestudiar.beans.BUser" %>
+<%@ page import="com.example.cinestudiar.beans.BCompra" %>
 <%--
   Created by IntelliJ IDEA.
   User: Jon
@@ -8,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BUser>" scope="request" id="listaClientes"/>
+<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BCompra>" scope="request" id="historialdecompracliente"/>
 <html lang="en">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -105,12 +107,12 @@
                         <div class="input-group mb-3 col">
 
                             <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Historial de compras
-                            </button>
+                                <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal<%=cl.getCodigoPucp()%>">
+                                    Historial de compras
+                                </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal<%=cl.getCodigoPucp()%>" tabindex="-1" aria-labelledby="exampleModalLabel<%=cl.getCodigoPucp()%>" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -118,54 +120,17 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div style="color: black" class="modal-body">
-                                            <h5><Strong>NombreFuncion1</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
+
+                                            <%for (BCompra com : historialdecompracliente) {%>
+
+                                            <%if (cl.getCodigoPucp().equals(com.getCodigoPucp())) {%>
+
+                                            <h5><Strong>S/<%=com.getPago_total()%></Strong></h5>
+                                            <p><%=com.getFecha_compra()%> - <%=com.getHora_compra()%> - Tickets:<%=com.getCantidad_tikets()%></p>
                                             <hr>
-                                            <h5><Strong>NombreFuncion2</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion3</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion4</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion5</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion6</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion7</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion8</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion9</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion10</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion11</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion12</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion13</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion14</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion15</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
-                                            <h5><Strong>NombreFuncion16</Strong></h5>
-                                            <p>01/02/2022 - 17:00-19:00 - Tickets:1 -<strong> TOTAL: S/30.00</strong></p>
-                                            <hr>
+                                            <%}
+                                            }%>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
