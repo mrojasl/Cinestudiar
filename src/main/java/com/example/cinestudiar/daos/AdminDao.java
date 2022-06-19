@@ -486,5 +486,65 @@ public class AdminDao {
 
         return historialCompras;
     }
+    public static ArrayList<BProfesional> ObtenerProfesionalesFiltro(String parametro){
+        ArrayList<BProfesional> listaProfesionales = new ArrayList<>();
 
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "SELECT idprofesional,nombre,apellido,rol " +
+                "FROM profesionales where rol = ?";
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+
+            preparedStatement.setString(1, parametro);
+
+            try (ResultSet rs = preparedStatement.executeQuery();) {
+                while (rs.next()) {
+                    BProfesional pr = new BProfesional();
+                    pr.setIdProfesional(rs.getInt(1));
+                    pr.setNombre(rs.getString(2));
+                    pr.setApellido(rs.getString(3));
+                    pr.setRol(rs.getString(4));
+                    listaProfesionales.add(pr);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaProfesionales;
+    }
+
+    public static void BorrarProfesional(int id){
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "delete from profesionales where idprofesional = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

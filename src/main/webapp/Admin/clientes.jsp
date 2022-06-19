@@ -50,32 +50,20 @@
         </ul>
         <div id="general">
             <br>
+            <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=filtrosede">
+
             <div class="supbarblue row">
                 <div class="input-group mb-3 col">
                     <h5 class="col" style="padding: 14px;color: white;width: 250px">Lista de Clientes</h5>
                 </div>
-                <div class="input-group mb-3 col">
-                    <h5 class="col" style="padding: 14px;color: white;width: 250px">Ordenar por:</h5>
-                </div>
-                <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
-                    <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=ordenarcliente">
-                    <select name="ordencliente" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Sin orden</option>
-                        <option>Más compras</option>
-                        <option>Más antiguos</option>
-                        <option>Más recientes</option>
-                    </select>
-                    <button type="submit" class="btn btn-secondary">Ordenar</button>
-                    </form>
 
-                </div>
                 <div class="input-group mb-3 col">
                 </div>
                 <div class="input-group mb-3 col">
-                    <h5 class="col" style="padding: 14px;color: white;width: 250px">Filtar por sede:</h5>
+                    <h5 class="col" style="padding: 14px;color: white;width: 250px">Filtrar por sede:</h5>
                 </div>
-                <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
-                    <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=filtrosede">
+                <div class="input-group mb-3 col" style="margin-top: 5px;margin-bottom: 10px;height: 15px">
+
                     <select name="filtrosede" class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option selected>Sin Filtro</option>
                         <option>Lima Cercado</option>
@@ -84,9 +72,13 @@
                         <option>San Miguel</option>
                     </select>
                     <button type="submit" class="btn btn-secondary">Filtrar</button>
-                    </form>
+                </div>
+                <div class="input-group mb-3 col">
                 </div>
             </div>
+
+            </form>
+
             <div class="topmargin">
 
                 <div>

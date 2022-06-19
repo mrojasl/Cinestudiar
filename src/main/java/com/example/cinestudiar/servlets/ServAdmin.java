@@ -57,7 +57,10 @@ public class ServAdmin extends HttpServlet {
                 AdminDao.EliminarOperador(opcodigo);
                 response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=operador");
 
-
+            case "borrarprofesional":
+                int proid = Integer.parseInt(request.getParameter("proid"));
+                AdminDao.BorrarProfesional(proid);
+                response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
 
         }
 
@@ -133,8 +136,22 @@ public class ServAdmin extends HttpServlet {
 
                 }
             }
-            case "ordenarcliente" ->{
-                String parametro = request.getParameter("ordencliente");
+            case "filtroprofesional" ->{
+                String parametro = request.getParameter("filtroprof");
+                if (parametro.equals("Todo")) {
+                    response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
+                } else{
+                    if (parametro.equals("Director")) {
+                        parametro="d";
+                    } else if (parametro.equals("Actor/Actriz")){
+                        parametro="a";
+                    }
+                    ArrayList<BProfesional> listaProfesionales= AdminDao.ObtenerProfesionalesFiltro(parametro);
+                    request.setAttribute("listaProfesionales",listaProfesionales);
+                    RequestDispatcher rd4 =request.getRequestDispatcher("Admin/actoresydirectores.jsp");
+                    rd4.forward(request,response);
+                }
+
 
             }
 

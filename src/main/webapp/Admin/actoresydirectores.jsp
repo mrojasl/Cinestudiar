@@ -98,35 +98,36 @@
                 </div>
             </div>
             <br>
-            <div class="supbarblue row">
-                <div class="input-group mb-3 col">
-                    <h5 class="col" style="padding: 14px;color: white;width: 250px">Lista de Actores/Directores</h5>
+
+            <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=filtroprofesional">
+
+                <div class="supbarblue row">
+                    <div class="input-group mb-3 col">
+                        <h5 class="col" style="padding: 14px;color: white;width: 250px">Lista de Actores/Directores</h5>
+                    </div>
+
+                    <div class="input-group mb-3 col">
+                    </div>
+
+
+                    <div class="input-group mb-3 col">
+                        <h5 class="col" style="padding: 14px;color: white;width: 250px">Filtrar por:</h5>
+                    </div>
+                    <div class="input-group mb-3 col" style="margin-top: 5px;margin-bottom: 10px;height: 15px">
+                        <select name="filtroprof" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option selected>Todo</option>
+                            <option>Director</option>
+                            <option>Actor/Actriz</option>
+                        </select>
+                        <button type="submit" class="btn btn-secondary">Filtrar</button>
+
+                    </div>
+                    <div class="input-group mb-3 col">
+                    </div>
                 </div>
 
-                <div class="input-group mb-3 col">
-                    <h5 class="col" style="padding: 14px;color: white;width: 250px">Obra:</h5>
-                </div>
-                <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Obra1</option>
-                        <option value="1">Obra2</option>
-                        <option value="1">Obra3</option>
-                        <option value="1">Obra4</option>
-                        <option value="1">Obra5</option>
-                        <option value="1">Obra6</option>
-                    </select>
-                </div>
-                <div class="input-group mb-3 col">
-                    <h5 class="col" style="padding: 14px;color: white;width: 250px">Filtar por:</h5>
-                </div>
-                <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Todo</option>
-                        <option value="1">Director</option>
-                        <option value="2">Actor/Actriz</option>
-                    </select>
-                </div>
-            </div>
+            </form>
+
             <div class="topmargin">
 
 
@@ -177,8 +178,8 @@
                             </div>
                         </div>
                         <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button>
+                            <a href="<%=request.getContextPath()%>/ServAdmin?admin=borrarprofesional&proid=<%=p.getIdProfesional()%>"><button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
+                            </button></a>
                         </div>
                         <hr>
                     </div>
