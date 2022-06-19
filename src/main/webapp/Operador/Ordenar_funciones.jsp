@@ -147,7 +147,7 @@
                     <th>Hora</th>
                     <th>Sede</th>
                     <th>Sala</th>
-                    <th>Precio</th>
+                    <th>Precio de ticket</th>
                     <th>Calificacion Promedio</th>
 
                 </tr>
@@ -164,7 +164,7 @@
                 <td><%=funcion.getHora()%></td>
                 <td><%=funcion.getSede() %></td>
                 <td><%=funcion.getIdSala()%></td>
-                <td>Precio:$50</td>
+                <td>S/. <%=funcion.getPrecioTicket()%></td>
                 <% int num= (int) funcion.getCalificacion();%>
                 <%if (num == 1){ %>
                 <td class="fa fa-star checked"></td>

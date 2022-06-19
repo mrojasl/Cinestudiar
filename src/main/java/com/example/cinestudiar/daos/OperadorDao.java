@@ -25,6 +25,7 @@ public class OperadorDao {
                     "f.fecha,f.hora,\n" +
                     "se.nombre_sede as `Sede`,\n" +
                     "sa.idsala as `Sala`,\n" +
+                    "f.precio_ticket as `Precio`,\n" +
                     "round(p.calificacion) as `Calificacion`\n" +
                     "from funciones f\n" +
                     "inner join salas sa on (f.idsala=sa.idsala)\n" +
@@ -44,7 +45,8 @@ public class OperadorDao {
                 fu.setHora(rs.getString(4));
                 fu.setSede(rs.getString(5));
                 fu.setIdSala(rs.getInt(6));
-                fu.setCalificacion(rs.getInt(7));
+                fu.setPrecioTicket(rs.getInt(7));
+                fu.setCalificacion(rs.getInt(8));
 
                 System.out.println(fu.getPelicula());
 
