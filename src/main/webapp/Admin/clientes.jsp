@@ -56,11 +56,16 @@
                     <h5 class="col" style="padding: 14px;color: white;width: 250px">Ordenar por:</h5>
                 </div>
                 <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Más compras</option>
-                        <option value="1">Más antiguos</option>
-                        <option value="2">Más recientes</option>
+                    <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=ordenarcliente">
+                    <select name="ordenoperador" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Sin orden</option>
+                        <option>Más compras</option>
+                        <option>Más antiguos</option>
+                        <option>Más recientes</option>
                     </select>
+                    <button type="submit" class="btn btn-secondary">Ordenar</button>
+                    </form>
+
                 </div>
                 <div class="input-group mb-3 col">
                 </div>
@@ -68,12 +73,16 @@
                     <h5 class="col" style="padding: 14px;color: white;width: 250px">Filtar por sede:</h5>
                 </div>
                 <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>San Miguel</option>
-                        <option value="1">Miraflores</option>
-                        <option value="2">Surco</option>
-                        <option value="2">Pueblo Libre</option>
+                    <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=filtrosede">
+                    <select name="filtrosede" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Sin Filtro</option>
+                        <option>Lima Cercado</option>
+                        <option>Pueblo Libre</option>
+                        <option>San Borja</option>
+                        <option>San Miguel</option>
                     </select>
+                    <button type="submit" class="btn btn-secondary">Filtrar</button>
+                    </form>
                 </div>
             </div>
             <div class="topmargin">

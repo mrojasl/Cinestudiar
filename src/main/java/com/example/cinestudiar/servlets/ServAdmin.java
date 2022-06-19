@@ -117,7 +117,17 @@ public class ServAdmin extends HttpServlet {
                 AdminDao.AsignarOperador(operadorcodigo);
                 response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=operador");
             }
+            case "filtrosede" ->{
+                String parametro = request.getParameter("filtrosede");
+                if (parametro.equalsIgnoreCase("Sin Filtro")){
+                    response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=cliente");
+                } else{
+                    request.setAttribute("listaClientes",AdminDao.FiltrarClientePorSede(parametro));
+                    RequestDispatcher rd3 =request.getRequestDispatcher("Admin/clientes.jsp");
+                    rd3.forward(request,response);
 
+                }
+            }
 
         }
     }

@@ -404,5 +404,48 @@ public class AdminDao {
         return listaOperadores;
     }
 
+    public static ArrayList<BUser> FiltrarClientePorSede(String sede) {
+        ArrayList<BUser> listaClientes = new ArrayList<>();
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select u.codigo_pucp,u.nombre,u.apellido,u.dni,u.telefono,u.correo " +
+                "from usuarios u left join compradefunciones cf " +
+                "on (u.codigo_pucp=cf.usuarios_codigo_pucp) left join funciones f " +
+                "on (f.idfuncion=cf.idfuncion) left join salas s " +
+                "on (f.idsala=s.idsala) where s.nombre_sede= ? " +
+                "group by u.codigo_pucp";
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+
+            preparedStatement.setString(1, sede);
+
+            try (ResultSet rs = preparedStatement.executeQuery();) {
+                while (rs.next()) {
+                    BUser cl = new BUser();
+                    cl.setCodigoPucp(rs.getString(1));
+                    cl.setNombres(rs.getString(2));
+                    cl.setApellidos(rs.getString(3));
+                    cl.setDni(rs.getString(4));
+                    cl.setTelefono(rs.getString(5));
+                    cl.setCorreo(rs.getString(6));
+
+                    listaClientes.add(cl);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaClientes;
+    }
 
 }
