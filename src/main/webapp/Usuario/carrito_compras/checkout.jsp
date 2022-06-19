@@ -191,8 +191,8 @@
                     <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form method="POST" action="<%=request.getContextPath()%>/Checkout?a=comprar">
                 <div class="modal-body">
-
                     <div class="row justify-content-center">
                         <div class="col-lg-12">
                             <div class="card">
@@ -204,12 +204,12 @@
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="row px-2">
-                                            <div class="form-group col-md-6"> <label class="form-control-label">Nombre del Titular</label> <input type="text" id="cname" name="cname" placeholder="Ingrese su nombre"> </div>
-                                            <div class="form-group col-md-6"> <label class="form-control-label">Numero de Tarjeta</label> <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3223 4204"> </div>
+                                            <div class="form-group col-md-6"> <label class="form-control-label">Nombre del Titular</label> <input type="text" id="cname" name="cname" required="required" placeholder="Ingrese su nombre"> </div>
+                                            <div class="form-group col-md-6"> <label for="cnum" class="form-control-label">Numero de Tarjeta</label> <input type="text" onkeyup="modifyInputcard(this)" id="cnum" name="cnum" required="required" placeholder="1111 2222 3223 4204" > </div>
                                         </div>
                                         <div class="row px-2">
-                                            <div class="form-group col-md-6"> <label class="form-control-label">Fecha de Expiración</label> <input type="text" id="exp" name="exp" placeholder="MM/YYYY"> </div>
-                                            <div class="form-group col-md-6"> <label class="form-control-label">CVV</label> <input type="text" id="cvv" name="cvv" placeholder="***"> </div>
+                                            <div class="form-group col-md-6"> <label class="form-control-label">Fecha de Expiración</label> <input type="text" onkeyup="modifyInput(this)" id="exp" name="exp" required="required" placeholder="MM/YYYY"> </div>
+                                            <div class="form-group col-md-6"> <label for="cvv">cvv</label><input type="number" class="form-control" id="cvv" name="cvv" min="1" max="9999" placeholder="0000"> </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mt-2">
@@ -219,15 +219,15 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <form method="POST" action="<%=request.getContextPath()%>/Checkout?a=comprar">
 
                                             <input type="hidden" class="form-control" name="cantidad_ticketsStr" id="cantidad_ticketsStr" value="<%=totaldetickets%>">
                                             <label for="pago_totalStr" class="form-label"></label>
                                             <input type="hidden" class="form-control" name="pago_totalStr" id="pago_totalStr" value="<%=preciototal%>">
                                             <label for="codigo_pucp" class="form-label"></label>
                                             <input type="hidden" class="form-control" name="codigo_pucp" id="codigo_pucp" value="<%=codigo_puke%>">
+
                                             <button type="submit" class="btn btn-primary" >Pagar</button>
-                                        </form>
+
 
 
 
@@ -265,6 +265,7 @@
 
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -276,7 +277,29 @@
 
 
 
+<script>
+    function modifyInput(ele) {
 
+        if (ele.value.length === 2)
+            ele.value = ele.value + '/'
+        else
+        if (ele.value.length === 3 && ele.value.charAt(2) === '/')
+            ele.value = ele.value.replace('/', '');
+    }
+    function modifyInputcard(ele) {
+
+        if (ele.value.length === 4)
+            ele.value = ele.value + ' '
+        if (ele.value.length === 9)
+            ele.value = ele.value + ' '
+        if (ele.value.length === 14)
+            ele.value = ele.value + ' '
+        if (ele.value.length === 19)
+            ele.value = ele.value + ' '
+
+
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>

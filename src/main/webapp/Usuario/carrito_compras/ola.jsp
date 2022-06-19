@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Example of Auto Loading Bootstrap Modal on Page Load</title>
+    <title>Gracias por tu Compra :D</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -24,7 +24,7 @@
     if( hitsCount ==null || hitsCount == 0 )
     {
         /* First visit */
-        hitsCount = 3;
+        hitsCount = 2;
     }
     else
     {
@@ -38,7 +38,7 @@
     if( hitsCountresta ==null || hitsCountresta == 0 )
     {
         /* First visit */
-        hitsCountresta = 50;
+        hitsCountresta = 1;
     }
     else
     {
