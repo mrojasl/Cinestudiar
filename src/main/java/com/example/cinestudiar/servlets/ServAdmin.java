@@ -128,6 +128,11 @@ public class ServAdmin extends HttpServlet {
 
                 }
             }
+            case "ordenarcliente" ->{
+                String parametro = request.getParameter("ordencliente");
+
+
+            }
 
         }
     }

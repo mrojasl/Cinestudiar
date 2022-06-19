@@ -57,7 +57,7 @@
                 </div>
                 <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
                     <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=ordenarcliente">
-                    <select name="ordenoperador" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <select name="ordencliente" class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option selected>Sin orden</option>
                         <option>Más compras</option>
                         <option>Más antiguos</option>
