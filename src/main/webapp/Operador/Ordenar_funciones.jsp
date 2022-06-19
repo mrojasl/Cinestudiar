@@ -157,6 +157,7 @@
                 for (BFuncion funcion : obtenerFuncion) { %>
 
             <tr>
+
                 <td><%=funcion.getIdFuncion()%></td>
                 <td><%=funcion.getPelicula()%> </td>
                 <td><%=funcion.getFecha()%></td>
@@ -164,11 +165,42 @@
                 <td><%=funcion.getSede() %></td>
                 <td><%=funcion.getIdSala()%></td>
                 <td>Precio:$50</td>
+                <% int num= (int) funcion.getCalificacion();%>
+                <%if (num == 1){ %>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star"></td>
+                <td class="fa fa-star"></td>
+                <td class="fa fa-star"></td>
+                <td class="fa fa-star"></td>
+                <%}%>
+                <%if(num==2){%>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star"></td>
+                <td class="fa fa-star"></td>
+                <td class="fa fa-star"></td>
+                <%}%>
+                <%if(num==3){%>
                 <td class="fa fa-star checked"></td>
                 <td class="fa fa-star checked"></td>
                 <td class="fa fa-star checked"></td>
                 <td class="fa fa-star"></td>
                 <td class="fa fa-star"></td>
+                <%}%>
+                <%if(num==4){%>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star"></td>
+                <%}%>
+                <%if(num==5){%>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <td class="fa fa-star checked"></td>
+                <%}%>
             </tr>
 
             <%

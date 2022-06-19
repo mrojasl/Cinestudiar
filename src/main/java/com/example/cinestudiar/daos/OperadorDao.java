@@ -24,7 +24,8 @@ public class OperadorDao {
             String sql = "select f.idfuncion as 'IdFunción',p.nombre as `Título de Película`,\n" +
                     "f.fecha,f.hora,\n" +
                     "se.nombre_sede as `Sede`,\n" +
-                    "sa.idsala as `Sala`\n" +
+                    "sa.idsala as `Sala`,\n" +
+                    "round(p.calificacion) as `Calificacion`\n" +
                     "from funciones f\n" +
                     "inner join salas sa on (f.idsala=sa.idsala)\n" +
                     "inner join sedes se on (sa.nombre_sede=se.nombre_sede)\n" +
@@ -43,6 +44,7 @@ public class OperadorDao {
                 fu.setHora(rs.getString(4));
                 fu.setSede(rs.getString(5));
                 fu.setIdSala(rs.getInt(6));
+                fu.setCalificacion(rs.getInt(7));
 
                 System.out.println(fu.getPelicula());
 
