@@ -1,5 +1,6 @@
 package com.example.cinestudiar.daos;
 
+import com.example.cinestudiar.beans.BCompra;
 import com.example.cinestudiar.beans.BProfesional;
 import com.example.cinestudiar.beans.BSedeYSala;
 import com.example.cinestudiar.beans.BUser;
@@ -421,7 +422,7 @@ public class AdminDao {
                 "from usuarios u left join compradefunciones cf " +
                 "on (u.codigo_pucp=cf.usuarios_codigo_pucp) left join funciones f " +
                 "on (f.idfuncion=cf.idfuncion) left join salas s " +
-                "on (f.idsala=s.idsala) where s.nombre_sede= ? " +
+                "on (f.idsala=s.idsala) where s.nombre_sede= ? and rol='cliente' " +
                 "group by u.codigo_pucp";
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
@@ -446,6 +447,44 @@ public class AdminDao {
         }
 
         return listaClientes;
+    }
+
+    public static ArrayList<BCompra> ObtenerHistorialCompra() {
+        ArrayList<BCompra> historialCompras = new ArrayList<>();
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select pago_total,fecha_compra,hora_compra,cantidad_tickets,codigo_pucp " +
+                "from compras " +
+                "order by fecha_compra desc,hora_compra desc";
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+
+            try (ResultSet rs = preparedStatement.executeQuery();) {
+                while (rs.next()) {
+                    BCompra c = new BCompra();
+                    c.setPago_total(rs.getDouble(1));
+                    c.setFecha_compra(rs.getString(2));
+                    c.setHora_compra(rs.getString(3));
+                    c.setCantidad_tikets(rs.getInt(4));
+                    c.setCodigoPucp(rs.getString(5));
+
+                    historialCompras.add(c);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return historialCompras;
     }
 
 }
