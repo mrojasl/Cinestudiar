@@ -333,11 +333,13 @@
                 <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>
                 <label>05/04/2001</label>
                 <li><i class="icono fas fa-user-check"></i> Contraseña:</li>
-                <div class="input-group mb-3">
-                    <label for="inputPassword" class="col-sm-2 col-form-label"></label>
-                    <input type="password" class="form-control" id="inputPassword" value="<%=perfil.getContrasenha()%>">
-                    <button class="btn btn-outline-secondary" type="button" >Actualizar</button>
-                </div>
+                <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarcon">
+                    <div class="input-group mb-3">
+                        <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
+                        <input type="password" class="form-control" name="contranueva" id="contranueva"value="<%=perfil.getContrasenha()%>">
+                        <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                    </div>
+                </form>
                 <% } %>
 
             </ul>
