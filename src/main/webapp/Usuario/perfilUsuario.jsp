@@ -1,5 +1,5 @@
-
-<%@ page import="com.example.cinestudiar.beans.BPerfil" %><%--
+<%@ page import="com.example.cinestudiar.beans.BPerfil" %>
+<%@ page import="com.example.cinestudiar.beans.BUsuarioFuncion" %><%--
   Created by IntelliJ IDEA.
   User: jesus
   Date: 5/06/2022
@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="perfilDusuario" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPerfil>" />
+<jsp:useBean id="usuarioFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BUsuarioFuncion>" />
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -49,7 +50,46 @@
     /*=====================================
     estilos
     =====================================*/
-
+    body {
+        background-image: url("https://drive.google.com/uc?export=view&id=1zlb3YXP4dZ4HlsdaAeRdUn9v7psnJVpL");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    header{
+        background-color: #003f9e;
+        width: auto;
+        height: 11vh;
+        color: white;
+    }
+    header h2{
+        position: absolute;
+        left: 10%;
+        top:4%;
+    }
+    .elementos{
+        position: absolute;
+        left: 25%;
+    }
+    .elementos a{
+        position: relative;
+        left:65%;
+        top:0%;
+        color:white;
+        text-decoration: none;
+        margin-right: 5px;
+    }
+    .administrador{
+        background-color: #7e7878;
+        width: auto;
+        height: 6vh;
+    }
+    .administrador h3{
+        position: absolute;
+        color: #ece9e9;
+        left: 50%;
+    }
     html {
         -webkit-text-size-adjust: 100%;
         -ms-text-size-adjust: 100%;
@@ -92,7 +132,6 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        background: linear-gradient(#FF5A31FF);
         margin-bottom: 1.25rem;
     }
 
@@ -339,6 +378,7 @@
 
             <div >
                 <div class="supbarblack row">
+                    <% for (BUsuarioFuncion funciones: usuarioFunciones){ %>
 
                     <div class="row">
                         <div class="input-group mb-3 col">
@@ -346,7 +386,7 @@
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Piratas en el callao<br><br>Fecha:<br>20/04/2022<br><br>Cantidad de tickets:<br>1</h6>
+                            <h6>Nombre:<br><%=funciones.getNombrepelicula()%><br><br>Fecha:<br>20/04/2022<br><br>Cantidad de tickets:<br>1</h6>
                         </div>
                         <div class="input-group mb-3 col">
                             <h6>Sede:<br>Surco <br><br>Hora:<br>16:00 - 18:00</h6>
@@ -361,90 +401,15 @@
                         <hr>
                     </div>
 
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="cine.jpeg" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Piratas en el callao<br><br>Fecha:<br>20/04/2022<br><br>Cantidad de tickets:<br>3</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Sede:<br>Surco <br><br>Hora:<br>16:00 - 18:00</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="cine.jpeg" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Piratas en el callao<br><br>Fecha:<br>20/04/2022<br><br>Cantidad de tickets:<br>2</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Sede:<br>Surco <br><br>Hora:<br>16:00 - 18:00</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
+                    <% } %>
 
 
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="cine.jpeg" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Quinua<br><br>Fecha:<br>01/04/2022<br><br>Cantidad de tickets:<br>2</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Sede:<br>San Miguel <br><br>Hora:<br>13:00 - 15:00</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Caducado
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img src="cine.jpeg" alt="perfil foto" style="width:100px;height:100px;">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6>Nombre:<br>Quinua<br><br>Fecha:<br>15/03/2022<br><br>Cantidad de tickets:<br>1</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6>Sede:<br>San Miguel <br><br>Hora:<br>13:00 - 15:00</h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Caducado
-                            </button>
-                        </div>
-                        <hr>
-                    </div>
                 </div>
+                <hr>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </section>
 </body>

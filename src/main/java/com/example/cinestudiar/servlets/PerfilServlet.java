@@ -17,7 +17,9 @@ public class PerfilServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         PerfilDao perfilDao= new PerfilDao();
+
         request.setAttribute("perfilDusuario",perfilDao.listarUsuario());
+        request.setAttribute("usuarioFunciones",perfilDao.listarFunciones());
 
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/perfilUsuario.jsp");
         requestDispatcher.forward(request,response);
