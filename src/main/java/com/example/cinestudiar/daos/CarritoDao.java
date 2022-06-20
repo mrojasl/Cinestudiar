@@ -24,7 +24,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima\n";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
