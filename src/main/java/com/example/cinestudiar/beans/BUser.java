@@ -1,6 +1,8 @@
 package com.example.cinestudiar.beans;
 
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.Date;
 
 public class BUser {
@@ -20,15 +22,16 @@ public class BUser {
 
 
     private String direccion;
-    private String foto;
+    private InputStream foto;
+    private byte foto2;
     private String datosTarjeta;
 
     public BUser() {
-
     }
 
 
-    public BUser(String codigoPucp, String nombres, String apellidos, String rol, String dni, String telefono, String correo, String contrasena, String fechaNacimiento, String direccion, String foto, String datosTarjeta) {
+
+    public BUser(String codigoPucp, String nombres, String apellidos, String rol, String dni, String telefono, String correo, String contrasena, String fechaNacimiento, String direccion, InputStream foto, String datosTarjeta) {
         this.codigoPucp = codigoPucp;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -123,12 +126,20 @@ public class BUser {
         this.direccion = direccion;
     }
 
-    public String getFoto() {
+    public InputStream getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(InputStream foto) {
         this.foto = foto;
+    }
+
+    public byte getFoto2() {
+        return foto2;
+    }
+
+    public void setFoto2(byte foto2) {
+        this.foto2 = foto2;
     }
 
     public String getDatosTarjeta() {

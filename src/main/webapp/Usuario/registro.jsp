@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.cinestudiar.daos.UsuariosDao"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +89,7 @@
                                 </div>
                                 <br>
 
-                                <form class="user" method="POST" action="<%=request.getContextPath()%>/UsuarioServletRegistro?action=añadir" enctype="multipart/form-data">
+                                <form class="user" method="POST" action="<%=request.getContextPath()%>/UsuarioRegistroServlet?action=añadir" enctype="multipart/form-data">
                                     <!-- Nombre completo-->
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="nombre"
@@ -142,9 +143,9 @@
                                                name="password">
                                     </div>
                                     <div class="form-group">
-                                        <input type="file"  class="btn btn-primary" name="foto">
+                                        <input type="file" name="picture">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Crear Usuario</button>
+                                    <button type="submit" class="btn btn-primary" >Crear Usuario</button>
                                     <hr>
                                 </form>
                                 <hr>

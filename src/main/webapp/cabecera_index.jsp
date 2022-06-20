@@ -45,7 +45,7 @@
                 </div>
 
 
-                <a href="<%=request.getContextPath()%>/UsuarioServletRegistro">Registrarse⠀<i class="bi bi-book"></i></a>
+                <a href="<%=request.getContextPath()%>/UsuarioRegistroServlet">Registrarse⠀<i class="bi bi-book"></i></a>
 
             </div>
         </header>

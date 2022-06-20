@@ -48,7 +48,7 @@ public class UsuariosDao {
             pstmt.setString(8, usuario.getContrasena());
             pstmt.setString(9, usuario.getFechaNacimiento());
             pstmt.setString(10, usuario.getDireccion());
-            pstmt.setString(11, usuario.getFoto());
+            pstmt.setBlob(11, usuario.getFoto());
             pstmt.setString(12, usuario.getDatosTarjeta());
 
 
