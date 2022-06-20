@@ -40,54 +40,11 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
     <link rel="stylesheet" href="carritocomprasvacio.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="inicio_style.css">
+    <link rel="stylesheet" href="Usuario/inicio_style.css">
 
 </head>
 <body>
-<header class="header">
-    <h2>Cinestudiar</h2>
-    <div class="nav">
-        <a href="#">Inicio⠀<i class="bi bi-house-fill"></i> </a>
-        <a href="#"  onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Inicio de sesión⠀<i class="bi bi-person-fill"></i></a>
-
-        <div id="id01" class="modalh1">
-
-            <form style="background-color: #003f9e" class="modal-contenth1 animate" action="/action_page.php" method="post">
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                </div>
-                <div class="container align-content-center w-75 mt-5 rounded">
-                    <p class="text-center" style="color: black; font-size: 40px" ><b>Iniciar sesión</b></p>
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Ingrese usuario" name="uname" required>
-
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Ingrese contraseña" name="psw" required>
-
-                    <a href="in_con_sesion.html"><button type="button" class="btn btn-success">Ingresar</button></a><br>
-                    <label>
-                        <input id="rememberme" type="checkbox" checked="checked" name="remember"> Recuérdame
-                    </label>
-                </div>
-
-                <footer class="container d-flex justify-content-between" style="background-color:#f1f1f1" >
-                    <div class="mx-0">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
-                        <a id="forgot" href="#"  ><b>¿Olvidaste la contraseña?</b></a>
-                    </div>
-
-                </footer>
-
-            </form>
-
-        </div>
-
-
-
-        <a href="UsuarioServlet">Registrarse⠀<i class="bi bi-book"></i></a>
-
-    </div>
-</header>
+    <jsp:include page="cabecera_index.jsp"/>
 <div id="general">
     <div class="leftside">
         <div class="sugerencia"><h3>Sugerencias</h3></div>

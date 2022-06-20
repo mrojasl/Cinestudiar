@@ -26,16 +26,16 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
     <link rel="stylesheet" href="carritocomprasvacio.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="inicio_style.css">
+    <link rel="stylesheet" href="Usuario/inicio_style.css">
 </head>
 <body class='snippet-body'>
 <header>
     <h2>Cinestudiar</h2>
     <div class="nav">
-        <a href="in_con_sesion.html">Inicio⠀<i class="bi bi-house-fill"></i> </a>
-        <a href="../carrito/checkout.html">Carrito de compras⠀<i class="bi bi-cart-fill"></i></a>
-        <a href="../PerfilUsuario/ClientePerfilNuevo.htmll">Mi Perfil <i class="bi bi-person-circle"></i></a>
-        <a href="in_sin_sesion.html">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
+        <a href="<%=request.getContextPath()%>/ServAdmin">Inicio⠀<i class="bi bi-house-fill"></i> </a>
+        <a href="<%=request.getContextPath()%>//Checkout">Carrito de compras⠀<i class="bi bi-cart-fill"></i></a>
+        <a href="<%=request.getContextPath()%>/PerfildeUsuario">Mi Perfil <i class="bi bi-person-circle"></i></a>
+        <a href="<%=request.getContextPath()%>/UsuarioServletSin_sesion">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
     </div>
 </header>
 <div id="general">

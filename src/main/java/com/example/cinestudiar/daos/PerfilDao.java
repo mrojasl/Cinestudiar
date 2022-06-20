@@ -42,6 +42,7 @@ public class PerfilDao {
                 bUsuarioFuncion.setFechapelicula(rs.getString(3));
                 bUsuarioFuncion.setHorapelicula(rs.getString(4));
                 bUsuarioFuncion.setSede(rs.getString(5));
+                bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
                 listausuarios.add(bUsuarioFuncion);
             }
         } catch (SQLException e) {
@@ -112,6 +113,62 @@ public class PerfilDao {
 
             pstmt.setString(1, tel.getNumero());
             pstmt.setString(2, tel.getCodigopucp());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void actualizadireccion(BPerfil dir) {
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "UPDATE usuarios set direccion=? where codigo_pucp=?;";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+
+            pstmt.setString(1, dir.getDireccion());
+            pstmt.setString(2, dir.getCodigopucp());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void actualizacontra(BPerfil con) {
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "UPDATE usuarios set contraseña=? where codigo_pucp=?;";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+
+            pstmt.setString(1, con.getContrasenha());
+            pstmt.setString(2, con.getCodigopucp());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

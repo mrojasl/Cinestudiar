@@ -29,7 +29,16 @@ public class BUser {
     public BUser() {
     }
 
+    public BUser(String nombres, String contrasena) {
+        this.nombres = nombres;
+        this.contrasena = contrasena;
+    }
 
+    public BUser(String nombres, String rol, String contrasena) {
+        this.nombres = nombres;
+        this.rol = rol;
+        this.contrasena = contrasena;
+    }
 
     public BUser(String codigoPucp, String nombres, String apellidos, String rol, String dni, String telefono, String correo, String contrasena, String fechaNacimiento, String direccion, InputStream foto, String datosTarjeta) {
         this.codigoPucp = codigoPucp;

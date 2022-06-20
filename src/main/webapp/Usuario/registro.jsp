@@ -137,11 +137,6 @@
                                         <input type="password" class="form-control form-control-user"
                                                id="exampleInputPassword" placeholder="Contraseña" name="password">
                                     </div>
-                                    <!-- Repetir contraseña-->
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                               name="password">
-                                    </div>
                                     <div class="form-group">
                                         <input type="file" name="picture">
                                     </div>

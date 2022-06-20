@@ -51,11 +51,7 @@
     estilos
     =====================================*/
     body {
-        background-image: url("https://drive.google.com/uc?export=view&id=1zlb3YXP4dZ4HlsdaAeRdUn9v7psnJVpL");
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        background-color: #3C3C41FF;
     }
     header{
         background-color: #003f9e;
@@ -247,12 +243,14 @@
 
 
     .supbarblue{
-        background-color: #3C3C41FF;
+        background-color: #003f9e;
         height: 50px;
     }
     .supbarblack{
         background-color: #3C3C41FF;
-        height: 1100px;
+        position: relative;
+        height: 1600px;
+        width: 1000px;
     }
     .topmargin{
         margin-top: 30px;
@@ -283,7 +281,7 @@
             <div class="perfil-usuario-avatar">
 
 
-                <img class="mb-4" src="persona.jpeg" alt="">
+                <img class="mb-4" src="Usuario/persona.jpeg" alt="">
 
                 <button type="button" class="boton-avatar">
                     <i class="far fa-image"></i>
@@ -321,20 +319,25 @@
             </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-map-marker-alt"></i> Direccion:</li>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="<%=perfil.getDireccion()%>">
-                    <button class="btn btn-outline-secondary" type="button" >Actualizar</button>
-                </div>
+                <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizardir">
+                    <div class="input-group mb-3">
+                        <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
+                        <input type="text" class="form-control" name="direccionnueva" id="direccionnueva"value="<%=perfil.getDireccion()%>">
+                        <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                    </div>
+                </form>
                 <li><i class="icono fas fa-briefcase"></i> Correo:</li>
                 <label><%=perfil.getCorreo()%></label>
                 <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>
                 <label>05/04/2001</label>
                 <li><i class="icono fas fa-user-check"></i> Contraseña:</li>
-                <div class="input-group mb-3">
-                    <label for="inputPassword" class="col-sm-2 col-form-label"></label>
-                    <input type="password" class="form-control" id="inputPassword" value="<%=perfil.getContrasenha()%>">
-                    <button class="btn btn-outline-secondary" type="button" >Actualizar</button>
-                </div>
+                <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarcon">
+                    <div class="input-group mb-3">
+                        <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
+                        <input type="password" class="form-control" name="contranueva" id="contranueva"value="<%=perfil.getContrasenha()%>">
+                        <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                    </div>
+                </form>
                 <% } %>
 
             </ul>
@@ -370,7 +373,7 @@
                     <option selected>San Miguel</option>
                     <option value="1">Miraflores</option>
                     <option value="2">Surco</option>
-                    <option value="2">Pueblo Libre</option>
+                    <option value="3">Pueblo Libre</option>
                 </select>
             </div>
         </div>
@@ -382,20 +385,20 @@
 
                     <div class="row">
                         <div class="input-group mb-3 col">
-                            <img src="cine.jpeg" alt="perfil foto" style="width:100px;height:100px;">
+                            <img src="Usuario/cine.jpeg" alt="perfil foto" style="width:100px;height:100px;">
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br><%=funciones.getNombrepelicula()%><br><br>Fecha:<br>20/04/2022<br><br>Cantidad de tickets:<br>1</h6>
+                            <h6>Nombre:<br><%=funciones.getNombrepelicula()%><br><br>Fecha:<br><%=funciones.getFechapelicula()%><br><br>Cantidad de tickets:<br><%=funciones.getCantidadtickets()%></h6>
                         </div>
                         <div class="input-group mb-3 col">
-                            <h6>Sede:<br>Surco <br><br>Hora:<br>16:00 - 18:00</h6>
+                            <h6>Sede:<br><%=funciones.getSede()%> <br><br>Hora:<br><%=funciones.getHorapelicula()%></h6>
                         </div>
 
                         <div class="input-group mb-3 col">
                         </div>
                         <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
+                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px" disabled>Caducado
                             </button>
                         </div>
                         <hr>

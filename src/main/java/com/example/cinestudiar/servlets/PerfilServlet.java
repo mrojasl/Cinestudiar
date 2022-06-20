@@ -2,7 +2,10 @@ package com.example.cinestudiar.servlets;
 
 
 import com.example.cinestudiar.beans.BCarrito;
+import com.example.cinestudiar.beans.BCompra;
 import com.example.cinestudiar.beans.BPerfil;
+import com.example.cinestudiar.beans.BProfesional;
+import com.example.cinestudiar.daos.AdminDao;
 import com.example.cinestudiar.daos.CarritoDao;
 import com.example.cinestudiar.daos.PerfilDao;
 
@@ -10,6 +13,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Blob;
+import java.util.ArrayList;
 
 @WebServlet(name = "PerfilServlet", value = "/PerfildeUsuario")
 public class PerfilServlet extends HttpServlet {
@@ -43,5 +48,29 @@ public class PerfilServlet extends HttpServlet {
             perfilDao.actualizatelefono(bPerfil);
             response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
         }
+
+        if ("actualizardir".equals(action)) {
+            BPerfil bPerfil= new BPerfil();
+            String codigo=request.getParameter("codigopuke");
+            String direccion=request.getParameter("direccionnueva");
+            bPerfil.setDireccion(direccion);
+            bPerfil.setCodigopucp(codigo);
+            perfilDao.actualizadireccion(bPerfil);
+            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
+        }
+        if ("actualizarcon".equals(action)) {
+            BPerfil bPerfil= new BPerfil();
+            String codigo=request.getParameter("codigopuke");
+            String contrasenha=request.getParameter("contranueva");
+            bPerfil.setContrasenha(contrasenha);
+            bPerfil.setCodigopucp(codigo);
+            perfilDao.actualizacontra(bPerfil);
+            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
+        }
+
+
+
+
     }
 }
+
