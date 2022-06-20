@@ -51,11 +51,7 @@
     estilos
     =====================================*/
     body {
-        background-image: url("https://drive.google.com/uc?export=view&id=1zlb3YXP4dZ4HlsdaAeRdUn9v7psnJVpL");
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        background-color: #3C3C41FF;
     }
     header{
         background-color: #003f9e;
@@ -247,12 +243,14 @@
 
 
     .supbarblue{
-        background-color: #3C3C41FF;
+        background-color: #003f9e;
         height: 50px;
     }
     .supbarblack{
         background-color: #3C3C41FF;
-        height: 1100px;
+        position: relative;
+        height: 1600px;
+        width: 1000px;
     }
     .topmargin{
         margin-top: 30px;
@@ -283,7 +281,7 @@
             <div class="perfil-usuario-avatar">
 
 
-                <img class="mb-4" src="persona.jpeg" alt="">
+                <img class="mb-4" src="Usuario/persona.jpeg" alt="">
 
                 <button type="button" class="boton-avatar">
                     <i class="far fa-image"></i>
@@ -375,7 +373,7 @@
                     <option selected>San Miguel</option>
                     <option value="1">Miraflores</option>
                     <option value="2">Surco</option>
-                    <option value="2">Pueblo Libre</option>
+                    <option value="3">Pueblo Libre</option>
                 </select>
             </div>
         </div>
@@ -387,20 +385,20 @@
 
                     <div class="row">
                         <div class="input-group mb-3 col">
-                            <img src="cine.jpeg" alt="perfil foto" style="width:100px;height:100px;">
+                            <img src="Usuario/cine.jpeg" alt="perfil foto" style="width:100px;height:100px;">
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br><%=funciones.getNombrepelicula()%><br><br>Fecha:<br>20/04/2022<br><br>Cantidad de tickets:<br>1</h6>
+                            <h6>Nombre:<br><%=funciones.getNombrepelicula()%><br><br>Fecha:<br><%=funciones.getFechapelicula()%><br><br>Cantidad de tickets:<br><%=funciones.getCantidadtickets()%></h6>
                         </div>
                         <div class="input-group mb-3 col">
-                            <h6>Sede:<br>Surco <br><br>Hora:<br>16:00 - 18:00</h6>
+                            <h6>Sede:<br><%=funciones.getSede()%> <br><br>Hora:<br><%=funciones.getHorapelicula()%></h6>
                         </div>
 
                         <div class="input-group mb-3 col">
                         </div>
                         <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
+                            <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px" disabled>Caducado
                             </button>
                         </div>
                         <hr>

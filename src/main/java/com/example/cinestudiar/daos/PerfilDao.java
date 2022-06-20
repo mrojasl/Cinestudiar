@@ -42,6 +42,7 @@ public class PerfilDao {
                 bUsuarioFuncion.setFechapelicula(rs.getString(3));
                 bUsuarioFuncion.setHorapelicula(rs.getString(4));
                 bUsuarioFuncion.setSede(rs.getString(5));
+                bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
                 listausuarios.add(bUsuarioFuncion);
             }
         } catch (SQLException e) {
