@@ -5,7 +5,7 @@ import com.example.cinestudiar.beans.BCarrito;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CarritocomprasDao {
+public class CarritoComprasDao {
 
     public ArrayList<BCarrito> obtenerdelCliente(){
         ArrayList<BCarrito> carritoCliente = new ArrayList<>();

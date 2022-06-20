@@ -1,5 +1,5 @@
 <%@ page import="com.example.cinestudiar.beans.BUser" %>
-<%@ page import="com.example.cinestudiar.servlets.ServAdmin" %>
+<%@ page import="com.example.cinestudiar.servlets.AdminServlet" %>
 <%--
   Created by IntelliJ IDEA.
   User: Jon

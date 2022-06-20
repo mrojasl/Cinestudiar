@@ -14,7 +14,7 @@ import java.sql.Blob;
 import java.util.ArrayList;
 
 @WebServlet(name = "ServAdmin", value = "/ServAdmin")
-public class ServAdmin extends HttpServlet {
+public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

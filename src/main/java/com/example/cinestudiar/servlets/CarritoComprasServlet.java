@@ -1,7 +1,7 @@
 package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BCarrito;
-import com.example.cinestudiar.daos.CarritocomprasDao;
+import com.example.cinestudiar.daos.CarritoComprasDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class CarritoComprasServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CarritocomprasDao carritocomprasDao= new CarritocomprasDao();
+        CarritoComprasDao carritocomprasDao= new CarritoComprasDao();
         ArrayList<BCarrito> carritoCliente=carritocomprasDao.obtenerdelCliente();
 
 

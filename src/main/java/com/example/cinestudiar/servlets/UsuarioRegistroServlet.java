@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 @MultipartConfig
 @WebServlet(name = "UsuarioServlet", value = "/UsuarioServletRegistro")
-public class UsuarioServletRegistro extends HttpServlet {
+public class UsuarioRegistroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("Usuario/registro.jsp");
