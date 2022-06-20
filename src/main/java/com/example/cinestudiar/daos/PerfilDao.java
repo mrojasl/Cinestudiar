@@ -17,7 +17,8 @@ public class PerfilDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -58,7 +59,7 @@ public class PerfilDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -95,7 +96,7 @@ public class PerfilDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
