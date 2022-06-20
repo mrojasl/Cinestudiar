@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<header >
+<header class = "header" >
     <div class="d-flex justify-content pt-5">
         <h2 class="p-0 m-0">Cinestudiar</h2>
         <div class="elementos">
