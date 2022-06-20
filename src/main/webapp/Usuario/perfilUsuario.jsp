@@ -321,10 +321,13 @@
             </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-map-marker-alt"></i> Direccion:</li>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="<%=perfil.getDireccion()%>">
-                    <button class="btn btn-outline-secondary" type="button" >Actualizar</button>
-                </div>
+                <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizardir">
+                    <div class="input-group mb-3">
+                        <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
+                        <input type="text" class="form-control" name="direccionnueva" id="direccionnueva"value="<%=perfil.getDireccion()%>">
+                        <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                    </div>
+                </form>
                 <li><i class="icono fas fa-briefcase"></i> Correo:</li>
                 <label><%=perfil.getCorreo()%></label>
                 <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>

@@ -43,5 +43,15 @@ public class PerfilServlet extends HttpServlet {
             perfilDao.actualizatelefono(bPerfil);
             response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
         }
+
+        if ("actualizardir".equals(action)) {
+            BPerfil bPerfil= new BPerfil();
+            String codigo=request.getParameter("codigopuke");
+            String direccion=request.getParameter("direccionnueva");
+            bPerfil.setDireccion(direccion);
+            bPerfil.setCodigopucp(codigo);
+            perfilDao.actualizadireccion(bPerfil);
+            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
+        }
     }
 }
