@@ -15,6 +15,10 @@ public class BCarrito {
     private int cantidad_funcion;
     private int precio_ticket;
     private String imagen;
+
+    private byte[] archivoimagen;
+
+    private int idpelicula;
     private String codigoEstudiante;
 
     private int idfuncion;
@@ -33,6 +37,14 @@ public class BCarrito {
 
     public BCarrito() {
 
+    }
+
+    public byte[] getArchivoimagen() {
+        return archivoimagen;
+    }
+
+    public void setArchivoimagen(byte[] archivoimagen) {
+        this.archivoimagen = archivoimagen;
     }
 
     public int getIdfuncion() {
@@ -125,6 +137,14 @@ public class BCarrito {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public int getIdpelicula() {
+        return idpelicula;
+    }
+
+    public void setIdpelicula(int idpelicula) {
+        this.idpelicula = idpelicula;
     }
 }
 //check

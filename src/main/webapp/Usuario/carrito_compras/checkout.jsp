@@ -115,7 +115,8 @@
 
                 preciototal = preciototal + carrito.getPrecio_ticket() * carrito.getCantidad_funcion();%>
         <tr>
-            <td><div class="book"> <img src="<%=carrito.getImagen()%>" class="book-img" alt=""> </div>
+            <td>
+                 <img src="Usuario/carrito_compras/error_cruce_horarios/idpelicula_<%=carrito.getIdpelicula()%>.jpg" alt="perfil foto" style="width:110px;height:150px;">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <div class="p-2 bd-highlight" style="color:White;font-size: 20px "><%=carrito.getNombre_pelicula()%></div>
                     <div class="p-2 bd-highlight" style="color:White "><%=carrito.getFecha()%></div>
