@@ -1,9 +1,5 @@
 body {
-    background-image: url("https://drive.google.com/uc?export=view&id=1zlb3YXP4dZ4HlsdaAeRdUn9v7psnJVpL");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background-color: #3C3C41FF;
 }
 header{
     background-color: #003f9e;
