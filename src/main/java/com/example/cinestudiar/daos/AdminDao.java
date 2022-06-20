@@ -14,7 +14,7 @@ public class AdminDao {
         try {
             String user = "root";
             String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
             Class.forName("com.mysql.cj.jdbc.Driver");
             String sql = "select codigo_pucp,nombre,apellido,dni,correo,telefono from usuarios where rol='operador' order by codigo_pucp;";
             Connection conn = DriverManager.getConnection(url,user,pass);
@@ -43,7 +43,7 @@ public class AdminDao {
         try {
             String user = "root";
             String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
             Class.forName("com.mysql.cj.jdbc.Driver");
             String sql = "select codigo_pucp,nombre,apellido,dni,telefono,correo from usuarios \n" +
                     "where rol='cliente'\n" +
@@ -74,7 +74,7 @@ public class AdminDao {
         try {
             String user = "root";
             String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
             Class.forName("com.mysql.cj.jdbc.Driver");
             String sql = "select se.nombre_sede,sa.idsala,sa.aforo_administrador,sa.aforo_operador\n" +
                     "from sedes se inner join salas sa\n" +
@@ -105,7 +105,7 @@ public class AdminDao {
         try {
             String user = "root";
             String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
             Class.forName("com.mysql.cj.jdbc.Driver");
             String sql = "SELECT idprofesional,nombre,apellido,rol\n" +
                     "FROM profesionales;";
@@ -134,7 +134,7 @@ public class AdminDao {
         try {
             String user = "root";
             String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
             Class.forName("com.mysql.cj.jdbc.Driver");
             String sql = "select u.codigo_pucp, u.nombre, u.apellido, se.nombre_sede\n" +
                     "from usuarios u, compras c, compradefunciones co, funciones f, salas sa, sedes se\n" +
@@ -169,7 +169,7 @@ public class AdminDao {
         try {
             String user = "root";
             String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
             Class.forName("com.mysql.cj.jdbc.Driver");
             String sql ="select f.fecha ,c.pago_total ,co.cantidad_por_funcion,u.codigo_pucp"+
                     " from funciones f inner join compradefunciones co on (f.idfuncion=co.idfuncion)"+
@@ -201,7 +201,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -228,7 +228,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -256,7 +256,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -289,7 +289,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -315,7 +315,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -343,7 +343,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -370,7 +370,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -410,7 +410,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -454,7 +454,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -491,7 +491,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -527,7 +527,7 @@ public class AdminDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
