@@ -1,6 +1,8 @@
 package com.example.cinestudiar.servlets;
 
+import com.example.cinestudiar.beans.BSedeYSala;
 import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.daos.AdminDao;
 import com.example.cinestudiar.daos.UsuariosDao;
 
 import java.io.*;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "inicioServlet", urlPatterns = {"/inicioServlet",""})
 public class inicioServlet extends HttpServlet {
@@ -55,8 +58,8 @@ public class inicioServlet extends HttpServlet {
 
                     switch (caso){
                         case "admin" ->{
-                            RequestDispatcher view = request.getRequestDispatcher("Admin/actoresydirectores.jsp");
-                            view.forward(request, response);
+                            response.sendRedirect(request.getContextPath() + "/ServAdmin");
+
                         }
                         case "cliente"->{
                             RequestDispatcher view = request.getRequestDispatcher("Usuario/in_con_sesion.jsp");
