@@ -1,4 +1,5 @@
-<%--
+
+<%@ page import="com.example.cinestudiar.beans.BPerfil" %><%--
   Created by IntelliJ IDEA.
   User: jesus
   Date: 5/06/2022
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="perfilDusuario" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPerfil>" />
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -90,7 +92,7 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        background: linear-gradient(#317FFF, transparent);
+        background: linear-gradient(#FF5A31FF);
         margin-bottom: 1.25rem;
     }
 
@@ -101,12 +103,7 @@
         height: 17rem;
 
         border-radius: 0 0 20px 20px;
-        /*
-        background-image: url('http://localhost/multimedia/png/user-portada-3.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        */
+
     }
 
     .seccion-perfil-usuario .perfil-usuario-portada .boton-portada {
@@ -209,50 +206,13 @@
         vertical-align: middle;
     }
 
-    .seccion-perfil-usuario .redes-sociales {
-        position: absolute;
-        right: calc(0px - 50px - 1rem);
-        top: 0;
-        display: flex;
-        flex-direction: column;
-    }
 
-    .seccion-perfil-usuario .redes-sociales .boton-redes {
-        border: 0;
-        background-color: #fff;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        color: #fff;
-        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
-        font-size: 1.3rem;
-    }
-
-    .seccion-perfil-usuario .redes-sociales .boton-redes+.boton-redes {
-        margin-top: .5rem;
-    }
-
-    .seccion-perfil-usuario .boton-redes.facebook {
-        background-color: #5955FF;
-    }
-
-    .seccion-perfil-usuario .boton-redes.twitter {
-        background-color: #35E1BF;
-    }
-
-    .seccion-perfil-usuario .boton-redes.instagram {
-        background: linear-gradient(45deg, #FF2DFD, #40A7FF);
-    }
     .supbarblue{
-        background-color: #597eaa;
+        background-color: #3C3C41FF;
         height: 50px;
     }
     .supbarblack{
-        background-color: #597eaa;
+        background-color: #3C3C41FF;
         height: 1100px;
     }
     .topmargin{
@@ -300,25 +260,43 @@
         </div>
         <div class="perfil-usuario-footer">
             <ul class="lista-datos">
+                <% for (BPerfil perfil: perfilDusuario){ %>
                 <li><i class="icono fas fa-user-check"></i> Nombre y apellido:</li>
 
-                <label>Marcelo Jon</label>
+                <label><%=perfil.getNombre()%></label>
+
                 <li><i class="icono fas fa-map-signs"></i> Codigo PUCP:</li>
-                <label>20190561</label>
+                <label><%=perfil.getCodigopucp()%></label>
+
                 <li><i class="icono fas fa-phone-alt"></i> Telefono:</li>
-                <label>958698744</label>
+                <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizartel">
+                    <div class="input-group mb-3">
+                        <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
+                        <input type="text" class="form-control" name="numerotelefonico" id="numerotelefonico" value="<%=perfil.getNumero()%>">
+                        <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                    </div>
+                </form>
                 <li><i class="icono fas fa-building"></i> DNI:</li>
-                <label>70698541</label>
+                <label><%=perfil.getDni()%></label>
+
             </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-map-marker-alt"></i> Direccion:</li>
-                <label>Calle Jupiter 963</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" value="<%=perfil.getDireccion()%>">
+                    <button class="btn btn-outline-secondary" type="button" >Actualizar</button>
+                </div>
                 <li><i class="icono fas fa-briefcase"></i> Correo:</li>
-                <label>marcelo.jon@pucp.edu.pe</label>
+                <label><%=perfil.getCorreo()%></label>
                 <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>
                 <label>05/04/2001</label>
                 <li><i class="icono fas fa-user-check"></i> Contraseña:</li>
-                <label>**************</label>
+                <div class="input-group mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label"></label>
+                    <input type="password" class="form-control" id="inputPassword" value="<%=perfil.getContrasenha()%>">
+                    <button class="btn btn-outline-secondary" type="button" >Actualizar</button>
+                </div>
+                <% } %>
 
             </ul>
         </div>
@@ -377,7 +355,7 @@
                         <div class="input-group mb-3 col">
                         </div>
                         <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px">Vigente
+                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
                             </button>
                         </div>
                         <hr>
@@ -397,7 +375,7 @@
                         <div class="input-group mb-3 col">
                         </div>
                         <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px">Vigente
+                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
                             </button>
                         </div>
                         <hr>
@@ -417,7 +395,7 @@
                         <div class="input-group mb-3 col">
                         </div>
                         <div class="input-group mb-3 col">
-                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px">Vigente
+                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
                             </button>
                         </div>
                         <hr>
