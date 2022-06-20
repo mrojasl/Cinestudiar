@@ -24,7 +24,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima\n";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -70,7 +70,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -99,7 +99,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -125,7 +125,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
         String unique_qr=generateRandomBase64Token(16);
 
         try {
@@ -155,7 +155,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -190,7 +190,7 @@ public class CarritoDao {
     public void setId00 ( BCarrito carrito){
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
