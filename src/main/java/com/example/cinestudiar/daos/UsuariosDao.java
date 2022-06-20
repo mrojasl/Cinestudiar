@@ -1,14 +1,9 @@
 
 package com.example.cinestudiar.daos;
 
-import com.example.cinestudiar.beans.BCompra;
-import com.example.cinestudiar.beans.BComprafuncion;
-import com.example.cinestudiar.beans.BFuncion;
 import com.example.cinestudiar.beans.BUser;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
-import java.util.ArrayList;
 
 /*"select concat(f.fecha,' ',f.hora) as 'Función' , f.precio_ticket as 'precio de funcón',\n" +
         "p.nombre as 'Nombre de pelicula' , p.foto as 'Foto funcion' from \n" +
@@ -23,6 +18,11 @@ public class UsuariosDao {
     private static String sql_agregar="insert into usuarios(codigo_pucp,nombre,apellido,rol,dni,telefono,correo,contraseña,fecha_nacimiento,direccion,foto,datos_tarjeta)\n" +
             "values (?,?,?,?,?,?,?,?,?,?,?,?);";
     private static String sql_delete="delete from usuarios where codigo_pucp=?;";
+
+    private static String sql_iniciar="select * from usuarios where nombre=? and contraseña=?;";
+    private static String sql_rol="select rol from usuarios where nombre=? and contraseña=?";
+
+
 
 
     public static void agregar(BUser usuario) {
@@ -78,6 +78,56 @@ public class UsuariosDao {
 
     }
 
+    public static boolean loguear(BUser usuario) {
+        boolean result = false;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql_iniciar)
+        ) {
+            pstmt.setString(1, usuario.getNombres());
+            pstmt.setString(2, usuario.getContrasena());
+            ResultSet rs=pstmt.executeQuery();
+            result=rs.next();
+
+        } catch (SQLException error) {
+            error.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static BUser rol(BUser usuario) {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql_rol);
+        ) {
+            pstmt.setString(1, usuario.getNombres());
+            pstmt.setString(2, usuario.getContrasena());
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                while (rs.next()) {
+                    usuario.setRol(rs.getString(1));
+                    System.out.println(rs.getString(1));
+                }
+            }
+
+
+        } catch (SQLException error) {
+            error.printStackTrace();
+        }
+
+        return usuario;
+    }
 
 
 }
