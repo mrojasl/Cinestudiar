@@ -12,7 +12,7 @@ public class OperadorDao {
         ArrayList<BFuncion> todasLasFunciones = new ArrayList<>();
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -61,7 +61,7 @@ public class OperadorDao {
         ArrayList<BFuncion> funcionesDisponibles = new ArrayList<>();
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -96,7 +96,6 @@ public class OperadorDao {
                 fu.setIdSala(rs.getInt(6));
                 fu.setPrecioTicket(rs.getInt(7));
                 fu.setCalificacion(rs.getInt(8));
-
                 System.out.println(fu.getPelicula());
 
                 funcionesDisponibles.add(fu);
@@ -111,7 +110,7 @@ public class OperadorDao {
         ArrayList<BFuncion> listaFunMejorCalif = new ArrayList<>();
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -144,7 +143,7 @@ public class OperadorDao {
         ArrayList<BFuncion> listaFunMasVis = new ArrayList<>();
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -178,7 +177,7 @@ public class OperadorDao {
         ArrayList<BFuncion> listaFunMenVis = new ArrayList<>();
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -214,7 +213,7 @@ public class OperadorDao {
         try {
             String user = "root";
             String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
             Class.forName("com.mysql.cj.jdbc.Driver");
             String sql = "select pro.nombre,pro.apellido,\n" +
                     "cali.calificacion as `Calificacion`,\n" +

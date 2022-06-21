@@ -32,11 +32,11 @@
         }
     </style>
 
-     <link rel="stylesheet" href="Operador/header_style.css">
+     <link rel="stylesheet" href="Operador/operador_style.css">
 </head>
 <body class='snippet-body'>
 
-    <jsp:include page="cabecera_operador.jsp"/>
+    <jsp:include page="../cabecera_operador.jsp"/>
 
     <section class="administrador">
         <h3 class="mt-1 p-0 mb-0 ">Operador</h3>
@@ -118,16 +118,16 @@
 
     <div class="mx-5 mb-1 supbarblue row">
         <div  class="input-group mb-1 col">
-            <label class="fw-bold mx-1 my-2 " >Fecha de inicio:</label>
+            <label class="fw-bold mx-1 my-2 text-white " >Fecha de inicio:</label>
             <input class="mx-1 my-2" type="date" id="fechainicio">
         </div>
 
         <div class="input-group mb-1 col">
-            <label class="fw-bold mx-1 my-2" >Fecha de fin:</label>
-            <input class="mx-1 my-2" type="date" id="fechafin">
+            <label class="fw-bold mx-1 my-2 text-white" >Fecha de fin:</label>
+            <input class="mx-0 my-2" type="date" id="fechafin">
         </div>
         <div class="input-group mb-1 col">
-            <label class="fw-bold mx-1 my-2" >Ordenar por:</label>
+            <label class="fw-bold mx-1 my-2 text-white" >Ordenar por:</label>
             <form name = "formid">
                 <select id ="selection" class=" mx-1 my-2 form-select form-select-sm" onchange="update()" >
                     <option selected>Selecione su opción</option>
@@ -137,8 +137,13 @@
                     <option value="4">Más visto</option>
                     <option value="5">Menos visto</option>
                 </select>
+                <div class="imput-group mb-1 col">
+                    <button type = "submit" class = "btn btn-primary">Filtrar</button>
+                </div>
             </form>
         </div>
+
+
     </div>
     <div class="container">
         <div class="row ">
@@ -146,14 +151,14 @@
             <table class="table" id = "tableUp">
                 <head>
                     <tr>
-                        <th>IdFunción</th>
-                        <th>Película</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Sede</th>
-                        <th>Sala</th>
-                        <th>Precio de ticket</th>
-                        <th>Calificacion Promedio</th>
+                        <th class="text-white">IdFunción</th>
+                        <th class="text-white">Película</th>
+                        <th class="text-white">Fecha</th>
+                        <th class="text-white">Hora</th>
+                        <th class="text-white">Sede</th>
+                        <th class="text-white">Sala</th>
+                        <th class="text-white">Precio de ticket</th>
+                        <th class="text-white">Calificacion Promedio</th>
 
                     </tr>
                 </head>
@@ -163,13 +168,13 @@
                     for (BFuncion funcion : todasLasFunciones) { %>
 
                 <tr>
-                    <td><%=funcion.getIdFuncion()%></td>
-                    <td><%=funcion.getPelicula()%> </td>
-                    <td><%=funcion.getFecha()%></td>
-                    <td><%=funcion.getHora()%></td>
-                    <td><%=funcion.getSede() %></td>
-                    <td><%=funcion.getIdSala()%></td>
-                    <td>S/. <%=funcion.getPrecioTicket()%></td>
+                    <td class="text-white"><%=funcion.getIdFuncion()%></td>
+                    <td class="text-white"><%=funcion.getPelicula()%> </td>
+                    <td class="text-white"><%=funcion.getFecha()%></td>
+                    <td class="text-white"><%=funcion.getHora()%></td>
+                    <td class="text-white"><%=funcion.getSede() %></td>
+                    <td class="text-white"><%=funcion.getIdSala()%></td>
+                    <td class="text-white">S/. <%=funcion.getPrecioTicket()%></td>
                     <% int num= (int) funcion.getCalificacion();%>
                     <%if (num == 1){ %>
                     <td class="fa fa-star checked"></td>

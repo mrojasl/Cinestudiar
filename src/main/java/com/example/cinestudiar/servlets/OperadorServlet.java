@@ -14,38 +14,39 @@ public class OperadorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("a") == null ? "listarTodas" : request.getParameter("a");
+        String action = request.getParameter("a") == null ? "listarFuncionesDisponibles" : request.getParameter("a");
         OperadorDao operadorDao = new OperadorDao();
 
         switch (action){
+
             case "listarTodas" -> {
                 request.setAttribute("todasLasFunciones", operadorDao.TodasLasFunciones());
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Operador/Ordenar_funciones.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Operador/Ordenar_funciones/Func_Disp.jsp");
                 requestDispatcher.forward(request,response);
             }
             case "listarFuncionesDisponibles" -> {
                 request.setAttribute("funcionesDisponibles", operadorDao.FuncionesDisponibles());
 
-                RequestDispatcher requestDispatcher=request.getRequestDispatcher(("Operador/Ordenar_funciones.jsp"));
+                RequestDispatcher requestDispatcher=request.getRequestDispatcher("Operador/Ordenar_funciones/Func_Disp.jsp");
                 requestDispatcher.forward(request,response);
             }
             case "listarFuncionMejorC" -> {
                 request.setAttribute("listaFunMejorCalif", operadorDao.obtenerFuncionMejorCalificada());
 
-                RequestDispatcher requestDispatcher=request.getRequestDispatcher(("Operador/Ordenar_funciones.jsp"));
+                RequestDispatcher requestDispatcher=request.getRequestDispatcher("Operador/Ordenar_funciones/Todas_func.jsp");
                 requestDispatcher.forward(request,response);
             }
             case "listarFuncionMasV" -> {
                 request.setAttribute("listaFunMasVis", operadorDao.obtenerFuncionMasVista());
 
-                RequestDispatcher requestDispatcher=request.getRequestDispatcher(("Operador/Ordenar_funciones.jsp"));
+                RequestDispatcher requestDispatcher=request.getRequestDispatcher(("Operador/Ordenar_funciones/Todas_func.jsp"));
                 requestDispatcher.forward(request,response);
             }
             case "listarFuncionMenosV" -> {
                 request.setAttribute("listaFunMenVis", operadorDao.obtenerFuncionMenosVista());
 
-                RequestDispatcher requestDispatcher=request.getRequestDispatcher(("Operador/Ordenar_funciones.jsp"));
+                RequestDispatcher requestDispatcher=request.getRequestDispatcher(("Operador/Ordenar_funciones/Todas_func.jsp"));
                 requestDispatcher.forward(request,response);
             }
         }
