@@ -24,7 +24,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -34,7 +34,7 @@ public class CarritoDao {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador,cf.idfuncion,cf.idhistorialdecompras from usuarios u\n" +
+             ResultSet rs = stmt.executeQuery("select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador,cf.idfuncion,cf.idhistorialdecompras,p.idpelicula from usuarios u\n" +
                      "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
                      "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
                      "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
@@ -44,6 +44,7 @@ public class CarritoDao {
             while(rs.next()){
                 BCarrito bCarrito = new BCarrito();
                 bCarrito.setImagen(rs.getString(1));
+                bCarrito.setIdpelicula(rs.getInt(13));
                 bCarrito.setNombre_pelicula(rs.getString(2));
                 bCarrito.setFecha(rs.getString(3));
                 bCarrito.setHora(rs.getString(4));
@@ -69,7 +70,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -98,7 +99,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -124,7 +125,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
         String unique_qr=generateRandomBase64Token(16);
 
         try {
@@ -154,7 +155,7 @@ public class CarritoDao {
 
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -189,7 +190,7 @@ public class CarritoDao {
     public void setId00 ( BCarrito carrito){
         String user = "root";
         String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
