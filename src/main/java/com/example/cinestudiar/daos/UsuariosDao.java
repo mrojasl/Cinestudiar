@@ -9,12 +9,7 @@ import java.sql.*;
         "p.nombre as 'Nombre de pelicula' , p.foto as 'Foto funcion' from \n" +
         "funciones f inner join peliculas p on  (f.idpelicula=p.idpelicula);*/
 
-public class UsuariosDao {
-
-    private static String user = "root";
-    private static String pass = "root";
-    private static String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
-
+public class UsuariosDao extends BaseDao{
     private static String sql_agregar="insert into usuarios(codigo_pucp,nombre,apellido,rol,dni,telefono,correo,contraseña,fecha_nacimiento,direccion,foto,datos_tarjeta)\n" +
             "values (?,?,?,?,?,?,?,?,?,?,?,?);";
     private static String sql_delete="delete from usuarios where codigo_pucp=?;";
@@ -23,15 +18,9 @@ public class UsuariosDao {
     private static String sql_rol="select rol from usuarios where nombre=? and contraseña=?";
 
 
+    public void agregar(BUser usuario) {
 
-
-    public static void agregar(BUser usuario) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql_agregar)
         ) {
 
@@ -51,7 +40,6 @@ public class UsuariosDao {
             pstmt.setBlob(11, usuario.getFoto());
             pstmt.setString(12, usuario.getDatosTarjeta());
 
-
             pstmt.executeUpdate();
         } catch (SQLException error) {
             error.printStackTrace();
@@ -59,13 +47,9 @@ public class UsuariosDao {
 
 
     }
-    public static void eliminar(BUser usuario) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+    public  void eliminar(BUser usuario) {
+
+        try (Connection conn =this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql_delete)
         ) {
             pstmt.setString(1, usuario.getCodigoPucp());
@@ -77,16 +61,9 @@ public class UsuariosDao {
 
 
     }
-
-    public static boolean loguear(BUser usuario) {
+    public  boolean loguear(BUser usuario) {
         boolean result = false;
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql_iniciar)
         ) {
             pstmt.setString(1, usuario.getNombres());
@@ -101,14 +78,8 @@ public class UsuariosDao {
         return result;
     }
 
-    public static BUser rol(BUser usuario) {
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try (Connection conn = DriverManager.getConnection(url, user, pass);
+    public BUser rol(BUser usuario) {
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql_rol);
         ) {
             pstmt.setString(1, usuario.getNombres());

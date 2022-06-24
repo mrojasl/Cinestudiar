@@ -35,6 +35,7 @@ public class inicioServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
+        UsuariosDao usuariosDao = new UsuariosDao();
 
         switch (action){
             case ""->{
@@ -46,9 +47,9 @@ public class inicioServlet extends HttpServlet {
                 System.out.println("logueando");
                 BUser user = leerParametrosRequest(request);
 
-                Boolean valor=UsuariosDao.loguear(user);
+                Boolean valor=usuariosDao.loguear(user);
                 if (valor){
-                    BUser usuario2 =UsuariosDao.rol(user);
+                    BUser usuario2 =usuariosDao.rol(user);
                     String caso="";
                     if (usuario2.getRol()!=null){
                         caso = usuario2.getRol();

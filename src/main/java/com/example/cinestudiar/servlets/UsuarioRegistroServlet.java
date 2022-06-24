@@ -24,6 +24,8 @@ public class UsuarioRegistroServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "muestra_registro" : request.getParameter("action");
 
+        UsuariosDao usuariosDao = new UsuariosDao();
+
         switch (action){
             case "muestra_registro"->{
                 System.out.println("mostrando");
@@ -33,7 +35,7 @@ public class UsuarioRegistroServlet extends HttpServlet {
             case "añadir"->{
                 System.out.println("Añadiendo");
                 BUser usuario =leerParametrosRequest(request);
-                UsuariosDao.agregar(usuario);
+                usuariosDao.agregar(usuario);
                 RequestDispatcher view = request.getRequestDispatcher("Usuario/registro.jsp");
                 view.forward(request, response);
             }
