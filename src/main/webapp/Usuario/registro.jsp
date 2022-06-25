@@ -89,7 +89,7 @@
                                 </div>
                                 <br>
 
-                                <form class="user" method="POST" action="<%=request.getContextPath()%>/UsuarioRegistroServlet?action=añadir" enctype="multipart/form-data">
+                                <form class="user" method="POST" action="<%=request.getContextPath()%>/Usuario?action=añadir" enctype="multipart/form-data">
                                     <!-- Nombre completo-->
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="nombre"

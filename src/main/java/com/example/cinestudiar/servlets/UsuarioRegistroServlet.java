@@ -1,6 +1,7 @@
 package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.daos.ImageDao;
 import com.example.cinestudiar.daos.UsuariosDao;
 
 import javax.servlet.*;
@@ -10,14 +11,34 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @MultipartConfig
-@WebServlet(name = "UsuarioRegistroServlet", urlPatterns = {"/UsuarioRegistroServlet"})
+@WebServlet(name = "UsuarioRegistroServlet", urlPatterns = {"/Usuario"})
 public class UsuarioRegistroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action") == null ? "sin_registrar" : request.getParameter("action");
+        UsuariosDao usuariosDao = new UsuariosDao();
+        ImageDao imagenesDao = new ImageDao();
+        int id=1;
+        switch (action){
+            case "sin_registrar"->{
+                System.out.println("registrado");
+                //byte[] imagen = imagenesDao.obtenerimagenes(id);
+                //request.setAttribute("imagen",imagen);
+                RequestDispatcher view = request.getRequestDispatcher("Usuario/index.jsp");
+                view.forward(request, response);
+            }
+            case "registrado"->{
+                System.out.println("Añadiendo");
+                BUser usuario =leerParametrosRequest(request);
+                usuariosDao.agregar(usuario);
+                RequestDispatcher view = request.getRequestDispatcher("Usuario/in_con_sesion.jsp");
+                view.forward(request, response);
+            }
+        }
 
-        RequestDispatcher view = request.getRequestDispatcher("Usuario/registro.jsp");
-        view.forward(request, response);
+
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

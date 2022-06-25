@@ -9,7 +9,7 @@
         <header class="header">
             <h2>Cinestudiar</h2>
             <div class="nav">
-                <a href="<%=request.getContextPath()%>/ServAdmin">Inicio⠀<i class="bi bi-house-fill"></i> </a>
+                <a href="<%=request.getContextPath()%>/Usuario?action=sin_registrar">Inicio⠀<i class="bi bi-house-fill"></i> </a>
                 <a href="#"  onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Inicio de sesión⠀<i class="bi bi-person-fill"></i></a>
 
                 <div id="id01" class="modalh1">

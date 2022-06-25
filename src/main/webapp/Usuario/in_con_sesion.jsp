@@ -32,10 +32,10 @@
 <header>
     <h2>Cinestudiar</h2>
     <div class="nav">
-        <a href="<%=request.getContextPath()%>/ServAdmin">Inicio⠀<i class="bi bi-house-fill"></i> </a>
-        <a href="<%=request.getContextPath()%>//Checkout">Carrito de compras⠀<i class="bi bi-cart-fill"></i></a>
+        <a href="<%=request.getContextPath()%>/Usuario?action=registrado">Inicio⠀<i class="bi bi-house-fill"></i> </a>
+        <a href="<%=request.getContextPath()%>/Checkout">Carrito de compras⠀<i class="bi bi-cart-fill"></i></a>
         <a href="<%=request.getContextPath()%>/PerfildeUsuario">Mi Perfil <i class="bi bi-person-circle"></i></a>
-        <a href="<%=request.getContextPath()%>/UsuarioServletSin_sesion">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
+        <a href="<%=request.getContextPath()%>/Usuario?action=sin_registrar">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
     </div>
 </header>
 <div id="general">
