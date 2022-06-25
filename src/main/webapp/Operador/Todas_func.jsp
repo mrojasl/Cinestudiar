@@ -1,8 +1,8 @@
 <%@ page import="com.example.cinestudiar.beans.BFuncion" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="todasLasFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
-
+<jsp:useBean id="funcionesDisponibles" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
+<jsp:useBean id="listarFunciones" scope="request" type="java.lang.String"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -36,7 +36,7 @@
 </head>
 <body class='snippet-body'>
 
-    <jsp:include page="../cabecera_operador.jsp"/>
+    <jsp:include page="cabecera_operador.jsp"/>
 
     <section class="administrador">
         <h3 class="mt-1 p-0 mb-0 ">Operador</h3>
@@ -128,17 +128,16 @@
         </div>
         <div class="input-group mb-1 col">
             <label class="fw-bold mx-1 my-2 text-white" >Ordenar por:</label>
-            <form name = "formid">
-                <select id ="selection" class=" mx-1 my-2 form-select form-select-sm" onchange="update()" >
+            <form method="POST" action="<%=request.getContextPath()%>/?action=filtro_func">
+                <select id ="selection_option" name="listarFunciones" class=" mx-1 my-2 form-select form-select-sm" onchange="update()" >
                     <option selected>Selecione su opción</option>
-                    <option value="1">Funciones Disponibles</option>
-                    <option value="2">Mejor calificado</option>
-                    <option value="3">Peor Calificado</option>
-                    <option value="4">Más visto</option>
-                    <option value="5">Menos visto</option>
+                    <option value="Funciones Disponibles" <%=listarFunciones.equals("Funciones Disponibles")%>>Funciones Disponibles</option>
+                    <option value="Mejor calificado   ">Mejor calificado</option>
+                    <option value="Más visto">Más visto</option>
+                    <option value="Menos visto">Menos visto</option>
                 </select>
                 <div class="imput-group mb-1 col">
-                    <button type = "submit" class = "btn btn-primary">Filtrar</button>
+                    <button type = "submit" class = "output btn btn-primary">Filtrar</button>
                 </div>
             </form>
         </div>
@@ -165,7 +164,7 @@
                 <tbody>
 
                 <%
-                    for (BFuncion funcion : todasLasFunciones) { %>
+                    for (BFuncion funcion : funcionesDisponibles) { %>
 
                 <tr>
                     <td class="text-white"><%=funcion.getIdFuncion()%></td>

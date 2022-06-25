@@ -1,8 +1,9 @@
 <%@ page import="com.example.cinestudiar.beans.BFuncion" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
 <jsp:useBean id="funcionesDisponibles" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
-<jsp:useBean id="todasLasFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
+
 
 <html>
 <head>
@@ -37,7 +38,7 @@
 </head>
 <body class='snippet-body'>
 
-<jsp:include page="../cabecera_operador.jsp"/>
+<jsp:include page="cabecera_operador.jsp"/>
 
 <section class="administrador">
     <h3 class="mt-1 p-0 mb-0 ">Operador</h3>
@@ -130,9 +131,9 @@
     <div class="input-group mb-1 col">
         <label class="fw-bold mx-1 my-2 text-white" >Ordenar por:</label>
         <form name = "formid">
-            <select name = "option" id ="selection" class=" mx-1 my-2 form-select form-select-sm" onchange="update()" >
+            <select name = "option" id ="selection" class=" mx-1 my-2 form-select form-select-sm" >
                 <option selected>Selecione su opción</option>
-                <option value="1">Funciones Disponibles</option>
+                <option value="func1">Funciones Disponibles</option>
                 <option value="2">Mejor calificado</option>
                 <option value="3">Peor Calificado</option>
                 <option value="4">Más visto</option>
@@ -148,8 +149,7 @@
 </div>
 <div class="container">
     <div class="row ">
-        <%  String opcion = request.getParameter("option");
-            if (opcion == "2"){%>
+
         <table class="table" id = "tableUp">
             <head>
                 <tr>
@@ -164,10 +164,12 @@
 
                 </tr>
             </head>
+                <%  String opcion = request.getParameter("option");
+            if (opcion =="func"){%>
+                <%
+                for (BFuncion funcion : funcionesDisponibles) { %>
             <tbody>
 
-            <%
-                for (BFuncion funcion : funcionesDisponibles) { %>
 
             <tr>
                 <td class="text-white"><%=funcion.getIdFuncion()%></td>
@@ -218,75 +220,7 @@
             <%
                 } %>
             <%}%>
-            <%if (opcion == "1"){%>
-            <table class="table" id = "tableUp">
-                <head>
-                    <tr>
-                        <th class="text-white">IdFunción</th>
-                        <th class="text-white">Película</th>
-                        <th class="text-white">Fecha</th>
-                        <th class="text-white">Hora</th>
-                        <th class="text-white">Sede</th>
-                        <th class="text-white">Sala</th>
-                        <th class="text-white">Precio de ticket</th>
-                        <th class="text-white">Calificacion Promedio</th>
 
-                    </tr>
-                </head>
-                <tbody>
-
-                <%
-                    for (BFuncion funcion2 : todasLasFunciones) { %>
-
-                <tr>
-                    <td class="text-white"><%=funcion2.getIdFuncion()%></td>
-                    <td class="text-white"><%=funcion2.getPelicula()%> </td>
-                    <td class="text-white"><%=funcion2.getFecha()%></td>
-                    <td class="text-white"><%=funcion2.getHora()%></td>
-                    <td class="text-white"><%=funcion2.getSede() %></td>
-                    <td class="text-white"><%=funcion2.getIdSala()%></td>
-                    <td class="text-white">S/. <%=funcion2.getPrecioTicket()%></td>
-                    <% int num= (int) funcion2.getCalificacion();%>
-                    <%if (num == 1){ %>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <%}%>
-                    <%if(num==2){%>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <%}%>
-                    <%if(num==3){%>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <%}%>
-                    <%if(num==4){%>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star"></td>
-                    <%}%>
-                    <%if(num==5){%>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <%}%>
-                </tr>
-
-                <%
-                    } %>
-                <%}%>
             </tbody>
 
             <!-- Large modal -->

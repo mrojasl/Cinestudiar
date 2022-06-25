@@ -47,7 +47,7 @@ public class OperadorDao {
                 fu.setPrecioTicket(rs.getInt(7));
                 fu.setCalificacion(rs.getInt(8));
 
-                System.out.println(fu.getPelicula());
+
 
                 todasLasFunciones.add(fu);
             }
@@ -85,7 +85,7 @@ public class OperadorDao {
             Connection conn = DriverManager.getConnection(url,user,pass);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            System.out.println("Aqui hola");
+
             while (rs.next()){
                 BFuncion fu = new BFuncion();
                 fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
@@ -96,7 +96,6 @@ public class OperadorDao {
                 fu.setIdSala(rs.getInt(6));
                 fu.setPrecioTicket(rs.getInt(7));
                 fu.setCalificacion(rs.getInt(8));
-                System.out.println(fu.getPelicula());
 
                 funcionesDisponibles.add(fu);
             }
