@@ -88,7 +88,6 @@ public class UsuariosDao extends BaseDao{
             try (ResultSet rs = pstmt.executeQuery();) {
                 while (rs.next()) {
                     usuario.setRol(rs.getString(1));
-                    System.out.println(rs.getString(1));
                 }
             }
 

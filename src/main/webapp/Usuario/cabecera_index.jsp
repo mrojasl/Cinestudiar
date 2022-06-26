@@ -6,15 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-        <header class="header">
-            <h2>Cinestudiar</h2>
-            <div class="nav">
-                <a href="<%=request.getContextPath()%>/Usuario?action=sin_registrar">Inicio⠀<i class="bi bi-house-fill"></i> </a>
+    <div class="navbar sticky-top navbar-expand-lg navbar-dark">
+                <img src="Imagenes/cinestudiarlogo.png" href="<%=request.getContextPath()%>/inicio" >
+                <a href="<%=request.getContextPath()%>/inicio"> Inicio⠀<i class="bi bi-house-fill"></i> </a>
                 <a href="#"  onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Inicio de sesión⠀<i class="bi bi-person-fill"></i></a>
 
                 <div id="id01" class="modalh1">
-
-                    <form style="background-color: #003f9e" class="modal-contenth1 animate" action="<%=request.getContextPath()%>/inicioServlet?action=loguear" method="post">
+                    <form style="background-color: #003f9e" class="modal-contenth1 animate" action="<%=request.getContextPath()%>/inicio?action=loguear" method="post">
                         <div class="imgcontainer">
                             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                         </div>
@@ -38,15 +36,9 @@
                                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
                                 <a id="forgot" href="#"  ><b>¿Olvidaste la contraseña?</b></a>
                             </div>
-
                         </footer>
-
                     </form>
-
                 </div>
+                <a href="<%=request.getContextPath()%>/inicio?action=registrar"> Registrarse⠀<i class="bi bi-book"></i></a>
+    </div>
 
-
-                <a href="<%=request.getContextPath()%>/UsuarioRegistroServlet">Registrarse⠀<i class="bi bi-book"></i></a>
-
-            </div>
-        </header>
