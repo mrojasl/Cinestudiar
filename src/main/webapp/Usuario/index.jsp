@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <jsp:include page="headerSesionNoIniciada.jsp"/>
         <meta charset='utf-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="https://assets.website-files.com/60b56cdf18d38e15ce088579/60c111551dc75d6dc896a30e_pucp-favicon.png" type="image/x-icon">
@@ -13,15 +14,7 @@
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
        <style>
-            body {
-                background-image: url("Imagenes/fondo_registro.jpg");
-                background-color: #ffffff;
-                background-size: cover;
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center center;
-                background-attachment: fixed;
-            }
+
             .desc1back{
                 color: white;
                 background-color: #45698a;
@@ -264,7 +257,7 @@
 
     </head>
     <body>
-        <jsp:include page="cabecera_index.jsp"/>
+
         <div class="d-flex justify-content-between">
             <div class="leftside d-flex flex-column">
                 <div class="sugerencia p-2" ><h3>Sugerencias</h3></div>
