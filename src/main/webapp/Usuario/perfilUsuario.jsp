@@ -10,6 +10,8 @@
 
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.*" %>
+<%@ page import="java.util.Collections" %>
+
 
 
 <jsp:useBean id="perfilDusuario" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPerfil>" />
@@ -309,12 +311,13 @@
 
             <div class="perfil-usuario-avatar">
 
-
-                <img class="mb-4" src="Usuario/persona.jpeg" alt="">
+                <% for (BPerfil foto: perfilDusuario){ %>
+                <img class="mb-4" src="${pageContext.request.contextPath}/Image?id=<%=foto.getCodigopucp()%>" alt="">
 
                 <button type="button" class="boton-avatar">
                     <i class="far fa-image"></i>
                 </button>
+                <% } %>
             </div>
 
 
@@ -338,7 +341,7 @@
                 <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizartel">
                     <div class="input-group mb-3">
                         <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
-                        <input type="text" class="form-control" name="numerotelefonico" id="numerotelefonico" value="<%=perfil.getNumero()%>">
+                        <input type="tel" class="form-control" name="numerotelefonico" id="numerotelefonico"  pattern="[0-9]{9}" title="9 dígitos" value="<%=perfil.getNumero()%>">
                         <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
                     </div>
                 </form>
@@ -351,7 +354,7 @@
                 <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizardir">
                     <div class="input-group mb-3">
                         <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
-                        <input type="text" class="form-control" name="direccionnueva" id="direccionnueva"value="<%=perfil.getDireccion()%>">
+                        <input type="text" class="form-control" name="direccionnueva" id="direccionnueva"  pattern=".{5,}" title="Direccion válida" value="<%=perfil.getDireccion()%>">
                         <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
                     </div>
                 </form>
@@ -385,14 +388,26 @@
             <div class="input-group mb-3 col">
                 <h5 class="col" style="padding: 14px;color: white;width: 250px">Ordenar por:</h5>
             </div>
-            <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    <option selected>Más recientes</option>
-                    <option value="1">Más antiguos</option>
-
-                </select>
+            <div class="input-group mb-3 col">
             </div>
             <div class="input-group mb-3 col">
+            </div>
+
+            <div class="col" style="padding: 7px">
+                <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarcon">
+                    <div class="input-group mb-3">
+                        <button class="btn btn-light" type="submit" >Más antiguos</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col" style="padding: 7px">
+
+                <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarcon">
+                    <div class="input-group mb-3">
+                        <button class="btn btn-light" type="submit" >Más recientes</button>
+                    </div>
+                </form>
             </div>
             <!--<div class="input-group mb-3 col">
                 <h5 class="col" style="padding: 14px;color: white;width: 250px">Filtar por sede:</h5>
@@ -410,6 +425,7 @@
 
             <div >
                 <div class="supbarblack row">
+                    <% Collections.reverse(usuarioFunciones); %>
                     <% for (BUsuarioFuncion funciones: usuarioFunciones){ %>
 
                     <div class="row">
@@ -468,7 +484,7 @@
 
 
                 </div>
-                <hr>
+
             </div>
         </div>
     </div>
