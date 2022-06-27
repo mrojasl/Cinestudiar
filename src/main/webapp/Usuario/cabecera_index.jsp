@@ -22,7 +22,7 @@
                             <input type="text" placeholder="Ingrese su código" name="codigo" required>
 
                             <label><b>Contraseña</b></label>
-                            <input type="password" placeholder="Ingrese contraseña" name="password" required>
+                            <input type="password" placeholder="Ingrese su contraseña" name="password" required>
 
                             <button type="submit" class="btn btn-success">Ingresar</button>
                             <br>
@@ -33,8 +33,8 @@
 
                         <footer class="container d-flex justify-content-between" style="background-color:#f1f1f1" >
                             <div class="mx-0">
-                                <button type="button"  onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
-                                <a id="forgot" href="#"  ><b>¿Olvidaste la contraseña?</b></a>
+                                <button type="button" class="btn btn-danger btn-rounded" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
+                                <a id="forgot" href="#" ><b>¿Olvidaste la contraseña?</b></a>
                             </div>
                         </footer>
                     </form>

@@ -51,7 +51,7 @@
         <footer class="container d-flex justify-content-between" style="background-color:#f1f1f1" >
           <div class="mx-0">
             <button type="button" class="btn btn-danger btn-rounded" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
-            <a id="forgot" href="#"  ><b>¿Olvidaste la contraseña?</b></a>
+            <a id="forgot" href="#" ><b>¿Olvidaste la contraseña?</b></a>
           </div>
         </footer>
       </form>
