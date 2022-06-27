@@ -159,7 +159,7 @@ input[id=rememberme]{
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
-    margin-right: 0px;
+    margin-right: 5px;
     background-color: #f44336;
 }
 

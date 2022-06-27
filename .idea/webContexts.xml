@@ -8,7 +8,9 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/carrito_compras/error_cruce_horarios/checkout.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario/carrito_compras/error_cruce_horarios" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/headerSesionNoIniciada.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/in_con_sesion.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/perfilUsuario.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/registro.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>

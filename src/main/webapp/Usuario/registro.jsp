@@ -155,7 +155,7 @@
         .cancelbtn {
             width: auto;
             padding: 10px 18px;
-            margin-right: 0px;
+            margin-right: 5px;
             background-color: #f44336;
         }
 
@@ -296,7 +296,7 @@
                                     <!-- DNI--->
                                     <div class="form-group">
                                         <input type="number" class="form-control form-control-user" id="exampleDNI"
-                                               placeholder="DNI" name="dni">
+                                               placeholder=" DNI" name="dni">
                                     </div>
                                     <!-- Código-->
                                     <div class="form-group">
@@ -306,7 +306,7 @@
                                     <!-- Correo-->
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                               placeholder="Correo" name="correo">
+                                               placeholder=" Correo PUCP" name="correo">
                                     </div>
                                     <!-- Dirección de domicilio-->
                                     <div class="form-group">
@@ -316,7 +316,7 @@
                                     <!-- Número de Celular-->
                                     <div class="form-group">
                                         <input type="integrity" class="form-control form-control-user"
-                                               id="exampleInputNumber" placeholder="Numero de Celular"
+                                               id="exampleInputNumber" placeholder=" Número de Celular"
                                                name="telefono">
                                     </div>
                                     <!-- Fecha de nacimiento-->
@@ -330,6 +330,8 @@
                                         <input type="password" class="form-control form-control-user"
                                                id="exampleInputPassword" placeholder="Contraseña" name="password">
                                     </div>
+                                    <!-- IMAGEN-->
+                                    <label for="start">Agregar Foto de Perfil:</label>
                                     <div class="form-group">
                                         <input type="file" name="picture">
                                     </div>

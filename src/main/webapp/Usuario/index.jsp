@@ -265,7 +265,7 @@
                         <h5>El Hombre Araña 2</h5>
                         <img  src="Imagenes/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
                     </div>
-                    <button type="button" class="btn btn-secondary buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Más información</button>
+                    <button type="button" class="btn btn-info buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver detalles</button>
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -337,10 +337,10 @@
                 <div >
                     <div class="buttonswipe" >
                         <br>
-                        <button type="button" class="btn btn-secondary" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
                             Anterior
                         </button>
-                        <button type="button" class="btn btn-secondary" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
                             Siguiente
                         </button>
                     </div>
@@ -360,7 +360,7 @@
                                         <div class="boxfuncion">
                                             <h5><%=listapeliculas.get(k-1).getNombre()%></h5>
                                             <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
-                                            <a type="button" href="<%=request.getContextPath()%>/inicio?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
+                                            <a type="button" class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/inicio?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
                                         </div>
                                     </div>
                                     <% if (k%3==0) {
