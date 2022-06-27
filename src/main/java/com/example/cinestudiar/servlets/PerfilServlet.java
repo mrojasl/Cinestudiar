@@ -67,8 +67,24 @@ public class PerfilServlet extends HttpServlet {
             perfilDao.actualizacontra(bPerfil);
             response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
         }
+        if ("filtroprofesional".equals(action)) {
+            String parametro = request.getParameter("filtroprof");
+            if (parametro.equals("Todo")) {
+                response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
+            } else{
+                if (parametro.equals("Director")) {
+                    parametro="d";
+                } else if (parametro.equals("Actor/Actriz")){
+                    parametro="a";
+                }
+                ArrayList<BProfesional> listaProfesionales= AdminDao.ObtenerProfesionalesFiltro(parametro);
+                request.setAttribute("listaProfesionales",listaProfesionales);
+                RequestDispatcher rd4 =request.getRequestDispatcher("Admin/actoresydirectores.jsp");
+                rd4.forward(request,response);
+            }
 
 
+        }
 
 
     }
