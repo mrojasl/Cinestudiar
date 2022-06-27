@@ -1,18 +1,24 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 124349
+  Date: 26/06/2022
+  Time: 16:50
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
-<jsp:useBean id="listapeliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
-<jsp:useBean id="cointaner" scope="request" type="java.lang.Integer"/>
-<jsp:useBean id="valor" scope="request" type="java.lang.Integer"/>
-<!DOCTYPE html>
-<html lang="en">
+<jsp:useBean id="lista_profesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
+<jsp:useBean id="pelicula" scope="request" type="com.example.cinestudiar.beans.BPeliculas"/>
+<html>
     <head>
         <meta charset='utf-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="https://assets.website-files.com/60b56cdf18d38e15ce088579/60c111551dc75d6dc896a30e_pucp-favicon.png" type="image/x-icon">
+        <title>Inicio-Cinestudiar</title>
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-       <style>
+        <style>
             body {
                 background-image: url("Imagenes/fondo_registro.jpg");
                 background-color: #ffffff;
@@ -259,136 +265,51 @@
                 margin-right: 75px;
             }
         </style>
-
-            <title>Inicio-Cinestudiar</title>
-
     </head>
     <body>
         <jsp:include page="cabecera_index.jsp"/>
-        <div class="d-flex justify-content-between">
-            <div class="leftside d-flex flex-column">
-                <div class="sugerencia p-2" ><h3>Sugerencias</h3></div>
-                <br>
-                <div class="px-5">
-                    <div class="boxfuncion " >
-                        <h5>El Hombre Araña 2</h5>
-                        <img  src="Imagenes/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
-                    </div>
-                    <button type="button" class="btn btn-secondary buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Más información</button>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Detalles de película</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="desc1back">
-                                        <h4>El Hombre Araña 2</h4>
-                                        <p>Spider-Man 2 | Parker (Tobey Maguire) está en la universidad, sigue enamorado de Mary Jane Watson (Kirsten Dunst) y tiene muchos problemas: su trabajo de héroe no le deja tiempo para estudiar, ni para ganar dinero para pagarse los estudios, ni para ayudar a su tía. Además, a veces pierde sus poderes.</p>
-                                    </div>
-                                    <div class="desc2back">
-                                        <p>Director:<br>Sam Raimi</p>
-                                        <p>Género:<br>Acción, superhéroes, ciencia, ficción, drama</p>
-                                        <p>Duración:<br>180 minutos</p>
-                                        <p>Actores:<br>Tobey Maguire, Kirsten Dunst, James Franco, Alfred Molina, Rosemary Harris, Donna Murphy</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%=listapeliculas.size()%>
-                <%=listapeliculas.get(1).getIdpeliculas()%>
-                <%=listapeliculas.get(1).getNombre()%>
+        <div class="container my-10">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-12 col-md-9">
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6">
 
-                <div class="px-5" >
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                </div>
-                <br>
-                <div class="px-5">
-                    <h5 class="textchoosereserv">Sede:</h5>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>San Miguel</option>
-                        <option value="1">Pueblo Libre</option>
-                        <option value="2">Miraflores</option>
-                        <option value="3">Surco</option>
-                    </select>
-                    <br>
-                    <h5 class="textchoosereserv">Horario:</h5>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Mar. 20/05/2022 14:00-16:00</option>
-                        <option value="1">Miér. 21/05/2022 15:00-16:30</option>
-                        <option value="2">Juev. 22/05/2022 18:00-21:00</option>
-                        <option value="3">Vier. 23/05/2022 18:00-19:45</option>
-                    </select>
-                    <br>
-                </div>
-                <div class="px-5" >
-                    <h5 class="textchoosereserv">Cantidad de tickets:</h5>
-                </div>
-                <div class="px-5">
-                    <input type="number" name="tentacles" min="1" max="35">
-                </div>
-                <h6 class="spaceleft">Tickets disponibles: 35</h6>
-                <h6 class="spaceleft">Precio por ticket: S/25.00</h6>
-                <br>
-                <div class="leftfinal px-5">
-                    <h4>TOTAL: S/50.00</h4>
-                    <button type="button" class="btn btn-success">Reservar</button>
-                </div>
-            </div>
-            <div style="margin-right: 150px">
-                <div >
-                    <div class="buttonswipe" >
-                        <br>
-                        <button type="button" class="btn btn-secondary" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-                            Anterior
-                        </button>
-                        <button type="button" class="btn btn-secondary" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-                            Siguiente
-                        </button>
-                    </div>
-                </div>
-                <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-                    <div class="carousel-inner">
-
-                        <%  int h=1;
-                            for (int n = 1; n<cointaner+1; n++) {%>
-                        <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">
-                            <div class="container">
-                                <%for (int m= 1 ; m<valor+1;m++){%>
-                                <div class="row align-items-start">
-                                    <%for (int k=h;k<listapeliculas.size()+1;k++){%>
-                                    <div class="col">
-                                        <br>
-                                        <div class="boxfuncion">
-                                            <h5><%=listapeliculas.get(k-1).getNombre()%></h5>
-                                            <img src="${pageContext.request.contextPath}/Image?id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
-                                            <a type="button" href="<%=request.getContextPath()%>/inicio?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <a class="" href="#"><b>Detalles peliculas</b></a>
                                         </div>
+                                        <br>
+                                        <h5><%=pelicula.getNombre()%></h5>
+                                        <%if (pelicula.getInformación()!=null){%>
+                                            <p>jojojojo</p>
+                                        <%}else{%>
+                                            <p>Todavía no contamos con una descripción disponible</p>
+                                        <%}%>
+                                        <H4>Lista de directores:</H4>
+                                        <H4 > Lista de actores:</H4 >
+                                        <%for(BPeliculas bPeliculas : lista_profesionales) {%>
+                                        <tr ><%=bPeliculas.getProfesional().getNombre()%></tr >
+                                        <%}%>
+
+                                        <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir_nologueo" enctype="multipart/form-data">
+                                            <!-- Código-->
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-user" id="exampleCodigo"
+                                                       placeholder="Código PUCP" name="codigo_pucp">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" >Añadir pelicula</button>
+                                            <hr>
+                                        </form>
+                                        <hr>
+
                                     </div>
-                                    <% if (k%3==0) {
-                                            h=k+1;
-                                            break;
-                                        }%>
-                                    <%}%>
                                 </div>
-                                <% if (m%2==0) {
-                                    break;
-                                }%>
-                                <%}%>
                             </div>
                         </div>
-                        <%}%>
                     </div>
                 </div>
             </div>
@@ -415,6 +336,6 @@
         </script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     </body>
 </html>
-

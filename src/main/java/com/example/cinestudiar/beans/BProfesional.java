@@ -10,6 +10,18 @@ public class BProfesional {
     private Blob foto;
     private float calificacion;
 
+    public BProfesional() {
+    }
+
+    public BProfesional(int idProfesional, String nombre, String apellido, String rol) {
+        this.idProfesional = idProfesional;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.rol = rol;
+        this.foto = foto;
+        this.calificacion = calificacion;
+    }
+
     public int getIdProfesional() {
         return idProfesional;
     }

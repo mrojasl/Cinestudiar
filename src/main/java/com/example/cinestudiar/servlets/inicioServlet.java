@@ -28,7 +28,6 @@ public class inicioServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
         UsuariosDao usuariosDao = new UsuariosDao();
-        ImageDao imagenesDao = new ImageDao();
         PeliculasDao peliculasDao = new PeliculasDao();
         RequestDispatcher view;
         System.out.println(peliculasDao.cointaner(peliculasDao.listasPeliculas().size()));
@@ -67,6 +66,12 @@ public class inicioServlet extends HttpServlet {
                 request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
                 request.setAttribute("listapeliculas",listapeliculas);
                 view = request.getRequestDispatcher("Usuario/index.jsp");
+                view.forward(request, response);
+            }
+            case "detalles"->{
+                request.setAttribute("pelicula",peliculasDao.obtener_pelicula(Integer.parseInt(request.getParameter("id")),peliculasDao.listasPeliculas()));
+                request.setAttribute("lista_profesionales",peliculasDao.listapeliculaprofesional(Integer.parseInt(request.getParameter("id"))));
+                view = request.getRequestDispatcher("Usuario/detalles.jsp");
                 view.forward(request, response);
             }
         }

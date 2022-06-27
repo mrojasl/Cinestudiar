@@ -4,15 +4,33 @@ public class BPeliculas {
         private int idpeliculas;
         private String nombre;
         private int duracion;
-        private String calificacion;
+        private double calificacion;
         private String genero;
         private String información;
 
+        private BProfesional profesional;
 
-        public BPeliculas(int idpeliculas, String nombre, String información) {
+
+
+        public BPeliculas(int idpeliculas, BProfesional profesional) {
+                this.idpeliculas = idpeliculas;
+                this.profesional = profesional;
+        }
+
+        public BPeliculas(int idpeliculas, String nombre, int duracion, double calificacion, String genero, String información) {
                 this.idpeliculas = idpeliculas;
                 this.nombre = nombre;
+                this.duracion = duracion;
+                this.calificacion = calificacion;
+                this.genero = genero;
                 this.información = información;
+        }
+        public BProfesional getProfesional() {
+                return profesional;
+        }
+
+        public void setProfesional(BProfesional profesional) {
+                this.profesional = profesional;
         }
 
         public int getIdpeliculas() {
@@ -39,11 +57,11 @@ public class BPeliculas {
                 this.duracion = duracion;
         }
 
-        public String getCalificacion() {
+        public double getCalificacion() {
                 return calificacion;
         }
 
-        public void setCalificacion(String calificacion) {
+        public void setCalificacion(double calificacion) {
                 this.calificacion = calificacion;
         }
 
