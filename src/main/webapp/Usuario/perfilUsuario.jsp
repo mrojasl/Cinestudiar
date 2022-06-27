@@ -10,8 +10,7 @@
 
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.*" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
+
 
 <jsp:useBean id="perfilDusuario" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPerfil>" />
 <jsp:useBean id="usuarioFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BUsuarioFuncion>" />
@@ -395,7 +394,7 @@
             </div>
             <div class="input-group mb-3 col">
             </div>
-            <div class="input-group mb-3 col">
+            <!--<div class="input-group mb-3 col">
                 <h5 class="col" style="padding: 14px;color: white;width: 250px">Filtar por sede:</h5>
             </div>
             <div class="input-group mb-3 col"style="margin-top: 10px;height: 20px">
@@ -405,7 +404,7 @@
                     <option value="2">Surco</option>
                     <option value="3">Pueblo Libre</option>
                 </select>
-            </div>
+            </div>-->
         </div>
         <div class="topmargin">
 
