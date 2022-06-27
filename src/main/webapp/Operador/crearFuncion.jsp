@@ -50,13 +50,16 @@
         <section>
             <ul class="navbar navbar-dark bg-dark">
                 <li class="nav-item">
-                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crear" class="navbar-brand" aria-current="page" href="Administar_funciones_Crear.html">Crear</a>
+                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-brand" aria-current="page">Crear Película</a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="Administrar_funciones_Modificar.html">Modificar</a>
+                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-brand" aria-current="page">Crear Función</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=funciones" class="navbar-brand" href="Administrar_Funciones_Funcion.html">Funcion</a>
+                    <a  href="<%=request.getContextPath()%>/OperadorServlet?action=peliculas" class="navbar-brand">Películas</a>
+                </li>
+                <li class="nav-item">
+                    <a  href="<%=request.getContextPath()%>/OperadorServlet?action=funciones" class="navbar-brand">Funciones</a>
                 </li>
             </ul>
 
@@ -69,8 +72,13 @@
 
                         <div class="mb-4 pb-2">
                             <div class="form-outline form-white">
-                                <input type="text" id="form3Examplea2" class="form-control form-control-lg">
-                                <label class="form-label" for="form3Examplea2" style="margin-left: 0px;">Película</label>
+                                <select type="text" id="pelicula" class="form-control form-control-lg">
+                                    <option selected></option>
+                                    <option value="1">Peli 1</option>
+                                    <option value="2">Peli 2</option>
+                                    <option value="3">Peli 3</option>
+                                </select>
+                                <label class="form-label" for="pelicula" style="margin-left: 0px;">Película</label>
                                 <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 70.4px;"></div><div class="form-notch-trailing"></div></div></div>
                         </div>
 
@@ -183,7 +191,7 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-light btn-lg" data-mdb-ripple-color="dark">Register</button>
+                        <button type="button" class="btn btn-light btn-lg" data-mdb-ripple-color="dark">Crear</button>
 
                     </div>
                 </div>
