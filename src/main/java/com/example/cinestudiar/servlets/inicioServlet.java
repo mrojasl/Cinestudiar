@@ -141,12 +141,12 @@ public class inicioServlet extends HttpServlet {
     }
 
     public BUser leerParametrosRequest(HttpServletRequest request) throws IOException, ServletException {
-        String nombre = request.getParameter("nombre");
+        String codigo = request.getParameter("codigo");
         String contraseña = request.getParameter("password");
 
-        System.out.println(nombre +contraseña);
+        System.out.println(codigo +contraseña);
 
-        return new BUser(nombre ,contraseña);
+        return new BUser(codigo ,contraseña);
     }
 
     public BUser leerParametrosRequest2(HttpServletRequest request) throws IOException, ServletException {

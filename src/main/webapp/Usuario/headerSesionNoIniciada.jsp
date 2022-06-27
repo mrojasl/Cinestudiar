@@ -36,7 +36,7 @@
         <div class="container align-content-center w-75 mt-5 rounded">
           <p class="text-center" style="color: black; font-size: 40px" ><b>Iniciar sesión</b></p>
           <label><b>Username</b></label>
-          <input type="text" placeholder="Ingrese usuario" name="nombre" required>
+          <input type="text" placeholder="Ingrese usuario" name="codigo" required>
 
           <label><b>Password</b></label>
           <input type="password" placeholder="Ingrese contraseña" name="password" required>
@@ -44,7 +44,7 @@
           <button type="submit" class="btn btn-success">Ingresar</button>
           <br>
           <label>
-            <input id="rememberme" type="checkbox" checked="checked" name="remember"> Recuérdame
+            <input id="rememberme" type="checkbox" checked="checked" name="remember" > Recuérdame
           </label>
         </div>
 

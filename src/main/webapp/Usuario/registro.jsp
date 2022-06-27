@@ -286,16 +286,16 @@
                                     <!-- Nombre completo-->
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="nombre"
-                                               placeholder="Nombres" name="nombre">
+                                               placeholder="Nombres" name="nombre" required>
                                     </div>
                                     <!-- Apellido completo-->
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="apellidos"
-                                               placeholder="Apellidos" name="apellido">
+                                               placeholder="Apellidos" name="apellido" required>
                                     </div>
                                     <!-- DNI--->
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleDNI"
+                                        <input type="number" class="form-control form-control-user" id="exampleDNI"
                                                placeholder="DNI" name="dni">
                                     </div>
                                     <!-- Código-->

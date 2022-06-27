@@ -293,10 +293,6 @@
                         </div>
                     </div>
                 </div>
-                <%=listapeliculas.size()%>
-                <%=listapeliculas.get(1).getIdpeliculas()%>
-                <%=listapeliculas.get(1).getNombre()%>
-
                 <div class="px-5" >
                     <img src="Imagenes/estrella.png" height="35px" width="35px">
                     <img src="Imagenes/estrella.png" height="35px" width="35px">

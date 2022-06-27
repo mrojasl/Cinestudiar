@@ -14,8 +14,8 @@ public class UsuariosDao extends BaseDao{
             "values (?,?,?,?,?,?,?,?,?,?,?,?);";
     private static String sql_delete="delete from usuarios where codigo_pucp=?;";
 
-    private static String sql_iniciar="select * from usuarios where nombre=? and contraseña=?;";
-    private static String sql_rol="select rol from usuarios where nombre=? and contraseña=?";
+    private static String sql_iniciar="select * from usuarios where codigo_pucp=? and contraseña=?;";
+    private static String sql_rol="select rol from usuarios where codigo_pucp=? and contraseña=?";
 
 
     public void agregar(BUser usuario) {
@@ -66,7 +66,7 @@ public class UsuariosDao extends BaseDao{
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql_iniciar)
         ) {
-            pstmt.setString(1, usuario.getNombres());
+            pstmt.setString(1, usuario.getCodigoPucp());
             pstmt.setString(2, usuario.getContrasena());
             ResultSet rs=pstmt.executeQuery();
             result=rs.next();
@@ -82,7 +82,7 @@ public class UsuariosDao extends BaseDao{
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql_rol);
         ) {
-            pstmt.setString(1, usuario.getNombres());
+            pstmt.setString(1, usuario.getCodigoPucp());
             pstmt.setString(2, usuario.getContrasena());
 
             try (ResultSet rs = pstmt.executeQuery();) {

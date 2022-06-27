@@ -29,8 +29,9 @@ public class BUser {
     public BUser() {
     }
 
-    public BUser(String nombres, String contrasena) {
-        this.nombres = nombres;
+
+    public BUser(String codigoPucp, String contrasena) {
+        this.codigoPucp = codigoPucp;
         this.contrasena = contrasena;
     }
 

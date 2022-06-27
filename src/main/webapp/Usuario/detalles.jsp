@@ -285,25 +285,29 @@
                                         <br>
                                         <h5><%=pelicula.getNombre()%></h5>
                                         <%if (pelicula.getInformación()!=null){%>
-                                            <p>jojojojo</p>
+                                        <p>jojojojo</p>
                                         <%}else{%>
-                                            <p>Todavía no contamos con una descripción disponible</p>
+                                        <p>Todavía no contamos con una descripción disponible</p>
                                         <%}%>
-                                        <H4>Lista de directores:</H4>
-                                        <H4 > Lista de actores:</H4 >
+                                        <%int i =1;%>
+                                        <%int j=1;%>
                                         <%for(BPeliculas bPeliculas : lista_profesionales) {%>
+                                        <% if (bPeliculas.getProfesional().getRol().equals("d")){ %>
+                                        <% if(i==1){%>
+                                        <H4>Lista de directores:</H4>
+                                        <%}%>
+                                        <tr ><%=bPeliculas.getProfesional().getNombre()%> </tr >
+                                        <%i=2;%>
+                                        <%}%>
+                                        <% if (bPeliculas.getProfesional().getRol().equals("a")){%>
+                                        <%if (j==1){%>
+                                        <H4 > Lista de actores:</H4 >
+                                        <%}%>
+                                        <%j=2;%>
                                         <tr ><%=bPeliculas.getProfesional().getNombre()%></tr >
                                         <%}%>
+                                        <%}%>
 
-                                        <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir_nologueo" enctype="multipart/form-data">
-                                            <!-- Código-->
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" id="exampleCodigo"
-                                                       placeholder="Código PUCP" name="codigo_pucp">
-                                            </div>
-                                            <button type="submit" class="btn btn-primary" >Añadir pelicula</button>
-                                            <hr>
-                                        </form>
                                         <hr>
 
                                     </div>
