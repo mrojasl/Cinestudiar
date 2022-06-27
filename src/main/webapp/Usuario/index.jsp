@@ -105,14 +105,12 @@
             }
             .navbar a{
                 position: relative;
-                left:55%;
                 color:white;
                 text-decoration: none;
                 margin-right: 18px;
             }
             .navbar a[id=forgot]{
                 position: relative;
-                left:65%;
                 color: #78261f;
                 text-decoration: none;
             }
