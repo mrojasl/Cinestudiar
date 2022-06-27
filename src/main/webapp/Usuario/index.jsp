@@ -338,10 +338,10 @@
                     <div class="buttonswipe" >
                         <br>
                         <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-                            Anterior
+                            <i class="bi bi-arrow-left-square-fill"></i> Anterior
                         </button>
                         <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-                            Siguiente
+                            Siguiente <i class="bi bi-arrow-right-square-fill"></i>
                         </button>
                     </div>
                 </div>

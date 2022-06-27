@@ -275,8 +275,10 @@
         }
     </style>
 </head>
+
     <body>
         <jsp:include page="cabecera_usuario.jsp"/>
+
         <div class="d-flex justify-content-between">
             <div class="leftside d-flex flex-column">
                 <div class="sugerencia p-2" ><h3>Sugerencias</h3></div>
@@ -286,7 +288,7 @@
                         <h5>El Hombre Araña 2</h5>
                         <img  src="Imagenes/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
                     </div>
-                    <button type="button" class="btn btn-secondary buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Más información</button>
+                    <button type="button" class="btn btn-info buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver detalles</button>
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -314,7 +316,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="px-5" >
                     <img src="Imagenes/estrella.png" height="35px" width="35px">
                     <img src="Imagenes/estrella.png" height="35px" width="35px">
@@ -359,40 +360,20 @@
                 <div >
                     <div class="buttonswipe" >
                         <br>
-                        <button type="button" class="btn btn-secondary" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-                            Anterior
+                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                            <i class="bi bi-arrow-left-square-fill"></i> Anterior
                         </button>
-                        <button type="button" class="btn btn-secondary" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-                            Siguiente
+                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                            Siguiente <i class="bi bi-arrow-right-square-fill"></i>
                         </button>
                     </div>
                 </div>
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="container">
-                                <%for (int j = 0 ; j<6;j=j+3){%>
 
-                                <div class="row align-items-start">
-                                    <%for (int i=j ; i<3+j;i++){%>
-                                    <div class="col">
-                                        <br>
-                                        <div class="boxfuncion">
-                                            <h5><%=listapeliculas.get(i).getNombre()%></h5>
-                                            <img src="${pageContext.request.contextPath}/Image?id=<%=listapeliculas.get(i).getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
-                                        </div>
-                                        <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
-                                    </div>
-                                    <%}%>
-                                </div>
-                                <%}%>
-                            </div>
-
-                        </div>
-
-                        <%  int h=7;
-                            for (int n = 1; n<cointaner; n++) {%>
-                        <div class="carousel-item">
+                        <%  int h=1;
+                            for (int n = 1; n<cointaner+1; n++) {%>
+                        <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">
                             <div class="container">
                                 <%for (int m= 1 ; m<valor+1;m++){%>
                                 <div class="row align-items-start">
@@ -401,9 +382,9 @@
                                         <br>
                                         <div class="boxfuncion">
                                             <h5><%=listapeliculas.get(k-1).getNombre()%></h5>
-                                            <img src="${pageContext.request.contextPath}/Image?id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
+                                            <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
+                                            <a type="button" class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/inicio?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
                                         </div>
-                                        <button type="button" class="btn btn-secondary buttonsize">Ver detalles</button>
                                     </div>
                                     <% if (k%3==0) {
                                         h=k+1;
@@ -423,12 +404,14 @@
             </div>
         </div>
 
+        <!-- 1-->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
                 integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
                 crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
                 integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
                 crossorigin="anonymous"></script>
+
         <script>
             // Get the modal
             var modalh1 = document.getElementById('id01');
