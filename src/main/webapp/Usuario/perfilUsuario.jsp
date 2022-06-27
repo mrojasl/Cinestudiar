@@ -7,6 +7,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
 <jsp:useBean id="perfilDusuario" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPerfil>" />
 <jsp:useBean id="usuarioFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BUsuarioFuncion>" />
 <html lang="en">
@@ -50,6 +56,30 @@
     /*=====================================
     estilos
     =====================================*/
+
+    .navbar{
+        position: relative;
+        width: 100%;
+        padding: 20px 10px;
+        background-color: #003f9e;
+    }
+    .navbar img{
+        width:300px;
+        height:80px;
+    }
+    .navbar a{
+        position: relative;
+        color:white;
+        text-decoration: none;
+        margin-right: 18px;
+    }
+    .navbar a[id=forgot]{
+        position: relative;
+        left:65%;
+        color: #78261f;
+        text-decoration: none;
+    }
+
     body {
         background-color: #3C3C41FF;
     }
@@ -395,12 +425,43 @@
                             <h6>Sede:<br><%=funciones.getSede()%> <br><br>Hora:<br><%=funciones.getHorapelicula()%></h6>
                         </div>
 
-                        <div class="input-group mb-3 col">
-                        </div>
+                        <% String[] split = funciones.getFechapelicula().split("-");
+                            String[] split2 = funciones.getHorapelicula().split(":");%>
+                        <%  LocalDate date1 = LocalDate.now();
+                            LocalDate date2 = LocalDate.of(Integer. parseInt(split[0]), Integer. parseInt(split[1]), Integer. parseInt(split[2]));
+                            LocalTime time1 = LocalTime.now();
+                            LocalTime time2 = LocalTime.of(Integer. parseInt(split2[0]), Integer. parseInt(split2[1]), Integer. parseInt(split2[2]));
+                            // compareTo() method
+                            int diff = date1.compareTo(date2);
+                            int diff2 = time1.compareTo(time2);%>
+
+                        <% if(diff > 0) {%>
                         <div class="input-group mb-3 col">
                             <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px" disabled>Caducado
                             </button>
                         </div>
+
+                        <%} else if (diff < 0) {%>
+                        <div class="input-group mb-3 col">
+                            <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
+                            </button>
+                        </div>
+                        <%} else {
+                                /*System.out.println(date1 + " is equal to " + date2);*/
+                            if(diff2 > 0) {%>
+                            <div class="input-group mb-3 col">
+                                <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px" disabled>Caducado
+                                </button>
+                            </div>
+
+                            <%} else if (diff2 < 0) {%>
+                            <div class="input-group mb-3 col">
+                                <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px" disabled>Vigente
+                                </button>
+                            </div>
+                            <%}%>
+                        <%}%>
+
                         <hr>
                     </div>
 
