@@ -28,7 +28,7 @@ public class ImageDao extends BaseDao{
         return content;
     }
 
-    public byte[] obtenerimagenesUsuarios(int id) {
+    public byte[] obtenerimagenesUsuarios() {
         byte[] content = null;
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql_usuarios);

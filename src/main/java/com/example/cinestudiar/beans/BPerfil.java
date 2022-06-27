@@ -1,5 +1,6 @@
 package com.example.cinestudiar.beans;
 
+import java.io.InputStream;
 import java.sql.Blob;
 
 public class BPerfil {
@@ -12,11 +13,11 @@ public class BPerfil {
     private int dni;
     private String direccion;
     private String correo;
-    private Blob fotoperfil;
+    private InputStream fotoperfil;
     private String contrasenha;
 
 
-    public BPerfil(String nombre, String codigopucp, String numero, int dni, String direccion, String correo, Blob fotoperfil, String contrasenha) {
+    public BPerfil(String nombre, String codigopucp, String numero, int dni, String direccion, String correo, InputStream fotoperfil, String contrasenha) {
         this.nombre = nombre;
         this.codigopucp = codigopucp;
         this.numero = numero;
@@ -64,11 +65,11 @@ public class BPerfil {
 
 
 
-    public Blob getFotoperfil() {
+    public InputStream getFotoperfil() {
         return fotoperfil;
     }
 
-    public void setFotoperfil(Blob fotoperfil) {
+    public void setFotoperfil(InputStream fotoperfil) {
         this.fotoperfil = fotoperfil;
     }
 

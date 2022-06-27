@@ -3,6 +3,7 @@ package com.example.cinestudiar.daos;
 
 import com.example.cinestudiar.beans.*;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -79,7 +80,7 @@ public class PerfilDao {
                 bPerfil.setDni(Integer.parseInt(rs.getString(4)));
                 bPerfil.setDireccion(rs.getString(5));
                 bPerfil.setCorreo(rs.getString(6));
-                bPerfil.setFotoperfil(rs.getBlob(7));
+
                 bPerfil.setContrasenha(rs.getString(8));
 
                 listausuarios.add(bPerfil);
@@ -175,6 +176,33 @@ public class PerfilDao {
 
     }
 
+    public void actualizafoto(BPerfil fot) {
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "UPDATE usuarios set foto=? where codigo_pucp=?;";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+
+            pstmt.setBlob(1, fot.getFotoperfil());
+            pstmt.setString(2, fot.getCodigopucp());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public static ArrayList<BUsuarioFuncion> ObtenerSedesFiltro(String parametro){
         ArrayList<BUsuarioFuncion> listausuarios = new ArrayList<>();

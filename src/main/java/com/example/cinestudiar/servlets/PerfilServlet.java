@@ -13,9 +13,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.util.ArrayList;
-
+@MultipartConfig
 @WebServlet(name = "PerfilServlet", value = "/PerfildeUsuario")
 public class PerfilServlet extends HttpServlet {
     @Override
@@ -67,23 +68,16 @@ public class PerfilServlet extends HttpServlet {
             perfilDao.actualizacontra(bPerfil);
             response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
         }
-        if ("filtroprofesional".equals(action)) {
-            String parametro = request.getParameter("filtroprof");
-            if (parametro.equals("Todo")) {
-                response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
-            } else{
-                if (parametro.equals("Director")) {
-                    parametro="d";
-                } else if (parametro.equals("Actor/Actriz")){
-                    parametro="a";
-                }
-                ArrayList<BProfesional> listaProfesionales= AdminDao.ObtenerProfesionalesFiltro(parametro);
-                request.setAttribute("listaProfesionales",listaProfesionales);
-                RequestDispatcher rd4 =request.getRequestDispatcher("Admin/actoresydirectores.jsp");
-                rd4.forward(request,response);
-            }
-
-
+        if ("actualizarfoto".equals(action)) {
+            BPerfil bPerfil= new BPerfil();
+            String codigo=request.getParameter("codigopuke");
+            Part foto = request.getPart("fotonueva");
+            InputStream fotoinput = null;
+            fotoinput = foto.getInputStream();
+            bPerfil.setFotoperfil(fotoinput);
+            bPerfil.setCodigopucp(codigo);
+            perfilDao.actualizafoto(bPerfil);
+            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
         }
 
 

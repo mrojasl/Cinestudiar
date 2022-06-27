@@ -190,17 +190,17 @@
 
     .seccion-perfil-usuario .perfil-usuario-avatar {
         display: flex;
-        width: 180px;
-        height: 180px;
+        width: 160px;
+        height: 160px;
         align-items: center;
         justify-content: center;
-        border: 7px solid #FFFFFF;
-        background-color: #DFE5F2;
+        border: rgba(213, 8, 8, 0.2);
+
         border-radius: 50%;
-        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+
         position: absolute;
-        bottom: -40px;
-        left: calc(50% - 90px);
+        bottom: -20px;
+        left: calc(50% - 35px);
         z-index: 1;
     }
 
@@ -211,7 +211,7 @@
     }
 
     .seccion-perfil-usuario .perfil-usuario-avatar .boton-avatar {
-        position: absolute;
+        position: relative;
         left: -2px;
         top: -2px;
         border: 0;
@@ -288,7 +288,23 @@
         color: white;
     }
 
-
+    .container {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        margin: 10px;
+        position: relative;
+    }
+    .container > .crop {
+        position:absolute;
+        left: -100%;
+        right: -100%;
+        top: -100%;
+        bottom: -100%;
+        margin: auto;
+        min-height: 100%;
+        min-width: 100%;
+    }
     /* adactacion a dispositivos */
     @media (max-width: 750px) {
         .seccion-perfil-usuario .lista-datos {
@@ -312,11 +328,19 @@
             <div class="perfil-usuario-avatar">
 
                 <% for (BPerfil foto: perfilDusuario){ %>
-                <img class="mb-4" src="${pageContext.request.contextPath}/Image?id=<%=foto.getCodigopucp()%>" alt="">
 
-                <button type="button" class="boton-avatar">
-                    <i class="far fa-image"></i>
-                </button>
+                <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=foto.getCodigopucp()%>"/>
+
+
+                <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarfoto" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <input type="hidden" name="codigopuke" value="<%=foto.getCodigopucp()%>" />
+                        <input type="file" class="form-control" name="fotonueva" id="fotonueva">
+                        <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                    </div>
+                </form>
+
+
                 <% } %>
             </div>
 
@@ -366,7 +390,7 @@
                 <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarcon">
                     <div class="input-group mb-3">
                         <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
-                        <input type="password" class="form-control" name="contranueva" id="contranueva"value="<%=perfil.getContrasenha()%>">
+                        <input type="password" class="form-control" name="contranueva" id="contranueva" pattern=".{5,}" title="La contraseña es muy corta" value="<%=perfil.getContrasenha()%>">
                         <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
                     </div>
                 </form>
@@ -425,7 +449,7 @@
 
             <div >
                 <div class="supbarblack row">
-                    <% Collections.reverse(usuarioFunciones); %>
+
                     <% for (BUsuarioFuncion funciones: usuarioFunciones){ %>
 
                     <div class="row">
