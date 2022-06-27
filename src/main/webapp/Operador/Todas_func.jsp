@@ -33,38 +33,39 @@
     </style>
 
      <link rel="stylesheet" href="Operador/operador_style.css">
+     <jsp:include page="cabecera_operador.jsp"/>
 </head>
-<body class='snippet-body'>
+<body class='snippet-body' bgcolor="#191970">
 
-    <jsp:include page="cabecera_operador.jsp"/>
+
 
     <section class="administrador">
         <h3 class="mt-1 p-0 mb-0 ">Operador</h3>
     </section>
     <section>
-        <ul class="nav nav-tabs topside d-flex justify-content-around">
+        <ul class="navbar navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="Administar_funciones_Crear.html">Crear</a>
+                <a href="<%=request.getContextPath()%>/OperadorServlet?action=crear" class="navbar-brand" aria-current="page" href="Administar_funciones_Crear.html">Crear</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Administrar_funciones_Modificar.html">Modificar</a>
+                <a class="navbar-brand" href="Administrar_funciones_Modificar.html">Modificar</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Administrar_Funciones_Funcion.html">Funcion</a>
+                <a  href="<%=request.getContextPath()%>/OperadorServlet?action=funciones" class="navbar-brand" href="Administrar_Funciones_Funcion.html">Funcion</a>
             </li>
         </ul>
 
     </section>
     <section>
-            <div class="d-flex bd-highlight mb-3 mx-5 ">
-            <div class="p-2 bd-highlight topnav">
-                <a class="mx-2" href="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">Ordenar Funciones</a>
-                <a class="mx-2" href="Ordenar%20Directores.html">Ordenar Directores</a>
-                <a  class="mx-2" href="Ordenar%20Actores.html">Ordenar Actores</a>
+        <div class="d-flex justify-content-evenly">
+            <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">Ordenar Funciones</a>
+                <a class="navbar-brand" href="Ordenar%20Directores.html">Ordenar Directores</a>
+                <a  class="navbar-brand" href="Ordenar%20Actores.html">Ordenar Actores</a>
             </div>
 
             <div class="ms-auto p-2 bd-highlight botones">
-                <button data-bs-toggle="modal" data-bs-target="#exporta_reporte">Exportar reporte</button>
+                <button data-bs-toggle="modal" class = "btn btn-secondary" data-bs-target="#exporta_reporte">Exportar reporte</button>
                 <div class="modal fade" id="exporta_reporte" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -116,32 +117,31 @@
         </div>
     </section>
 
-    <div class="mx-5 mb-1 supbarblue row">
+    <div class="d-flex justify-content-around">
+        <form method="POST" class = "d-flex justify-content-around" action="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">
         <div  class="input-group mb-1 col">
-            <label class="fw-bold mx-1 my-2 text-white " >Fecha de inicio:</label>
-            <input class="mx-1 my-2" type="date" id="fechainicio">
+            <label class="fw-bold mx-1 my-2 text-white" >Fecha de inicio:</label>
+            <input name = "fecha_in" class="mx-1 my-2" type="date" id="fechainicio">
         </div>
 
         <div class="input-group mb-1 col">
             <label class="fw-bold mx-1 my-2 text-white" >Fecha de fin:</label>
-            <input class="mx-0 my-2" type="date" id="fechafin">
+            <input name = "fecha_fin" class="mx-0 my-2" type="date" id="fechafin">
         </div>
         <div class="input-group mb-1 col">
-            <label class="fw-bold mx-1 my-2 text-white" >Ordenar por:</label>
-            <form method="POST" action="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">
-                <select id ="selection_option" name="listarFunciones" class=" mx-1 my-2 form-select form-select-sm" onchange="update()" >
+            <label class="fw-bold mx-0 my-0 text-white" >Ordenar por:</label>
+               <select id ="selection_option" name="listarFunciones" class=" mx--2 my-4 form-select form-select-sm" onchange="update()" >
                     <option selected value="defecto"<%=listarFunciones.equals("defecto")?"selected":""%>>Selecione su opción</option>
                     <option value="Funciones Disponibles" <%=listarFunciones.equals("Funciones Disponibles")?"selected":""%>>Funciones Disponibles</option>
                     <option value="Mejor calificado" <%=listarFunciones.equals("Mejor calificado")?"selected":""%>>Mejor calificado</option>
                     <option value="Mas visto"<%=listarFunciones.equals("Mas visto")?"selected":""%>>Más visto</option>
                     <option value="Menos visto"<%=listarFunciones.equals("Menos visto")?"selected":""%>>Menos visto</option>
                 </select>
-                <div class="imput-group mb-1 col">
-                    <button type = "submit" class = "output btn btn-primary">Filtrar</button>
-                </div>
-            </form>
         </div>
-
+        <div class="imput-group mb-1 col">
+            <button type = "submit" class = "output btn btn-primary">Filtrar</button>
+        </div>
+        </form>
 
     </div>
     <div class="container">

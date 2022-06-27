@@ -1,8 +1,5 @@
 package com.example.cinestudiar.beans;
 
-import java.sql.Time;
-import java.util.Date;
-
 public class BFuncion extends BSedeYSala{
     private int idFuncion;
     private String fecha;
@@ -14,7 +11,23 @@ public class BFuncion extends BSedeYSala{
     private String pelicula;
     private float calificacion;
     private float asistencia;
+    private int idPelicula;
 
+    public int getIdPelicula() {
+        return idPelicula;
+    }
+
+    public void setIdPelicula(int idPelicula) {
+        this.idPelicula = idPelicula;
+    }
+
+    public BFuncion(String fecha_funcion, String hora, String precio, String edad_min, String id_personal, String id_sala, String id_peli) {
+
+    }
+
+    public BFuncion() {
+
+    }
 
 
     public int getIdFuncion() {

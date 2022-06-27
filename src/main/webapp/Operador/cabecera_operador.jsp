@@ -36,7 +36,7 @@
         margin-left: 0px;
     }
     .bodycolor {
-        background: rgb(159,197,245);
+        background: #1c294e;
         background: linear-gradient(0deg, rgba(159,197,245,1) 0%, rgba(55,123,215,1) 80%);
         background-repeat: no-repeat ;
         background-size: cover;

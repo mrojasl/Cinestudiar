@@ -7,16 +7,11 @@ import com.example.cinestudiar.beans.BProfesional;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class OperadorDao {
+public class OperadorDao extends BaseDao {
+    public OperadorDao() throws SQLException {
+    }
+
     public ArrayList<BFuncion> filtradoFunciones(String filtro){
-        String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         if (filtro.equals("") || filtro.equals("defecto")){
             ArrayList<BFuncion> todasLasFunciones = new ArrayList<>();
             try {
@@ -31,7 +26,7 @@ public class OperadorDao {
                         "inner join sedes se on (sa.nombre_sede=se.nombre_sede)\n" +
                         "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
                         "order by se.nombre_sede,sa.idsala,f.fecha desc;";
-                Connection conn = DriverManager.getConnection(url,user,pass);
+                Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
                 System.out.println("PORBAAAAAANDO SI LLEGGA");
@@ -72,7 +67,7 @@ public class OperadorDao {
                         "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
                         "where datediff(f.fecha,now())>=0\n" +
                         "order by se.nombre_sede,sa.idsala,f.fecha desc;";
-                Connection conn = DriverManager.getConnection(url,user,pass);
+                Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
 
@@ -110,7 +105,7 @@ public class OperadorDao {
                         "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
                         "order by p.calificacion desc\n" +
                         "limit 1;";
-                Connection conn = DriverManager.getConnection(url,user,pass);
+                Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
 
@@ -149,7 +144,7 @@ public class OperadorDao {
                         "inner join compradefunciones cdf on (cdf.idfuncion=f.idfuncion)\n" +
                         "order by cdf.asistencia desc\n" +
                         "limit 1;";
-                Connection conn = DriverManager.getConnection(url,user,pass);
+                Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
                 System.out.println("PORBAAAAANDOOO WIWIWIWI");
@@ -189,7 +184,7 @@ public class OperadorDao {
                         "inner join compradefunciones cdf on (cdf.idfuncion=f.idfuncion)\n" +
                         "order by cdf.asistencia asc\n" +
                         "limit 1;";
-                Connection conn = DriverManager.getConnection(url,user,pass);
+                Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
 
@@ -215,117 +210,9 @@ public class OperadorDao {
         return null;
     }
 
-
-    public ArrayList<BFuncion> obtenerFuncionMejorCalificada(){
-        ArrayList<BFuncion> listaFunMejorCalif = new ArrayList<>();
-        String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            String sql = "select p.nombre,p.calificacion\n" +
-                    "from peliculas p \n" +
-                    "order by p.calificacion desc\n" +
-                    "limit 1;";
-            Connection conn = DriverManager.getConnection(url,user,pass);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()){
-                BFuncion fu = new BFuncion();
-                fu.setPelicula(rs.getString(1));
-                fu.setCalificacion(rs.getFloat(2));
-
-                listaFunMejorCalif.add(fu);
-            }
-
-        } catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-        return listaFunMejorCalif;
-
-    }
-    public ArrayList<BFuncion> obtenerFuncionMasVista(){
-        ArrayList<BFuncion> listaFunMasVis = new ArrayList<>();
-        String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            String sql = "select p.nombre,cdf.asistencia\n" +
-                    "from funciones f\n" +
-                    "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
-                    "inner join compradefunciones cdf on (cdf.idfuncion=f.idfuncion)\n" +
-                    "order by cdf.asistencia desc\n" +
-                    "limit 1;";
-            Connection conn = DriverManager.getConnection(url,user,pass);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()){
-                BFuncion fu = new BFuncion();
-                fu.setPelicula(rs.getString(1));
-                fu.setAsistencia(rs.getFloat(2));
-
-                listaFunMasVis.add(fu);
-            }
-
-        } catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-        return listaFunMasVis;
-    }
-    public ArrayList<BFuncion> obtenerFuncionMenosVista(){
-        ArrayList<BFuncion> listaFunMenVis = new ArrayList<>();
-        String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-
-            String sql = "select p.nombre,cdf.asistencia\n" +
-                    "from funciones f\n" +
-                    "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
-                    "inner join compradefunciones cdf on (cdf.idfuncion=f.idfuncion)\n" +
-                    "order by cdf.asistencia asc\n" +
-                    "limit 1;";
-            Connection conn = DriverManager.getConnection(url,user,pass);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()){
-                BFuncion fu = new BFuncion();
-                fu.setPelicula(rs.getString(1));
-                fu.setAsistencia(rs.getFloat(2));
-
-                listaFunMenVis.add(fu);
-            }
-
-        } catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-        return listaFunMenVis;
-    }
-    public static ArrayList<BProfesional> obtenerProfesionalesMejorCalificados(){
+    public ArrayList<BProfesional> obtenerProfesionalesMejorCalificados(){
         ArrayList<BProfesional> listaProMejorCalif = new ArrayList<>();
         try {
-            String user = "root";
-            String pass = "root";
-            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
-            Class.forName("com.mysql.cj.jdbc.Driver");
             String sql = "select pro.nombre,pro.apellido,\n" +
                     "cali.calificacion as `Calificacion`,\n" +
                     "pro.rol as `Rol`\n" +
@@ -334,7 +221,7 @@ public class OperadorDao {
                     "inner join profesionales pro on (php.profesionales_idprofesional=pro.idprofesional)\n" +
                     "inner join calificaciondeprofesionales cali on (cali.idprofesional=pro.idprofesional)\n" +
                     "order by cali.calificacion desc;";
-            Connection conn = DriverManager.getConnection(url,user,pass);
+            Connection conn = this.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -347,12 +234,34 @@ public class OperadorDao {
 
                 listaProMejorCalif.add(pr);
             }
-        } catch (ClassNotFoundException | SQLException e){
-            e.printStackTrace();
+        } catch (SQLException e){
+            throw new RuntimeException(e);
         }
         return listaProMejorCalif;
     }
 
+    //CREAR FUNCIONES
+    private static String sql_crear_func="INSERT INTO funciones (fecha,hora,precio_ticket,edad_minima,idpersonal,idsala,idpelicula) VALUES (?,?,?,?,?,?,?);";
+    public void crearFuncion(BFuncion funcion) {
 
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql_crear_func);) {
+
+            pstmt.setString(1, funcion.getFecha());
+            pstmt.setString(2, funcion.getHora());
+            pstmt.setInt(3, funcion.getPrecioTicket());
+            pstmt.setInt(4, funcion.getEdadMinima());
+            pstmt.setInt(5, funcion.getIdPersonal());
+            pstmt.setInt(6, funcion.getIdSala());
+            pstmt.setInt(7, funcion.getIdPelicula());
+            pstmt.executeUpdate();
+
+        }catch (SQLException error) {
+            error.printStackTrace();
+        }
+    }
 
 }
+
+
