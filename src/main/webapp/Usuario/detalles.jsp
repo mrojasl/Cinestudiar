@@ -285,7 +285,7 @@
                                         <br>
                                         <h5><%=pelicula.getNombre()%></h5>
                                         <%if (pelicula.getInformación()!=null){%>
-                                        <p>jojojojo</p>
+                                        <p><%=pelicula.getInformación()%></p>
                                         <%}else{%>
                                         <p>Todavía no contamos con una descripción disponible</p>
                                         <%}%>
