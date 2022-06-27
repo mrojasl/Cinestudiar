@@ -296,12 +296,12 @@
                                     <!-- DNI--->
                                     <div class="form-group">
                                         <input type="number" class="form-control form-control-user" id="exampleDNI"
-                                               placeholder=" DNI" name="dni">
+                                               placeholder=" DNI" name="dni" maxlength = "8">
                                     </div>
                                     <!-- Código-->
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="exampleCodigo"
-                                               placeholder="Código PUCP" name="codigo_pucp">
+                                               placeholder="Código PUCP" name="codigo_pucp" maxlength = "8">
                                     </div>
                                     <!-- Correo-->
                                     <div class="form-group">
@@ -317,7 +317,7 @@
                                     <div class="form-group">
                                         <input type="integrity" class="form-control form-control-user"
                                                id="exampleInputNumber" placeholder=" Número de Celular"
-                                               name="telefono">
+                                               name="telefono"     maxlength = "9">
                                     </div>
                                     <!-- Fecha de nacimiento-->
                                     <label for="start">Fecha de Nacimiento:</label>
