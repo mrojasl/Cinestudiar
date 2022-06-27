@@ -19,9 +19,10 @@
 <nav class="navbar navbar-light" style="background:#114a9d;">
     <h1 class="titulo" style="color: white; ">⠀<img src="${pageContext.request.contextPath}/Imagenes/cinestudiarlogo.png" alt="cinEstudiar" style="height: 85px;width: 320px;margin-top: -5px" ></h1>
     <div class="nav2">
-        <a href="${pageContext.request.contextPath}/inicio" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 18px;font-family: Akzidenz-Grotesk">Inicio⠀<i class="bi bi-house-fill"></i> </a>
-        <a href="${pageContext.request.contextPath}/PerfildeUsuario" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 18px;font-family: Akzidenz-Grotesk">Mi Perfil⠀<i class="bi bi-person-circle"></i></a>
-        <a href="${pageContext.request.contextPath}/inicio" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 18px;font-family: Akzidenz-Grotesk">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
+        <a href="${pageContext.request.contextPath}/inicio" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Inicio⠀<i class="bi bi-house-fill"></i> </a>
+        <a href="${pageContext.request.contextPath}/Checkout" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Carrito de Compras⠀<i class="bi bi-cart-fill"></i> </a>
+        <a href="${pageContext.request.contextPath}/PerfildeUsuario" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Mi Perfil⠀<i class="bi bi-person-circle"></i></a>
+        <a href="${pageContext.request.contextPath}/inicio?action=cerrar" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
     </div>
 </nav>
 
