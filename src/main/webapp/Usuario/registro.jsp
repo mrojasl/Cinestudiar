@@ -15,21 +15,15 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <head>
     <meta charset='utf-8'>
-    <link rel="icon" href="https://assets.website-files.com/60b56cdf18d38e15ce088579/60c111551dc75d6dc896a30e_pucp-favicon.png" type="image/x-icon">
+
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Inicio-Cinestudiar</title>
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
-    <link rel="stylesheet" href="carritocomprasvacio.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <style>
-        body {
-            background-image: url("Imagenes/fondo.jpg");
-            background-color: #ffffff;
-            background-size: cover;
-            background-size: cover;
 
-        }
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+
+
+    <style>
+
         .buttonswipe{
             text-align: right;
         }
@@ -103,29 +97,8 @@
             height: 1000px;
         }
 
-        .navbar{
-            position: fixed;
-            width: 100%;
-            padding: 20px 10px;
-            background-color: #003f9e;
-        }
-        .navbar img{
-            width:300px;
-            height:80px;
-        }
-        .navbar a{
-            position: relative;
-            left:55%;
-            color:white;
-            text-decoration: none;
-            margin-right: 18px;
-        }
-        .navbar a[id=forgot]{
-            position: relative;
-            left:65%;
-            color: #78261f;
-            text-decoration: none;
-        }
+
+
 
         p.emptytxt{
             margin-top: 45px;
@@ -135,16 +108,7 @@
 
         }
         /* Full-width input fields */
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            color: #2d2e33;
-            position: center;
-        }
+
         input[id=rememberme]{
             font-family: Arial, Helvetica, sans-serif;
             color: #2b2e31;
@@ -258,11 +222,16 @@
             cursor: pointer;
 
         }
+
+
     </style>
+
+    <jsp:include page="/Usuario/headerSesionNoIniciada.jsp"/>
+
 </head>
-<body >
+<body STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;" >
 <!-- Navbar -->
-    <jsp:include page="cabecera_index.jsp"/>
+
 <br>
 <br>
 <br>
@@ -278,79 +247,65 @@
                             <div class="p-5">
 
                                 <div class="text-center">
-                                    <a class="" href="#"><b>REGISTRO</b></a>
+                                    <b STYLE="color: #2f7cff;font-size: 25px">Registro de Usuario</b>
                                 </div>
                                 <br>
 
                                 <style>
-                                    input {
-                                        text-align: center;
-                                    }
-                                    ::-webkit-input-placeholder {
-                                        text-align: center;
-                                    }
-                                    :-moz-placeholder {
-                                        text-align: center;
-                                    }
+
+
                                 </style>
 
                                 <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir" enctype="multipart/form-data">
                                     <!-- Nombre completo-->
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="nombre"
-                                               placeholder="Nombres" name="nombre" required>
+                                        <input type="text" style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*"  required="required"
+                                               placeholder="Nombre(Solo se permiten letras)" >
+
                                     </div>
                                     <!-- Apellido completo-->
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="apellidos"
-                                               placeholder="Apellidos" name="apellido" required>
+                                        <input type="text" class="form-control form-control-user" pattern="^[a-zA-Z][\sa-zA-Z]*" id="apellidos"
+                                               placeholder="Apellidos(Solo se permiten letras)" name="apellido" required="required">
                                     </div>
                                     <!-- DNI--->
                                     <div class="form-group">
-                                        <input type="number" class="form-control form-control-user" id="exampleDNI"
-                                               placeholder="DNI" name="dni" maxlength = "8">
+                                        <input type="text" class="form-control" id="exampleDNI" name="dni" pattern="[0-9]*" required="required" placeholder="DNI"  minlength="8" maxlength = "8">
                                     </div>
                                     <!-- Código-->
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleCodigo"
-                                               placeholder="Código PUCP" name="codigo_pucp" maxlength = "8">
+                                        <input type="text" class="form-control" id="exampleCodigo" pattern="[0-9]*" required="required" placeholder="Código PUCP" name="codigo_pucp" minlength="8" maxlength = "8">
                                     </div>
                                     <!-- Correo-->
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                               placeholder="Correo PUCP" name="correo">
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Correo" name="correo" required="required">
                                     </div>
                                     <!-- Dirección de domicilio-->
-                                    <div class="form-group" >
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                               placeholder="Dirección de domicilio" name="direccion" text-align: center>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Dirección de domicilio" name="direccion" pattern="^[a-zA-Z0-9][\sa-zA-Z0-9]*" required="required">
                                     </div>
                                     <!-- Número de Celular-->
                                     <div class="form-group">
-                                        <input type="integrity" class="form-control form-control-user"
-                                               id="exampleInputNumber" placeholder="Número de Celular"
-                                               name="telefono"     maxlength = "9">
+                                        <input type="text" class="form-control form-control-user" id="exampleInputNumber" placeholder="Numero de Celular" name="telefono" pattern="[0-9]*" minlength="9" maxlength = "9" required="required">
                                     </div>
                                     <!-- Fecha de nacimiento-->
                                     <label for="start">Fecha de Nacimiento:</label>
 
-                                    <input type="date" id="start" name="fecha_nacimiento"
+                                    <input type="date" id="start" name="fecha_nacimiento" required="required"
                                            value="--/--/--"
-                                           min="1950-01-01" max="2003-01-01" >
+                                           min="1950-01-01" max="2003-01-01">
                                     <!-- Contraseña-->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Contraseña" name="password">
+                                               id="exampleInputPassword" placeholder="Contraseña" name="password" required="required">
                                     </div>
-                                    <!-- IMAGEN-->
-                                    <label for="start">Agregar Foto de Perfil:</label>
                                     <div class="form-group">
                                         <input type="file" name="picture">
                                     </div>
                                     <button type="submit" class="btn btn-primary" >Crear Usuario</button>
                                     <hr>
                                 </form>
-                                <hr>
+
 
                             </div>
                         </div>
