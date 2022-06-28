@@ -43,10 +43,23 @@ public class OperadorServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             }
-            case "crear" ->{
-                requestDispatcher = request.getRequestDispatcher("Operador/crear.jsp");
+            case "crearFu" ->{
+                requestDispatcher = request.getRequestDispatcher("Operador/crearFuncion.jsp");
+                requestDispatcher.forward(request, response);
+                break;
+            }
+            case "crearPe" ->{
+                requestDispatcher = request.getRequestDispatcher("Operador/crearPelicula.jsp");
+                requestDispatcher.forward(request, response);
+            break;
+            }
+            case "peliculas"->{
+                request.setAttribute("listarFunciones", "");
+                request.setAttribute("Funciones", operadorDao.filtradoFunciones(""));
+                requestDispatcher = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
                 requestDispatcher.forward(request, response);
             }
+
             /*case " " -> {
                 //ArrayList<BFuncion> lista = null;
                 if (request.getParameter("listarFunciones")!=null){
@@ -147,7 +160,7 @@ public class OperadorServlet extends HttpServlet {
         }
     }
     public BFuncion leerParametrosCrearFuncion (HttpServletRequest request) throws IOException, ServletException {
-        String fecha_funcion = request.getParameter("fecha_funcion");
+        String pelicula = request.getParameter("pelicula");
         String hora = request.getParameter("hora_func");
         String precio = request.getParameter("precio");
         String edad_min = request.getParameter("edad_min");
@@ -157,7 +170,7 @@ public class OperadorServlet extends HttpServlet {
         //Codigo para guardar una imagen en sql
 
 
-        return new BFuncion(fecha_funcion, hora, precio, edad_min, id_personal, id_sala, id_peli);
+        return new BFuncion(pelicula, hora, precio, edad_min, id_personal, id_sala, id_peli);
 
     }
 }
