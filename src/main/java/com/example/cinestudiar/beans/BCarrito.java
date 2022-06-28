@@ -24,6 +24,17 @@ public class BCarrito {
     private int idfuncion;
     private int historialcompra;
 
+    private String correopucp;
+
+
+    public String getCorreopucp() {
+        return correopucp;
+    }
+
+    public void setCorreopucp(String correopucp) {
+        this.correopucp = correopucp;
+    }
+
     public int getHistorialcompra() {
         return historialcompra;
     }

@@ -42,23 +42,19 @@ public class CarritoServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/Checkout");
         }
 
-        if ("setId00".equals(action)) {
-            BCarrito bCarrito = leerParametrosRequest1(request);
-            carritoDao.setId00(bCarrito);
-            response.sendRedirect(request.getContextPath() + "/Checkout");
-        }
-
         if ("comprar".equals(action)) {
+
             String cantidad_ticketsStr = request.getParameter("cantidad_ticketsStr");
             String pago_totalStr = request.getParameter("pago_totalStr");
             String codigo_pucp = request.getParameter("codigo_pucp");
+            String correo_pucp=request.getParameter("correo_puke");
 
 
             try {
                 int cantidad_tickets = Integer.parseInt(cantidad_ticketsStr);
                 double pago_total=Double.parseDouble(pago_totalStr);
 
-                carritoDao.compra(cantidad_tickets,pago_total,codigo_pucp);
+                carritoDao.compra(cantidad_tickets,pago_total,codigo_pucp,correo_pucp);
                 response.sendRedirect(request.getContextPath() + "/ola");
 
             } catch (NumberFormatException e) {
@@ -73,14 +69,14 @@ public class CarritoServlet extends HttpServlet {
 
 
     public BCarrito leerParametrosRequest(HttpServletRequest request) {
-         String nombre_pelicula=request.getParameter("nombre_pelicula");
-         String fecha=request.getParameter("fecha");
-         String hora=request.getParameter("hora");
-         String nombre_sede=request.getParameter("nombre_sede");
-         int cantidad_funcion= Integer.parseInt(request.getParameter("cantidad_funcion"));
-         int precio_ticket= Integer.parseInt(request.getParameter("precio_ticket"));
-         int idfuncion= Integer.parseInt(request.getParameter("idfuncion"));
-         String imagen=request.getParameter("imagen");
+        String nombre_pelicula=request.getParameter("nombre_pelicula");
+        String fecha=request.getParameter("fecha");
+        String hora=request.getParameter("hora");
+        String nombre_sede=request.getParameter("nombre_sede");
+        int cantidad_funcion= Integer.parseInt(request.getParameter("cantidad_funcion"));
+        int precio_ticket= Integer.parseInt(request.getParameter("precio_ticket"));
+        int idfuncion= Integer.parseInt(request.getParameter("idfuncion"));
+        String imagen=request.getParameter("imagen");
         String codigoEstudiante=request.getParameter("codigoEstudiante");
         int idcompra= Integer.parseInt(request.getParameter("idcompra"));
 
