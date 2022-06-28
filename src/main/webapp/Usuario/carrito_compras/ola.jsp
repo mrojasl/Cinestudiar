@@ -84,7 +84,7 @@
                     Los Datos de ingreso han sido enviados a su correo electrónico =)
                     <br>
                     <br>
-                    <a href="/Cinestudiar_war_exploded/Checkout"><button type="button" class="btn btn-success">Volver a mi Carrito de Compras</button></a>
+                    <a href="<%=request.getContextPath()%>/Checkout"><button type="button" class="btn btn-success">Volver a mi Carrito de Compras</button></a>
                 </div>
                 <% } %>
 

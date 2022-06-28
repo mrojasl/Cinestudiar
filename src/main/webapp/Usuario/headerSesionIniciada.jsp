@@ -15,6 +15,9 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+<link rel = "icon" href =
+        "https://assets.website-files.com/60b56cdf18d38e15ce088579/60c111551dc75d6dc896a30e_pucp-favicon.png"
+      type = "image/x-icon">
 
 <nav class="navbar navbar-light" style="background:#114a9d;">
     <h1 class="titulo" style="color: white; ">⠀<img src="${pageContext.request.contextPath}/Imagenes/cinestudiarlogo.png" alt="cinEstudiar" style="height: 85px;width: 320px;margin-top: -5px" ></h1>

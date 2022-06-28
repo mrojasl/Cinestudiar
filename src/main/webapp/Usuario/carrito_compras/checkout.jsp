@@ -16,9 +16,7 @@
     <jsp:include page="/Usuario/headerSesionIniciada.jsp"/>
 
     <meta charset='utf-8'>
-    <link rel = "icon" href =
-            "https://assets.website-files.com/60b56cdf18d38e15ce088579/60c111551dc75d6dc896a30e_pucp-favicon.png"
-          type = "image/x-icon">
+
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Checkout-CinEstudiar</title>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
