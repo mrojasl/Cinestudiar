@@ -1,11 +1,14 @@
 package com.example.cinestudiar.beans;
 
+import java.sql.Blob;
+
 public class BPeliculas {
         private int idpeliculas;
         private String nombre;
         private int duracion;
         private double calificacion;
         private String genero;
+        private Blob foto;
         private String información;
 
         private BProfesional profesional;
@@ -71,6 +74,14 @@ public class BPeliculas {
 
         public void setGenero(String genero) {
                 this.genero = genero;
+        }
+
+        public Blob getFoto() {
+                return foto;
+        }
+
+        public void setFoto(Blob foto) {
+                this.foto = foto;
         }
 
         public String getInformación() {

@@ -282,6 +282,18 @@
                                 </div>
                                 <br>
 
+                                <style>
+                                    input {
+                                        text-align: center;
+                                    }
+                                    ::-webkit-input-placeholder {
+                                        text-align: center;
+                                    }
+                                    :-moz-placeholder {
+                                        text-align: center;
+                                    }
+                                </style>
+
                                 <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir" enctype="multipart/form-data">
                                     <!-- Nombre completo-->
                                     <div class="form-group">
@@ -296,7 +308,7 @@
                                     <!-- DNI--->
                                     <div class="form-group">
                                         <input type="number" class="form-control form-control-user" id="exampleDNI"
-                                               placeholder=" DNI" name="dni" maxlength = "8">
+                                               placeholder="DNI" name="dni" maxlength = "8">
                                     </div>
                                     <!-- Código-->
                                     <div class="form-group">
@@ -306,17 +318,17 @@
                                     <!-- Correo-->
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                               placeholder=" Correo PUCP" name="correo">
+                                               placeholder="Correo PUCP" name="correo">
                                     </div>
                                     <!-- Dirección de domicilio-->
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                               placeholder="Dirección de domicilio" name="direccion">
+                                               placeholder="Dirección de domicilio" name="direccion" text-align: center>
                                     </div>
                                     <!-- Número de Celular-->
                                     <div class="form-group">
                                         <input type="integrity" class="form-control form-control-user"
-                                               id="exampleInputNumber" placeholder=" Número de Celular"
+                                               id="exampleInputNumber" placeholder="Número de Celular"
                                                name="telefono"     maxlength = "9">
                                     </div>
                                     <!-- Fecha de nacimiento-->
@@ -324,7 +336,7 @@
 
                                     <input type="date" id="start" name="fecha_nacimiento"
                                            value="--/--/--"
-                                           min="1950-01-01" max="2003-01-01">
+                                           min="1950-01-01" max="2003-01-01" >
                                     <!-- Contraseña-->
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"

@@ -4,7 +4,10 @@
   Date: 26/06/2022
   Time: 16:50
   To change this template use File | Settings | File Templates.
+
+
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
 <jsp:useBean id="lista_profesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
@@ -279,6 +282,7 @@
                                 <div class="col-sm-6">
 
                                     <div class="p-5">
+
                                         <div class="text-center">
                                             <a class=""><b>Detalles de la obra:</b></a>
                                         </div>
@@ -289,6 +293,10 @@
                                         <%}else{%>
                                         <p>Todavía no contamos con una descripción disponible</p>
                                         <%}%>
+                                        <H6>Duración:</H6>
+                                        <p><%=pelicula.getDuracion()%> minutos</p>
+                                        <H6>Género:</H6>
+                                        <p><%=pelicula.getGenero()%></p>
                                         <%int i =1;%>
                                         <%int j=1;%>
                                         <%for(BPeliculas bPeliculas : lista_profesionales) {%>
@@ -297,6 +305,7 @@
                                         <H6>Lista de directores:</H6>
                                         <%}%>
                                         <tr ><%=bPeliculas.getProfesional().getNombre()%> </tr >
+                                        <tr ><%=bPeliculas.getProfesional().getApellido()%> </tr >
                                         <%i=2;%>
                                         <%}%>
                                         <% if (bPeliculas.getProfesional().getRol().equals("a")){%>
@@ -304,7 +313,8 @@
                                         <H6 > Lista de actores:</H6 >
                                         <%}%>
                                         <%j=2;%>
-                                        <tr ><%=bPeliculas.getProfesional().getNombre()%></tr >
+                                        <tr > - <%=bPeliculas.getProfesional().getNombre()%></tr >
+                                        <tr ><%=bPeliculas.getProfesional().getApellido()%></tr >
                                         <%}%>
                                         <%}%>
 
