@@ -280,7 +280,7 @@
 
                                     <div class="p-5">
                                         <div class="text-center">
-                                            <a class="" href="#"><b>Detalles peliculas</b></a>
+                                            <a class=""><b>Detalles de la obra:</b></a>
                                         </div>
                                         <br>
                                         <h5><%=pelicula.getNombre()%></h5>
@@ -294,14 +294,14 @@
                                         <%for(BPeliculas bPeliculas : lista_profesionales) {%>
                                         <% if (bPeliculas.getProfesional().getRol().equals("d")){ %>
                                         <% if(i==1){%>
-                                        <H4>Lista de directores:</H4>
+                                        <H6>Lista de directores:</H6>
                                         <%}%>
                                         <tr ><%=bPeliculas.getProfesional().getNombre()%> </tr >
                                         <%i=2;%>
                                         <%}%>
                                         <% if (bPeliculas.getProfesional().getRol().equals("a")){%>
                                         <%if (j==1){%>
-                                        <H4 > Lista de actores:</H4 >
+                                        <H6 > Lista de actores:</H6 >
                                         <%}%>
                                         <%j=2;%>
                                         <tr ><%=bPeliculas.getProfesional().getNombre()%></tr >
