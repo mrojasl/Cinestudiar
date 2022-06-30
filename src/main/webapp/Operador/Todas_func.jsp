@@ -118,21 +118,20 @@
 
         </div>
     </section>
-
+    <form method="POST" class = "d-flex justify-content-around" action="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">
     <div class="d-flex justify-content-around">
-        <form method="POST" class = "d-flex justify-content-around" action="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">
-        <div  class="input-group mb-1 col">
+        <div  class="form-outline form-white w-25">
             <label class="fw-bold mx-1 my-2 text-white" >Fecha de inicio:</label>
-            <input name = "fecha_in" class="mx-1 my-2" type="date" id="fechainicio">
+            <input name = "fecha_in" class="form-control form-control-lg" type="date" id="fechainicio">
         </div>
 
-        <div class="input-group mb-1 col">
+        <div class="form-outline form-white w-25">
             <label class="fw-bold mx-1 my-2 text-white" >Fecha de fin:</label>
-            <input name = "fecha_fin" class="mx-0 my-2" type="date" id="fechafin">
+            <input name = "fecha_fin" class="form-control form-control-lg" type="date" id="fechafin">
         </div>
-        <div class="input-group mb-1 col">
-            <label class="fw-bold mx-0 my-0 text-white" >Ordenar por:</label>
-               <select id ="selection_option" name="listarFunciones" class=" mx--2 my-4 form-select form-select-sm" onchange="update()" >
+        <div class="form-outline form-white">
+            <label class="fw-bold mx-1 my-2 text-white" >Ordenar por:</label>
+               <select id ="selection_option" name="listarFunciones" class=" form-control form-control-lg" onchange="update()" >
                     <option selected value="defecto"<%=listarFunciones.equals("defecto")?"selected":""%>>Selecione su opción</option>
                     <option value="Funciones Disponibles" <%=listarFunciones.equals("Funciones Disponibles")?"selected":""%>>Funciones Disponibles</option>
                     <option value="Mejor calificado" <%=listarFunciones.equals("Mejor calificado")?"selected":""%>>Mejor calificado</option>
@@ -140,12 +139,11 @@
                     <option value="Menos visto"<%=listarFunciones.equals("Menos visto")?"selected":""%>>Menos visto</option>
                 </select>
         </div>
-        <div class="imput-group mb-1 col">
-            <button type = "submit" class = "output btn btn-primary">Filtrar</button>
+        <div class="outline">
+            <button type = "submit" class = "form-control form-control-lg text-white" style="background-color: #003f9e; text-decoration-color: #dedee1">Filtrar</button>
         </div>
-        </form>
-
     </div>
+    </form>
     <div class="container">
         <div class="row ">
 
