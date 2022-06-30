@@ -49,18 +49,20 @@
         </section>
         <section>
             <ul class="navbar navbar-dark bg-dark">
-                <li class="nav-item">
-                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-brand" aria-current="page">Crear Película</a>
-                </li>
-                <li class="nav-item">
-                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-brand" aria-current="page">Crear Función</a>
-                </li>
+
                 <li class="nav-item">
                     <a  href="<%=request.getContextPath()%>/OperadorServlet?action=peliculas" class="navbar-brand">Películas</a>
                 </li>
                 <li class="nav-item">
                     <a  href="<%=request.getContextPath()%>/OperadorServlet?action=funciones" class="navbar-brand">Funciones</a>
                 </li>
+                <li class="nav-item">
+                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-brand" aria-current="page">Actores</a>
+                </li>
+                <li class="nav-item">
+                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-brand" aria-current="page">Directores</a>
+                </li>
+
             </ul>
 
         </section>

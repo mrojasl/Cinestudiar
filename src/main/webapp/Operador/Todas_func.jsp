@@ -44,17 +44,18 @@
     </section>
     <section>
         <ul class="navbar navbar-dark bg-dark">
-            <li class="nav-item">
-                <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-brand" aria-current="page">Crear Película</a>
-            </li>
-            <li class="nav-item">
-                <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-brand" aria-current="page">Crear Función</a>
-            </li>
+
             <li class="nav-item">
                 <a  href="<%=request.getContextPath()%>/OperadorServlet?action=peliculas" class="navbar-brand">Películas</a>
             </li>
             <li class="nav-item">
                 <a  href="<%=request.getContextPath()%>/OperadorServlet?action=funciones" class="navbar-brand">Funciones</a>
+            </li>
+            <li class="nav-item">
+                <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-brand" aria-current="page">Actores</a>
+            </li>
+            <li class="nav-item">
+                <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-brand" aria-current="page">Directores</a>
             </li>
         </ul>
 
@@ -62,9 +63,7 @@
     <section>
         <div class="d-flex justify-content-evenly">
             <div class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">Ordenar Funciones</a>
-                <a class="navbar-brand" href="Ordenar%20Directores.html">Ordenar Directores</a>
-                <a  class="navbar-brand" href="Ordenar%20Actores.html">Ordenar Actores</a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu">Crear Función</a>
             </div>
 
             <div class="ms-auto p-2 bd-highlight botones">
@@ -153,14 +152,14 @@
             <table class="table" id = "tableUp">
                 <head>
                     <tr>
-                        <th class="text-white">IdFunción</th>
-                        <th class="text-white">Película</th>
-                        <th class="text-white">Fecha</th>
-                        <th class="text-white">Hora</th>
-                        <th class="text-white">Sede</th>
-                        <th class="text-white">Sala</th>
-                        <th class="text-white">Precio de ticket</th>
-                        <th class="text-white">Calificacion Promedio</th>
+                        <th class="text-dark">IdFunción</th>
+                        <th class="text-dark">Película</th>
+                        <th class="text-dark">Fecha</th>
+                        <th class="text-dark">Hora</th>
+                        <th class="text-dark">Sede</th>
+                        <th class="text-dark">Sala</th>
+                        <th class="text-dark">Precio de ticket</th>
+                        <th class="text-dark">Calificacion Promedio</th>
 
                     </tr>
                 </head>
@@ -171,13 +170,13 @@
                     for (BFuncion funcion : Funciones) { %>
 
                 <tr>
-                    <td class="text-white"><%=funcion.getIdFuncion()%></td>
-                    <td class="text-white"><%=funcion.getPelicula()%> </td>
-                    <td class="text-white"><%=funcion.getFecha()%></td>
-                    <td class="text-white"><%=funcion.getHora()%></td>
-                    <td class="text-white"><%=funcion.getSede() %></td>
-                    <td class="text-white"><%=funcion.getIdSala()%></td>
-                    <td class="text-white">S/. <%=funcion.getPrecioTicket()%></td>
+                    <td class="text-dark"><%=funcion.getIdFuncion()%></td>
+                    <td class="text-dark"><%=funcion.getPelicula()%> </td>
+                    <td class="text-dark"><%=funcion.getFecha()%></td>
+                    <td class="text-dark"><%=funcion.getHora()%></td>
+                    <td class="text-dark"><%=funcion.getSede() %></td>
+                    <td class="text-dark"><%=funcion.getIdSala()%></td>
+                    <td class="text-dark">S/. <%=funcion.getPrecioTicket()%></td>
                     <% int num= (int) funcion.getCalificacion();%>
                     <%if (num == 1){ %>
                     <td class="fa fa-star checked"></td>
