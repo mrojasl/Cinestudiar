@@ -1,10 +1,8 @@
 package com.example.cinestudiar.daos;
 
-import com.example.cinestudiar.beans.BCompra;
-import com.example.cinestudiar.beans.BProfesional;
-import com.example.cinestudiar.beans.BSedeYSala;
-import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.beans.*;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -547,4 +545,32 @@ public class AdminDao {
         }
 
     }
+    public static void actualizarFotoProf(String id, InputStream foto) {
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "UPDATE profesionales set foto=? where idprofesional=?;";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+
+            pstmt.setBlob(1, foto);
+            pstmt.setString(2, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 }

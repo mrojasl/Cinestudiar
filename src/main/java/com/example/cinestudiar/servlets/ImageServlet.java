@@ -45,6 +45,20 @@ public class ImageServlet extends HttpServlet {
                 }
 
             }
+            case "profesionales"->{
+                int id = Integer.parseInt(request.getParameter("id"));
+                byte[] content = null;
+                content = imageDao.obtenerimagenesProfesionales(id);
+                if (content.length == 1 && content[0] == 0) {
+                    System.out.println("Algo falló al nivel de SQL/DB");
+                } else if (content.length == 1 && content[0] == 1) {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                } else {
+                    response.setContentType("image/gif");
+                    response.setContentLength(content.length);
+                    response.getOutputStream().write(content);
+                }
+            }
         }
 
     }

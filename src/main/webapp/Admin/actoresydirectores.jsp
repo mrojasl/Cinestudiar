@@ -139,7 +139,9 @@
                 <div>
                     <div class="row">
                         <div class="input-group mb-3 col">
-                            <img src="Admin/perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
+
+                            <img class="crop" src="${pageContext.request.contextPath}/Image?action=profesionales&id=<%=p.getIdProfesional()%>" alt="perfil foto" style="width:100px;height:100px;"/>
+
                         </div>
 
                         <div class="input-group mb-3 col">
@@ -156,26 +158,30 @@
                             </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color: black" class="modal-title" id="exampleModalLabel">Información</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <p><Strong>Obras</Strong><br>
-                                                Obra1<br>Obra2<br><br><strong>Calificación promedio</strong><br>4 estrellas</p>
-                                            <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                            <input type="file" class="form-control">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=actualizarfoto">
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 style="color: black" class="modal-title" id="exampleModalLabel">Información</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div style="color: black" class="modal-body">
+                                                <p><Strong>Obras</Strong><br>
+                                                    Obra1<br>Obra2<br><br><strong>Calificación promedio</strong><br>4 estrellas</p>
+                                                <input type="hidden" name="idprof" value="<%=p.getIdProfesional()%>"/>
+                                                <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
+                                                <input type="file" class="form-control" name="fotonueva">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="input-group mb-3 col">
                             <a href="<%=request.getContextPath()%>/ServAdmin?admin=borrarprofesional&proid=<%=p.getIdProfesional()%>"><button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar

@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.util.ArrayList;
 
@@ -153,6 +154,14 @@ public class AdminServlet extends HttpServlet {
                 }
 
 
+            }
+            case "actualizarfoto"->{
+                String idProf = request.getParameter("idprof");
+                Part foto = request.getPart("fotonueva");
+                InputStream fotoinput = null;
+                fotoinput = foto.getInputStream();
+                AdminDao.actualizarFotoProf(idProf,fotoinput);
+                response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
             }
 
 
