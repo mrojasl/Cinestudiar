@@ -86,11 +86,14 @@ public class inicioServlet extends HttpServlet {
 
         switch (action){
             case "loguear"->{
-                System.out.println("logueando");
+
                 BUser user = leerParametrosRequest(request);
 
                 Boolean valor=usuariosDao.loguear(user);
                 if (valor){
+
+
+
                     BUser usuario2 =usuariosDao.rol(user);
                     String caso="";
                     if (usuario2.getRol()!=null){
@@ -144,7 +147,6 @@ public class inicioServlet extends HttpServlet {
         String codigo = request.getParameter("codigo");
         String contraseña = request.getParameter("password");
 
-        System.out.println(codigo +contraseña);
 
         return new BUser(codigo ,contraseña);
     }
