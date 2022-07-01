@@ -64,7 +64,7 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=crearprofesional">
+                                <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=crearprofesional" enctype="multipart/form-data">
                                     <div>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">Nombre</span>
@@ -149,7 +149,7 @@
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br> <%= p.getNombre()%>    <%= p.getApellido()%> <br><br> <%= rol%> </h6>
+                            <h6 style="color: black">Nombre:<br> <%= p.getNombre()%>    <%= p.getApellido()%> <br><br> <%= rol%> </h6>
                         </div>
                         <div class="input-group mb-3 col">
                         </div>
@@ -158,21 +158,20 @@
 
                             <!-- Button trigger modal -->
                             <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Información
+                                Editar
                             </button>
 
                             <!-- Modal -->
-                            <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=actualizarfoto">
+                            <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=actualizarfoto" enctype="multipart/form-data">
                                 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 style="color: black" class="modal-title" id="exampleModalLabel">Información</h5>
+                                                <h5 style="color: black" class="modal-title" id="exampleModalLabel">Editar</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div style="color: black" class="modal-body">
                                                 <p><Strong>Obras</Strong><br>
-                                                    Obra1<br>Obra2<br><br><strong>Calificación promedio</strong><br>4 estrellas</p>
                                                 <input type="hidden" name="idprof" value="<%=p.getIdProfesional()%>"/>
                                                 <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
                                                 <input type="file" class="form-control" name="fotonueva">

@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.util.ArrayList;
 
+
+@MultipartConfig
 @WebServlet(name = "ServAdmin", value = "/ServAdmin")
 public class AdminServlet extends HttpServlet {
     @Override
@@ -102,15 +104,21 @@ public class AdminServlet extends HttpServlet {
                 String nombre = request.getParameter("nombre");
                 String apellido = request.getParameter("apellido");
                 String profesion = request.getParameter("profesion");
-                Part foto = request.getPart("fotoperfil");
-                InputStream fotoinput = null;
-                fotoinput = foto.getInputStream();
-
                 if (profesion.equalsIgnoreCase("Actor")) {
                     profesion = "a";
                 } else profesion = "d";
-                AdminDao.crearProfesional(nombre, apellido, profesion,fotoinput);
-                response.sendRedirect(request.getContextPath() + "/ServAdmin");
+
+                if (request.getPart("fotoperfil")!=null){
+                    Part foto = request.getPart("fotoperfil");
+                    InputStream fotoinput = null;
+                    fotoinput = foto.getInputStream();
+                    AdminDao.crearProfesional(nombre, apellido, profesion,fotoinput);
+                } else{
+                    AdminDao.crearProfesional(nombre, apellido, profesion,null);
+                }
+
+                response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
+
 
             }
 
@@ -164,7 +172,7 @@ public class AdminServlet extends HttpServlet {
                 InputStream fotoinput = null;
                 fotoinput = foto.getInputStream();
                 AdminDao.actualizarFotoProf(idProf,fotoinput);
-                response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
+                response.sendRedirect(request.getContextPath()+"/ServAdmin?admin=profesional");
             }
 
 

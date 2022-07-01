@@ -125,10 +125,10 @@
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br><%=op.getNombres()%> <br><br>Código PUCP:<br><%=op.getCodigoPucp()%> </h6>
+                            <h6 style="color: black">Nombre:<br><%=op.getNombres()%> <br><br>Código PUCP:<br><%=op.getCodigoPucp()%> </h6>
                         </div>
                         <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br><%=op.getCodigoPucp()%> <br><br>Celular:<br><%=op.getTelefono()%></h6>
+                            <h6 style="color: black">Correo PUCP:<br><%=op.getCodigoPucp()%> <br><br>Celular:<br><%=op.getTelefono()%></h6>
                         </div>
                         <div class="input-group mb-3 col">
                         </div>
@@ -137,8 +137,9 @@
                             </button></a>
                         </div>
                         <hr>
-                        <%}%>
+
                     </div>
+                    <%}%>
 
 
 
