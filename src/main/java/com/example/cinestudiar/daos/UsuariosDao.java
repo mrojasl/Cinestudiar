@@ -3,6 +3,7 @@ package com.example.cinestudiar.daos;
 
 import com.example.cinestudiar.beans.BUser;
 
+import java.io.InputStream;
 import java.sql.*;
 
 /*"select concat(f.fecha,' ',f.hora) as 'Función' , f.precio_ticket as 'precio de funcón',\n" +
@@ -99,6 +100,50 @@ public class UsuariosDao extends BaseDao{
 
         return usuario;
     }
+
+
+    public BUser ValidarLoguinUser(String codigo, String password){
+
+        BUser usuario = null;
+
+        String sql="select codigo_pucp,nombre,apellido,rol,dni,telefono,correo,fecha_nacimiento,direccion,foto,datos_tarjeta from usuarios where codigo_pucp=? and contraseña=?;";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, codigo);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    usuario = new BUser();
+                    usuario.setCodigoPucp(rs.getString(1));
+                    usuario.setNombres(rs.getString(2));
+                    usuario.setApellidos(rs.getString(3));
+                    usuario.setRol(rs.getString(4));
+                    usuario.setDni(rs.getString(5));
+                    usuario.setTelefono(rs.getString(6));
+                    usuario.setCorreo(rs.getString(7));
+                    usuario.setFechaNacimiento(rs.getString(8));
+                    usuario.setDireccion(rs.getString(9));
+                    usuario.setFoto((InputStream) rs.getBlob(10));
+                    usuario.setDatosTarjeta(rs.getString(11));
+
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return usuario;
+
+
+    }
+
+
+
+
 
 
 }

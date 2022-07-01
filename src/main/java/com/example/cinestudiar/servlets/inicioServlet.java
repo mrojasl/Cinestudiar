@@ -87,53 +87,62 @@ public class inicioServlet extends HttpServlet {
         switch (action){
             case "loguear"->{
 
-                BUser user = leerParametrosRequest(request);
-
-                Boolean valor=usuariosDao.loguear(user);
-                if (valor){
+                String codigo = request.getParameter("codigo");
+                String contrasenha = request.getParameter("password");
 
 
+                BUser usuario=usuariosDao.ValidarLoguinUser(codigo,contrasenha);
 
-                    BUser usuario2 =usuariosDao.rol(user);
-                    String caso="";
-                    if (usuario2.getRol()!=null){
-                        caso = usuario2.getRol();
-                    }else{
-                        System.out.println("No hay usario");
-                    }
 
-                    switch (caso){
-                        case "admin" ->{
-                            response.sendRedirect(request.getContextPath() + "/ServAdmin");
 
-                        }
-                        case "cliente"->{
-                            ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
-                            request.setAttribute("listapeliculas",listapeliculas);
-                            request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
-                            request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
-                            view = request.getRequestDispatcher("Usuario/in_con_sesion.jsp");
-                            view.forward(request, response);
-                        }
-                        case "operador"->{
-                             view = request.getRequestDispatcher("Operador/perfilOperador.jsp");
-                            view.forward(request, response);
-                        }
-                        default ->{
-                            view = request.getRequestDispatcher("Usuario/index.jsp");
-                            view.forward(request, response);
-                        }
-                    }
-                }else{
-                   view = request.getRequestDispatcher("Usuario/index.jsp");
-                    view.forward(request, response);
-                }
 
+//                BUser user = leerParametrosRequest(request);XD
+//
+//                Boolean valor=usuariosDao.loguear(user);
+//                if (valor){
+//
+//
+//
+//                    BUser usuario2 =usuariosDao.rol(user);
+//                    String caso="";
+//                    if (usuario2.getRol()!=null){
+//                        caso = usuario2.getRol();
+//                    }else{
+//
+//                    }
+//
+//                    switch (caso){
+//                        case "admin" ->{
+//                            response.sendRedirect(request.getContextPath() + "/ServAdmin");
+//
+//                        }
+//                        case "cliente"->{
+//                            ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
+//                            request.setAttribute("listapeliculas",listapeliculas);
+//                            request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
+//                            request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
+//                            view = request.getRequestDispatcher("Usuario/in_con_sesion.jsp");
+//                            view.forward(request, response);
+//                        }
+//                        case "operador"->{
+//                             view = request.getRequestDispatcher("Operador/perfilOperador.jsp");
+//                            view.forward(request, response);
+//                        }
+//                        default ->{
+//                            view = request.getRequestDispatcher("Usuario/index.jsp");
+//                            view.forward(request, response);
+//                        }
+//                    }
+//                }else{
+//                   view = request.getRequestDispatcher("Usuario/index.jsp");
+//                    view.forward(request, response);
+//                }
+//
 
             }
 
             case "añadir"->{
-                System.out.println("Añadiendo");
+
                 BUser usuario =leerParametrosRequest2(request);
                 usuariosDao.agregar(usuario);
                 view = request.getRequestDispatcher("Usuario/registro.jsp");
