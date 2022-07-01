@@ -99,14 +99,17 @@ public class AdminServlet extends HttpServlet {
             }
 
             case "crearprofesional" -> {
-                String nombreyapellido = request.getParameter("nombreyapellido");
+                String nombre = request.getParameter("nombre");
+                String apellido = request.getParameter("apellido");
                 String profesion = request.getParameter("profesion");
-                Blob fotodeperfil = null;
-                String[] nombreyapellido_sepa = nombreyapellido.split(" ");
+                Part foto = request.getPart("fotoperfil");
+                InputStream fotoinput = null;
+                fotoinput = foto.getInputStream();
+
                 if (profesion.equalsIgnoreCase("Actor")) {
                     profesion = "a";
                 } else profesion = "d";
-                AdminDao.crearProfesional(nombreyapellido_sepa[0], nombreyapellido_sepa[1], profesion, fotodeperfil);
+                AdminDao.crearProfesional(nombre, apellido, profesion,fotoinput);
                 response.sendRedirect(request.getContextPath() + "/ServAdmin");
 
             }

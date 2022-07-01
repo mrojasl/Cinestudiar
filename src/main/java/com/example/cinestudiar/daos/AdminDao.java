@@ -222,7 +222,7 @@ public class AdminDao {
 
     }
 
-    public static void crearProfesional(String nombre, String apellido, String profesion, Blob fotoDePerfil) {
+    public static void crearProfesional(String nombre, String apellido, String profesion, InputStream foto) {
 
         String user = "root";
         String pass = "root";
@@ -237,11 +237,11 @@ public class AdminDao {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
             pstmt.setString(1, nombre);
             pstmt.setString(2, apellido);
             pstmt.setString(3, profesion);
-            pstmt.setBlob(4, fotoDePerfil);
+            pstmt.setBlob(4, foto);
+
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

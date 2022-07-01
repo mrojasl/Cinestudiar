@@ -68,20 +68,24 @@
                                     <div>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">Nombre</span>
-                                            <input name="nombreyapellido" type="text" class="form-control" placeholder="Nombre y Apellidos"
+                                            <input name="nombre" type="text" class="form-control" placeholder="Nombre"
+                                                   aria-label="Sala 1"
+                                                   aria-describedby="button-addon1">
+                                            <span class="input-group-text">Apellido</span>
+                                            <input name="apellido" type="text" class="form-control" placeholder="Apellido"
                                                    aria-label="Sala 1"
                                                    aria-describedby="button-addon1">
                                         </div>
                                         <div class="input-group mb-3">
                                             <select name="profesion" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                 <option selected>Actor</option>
-                                                <option value="1">Director</option>
+                                                <option>Director</option>
                                             </select>
                                         </div>
                                         <div class="input-group mb-3 ">
                                             <div class="input-group mb-3">
                                                 <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                                <input type="file" class="form-control" id="inputGroupFile01">
+                                                <input name="fotoperfil" type="file" class="form-control" id="inputGroupFile01">
                                             </div>
                                         </div>
 
@@ -176,7 +180,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
