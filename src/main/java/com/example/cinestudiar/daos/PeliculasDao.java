@@ -3,6 +3,7 @@ package com.example.cinestudiar.daos;
 import com.example.cinestudiar.beans.BPeliculas;
 import com.example.cinestudiar.beans.BProfesional;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -70,6 +71,29 @@ public class PeliculasDao extends BaseDao{
             }
         }
         return null;
+    }
+
+    public void crearPelicula(int idpeliucla, String nombre, int duracion, String genero, InputStream foto, String informacion)  {
+
+        String sql = "insert into peliculas (idpelicula, nombre, duracion , genero, foto, informacion)\n" +
+                "values(?,?,?,?,?,?,?);";
+
+        try(Connection conn= this.getConnection();
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setInt(1, idpeliucla);
+            pstmt.setString(2, nombre);
+            pstmt.setInt(3,duracion );
+            pstmt.setString(4 ,genero);
+            pstmt.setBlob(5, foto);
+            pstmt.setString(6, informacion);
+            pstmt.executeUpdate();
+
+        }catch(SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+
+
     }
     public Integer cointaner(int tamaño){
         if(tamaño%6==0){
