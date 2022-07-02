@@ -31,9 +31,9 @@ public class ImageServlet extends HttpServlet {
                 }
             }
             case "usuarios"->{
-                int id = Integer.parseInt(request.getParameter("id"));
+                String id = request.getParameter("id");
                 byte[] content = null;
-                content = imageDao.obtenerimagenesUsuarios();
+                content = imageDao.obtenerimagenesUsuarios(id);
                 if (content.length == 1 && content[0] == 0) {
                     System.out.println("Algo falló al nivel de SQL/DB");
                 } else if (content.length == 1 && content[0] == 1) {
