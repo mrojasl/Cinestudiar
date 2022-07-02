@@ -159,6 +159,13 @@ public class OperadorServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             }
+            case "editarDesc" ->{
+                int id = Integer.parseInt(request.getParameter("id"));
+                String desc = request.getParameter("descripcion");
+                OperadorDao.EditarDescripcion(id,desc);
+                response.sendRedirect(request.getContextPath() + "/OperadorServlet?action=peliculas");
+
+            }
 
         }
     }
