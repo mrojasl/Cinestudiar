@@ -65,18 +65,18 @@
   <div class="row ">
 
     <table class="table" id = "tableUp">
-      <head>
+
         <tr>
           <th class="text-white">Id</th>
           <th class="text-white">Título</th>
-          <th class="text-white">Duracion</th>
+          <th class="text-white">Duracion (minutos)</th>
           <th class="text-white">Genero</th>
-          <th class="text-white">Información</th>
+          <th class="text-white">Descripción</th>
           <th class="text-white">Calificacion Promedio</th>
 
         </tr>
-      </head>
-      <tbody>
+
+
 
       <%
 
@@ -87,48 +87,97 @@
         <td class="text-white"><%=pelicula.getNombre()%> </td>
         <td class="text-white"><%=pelicula.getDuracion()%></td>
         <td class="text-white"><%=pelicula.getGenero()%></td>
-        <td class="text-white"></td>
+        <td class="text-white"><button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#descripcion<%=pelicula.getIdpeliculas()%>">Ver</button></td>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="descripcion<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="descripcion<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
+          <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarDesc">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Descripción</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
+                <div class="input-group">
+                  <textarea name="descripcion" style="height:500px;font-size:14pt;" maxlength="1000" class="form-control"><%=pelicula.getInformación()%></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
         <% int num= (int) pelicula.getCalificacion();%>
+        <%if (num == 0){ %>
+        <td class="text-white">No tiene</td>
+        <%}%>
         <%if (num == 1){ %>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star"></td>
-        <td class="fa fa-star"></td>
-        <td class="fa fa-star"></td>
-        <td class="fa fa-star"></td>
+        <td>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </td>
         <%}%>
         <%if(num==2){%>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star"></td>
-        <td class="fa fa-star"></td>
-        <td class="fa fa-star"></td>
+        <td>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </td>
         <%}%>
         <%if(num==3){%>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star"></td>
-        <td class="fa fa-star"></td>
+        <td>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </td>
         <%}%>
         <%if(num==4){%>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star"></td>
+        <td>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star checked"></i>
+          <i class="fa fa-star"></i>
+        </td>
         <%}%>
         <%if(num==5){%>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
-        <td class="fa fa-star checked"></td>
+        <td>
+        <i class="fa fa-star checked"></i>
+        <i class="fa fa-star checked"></i>
+        <i class="fa fa-star checked"></i>
+        <i class="fa fa-star checked"></i>
+        <i class="fa fa-star checked"></i>
+        </td>
         <%}%>
       </tr>
 
       <%
         } %>
-      </tbody>
+
 
       <!-- Large modal -->
 

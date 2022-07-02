@@ -11,6 +11,31 @@ public class OperadorDao extends BaseDao {
     public OperadorDao() throws SQLException {
     }
 
+
+    public static void EditarDescripcion(int id, String desc){
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "UPDATE peliculas SET informacion= ? where idpelicula = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, desc);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     public ArrayList<BFuncion> filtradoFunciones(String filtro){
         if (filtro.equals("") || filtro.equals("defecto")){
             ArrayList<BFuncion> todasLasFunciones = new ArrayList<>();
