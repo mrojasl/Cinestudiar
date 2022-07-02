@@ -61,7 +61,93 @@
 
 </section>
 
+
 <div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop">
+    Crear Película
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+       tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Crear Película</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=crearpeli" enctype="multipart/form-data">
+            <div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Titulo</span>
+                <input name="nombre" type="text" class="form-control" placeholder="Título" required="required"
+                       aria-label="Sala 1"
+                       aria-describedby="button-addon1">
+              </div>
+              <div class="input-group mb-3">
+              <span class="input-group-text">Duracion</span>
+              <input name="nombre" type="number" class="form-control" placeholder="Duración" required="required"
+                     aria-label="Sala 1" min="0" max="400"
+                     aria-describedby="button-addon1">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Genero</span>
+                <input name="nombre" type="text" class="form-control" placeholder="Género" required="required"
+                       aria-label="Sala 1"
+                       aria-describedby="button-addon1">
+              </div>
+              <label>Descripción</label>
+              <div class="input-group mb-3">
+
+                <textarea name="descripcion" style="height:500px;font-size:14pt;" maxlength="1000" class="form-control"></textarea>
+
+              </div>
+              <div class="input-group mb-3 ">
+                <div class="input-group mb-3">
+                  <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
+                  <input name="fotoperfil" type="file" class="form-control" id="inputGroupFile01">
+                </div>
+              </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+              </button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
   <div class="row ">
 
     <table class="table" id = "tableUp">
