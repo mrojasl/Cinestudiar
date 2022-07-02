@@ -121,35 +121,29 @@
                     <%for (BUser op : listaOperadores) {%>
                     <div class="row">
                         <div class="input-group mb-3 col">
-                            <img src="Admin/perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
+                        </div>
+                        <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=op.getCodigoPucp()%>" alt="perfil foto" style="width:100px;height:100px;"/>
+
+                        <div class="input-group mb-3 col">
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br><%=op.getNombres()%> <br><br>Código PUCP:<br><%=op.getCodigoPucp()%> </h6>
+                            <h6 style="color: black">Nombre:<br><%=op.getNombres()%> <br><br>Código PUCP:<br><%=op.getCodigoPucp()%> </h6>
                         </div>
                         <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br><%=op.getCodigoPucp()%> <br><br>Celular:<br><%=op.getTelefono()%></h6>
+                            <h6 style="color: black">Correo PUCP:<br><%=op.getCodigoPucp()%> <br><br>Celular:<br><%=op.getTelefono()%></h6>
                         </div>
-                        <div class="input-group mb-3 col">
-                        </div>
+
                         <div class="input-group mb-3 col">
                             <a href="<%=request.getContextPath()%>/ServAdmin?admin=borraroperador&opcodigo=<%=op.getCodigoPucp()%>"><button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
                             </button></a>
                         </div>
                         <hr>
-                        <%}%>
+
                     </div>
-
-
-
-
-
-
-
-
-
-
+                <%}%>
                 </div>
+
             </div>
         </div>
     </body>

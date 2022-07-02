@@ -176,40 +176,53 @@
                     <td class="text-dark"><%=funcion.getIdSala()%></td>
                     <td class="text-dark">S/. <%=funcion.getPrecioTicket()%></td>
                     <% int num= (int) funcion.getCalificacion();%>
+                    <%if (num == 0){ %>
+                    <td class="text-white">No tiene</td>
+                    <%}%>
                     <%if (num == 1){ %>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
+                    <td>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </td>
                     <%}%>
                     <%if(num==2){%>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
+                    <td>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </td>
                     <%}%>
                     <%if(num==3){%>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star"></td>
-                    <td class="fa fa-star"></td>
+                    <td>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </td>
                     <%}%>
                     <%if(num==4){%>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star"></td>
+                    <td>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star"></i>
+                    </td>
                     <%}%>
                     <%if(num==5){%>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
-                    <td class="fa fa-star checked"></td>
+                    <td>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                        <i class="fa fa-star checked"></i>
+                    </td>
                     <%}%>
                 </tr>
 

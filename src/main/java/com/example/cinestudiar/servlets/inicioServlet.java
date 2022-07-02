@@ -86,17 +86,27 @@ public class inicioServlet extends HttpServlet {
 
         switch (action){
             case "loguear"->{
-                System.out.println("logueando");
+
+                String codigo = request.getParameter("codigo");
+                String contrasenha = request.getParameter("password");
+
+
+                BUser usuario=usuariosDao.ValidarLoguinUser(codigo,contrasenha);
+
+
                 BUser user = leerParametrosRequest(request);
 
                 Boolean valor=usuariosDao.loguear(user);
                 if (valor){
+
+
+
                     BUser usuario2 =usuariosDao.rol(user);
                     String caso="";
                     if (usuario2.getRol()!=null){
                         caso = usuario2.getRol();
                     }else{
-                        System.out.println("No hay usario");
+
                     }
 
                     switch (caso){
@@ -130,7 +140,7 @@ public class inicioServlet extends HttpServlet {
             }
 
             case "añadir"->{
-                System.out.println("Añadiendo");
+
                 BUser usuario =leerParametrosRequest2(request);
                 usuariosDao.agregar(usuario);
                 view = request.getRequestDispatcher("Usuario/registro.jsp");
@@ -144,7 +154,6 @@ public class inicioServlet extends HttpServlet {
         String codigo = request.getParameter("codigo");
         String contraseña = request.getParameter("password");
 
-        System.out.println(codigo +contraseña);
 
         return new BUser(codigo ,contraseña);
     }

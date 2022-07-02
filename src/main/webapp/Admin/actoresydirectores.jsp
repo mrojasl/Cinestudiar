@@ -64,24 +64,28 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=crearprofesional">
+                                <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=crearprofesional" enctype="multipart/form-data">
                                     <div>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">Nombre</span>
-                                            <input name="nombreyapellido" type="text" class="form-control" placeholder="Nombre y Apellidos"
+                                            <input name="nombre" type="text" class="form-control" placeholder="Nombre"
+                                                   aria-label="Sala 1"
+                                                   aria-describedby="button-addon1">
+                                            <span class="input-group-text">Apellido</span>
+                                            <input name="apellido" type="text" class="form-control" placeholder="Apellido"
                                                    aria-label="Sala 1"
                                                    aria-describedby="button-addon1">
                                         </div>
                                         <div class="input-group mb-3">
                                             <select name="profesion" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                                 <option selected>Actor</option>
-                                                <option value="1">Director</option>
+                                                <option>Director</option>
                                             </select>
                                         </div>
                                         <div class="input-group mb-3 ">
                                             <div class="input-group mb-3">
                                                 <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                                <input type="file" class="form-control" id="inputGroupFile01">
+                                                <input name="fotoperfil" type="file" class="form-control" id="inputGroupFile01">
                                             </div>
                                         </div>
 
@@ -139,11 +143,13 @@
                 <div>
                     <div class="row">
                         <div class="input-group mb-3 col">
-                            <img src="Admin/perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
+
+                            <img class="crop" src="${pageContext.request.contextPath}/Image?action=profesionales&id=<%=p.getIdProfesional()%>" alt="perfil foto" style="width:100px;height:100px;"/>
+
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br> <%= p.getNombre()%>    <%= p.getApellido()%> <br><br> <%= rol%> </h6>
+                            <h6 style="color: black">Nombre:<br> <%= p.getNombre()%>    <%= p.getApellido()%> <br><br> <%= rol%> </h6>
                         </div>
                         <div class="input-group mb-3 col">
                         </div>
@@ -152,30 +158,33 @@
 
                             <!-- Button trigger modal -->
                             <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Información
+                                Editar
                             </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color: black" class="modal-title" id="exampleModalLabel">Información</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
-                                            <p><Strong>Obras</Strong><br>
-                                                Obra1<br>Obra2<br><br><strong>Calificación promedio</strong><br>4 estrellas</p>
-                                            <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                            <input type="file" class="form-control">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=actualizarfoto" enctype="multipart/form-data">
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 style="color: black" class="modal-title" id="exampleModalLabel">Editar</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div style="color: black" class="modal-body">
+                                                <p><Strong>Obras</Strong><br>
+                                                <input type="hidden" name="idprof" value="<%=p.getIdProfesional()%>"/>
+                                                <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
+                                                <input type="file" class="form-control" name="fotonueva">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="input-group mb-3 col">
                             <a href="<%=request.getContextPath()%>/ServAdmin?admin=borrarprofesional&proid=<%=p.getIdProfesional()%>"><button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar

@@ -10,9 +10,12 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.util.ArrayList;
 
+
+@MultipartConfig
 @WebServlet(name = "ServAdmin", value = "/ServAdmin")
 public class AdminServlet extends HttpServlet {
     @Override
@@ -98,15 +101,24 @@ public class AdminServlet extends HttpServlet {
             }
 
             case "crearprofesional" -> {
-                String nombreyapellido = request.getParameter("nombreyapellido");
+                String nombre = request.getParameter("nombre");
+                String apellido = request.getParameter("apellido");
                 String profesion = request.getParameter("profesion");
-                Blob fotodeperfil = null;
-                String[] nombreyapellido_sepa = nombreyapellido.split(" ");
                 if (profesion.equalsIgnoreCase("Actor")) {
                     profesion = "a";
                 } else profesion = "d";
-                AdminDao.crearProfesional(nombreyapellido_sepa[0], nombreyapellido_sepa[1], profesion, fotodeperfil);
-                response.sendRedirect(request.getContextPath() + "/ServAdmin");
+
+                if (request.getPart("fotoperfil")!=null){
+                    Part foto = request.getPart("fotoperfil");
+                    InputStream fotoinput = null;
+                    fotoinput = foto.getInputStream();
+                    AdminDao.crearProfesional(nombre, apellido, profesion,fotoinput);
+                } else{
+                    AdminDao.crearProfesional(nombre, apellido, profesion,null);
+                }
+
+                response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
+
 
             }
 
@@ -153,6 +165,14 @@ public class AdminServlet extends HttpServlet {
                 }
 
 
+            }
+            case "actualizarfoto"->{
+                String idProf = request.getParameter("idprof");
+                Part foto = request.getPart("fotonueva");
+                InputStream fotoinput = null;
+                fotoinput = foto.getInputStream();
+                AdminDao.actualizarFotoProf(idProf,fotoinput);
+                response.sendRedirect(request.getContextPath()+"/ServAdmin?admin=profesional");
             }
 
 

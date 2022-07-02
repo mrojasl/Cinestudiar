@@ -85,14 +85,14 @@
                     <%for (BUser cl : listaClientes) {%>
                     <div class="row">
                         <div class="input-group mb-3 col">
-                            <img src="Admin/perfil_foto.png" alt="perfil foto" style="width:100px;height:100px;">
+                            <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=cl.getCodigoPucp()%>" alt="perfil foto" style="width:100px;height:100px;"/>
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6>Nombre:<br><%=cl.getNombres()+""+cl.getApellidos()%> <br><br>Código PUCP:<br><%=cl.getCodigoPucp()%></h6>
+                            <h6 style="color: black">Nombre:<br><%=cl.getNombres()+""+cl.getApellidos()%> <br><br>Código PUCP:<br><%=cl.getCodigoPucp()%></h6>
                         </div>
                         <div class="input-group mb-3 col">
-                            <h6>Correo PUCP:<br><%=cl.getCorreo()%> <br><br>Celular:<br><%=cl.getTelefono()%></h6>
+                            <h6 style="color: black">Correo PUCP:<br><%=cl.getCorreo()%> <br><br>Celular:<br><%=cl.getTelefono()%></h6>
                         </div>
                         <div class="input-group mb-3 col">
                         </div>
