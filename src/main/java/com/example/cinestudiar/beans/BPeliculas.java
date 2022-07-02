@@ -1,5 +1,6 @@
 package com.example.cinestudiar.beans;
 
+import java.io.InputStream;
 import java.sql.Blob;
 
 public class BPeliculas {
@@ -28,6 +29,16 @@ public class BPeliculas {
                 this.genero = genero;
                 this.información = información;
         }
+
+        public BPeliculas() {
+
+        }
+
+        public BPeliculas(String nombre, int duracion, String genero, InputStream fotoinput) {
+
+
+        }
+
         public BProfesional getProfesional() {
                 return profesional;
         }

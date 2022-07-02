@@ -5,12 +5,12 @@
   Time: 18:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="com.example.cinestudiar.beans.BFuncion" %>
+<%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%--<jsp:useBean id="Funciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
 <jsp:useBean id="listarFunciones" scope="request" type="java.lang.String"/> --%>
-
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -69,10 +69,10 @@
         <div class="col-lg-6 bg-indigo text-white ui-icon-background">
             <div class="p-5">
                 <h3 class="fw-normal mb-5">Crear Película</h3>
-
+                <form method="POST" action="<%=request.getContextPath()%>/OperadorServlet?action=crear_Pelicula" enctype="multipart/form-data">
                 <div class="mb-4 pb-2">
                     <div class="form-outline form-white">
-                        <input type="text" id="nombre_peli" class="form-control form-control-lg">
+                        <input type="text" id="nombre_peli" name="nombre_peli" class="form-control form-control-lg">
                         <label class="form-label" for="nombre_peli" style="margin-left: 0px;">Nombre de Película</label>
                         <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 70.4px;"></div><div class="form-notch-trailing"></div></div></div>
                 </div>
@@ -80,7 +80,7 @@
                     <div class="col-md-5 mb-4 pb-2">
 
                         <div class="form-outline form-white">
-                            <input type="text" id="duracion" class="form-control form-control-lg">
+                            <input type="text" id="duracion" name="duracion" class="form-control form-control-lg">
                             <label class="form-label" for="duracion" style="margin-left: 0px;">Duración</label>
                             <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 58.4px;"></div><div class="form-notch-trailing"></div></div></div>
 
@@ -88,13 +88,18 @@
                     <div class="col-md-7 mb-4 pb-2">
 
                         <div class="form-outline form-white">
-                            <select type="text" id="form3Examplea5" class="form-control form-control-lg">
+                            <select type="text" id="genero" name="genero" class="form-control form-control-lg">
                                 <option selected></option>
-                                <option value="1">Two</option>
-                                <option value="2">Three</option>
-                                <option value="3">Four</option>
+                                <option value="accion">accion</option>
+                                <option value="drama">drama</option>
+                                <option value="aventura">aventura</option>
+                                <option value="ciencia_ficcion">ciencia ficcion</option>
+                                <option value="misterio">misterio</option>
+                                <option value="comedia">comedia</option>
+                                <option value="suspenso">suspenso</option>
+                                <option value="terror">terror</option>
                             </select>
-                            <label class="form-label" for="form3Examplea5" style="margin-left: 0px;">Género</label>
+                            <label class="form-label" for="genero" style="margin-left: 0px;">Género</label>
                             <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 40px;"></div><div class="form-notch-trailing"></div></div></div>
 
                     </div>
@@ -103,14 +108,14 @@
 
                 <div class="mb-2 pb-2">
                     <div class="form-outline form-white">
-                        <input type="file" id="imagenpeliculas" class="btn btn-primary form-control form-control-lg">
+                        <input type="file" id="imagenpeliculas" name="image_peli" class="btn btn-primary form-control form-control-lg">
                         <label class="form-label" for="imagenpeliculas" style="margin-left: 0px;">Foto</label>
                         <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 52.8px;"></div><div class="form-notch-trailing"></div></div></div>
                 </div>
 
 
-                <button type="button" class="btn btn-light btn-lg" data-mdb-ripple-color="dark">Crear</button>
-
+                <button type="submit" class="btn btn-light btn-lg" data-mdb-ripple-color="dark">Crear</button>
+                </form>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 package com.example.cinestudiar.servlets;
 import com.example.cinestudiar.beans.BCompra;
 import com.example.cinestudiar.beans.BFuncion;
+import com.example.cinestudiar.beans.BPeliculas;
 import com.example.cinestudiar.beans.BUser;
 import com.example.cinestudiar.daos.AdminDao;
 import com.example.cinestudiar.daos.OperadorDao;
@@ -11,8 +12,10 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
+import java.sql.Blob;
+
 import java.util.ArrayList;
+@MultipartConfig
 @WebServlet(name = "OperadorServlet", urlPatterns = {"/OperadorServlet"})
 public class OperadorServlet extends HttpServlet {
 
@@ -20,12 +23,8 @@ public class OperadorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "funciones" : request.getParameter("action");
-        OperadorDao operadorDao = null;
-        try {
-            operadorDao = new OperadorDao();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        OperadorDao operadorDao = new OperadorDao();
+
         String filtro = request.getParameter("listarFunciones");
         //if (filtro == "Funciones Disponibles") {
         //
@@ -54,8 +53,8 @@ public class OperadorServlet extends HttpServlet {
             break;
             }
             case "peliculas"->{
-                request.setAttribute("listarFunciones", "");
-                request.setAttribute("Funciones", operadorDao.filtradoFunciones(""));
+                request.setAttribute("listarPeliculas", "");
+                request.setAttribute("Peliculas", operadorDao.filtradoPelicula(""));
                 requestDispatcher = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
                 requestDispatcher.forward(request, response);
             }
@@ -119,19 +118,16 @@ public class OperadorServlet extends HttpServlet {
 
 
     }
-
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //String action = request.getParameter("action") ;
         String action = request.getParameter("action") == null ? "redireccionar" : request.getParameter("action");
-        OperadorDao operadorDao = null;
-        try {
-            operadorDao = new OperadorDao();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
         String filtro;
+        String filtro2;
         RequestDispatcher view;
+        OperadorDao operadorDao = new OperadorDao();
 
         //ArrayList<BFuncion> lista = operadorDao.TodasLasFunciones();
 
@@ -147,6 +143,15 @@ public class OperadorServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             }
+            case "filtro_peli" -> {
+                System.out.println("HOLAAA Peli");
+                filtro2 = request.getParameter("listarPeliculas");
+                request.setAttribute("Peliculas", operadorDao.filtradoPelicula(filtro2));
+                request.setAttribute("listarPeliculas", filtro2);
+                view = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
+                view.forward(request, response);
+                break;
+            }
 
             case "crearFuncion" -> {
                 System.out.println("Añadiendo");
@@ -154,7 +159,14 @@ public class OperadorServlet extends HttpServlet {
                 operadorDao.crearFuncion(funcion);
                 view = request.getRequestDispatcher("Usuario/registro.jsp");
                 view.forward(request, response);
-                break;
+
+            }
+            case "crear_Pelicula"->{
+                System.out.println("AÑADIENDO PELI");
+                BPeliculas peliculas  = leerParametroPelicula(request);
+                operadorDao.crearPelicula(peliculas);
+                view = request.getRequestDispatcher("Operador/crearPelicula.jsp");
+                view.forward(request, response);
             }
 
         }
@@ -172,6 +184,18 @@ public class OperadorServlet extends HttpServlet {
 
         return new BFuncion(pelicula, hora, precio, edad_min, id_personal, id_sala, id_peli);
 
+    }
+    public BPeliculas leerParametroPelicula (HttpServletRequest request) throws IOException, ServletException{
+        String nombre = request.getParameter("nombre_peli");
+        System.out.println(nombre + "LLEGO NOMBRE");
+        int duracion = Integer.parseInt(request.getParameter("duracion"));
+        String genero = request.getParameter("genero");
+        Part foto_peli = request.getPart("image_peli");
+        InputStream fotoinput = null;
+        if (foto_peli.getSize() > 0) {
+            fotoinput = foto_peli.getInputStream();
+        }
+        return new BPeliculas(nombre, duracion, genero, fotoinput);
     }
 }
 
