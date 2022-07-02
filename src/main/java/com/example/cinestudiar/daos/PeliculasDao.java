@@ -3,36 +3,34 @@ package com.example.cinestudiar.daos;
 import com.example.cinestudiar.beans.BPeliculas;
 import com.example.cinestudiar.beans.BProfesional;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class PeliculasDao extends BaseDao{
     private static String sql_select="select idpelicula,nombre,calificacion,duracion,genero,informacion from peliculas;";
     private static String sql_select2="select po.idprofesional,po.nombre,po.apellido,po.rol from peliculas_has_profesionales ph inner join profesionales po " +
             "on (ph.profesionales_idprofesional=po.idprofesional) where peliculas_idpelicula=?;";
-    public ArrayList<BPeliculas> listasPeliculas(){
-        ArrayList<BPeliculas> listaBpeliculas=new ArrayList<>();
-        try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql_select);) {
-            try (ResultSet rs = pstmt.executeQuery()) {
-                System.out.println(rs);
-                while (rs.next()) {
-                    int idpelicula = rs.getInt(1);
-                    String nombre = rs.getString(2);
-                    double calificacion = rs.getDouble(3);
-                    int duracion = rs.getInt(4);
-                    String genero = rs.getString(5);
-                    String informacion= rs.getString(6);
-                    BPeliculas peliculas = new BPeliculas(idpelicula,nombre,duracion,calificacion,genero,informacion);
-                    listaBpeliculas.add(peliculas);
-                    System.out.println(peliculas.getInformación());
-                }
-            }
 
+    public ArrayList<BPeliculas> listasPeliculas() {
+
+        ArrayList<BPeliculas> listaBpeliculas = new ArrayList<>();
+        String sql = "select idpelicula,nombre,calificacion,duracion,genero,informacion from peliculas";
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql);) {
+
+            while (rs.next()) {
+                int idpelicula = rs.getInt(1);
+                String nombre = rs.getString(2);
+                double calificacion = rs.getDouble(3);
+                int duracion = rs.getInt(4);
+                String genero = rs.getString(5);
+                String informacion = rs.getString(6);
+                BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion);
+                listaBpeliculas.add(peliculas);
+            }
         } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
             e.printStackTrace();
         }
         return listaBpeliculas;

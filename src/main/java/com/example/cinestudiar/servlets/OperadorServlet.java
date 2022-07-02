@@ -4,6 +4,7 @@ import com.example.cinestudiar.beans.BFuncion;
 import com.example.cinestudiar.beans.BUser;
 import com.example.cinestudiar.daos.AdminDao;
 import com.example.cinestudiar.daos.OperadorDao;
+import com.example.cinestudiar.daos.PeliculasDao;
 
 
 import javax.servlet.*;
@@ -21,6 +22,7 @@ public class OperadorServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "funciones" : request.getParameter("action");
         OperadorDao operadorDao = null;
+        PeliculasDao peliculasDao = new PeliculasDao();
         try {
             operadorDao = new OperadorDao();
         } catch (SQLException e) {
@@ -55,9 +57,10 @@ public class OperadorServlet extends HttpServlet {
             }
             case "peliculas"->{
                 request.setAttribute("listarFunciones", "");
-                request.setAttribute("Funciones", operadorDao.filtradoFunciones(""));
+                request.setAttribute("Peliculas", peliculasDao.listasPeliculas());
                 requestDispatcher = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
                 requestDispatcher.forward(request, response);
+                break;
             }
 
             /*case " " -> {

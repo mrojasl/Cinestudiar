@@ -1,7 +1,8 @@
 <%@ page import="com.example.cinestudiar.beans.BFuncion" %>
+<%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="Funciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
+<jsp:useBean id="Peliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="listarFunciones" scope="request" type="java.lang.String"/>
 <html>
 <head>
@@ -66,13 +67,11 @@
     <table class="table" id = "tableUp">
       <head>
         <tr>
-          <th class="text-white">IdFunción</th>
-          <th class="text-white">Película</th>
-          <th class="text-white">Fecha</th>
-          <th class="text-white">Hora</th>
-          <th class="text-white">Sede</th>
-          <th class="text-white">Sala</th>
-          <th class="text-white">Precio de ticket</th>
+          <th class="text-white">Id</th>
+          <th class="text-white">Título</th>
+          <th class="text-white">Duracion</th>
+          <th class="text-white">Genero</th>
+          <th class="text-white">Información</th>
           <th class="text-white">Calificacion Promedio</th>
 
         </tr>
@@ -81,17 +80,15 @@
 
       <%
 
-        for (BFuncion funcion : Funciones) { %>
+        for (BPeliculas pelicula : Peliculas) { %>
 
       <tr>
-        <td class="text-white"><%=funcion.getIdFuncion()%></td>
-        <td class="text-white"><%=funcion.getPelicula()%> </td>
-        <td class="text-white"><%=funcion.getFecha()%></td>
-        <td class="text-white"><%=funcion.getHora()%></td>
-        <td class="text-white"><%=funcion.getSede() %></td>
-        <td class="text-white"><%=funcion.getIdSala()%></td>
-        <td class="text-white">S/. <%=funcion.getPrecioTicket()%></td>
-        <% int num= (int) funcion.getCalificacion();%>
+        <td class="text-white"><%=pelicula.getIdpeliculas()%></td>
+        <td class="text-white"><%=pelicula.getNombre()%> </td>
+        <td class="text-white"><%=pelicula.getDuracion()%></td>
+        <td class="text-white"><%=pelicula.getGenero()%></td>
+        <td class="text-white"></td>
+        <% int num= (int) pelicula.getCalificacion();%>
         <%if (num == 1){ %>
         <td class="fa fa-star checked"></td>
         <td class="fa fa-star"></td>
