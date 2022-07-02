@@ -8,8 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class OperadorDao extends BaseDao {
-    public OperadorDao() throws SQLException {
-    }
+
 
 
     public static void EditarDescripcion(int id, String desc){

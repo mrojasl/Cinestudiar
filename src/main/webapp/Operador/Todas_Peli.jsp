@@ -97,19 +97,19 @@
             <div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Titulo</span>
-                <input name="nombre" type="text" class="form-control" placeholder="Título" required="required"
+                <input name="titulo" type="text" class="form-control" placeholder="Título" required="required"
                        aria-label="Sala 1"
                        aria-describedby="button-addon1">
               </div>
               <div class="input-group mb-3">
               <span class="input-group-text">Duracion</span>
-              <input name="nombre" type="number" class="form-control" placeholder="Duración" required="required"
+              <input name="duracion" type="number" class="form-control" placeholder="Duración" required="required"
                      aria-label="Sala 1" min="0" max="400"
                      aria-describedby="button-addon1">
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">Genero</span>
-                <input name="nombre" type="text" class="form-control" placeholder="Género" required="required"
+                <input name="genero" type="text" class="form-control" placeholder="Género" required="required"
                        aria-label="Sala 1"
                        aria-describedby="button-addon1">
               </div>
@@ -122,7 +122,7 @@
               <div class="input-group mb-3 ">
                 <div class="input-group mb-3">
                   <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                  <input name="fotoperfil" type="file" class="form-control" id="inputGroupFile01">
+                  <input name="fotopeli" type="file" class="form-control" id="inputGroupFile01">
                 </div>
               </div>
 

@@ -73,19 +73,18 @@ public class PeliculasDao extends BaseDao{
         return null;
     }
 
-    public void crearPelicula(int idpeliucla, String nombre, int duracion, String genero, InputStream foto, String informacion)  {
+    public void crearPelicula(String nombre, int duracion, String genero, InputStream foto, String informacion)  {
 
-        String sql = "insert into peliculas (idpelicula, nombre, duracion , genero, foto, informacion)\n" +
-                "values(?,?,?,?,?,?,?);";
+        String sql = "insert into peliculas (nombre, duracion , genero, foto, informacion)\n" +
+                "values(?,?,?,?,?)";
 
         try(Connection conn= this.getConnection();
             PreparedStatement pstmt= conn.prepareStatement(sql)){
-            pstmt.setInt(1, idpeliucla);
-            pstmt.setString(2, nombre);
-            pstmt.setInt(3,duracion );
-            pstmt.setString(4 ,genero);
-            pstmt.setBlob(5, foto);
-            pstmt.setString(6, informacion);
+            pstmt.setString(1, nombre);
+            pstmt.setInt(2,duracion );
+            pstmt.setString(3 ,genero);
+            pstmt.setBlob(4, foto);
+            pstmt.setString(5, informacion);
             pstmt.executeUpdate();
 
         }catch(SQLException e) {
@@ -110,5 +109,27 @@ public class PeliculasDao extends BaseDao{
         }
     }
 
+    public void crearFuncion(String fecha, int hora, int precio_ticket, int edad_minima, int idpersonal, int idsala, int idpelicula)  {
 
+        String sql = "insert into funciones (fecha, hora, precio_ticket , edad_minima, idpersonal, idsala, idpelicula)\n" +
+                "values(?,?,?,?,?,?,?);";
+
+        try(Connection conn= this.getConnection();
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setString(1, fecha);
+            pstmt.setInt(2, hora);
+            pstmt.setInt(3,precio_ticket );
+            pstmt.setInt(4 ,edad_minima);
+            pstmt.setInt(5, idpersonal);
+            pstmt.setInt(6, idsala);
+            pstmt.setInt(7, idpelicula);
+            pstmt.executeUpdate();
+
+        }catch(SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+
+
+    }
 }
