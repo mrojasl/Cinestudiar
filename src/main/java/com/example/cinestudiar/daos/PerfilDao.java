@@ -1,51 +1,46 @@
 package com.example.cinestudiar.daos;
 
 
-import com.example.cinestudiar.beans.*;
+import com.example.cinestudiar.beans.BPerfil;
+import com.example.cinestudiar.beans.BUsuarioFuncion;
 
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class PerfilDao {
+public class PerfilDao extends BaseDao{
+
+    private static String sql_select1="select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,cf.idhistorialdecompras from usuarios u\n" +
+            "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
+            "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
+            "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
+            "                     inner join salas sala on (sala.idsala=f.idsala)\n" +
+            "                     where u.codigo_pucp=? AND cf.asistencia=5 order by f.fecha desc, f.hora DESC;";
+    private static String sql_select2="select concat(u.nombre,' ',u.apellido) as `nombre`, " +
+            "u.codigo_pucp,u.telefono,u.dni,u.direccion,u.correo,u.foto,u.contraseña from usuarios u\n" +
+            "where u.codigo_pucp=?;";
 
 
-    public ArrayList<BUsuarioFuncion> listarFunciones(){
-
+    public ArrayList<BUsuarioFuncion> listarFunciones(String codigo_pucp) {
         ArrayList<BUsuarioFuncion> listausuarios = new ArrayList<>();
-
-        String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
-
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,cf.idhistorialdecompras from usuarios u\n" +
-                     "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
-                     "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
-                     "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
-                     "                     inner join salas sala on (sala.idsala=f.idsala)\n" +
-                     "                     where u.codigo_pucp=20190421 AND cf.asistencia=5 order by f.fecha desc, f.hora DESC;");) {
-
-            while(rs.next()){
-                BUsuarioFuncion bUsuarioFuncion=new BUsuarioFuncion();
-                bUsuarioFuncion.setFotofuncion(rs.getBlob(1));
-                bUsuarioFuncion.setNombrepelicula(rs.getString(2));
-                bUsuarioFuncion.setFechapelicula(rs.getString(3));
-                bUsuarioFuncion.setHorapelicula(rs.getString(4));
-                bUsuarioFuncion.setSede(rs.getString(5));
-                bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
-                listausuarios.add(bUsuarioFuncion);
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql_select1);) {
+            pstmt.setString(1,codigo_pucp);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                System.out.println(rs);
+                while (rs.next()) {
+                    BUsuarioFuncion bUsuarioFuncion=new BUsuarioFuncion();
+                    bUsuarioFuncion.setFotofuncion(rs.getBlob(1));
+                    bUsuarioFuncion.setNombrepelicula(rs.getString(2));
+                    bUsuarioFuncion.setFechapelicula(rs.getString(3));
+                    bUsuarioFuncion.setHorapelicula(rs.getString(4));
+                    bUsuarioFuncion.setSede(rs.getString(5));
+                    bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
+                    listausuarios.add(bUsuarioFuncion);
+                }
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return listausuarios;
@@ -53,44 +48,41 @@ public class PerfilDao {
 
 
 
-    public ArrayList<BPerfil> listarUsuario(){
-
+    public ArrayList<BPerfil> listarUsuario(String codigo_pucp) {
         ArrayList<BPerfil> listausuarios = new ArrayList<>();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql_select2);) {
+            pstmt.setString(1,codigo_pucp);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                System.out.println(rs);
+                while(rs.next()){
+                    BPerfil bPerfil= new BPerfil();
+                    bPerfil.setNombre(rs.getString(1));
+                    bPerfil.setCodigopucp(rs.getString(2));
+                    bPerfil.setNumero(rs.getString(3));
+                    bPerfil.setDni(Integer.parseInt(rs.getString(4)));
+                    bPerfil.setDireccion(rs.getString(5));
+                    bPerfil.setCorreo(rs.getString(6));
 
-        String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+                    bPerfil.setContrasenha(rs.getString(8));
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select concat(u.nombre,' ',u.apellido) as `nombre`, u.codigo_pucp,u.telefono,u.dni,u.direccion,u.correo,u.foto,u.contraseña from usuarios u\n" +
-                     "where u.codigo_pucp='20190421';");) {
-
-            while(rs.next()){
-                BPerfil bPerfil= new BPerfil();
-                bPerfil.setNombre(rs.getString(1));
-                bPerfil.setCodigopucp(rs.getString(2));
-                bPerfil.setNumero(rs.getString(3));
-                bPerfil.setDni(Integer.parseInt(rs.getString(4)));
-                bPerfil.setDireccion(rs.getString(5));
-                bPerfil.setCorreo(rs.getString(6));
-
-                bPerfil.setContrasenha(rs.getString(8));
-
-                listausuarios.add(bPerfil);
+                    listausuarios.add(bPerfil);
+                }
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return listausuarios;
     }
+
+
+
+
+
+
+
 
     public void actualizatelefono(BPerfil tel) {
 

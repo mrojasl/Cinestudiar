@@ -1,21 +1,20 @@
 package com.example.cinestudiar.servlets;
 
 
-import com.example.cinestudiar.beans.BCarrito;
-import com.example.cinestudiar.beans.BCompra;
 import com.example.cinestudiar.beans.BPerfil;
-import com.example.cinestudiar.beans.BProfesional;
-import com.example.cinestudiar.daos.AdminDao;
-import com.example.cinestudiar.daos.CarritoDao;
 import com.example.cinestudiar.daos.PerfilDao;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
-import java.util.ArrayList;
+
 @MultipartConfig
 @WebServlet(name = "PerfilServlet", value = "/PerfildeUsuario")
 public class PerfilServlet extends HttpServlet {
@@ -24,8 +23,8 @@ public class PerfilServlet extends HttpServlet {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         PerfilDao perfilDao= new PerfilDao();
 
-        request.setAttribute("perfilDusuario",perfilDao.listarUsuario());
-        request.setAttribute("usuarioFunciones",perfilDao.listarFunciones());
+        request.setAttribute("perfilDusuario",perfilDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
+        request.setAttribute("usuarioFunciones",perfilDao.listarFunciones((String) request.getSession().getAttribute("codigo_pucp")));
 
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/perfilUsuario.jsp");
         requestDispatcher.forward(request,response);

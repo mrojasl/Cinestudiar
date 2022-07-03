@@ -1,25 +1,22 @@
 package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BPeliculas;
-import com.example.cinestudiar.beans.BSedeYSala;
 import com.example.cinestudiar.beans.BUser;
-import com.example.cinestudiar.daos.AdminDao;
-import com.example.cinestudiar.daos.ImageDao;
 import com.example.cinestudiar.daos.PeliculasDao;
 import com.example.cinestudiar.daos.UsuariosDao;
 
-import java.io.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+
 @MultipartConfig
 @WebServlet(name = "inicioServlet", urlPatterns = {"/inicio",""})
 public class inicioServlet extends HttpServlet {
@@ -43,15 +40,11 @@ public class inicioServlet extends HttpServlet {
                 view = request.getRequestDispatcher("Usuario/index.jsp");
                 view.forward(request, response);
             }
-            case "registrar"->{
-                view = request.getRequestDispatcher("Usuario/registro.jsp");
-                view.forward(request, response);
-            }
-
             case "registrado"->{
                 System.out.println("Añadiendo");
-                BUser usuario =leerParametrosRequest(request);
-                usuariosDao.agregar(usuario);
+                System.out.println(request.getSession().getAttribute("codigo_pucp"));
+
+
                 ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
                 request.setAttribute("listapeliculas",listapeliculas);
                 request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
@@ -61,6 +54,7 @@ public class inicioServlet extends HttpServlet {
             }
             case "cerrar"->{
                 System.out.println("cerrando");
+                request.getSession().invalidate();
                 ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
                 request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
                 request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
@@ -74,75 +68,7 @@ public class inicioServlet extends HttpServlet {
                 view = request.getRequestDispatcher("Usuario/detalles.jsp");
                 view.forward(request, response);
             }
-        }
-
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action") ;
-        UsuariosDao usuariosDao = new UsuariosDao();
-        RequestDispatcher view;
-        PeliculasDao peliculasDao = new PeliculasDao();
-
-        switch (action){
-            case "loguear"->{
-
-                String codigo = request.getParameter("codigo");
-                String contrasenha = request.getParameter("password");
-
-
-                BUser usuario=usuariosDao.ValidarLoguinUser(codigo,contrasenha);
-
-
-                BUser user = leerParametrosRequest(request);
-
-                Boolean valor=usuariosDao.loguear(user);
-                if (valor){
-
-
-
-                    BUser usuario2 =usuariosDao.rol(user);
-                    String caso="";
-                    if (usuario2.getRol()!=null){
-                        caso = usuario2.getRol();
-                    }else{
-
-                    }
-
-                    switch (caso){
-                        case "admin" ->{
-                            response.sendRedirect(request.getContextPath() + "/ServAdmin");
-
-                        }
-                        case "cliente"->{
-                            ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
-                            request.setAttribute("listapeliculas",listapeliculas);
-                            request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
-                            request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
-                            view = request.getRequestDispatcher("Usuario/in_con_sesion.jsp");
-                            view.forward(request, response);
-                        }
-                        case "operador"->{
-                             view = request.getRequestDispatcher("Operador/perfilOperador.jsp");
-                            view.forward(request, response);
-                        }
-                        default ->{
-                            view = request.getRequestDispatcher("Usuario/index.jsp");
-                            view.forward(request, response);
-                        }
-                    }
-                }else{
-                   view = request.getRequestDispatcher("Usuario/index.jsp");
-                    view.forward(request, response);
-                }
-
-
-            }
-
-            case "añadir"->{
-
-                BUser usuario =leerParametrosRequest2(request);
-                usuariosDao.agregar(usuario);
+            case "registrar"->{
                 view = request.getRequestDispatcher("Usuario/registro.jsp");
                 view.forward(request, response);
             }
@@ -150,13 +76,25 @@ public class inicioServlet extends HttpServlet {
 
     }
 
-    public BUser leerParametrosRequest(HttpServletRequest request) throws IOException, ServletException {
-        String codigo = request.getParameter("codigo");
-        String contraseña = request.getParameter("password");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UsuariosDao usuariosDao = new UsuariosDao();
+        RequestDispatcher view;
+        BUser usuario =leerParametrosRequest2(request);
+
+        if (usuariosDao.buscarPorId(usuario.getCodigoPucp())==null && usuariosDao.buscarPorCorreo(usuario.getCorreo())==null){
+            usuariosDao.agregar(usuario);
+            response.sendRedirect(request.getContextPath()+"/inicio?action=registrado");
+        }else{
+            request.setAttribute("indicador","error");
+            view = request.getRequestDispatcher("Usuario/registro.jsp");
+            view.forward(request, response);
+        }
 
 
-        return new BUser(codigo ,contraseña);
+
+
     }
+
 
     public BUser leerParametrosRequest2(HttpServletRequest request) throws IOException, ServletException {
         String codigo_pucp = request.getParameter("codigo_pucp");

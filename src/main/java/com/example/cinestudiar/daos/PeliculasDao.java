@@ -62,7 +62,7 @@ public class PeliculasDao extends BaseDao{
                     BProfesional profesional = new BProfesional(idprofesional,nombre, apellido,rol);
                     BPeliculas peliculas = new BPeliculas(id,profesional);
                     lista.add(peliculas);
-                    System.out.println(lista.get(i).getIdpeliculas());
+
                 }
             }
 

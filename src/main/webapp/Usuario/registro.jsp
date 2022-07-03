@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="indicador" scope="request" type="java.lang.String" class="java.lang.String"/>
 
 
 <!DOCTYPE html>
@@ -302,6 +303,13 @@
                                     <div class="form-group">
                                         <input type="file" name="picture">
                                     </div>
+                                    <%if (request.getAttribute("indicador").equals("error")){%>
+                                    </br>
+                                    <div class="text-danger nb-2">
+                                        Error código Pucp o correo!!!
+                                    </div>
+                                    <%request.removeAttribute("indicador");%>
+                                    <%}%>
                                     <button type="submit" class="btn btn-primary" >Crear Usuario</button>
                                     <hr>
                                 </form>

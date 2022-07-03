@@ -347,7 +347,6 @@
                 </div>
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
                     <div class="carousel-inner">
-
                         <%  int h=1;
                             for (int n = 1; n<cointaner+1; n++) {%>
                         <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">

@@ -328,7 +328,7 @@
             <div class="perfil-usuario-avatar">
 
                 <% for (BPerfil foto: perfilDusuario){ %>
-
+                <%=foto.getCodigopucp()%>
                 <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=foto.getCodigopucp()%>"/>
 
 

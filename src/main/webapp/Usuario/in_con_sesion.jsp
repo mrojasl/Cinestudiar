@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
+<jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="listapeliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="cointaner" scope="request" type="java.lang.Integer"/>
 <jsp:useBean id="valor" scope="request" type="java.lang.Integer"/>
@@ -277,8 +278,9 @@
 </head>
 
     <body>
-        <jsp:include page="cabecera_usuario.jsp"/>
-
+        <jsp:include page="headerSesionIniciada.jsp">
+            <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+        </jsp:include>
         <div class="d-flex justify-content-between">
             <div class="leftside d-flex flex-column">
                 <div class="sugerencia p-2" ><h3>Sugerencias</h3></div>

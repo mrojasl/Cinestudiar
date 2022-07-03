@@ -10,6 +10,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
+<jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="lista_profesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="pelicula" scope="request" type="com.example.cinestudiar.beans.BPeliculas"/>
 <html>
@@ -121,7 +122,6 @@
             }
             .navbar a{
                 position: relative;
-                left:55%;
                 color:white;
                 text-decoration: none;
                 margin-right: 18px;
@@ -270,8 +270,18 @@
         </style>
     </head>
     <body>
-        <jsp:include page="cabecera_index.jsp"/>
 
+        <%if (usuario!=null && usuario.getNombres()!=null){%>
+
+        <jsp:include page="headerSesionIniciada.jsp">
+            <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+        </jsp:include>
+
+        <%} else {%>
+        <jsp:include page="headerSesionNoIniciada.jsp"/>
+        <%}%>
+
+        <%=usuario%>
         <div class="container my-10">
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-12 col-md-9">
@@ -313,10 +323,12 @@
                                         <H6 > Lista de actores:</H6 >
                                         <%}%>
                                         <%j=2;%>
-                                        <tr > - <%=bPeliculas.getProfesional().getNombre()%></tr >
+                                        <tr > <%=bPeliculas.getProfesional().getNombre()%></tr >
                                         <tr ><%=bPeliculas.getProfesional().getApellido()%></tr >
                                         <%}%>
                                         <%}%>
+
+
 
                                         <hr>
 

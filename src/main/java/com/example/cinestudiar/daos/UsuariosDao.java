@@ -80,6 +80,86 @@ public class UsuariosDao extends BaseDao{
         return result;
     }
 
+    public BUser buscarPorId(String codigo_pucp) {
+        BUser usuario = null;
+
+        String sql = "select * from usuarios where codigo_pucp = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, codigo_pucp);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    usuario = new BUser();
+                    usuario.setCodigoPucp(rs.getString(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return usuario;
+    }
+    public BUser buscarPorCorreo(String correo) {
+        BUser usuario = null;
+
+        String sql = "select * from usuarios where correo = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, correo);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    usuario = new BUser();
+                    usuario.setCorreo(rs.getString(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return usuario;
+    }
+
+
+    public BUser validarPass(String password, String codigoPucp){
+        BUser usuario = null;
+
+        String sql = "select * from usuarios where codigo_pucp=? and contraseña=?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+            pstmt.setString(1,codigoPucp);
+            pstmt.setString(2,password);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    usuario = new BUser();
+                    usuario.setCodigoPucp(rs.getString(1));
+                    usuario.setNombres(rs.getString(2));
+                    usuario.setApellidos(rs.getString(3));
+                    usuario.setRol(rs.getString(4));
+                    usuario.setDni(rs.getString(5));
+                    usuario.setTelefono(rs.getString(6));
+                    usuario.setCorreo(rs.getString(7));
+                    usuario.setContrasena(rs.getString(8));
+                    usuario.setFechaNacimiento(rs.getString(9));
+                    usuario.setDireccion(rs.getString(10));
+                    usuario.setDatosTarjeta(rs.getString(12));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+
     public BUser rol(BUser usuario) {
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql_rol);
@@ -99,46 +179,6 @@ public class UsuariosDao extends BaseDao{
         }
 
         return usuario;
-    }
-
-
-    public BUser ValidarLoguinUser(String codigo, String password){
-
-        BUser usuario = null;
-
-        String sql="select codigo_pucp,nombre,apellido,rol,dni,telefono,correo,fecha_nacimiento,direccion,foto,datos_tarjeta from usuarios where codigo_pucp=? and contraseña=?;";
-
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setString(1, codigo);
-            pstmt.setString(2, password);
-
-            try (ResultSet rs = pstmt.executeQuery();) {
-                if (rs.next()) {
-                    usuario = new BUser();
-                    usuario.setCodigoPucp(rs.getString(1));
-                    usuario.setNombres(rs.getString(2));
-                    usuario.setApellidos(rs.getString(3));
-                    usuario.setRol(rs.getString(4));
-                    usuario.setDni(rs.getString(5));
-                    usuario.setTelefono(rs.getString(6));
-                    usuario.setCorreo(rs.getString(7));
-                    usuario.setFechaNacimiento(rs.getString(8));
-                    usuario.setDireccion(rs.getString(9));
-                    usuario.setFoto((InputStream) rs.getBlob(10));
-                    usuario.setDatosTarjeta(rs.getString(11));
-
-
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return usuario;
-
-
     }
 
 
