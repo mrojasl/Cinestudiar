@@ -4,15 +4,14 @@
   Date: 26/06/2022
   Time: 16:50
   To change this template use File | Settings | File Templates.
-
-
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="lista_profesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
-<jsp:useBean id="pelicula" scope="request" type="com.example.cinestudiar.beans.BPeliculas"/>
+<jsp:useBean id="pelicula" class="com.example.cinestudiar.beans.BPeliculas" scope="request" type="com.example.cinestudiar.beans.BPeliculas"/>
+
 <html>
     <head>
         <meta charset='utf-8'>
@@ -281,7 +280,7 @@
         <jsp:include page="headerSesionNoIniciada.jsp"/>
         <%}%>
 
-        <%=usuario%>
+
         <div class="container my-10">
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-12 col-md-9">
@@ -297,12 +296,15 @@
                                             <a class=""><b>Detalles de la obra:</b></a>
                                         </div>
                                         <br>
+                                        <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
                                         <h5><%=pelicula.getNombre()%></h5>
                                         <%if (pelicula.getInformación()!=null){%>
                                         <p><%=pelicula.getInformación()%></p>
                                         <%}else{%>
                                         <p>Todavía no contamos con una descripción disponible</p>
                                         <%}%>
+
+
                                         <H6>Duración:</H6>
                                         <p><%=pelicula.getDuracion()%> minutos</p>
                                         <H6>Género:</H6>

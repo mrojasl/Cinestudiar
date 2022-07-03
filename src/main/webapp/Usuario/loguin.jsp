@@ -5,6 +5,8 @@
   Time: 03:26
   To change this template use File | Settings | File Templates.
 --%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="indicador" scope="session" type="java.lang.String" class="java.lang.String"/>
@@ -12,6 +14,7 @@
 
 <html>
     <head>
+
         <title>registros</title>
     </head>
     <body>
