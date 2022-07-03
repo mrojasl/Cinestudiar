@@ -118,7 +118,7 @@
 
 
             for (BCarrito carrito : carritoDcompras) {
-                codigo_puke=carrito.getCodigoEstudiante();
+                codigo_puke=usuario.getCodigoPucp();
                 correo_pucp=carrito.getCorreopucp();
 
                 preciototal = preciototal + carrito.getPrecio_ticket() * carrito.getCantidad_funcion();%>

@@ -14,7 +14,7 @@ public class YaComproServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         CarritoDao carritoDao= new CarritoDao();
-        request.setAttribute("carritodecompras",carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
+        request.setAttribute("carritodecompras",carritoDao.listarUsuario(((String) request.getSession().getAttribute("codigo_pucp"))));
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/carrito_compras/ola.jsp");
         requestDispatcher.forward(request,response);
     }

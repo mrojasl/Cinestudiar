@@ -52,7 +52,8 @@
         $("#staticBackdrop").modal('show');
     });
 </script>
-<% int contador= carritodecompras.size(); %>
+<% int contador= carritodecompras.size();
+    %>
 
 
 <!-- Modal -->
@@ -115,7 +116,7 @@
                 </form>
                 <%
 
-                   contador--; }%>
+                        contador--; }%>
             </div>
 
 

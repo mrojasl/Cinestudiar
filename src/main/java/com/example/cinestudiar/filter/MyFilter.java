@@ -7,11 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "MyFilter",servletNames = {"CarritoServlet","PerfilServlet"})
+@WebFilter(filterName = "MyFilter",servletNames = {"CarritoServlet","PerfilServlet","YaComproServlet"})
 public class MyFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
-
     public void destroy() {
     }
 
