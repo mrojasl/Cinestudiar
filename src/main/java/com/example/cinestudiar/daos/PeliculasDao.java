@@ -15,7 +15,14 @@ public class PeliculasDao extends BaseDao{
     public ArrayList<BPeliculas> listasPeliculas() {
 
         ArrayList<BPeliculas> listaBpeliculas = new ArrayList<>();
-        String sql = "select idpelicula,nombre,calificacion,duracion,genero,informacion from peliculas";
+
+        String sql = "select p.idpelicula,p.nombre,p.calificacion,p.duracion,p.genero,p.informacion,subq.existeCompra\n" +
+                "from peliculas p left join (select p.idpelicula,idcompra as 'existeCompra' from peliculas p left join funciones f\n" +
+                "on (p.idpelicula=f.idpelicula) left join compradefunciones cf\n" +
+                "on (cf.idfuncion=f.idfuncion) group by p.idpelicula) subq\n" +
+                "on (p.idpelicula=subq.idpelicula);";
+
+
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql);) {
@@ -27,7 +34,8 @@ public class PeliculasDao extends BaseDao{
                 int duracion = rs.getInt(4);
                 String genero = rs.getString(5);
                 String informacion = rs.getString(6);
-                BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion);
+                int existeCompra = rs.getInt(7);
+                BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion,existeCompra);
                 listaBpeliculas.add(peliculas);
             }
         } catch (SQLException e) {

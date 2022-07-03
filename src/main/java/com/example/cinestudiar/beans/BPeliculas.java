@@ -13,7 +13,25 @@ public class BPeliculas {
         private String información;
 
         private BProfesional profesional;
+        private int existeCompra;
 
+        public int getExisteCompra() {
+                return existeCompra;
+        }
+
+        public void setExisteCompra(int existeCompra) {
+                this.existeCompra = existeCompra;
+        }
+
+        public BPeliculas(int idpelicula, String nombre, int duracion, double calificacion, String genero, String informacion, int existeCompra) {
+                this.idpeliculas = idpelicula;
+                this.nombre=nombre;
+                this.duracion=duracion;
+                this.calificacion=calificacion;
+                this.genero=genero;
+                this.información=informacion;
+                this.existeCompra=existeCompra;
+        }
 
 
         public BPeliculas(int idpeliculas, BProfesional profesional) {

@@ -271,15 +271,19 @@
                             <i class="fa fa-star checked"></i>
                         </td>
                         <%}%>
-
+                        <%if (pelicula.getExisteCompra()==0){%>
                         <td>
+
                             <a onclick="return confirm('¿Estas seguro de borrar?\nSe eliminarán todas las funciones que contengan esta película');"
                                href="<%=request.getContextPath()%>/OperadorServlet?action=borrarpeli&id=<%=pelicula.getIdpeliculas()%>"
                                type="button" class="btn btn-danger">
-                                <i class="bi bi-trash"></i>
+
+                               <i class="bi bi-trash"></i>
                             </a>
                         </td>
-
+                        <%} else{%>
+                        <td class="text-white">No aplica</td>
+                        <%}%>
                     </tr>
 
                     <%
