@@ -35,7 +35,7 @@
      <link rel="stylesheet" href="Operador/operador_style.css">
      <jsp:include page="cabecera_operador.jsp"/>
 </head>
-<body class='snippet-body' bgcolor="#191970">
+<body class='snippet-body' bgcolor="#191970" STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
 
 
 
@@ -150,14 +150,14 @@
             <table class="table" id = "tableUp">
                 <head>
                     <tr>
-                        <th class="text-dark">IdFunción</th>
-                        <th class="text-dark">Película</th>
-                        <th class="text-dark">Fecha</th>
-                        <th class="text-dark">Hora</th>
-                        <th class="text-dark">Sede</th>
-                        <th class="text-dark">Sala</th>
-                        <th class="text-dark">Precio de ticket</th>
-                        <th class="text-dark">Calificacion Promedio</th>
+                        <th class="text-white">IdFunción</th>
+                        <th class="text-white">Película</th>
+                        <th class="text-white">Fecha</th>
+                        <th class="text-white">Hora</th>
+                        <th class="text-white">Sede</th>
+                        <th class="text-white">Sala</th>
+                        <th class="text-white">Precio de ticket</th>
+                        <th class="text-white">Calificacion Promedio</th>
 
                     </tr>
                 </head>
@@ -168,13 +168,13 @@
                     for (BFuncion funcion : Funciones) { %>
 
                 <tr>
-                    <td class="text-dark"><%=funcion.getIdFuncion()%></td>
-                    <td class="text-dark"><%=funcion.getPelicula()%> </td>
-                    <td class="text-dark"><%=funcion.getFecha()%></td>
-                    <td class="text-dark"><%=funcion.getHora()%></td>
-                    <td class="text-dark"><%=funcion.getSede() %></td>
-                    <td class="text-dark"><%=funcion.getIdSala()%></td>
-                    <td class="text-dark">S/. <%=funcion.getPrecioTicket()%></td>
+                    <td class="text-white"><%=funcion.getIdFuncion()%></td>
+                    <td class="text-white"><%=funcion.getPelicula()%> </td>
+                    <td class="text-white"><%=funcion.getFecha()%></td>
+                    <td class="text-white"><%=funcion.getHora()%></td>
+                    <td class="text-white"><%=funcion.getSede() %></td>
+                    <td class="text-white"><%=funcion.getIdSala()%></td>
+                    <td class="text-white">S/. <%=funcion.getPrecioTicket()%></td>
                     <% int num= (int) funcion.getCalificacion();%>
                     <%if (num == 0){ %>
                     <td class="text-white">No tiene</td>
