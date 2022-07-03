@@ -1,10 +1,12 @@
 <%@ page import="com.example.cinestudiar.beans.BFuncion" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
+<%@ page import="com.example.cinestudiar.beans.BProfesional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="Peliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
-<jsp:useBean id="listarFunciones" scope="request" type="java.lang.String"/>
 <jsp:useBean type="java.lang.String" scope="request" id="txtbuscado" class="java.lang.String"/>
+<jsp:useBean id="directores" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BProfesional>"/>
+<jsp:useBean id="actores" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BProfesional>"/>
 
 <html>
     <head>
@@ -262,37 +264,6 @@
 
 
 
-                        <!-- ModalPortada -->
-                        <div class="modal fade" id="foto<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="foto<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
-                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarPort" enctype="multipart/form-data">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel2">Descripción</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
-                                            <div class="input-group">
-                                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="portada" style="width:250px;height:380px;margin-left: 100px "/>
-
-                                            </div>
-                                            <div style="margin-top: 20px">
-                                                <label class="input-group-text" for="inputGroupFile01">Editar Portada</label>
-                                                <input type="file" class="form-control" name="fotonueva">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-
-
                         <!-- ModalProfesionales -->
                         <div class="modal fade" id="profesionales<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="profesionales<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -302,15 +273,25 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
-                                            <div class="input-group">
-                                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="portada" style="width:250px;height:380px;margin-left: 100px "/>
+                                            Director:
+                                            <br>
+                                            <%for (BProfesional dir : directores){%>
+                                            <%if (dir.getIdPelicula()==pelicula.getIdpeliculas()){%>
+                                            <%=dir.getNombre()%> <%=dir.getApellido()%>
+                                            <br>
+                                            <%}%>
+                                            <%}%>
+                                            <br>
+                                            Actores:
+                                            <br>
+                                            <%for (BProfesional act : actores){%>
+                                            <%if (act.getIdPelicula()==pelicula.getIdpeliculas()){%>
+                                            <%=act.getNombre()%> <%=act.getApellido()%>
+                                            <br>
+                                            <%}%>
+                                            <%}%>
 
-                                            </div>
-                                            <div style="margin-top: 20px">
-                                                <label class="input-group-text" for="inputGroupFile01">Editar Portada</label>
-                                                <input type="file" class="form-control" name="fotonueva">
-                                            </div>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

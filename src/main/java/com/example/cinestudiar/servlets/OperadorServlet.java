@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -54,8 +55,11 @@ public class OperadorServlet extends HttpServlet {
                 break;
             }
             case "peliculas"->{
-                request.setAttribute("listarFunciones", "");
-                request.setAttribute("Peliculas", peliculasDao.listasPeliculas());
+                ArrayList<BPeliculas> listaPeliculas = peliculasDao.listasPeliculas();
+
+                request.setAttribute("directores",peliculasDao.listaDirector());
+                request.setAttribute("actores",peliculasDao.listaActor());
+                request.setAttribute("Peliculas", listaPeliculas);
                 requestDispatcher = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
                 requestDispatcher.forward(request, response);
                 break;
