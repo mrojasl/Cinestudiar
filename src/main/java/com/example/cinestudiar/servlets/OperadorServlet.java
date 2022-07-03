@@ -13,13 +13,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
-
+import java.sql.SQLException;
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 
->>>>>>> 8fbef29c7c315671603b0d013eca02cc9533f47c
 @MultipartConfig
 @WebServlet(name = "OperadorServlet", urlPatterns = {"/OperadorServlet"})
 public class OperadorServlet extends HttpServlet {
@@ -28,14 +24,9 @@ public class OperadorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "funciones" : request.getParameter("action");
-<<<<<<< HEAD
-        OperadorDao operadorDao = new OperadorDao();
-
-=======
         OperadorDao operadorDao = null;
         PeliculasDao peliculasDao = new PeliculasDao();
         operadorDao = new OperadorDao();
->>>>>>> 8fbef29c7c315671603b0d013eca02cc9533f47c
         String filtro = request.getParameter("listarFunciones");
         //if (filtro == "Funciones Disponibles") {
         //
@@ -61,16 +52,11 @@ public class OperadorServlet extends HttpServlet {
             case "crearPe" ->{
                 requestDispatcher = request.getRequestDispatcher("Operador/crearPelicula.jsp");
                 requestDispatcher.forward(request, response);
-            break;
+                break;
             }
             case "peliculas"->{
-<<<<<<< HEAD
-                request.setAttribute("listarPeliculas", "");
-                request.setAttribute("Peliculas", operadorDao.filtradoPelicula(""));
-=======
                 request.setAttribute("listarFunciones", "");
                 request.setAttribute("Peliculas", peliculasDao.listasPeliculas());
->>>>>>> 8fbef29c7c315671603b0d013eca02cc9533f47c
                 requestDispatcher = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
                 requestDispatcher.forward(request, response);
                 break;
@@ -135,24 +121,19 @@ public class OperadorServlet extends HttpServlet {
 
 
     }
-    @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //String action = request.getParameter("action") ;
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action") == null ? "redireccionar" : request.getParameter("action");
-<<<<<<< HEAD
-
-=======
         OperadorDao operadorDao = null;
         operadorDao = new OperadorDao();
->>>>>>> 8fbef29c7c315671603b0d013eca02cc9533f47c
         String filtro;
-        String filtro2;
         RequestDispatcher view;
-        OperadorDao operadorDao = new OperadorDao();
 
         //ArrayList<BFuncion> lista = operadorDao.TodasLasFunciones();
-
+        String filtro2;
 
         switch (action) {
 
@@ -165,6 +146,7 @@ public class OperadorServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             }
+
             case "filtro_peli" -> {
                 System.out.println("HOLAAA Peli");
                 filtro2 = request.getParameter("listarPeliculas");
@@ -181,14 +163,7 @@ public class OperadorServlet extends HttpServlet {
                 operadorDao.crearFuncion(funcion);
                 view = request.getRequestDispatcher("Usuario/registro.jsp");
                 view.forward(request, response);
-
-            }
-            case "crear_Pelicula"->{
-                System.out.println("AÑADIENDO PELI");
-                BPeliculas peliculas  = leerParametroPelicula(request);
-                operadorDao.crearPelicula(peliculas);
-                view = request.getRequestDispatcher("Operador/crearPelicula.jsp");
-                view.forward(request, response);
+                break;
             }
             case "editarDesc" ->{
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -241,11 +216,3 @@ public class OperadorServlet extends HttpServlet {
         return new BPeliculas(nombre, duracion, genero, fotoinput);
     }
 }
-
-
-
-
-
-
-
-

@@ -9,10 +9,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class OperadorDao extends BaseDao {
-<<<<<<< HEAD
-
-=======
->>>>>>> 8fbef29c7c315671603b0d013eca02cc9533f47c
 
 
 
