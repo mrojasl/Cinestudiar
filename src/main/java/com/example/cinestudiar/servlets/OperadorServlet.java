@@ -61,6 +61,30 @@ public class OperadorServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             }
+            case "borrar"->{
+                if (request.getParameter("id") != null) {
+                    String idpeliString = request.getParameter("id");
+                    int idpeli = 0;
+                    try {
+                        idpeli = Integer.parseInt(idpeliString);
+
+                        request.setAttribute("listaViaje", peliculasDao.listasPeliculas());
+                    } catch (NumberFormatException ex) {
+                        response.sendRedirect("ViajesServlet");
+                    }
+
+                    BPeliculas peli = peliculasDao.obtenerPelicula(idpeli);
+
+                    if ( peli != null) {
+
+                        peliculasDao.borrarPelicula(idpeli);
+                    }
+                }
+
+                requestDispatcher = request.getRequestDispatcher("Todas_Peli.jsp");
+                requestDispatcher.forward(request, response);
+                break;
+        }
 
             /*case " " -> {
                 //ArrayList<BFuncion> lista = null;
