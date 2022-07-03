@@ -1,8 +1,5 @@
 package com.example.cinestudiar.servlets;
-import com.example.cinestudiar.beans.BCompra;
-import com.example.cinestudiar.beans.BFuncion;
-import com.example.cinestudiar.beans.BPeliculas;
-import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.beans.*;
 import com.example.cinestudiar.daos.AdminDao;
 import com.example.cinestudiar.daos.OperadorDao;
 import com.example.cinestudiar.daos.PeliculasDao;
@@ -50,7 +47,9 @@ public class OperadorServlet extends HttpServlet {
                 break;
             }
             case "crearPe" ->{
-                requestDispatcher = request.getRequestDispatcher("Operador/crearPelicula.jsp");
+                ArrayList<BProfesional> listaProfesionales= AdminDao.obtenerProfesionales();
+                request.setAttribute("listaProfesionales",listaProfesionales);
+                requestDispatcher = request.getRequestDispatcher("Operador/profesionalOperador.jsp");
                 requestDispatcher.forward(request, response);
                 break;
             }
