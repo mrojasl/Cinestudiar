@@ -3,6 +3,7 @@ package com.example.cinestudiar.daos;
 import com.example.cinestudiar.beans.BFuncion;
 import com.example.cinestudiar.beans.BPeliculas;
 import com.example.cinestudiar.beans.BProfesional;
+import com.example.cinestudiar.beans.BEquipoLimpieza;
 /*import com.example.cinestudiar.beans.BUser;*/
 
 import java.sql.*;
@@ -318,7 +319,7 @@ public class OperadorDao extends BaseDao {
 
     //CREAR FUNCIONES
     private static String sql_crear_func="INSERT INTO funciones (fecha,hora,precio_ticket,edad_minima,idpersonal,idsala,idpelicula) VALUES (?,?,?,?,?,?,?);";
-    private static String sql_crear_peli = "insert into peliculas (nombre, duracion, genero, foto) values (?,?,?,?);";
+
     public void crearFuncion(BFuncion funcion) {
 
 
@@ -338,15 +339,16 @@ public class OperadorDao extends BaseDao {
             error.printStackTrace();
         }
     }
-    public void crearPelicula(BPeliculas peliculas) {
+    public void crearEquiposLimpieza(BEquipoLimpieza equipoLimpieza) {
 
-        System.out.println("CREANDO MI PELI");
+        String sql = "INSERT INTO equiposdelimpieza ( jefe ,limpiador1, limpiador2)\n" +
+                "VALUES ( ?, ?,?);";
         try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql_crear_peli);) {
-            pstmt.setString(1, peliculas.getNombre());
-            pstmt.setInt(2, peliculas.getDuracion());
-            pstmt.setString(3, peliculas.getGenero());
-            pstmt.setBlob(4, peliculas.getFoto());
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, equipoLimpieza.getJefe());
+            pstmt.setString(2, equipoLimpieza.getLimpiador1());
+            pstmt.setString(3, equipoLimpieza.getLimpiador2());
             pstmt.executeUpdate();
 
         }catch (SQLException error) {
