@@ -73,6 +73,56 @@ public class PeliculasDao extends BaseDao{
         return lista;
     }
 
+    public ArrayList<BProfesional> listapeliculaDirector(int id) {
+
+        ArrayList<BProfesional> listap = new ArrayList<>();
+        String sql = "select po.idprofesional,po.nombre,po.apellido,po.rol from peliculas_has_profesionales ph inner join profesionales po\n" +
+                "on (ph.profesionales_idprofesional=po.idprofesional) where peliculas_idpelicula=? and po.rol = 'd'\n" +
+                "order by po.nombre desc;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, id);
+            try (ResultSet resultSet = pstmt.executeQuery();) {
+                while (resultSet.next()) {
+                    BProfesional p = new BProfesional();
+                    p.setIdProfesional(resultSet.getInt(1));
+                    p.setNombre(resultSet.getString(2));
+                    p.setRol(resultSet.getString(3));
+                    listap.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+        return listap;
+    }
+    public ArrayList<BProfesional> listapeliculaActor(int id) {
+
+        ArrayList<BProfesional> listap = new ArrayList<>();
+        String sql = "select po.idprofesional,po.nombre,po.apellido,po.rol from peliculas_has_profesionales ph inner join profesionales po\n" +
+                "on (ph.profesionales_idprofesional=po.idprofesional) where peliculas_idpelicula=? and po.rol = 'a'\n" +
+                "order by po.nombre desc;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, id);
+            try (ResultSet resultSet = pstmt.executeQuery();) {
+                while (resultSet.next()) {
+                    BProfesional p = new BProfesional();
+                    p.setIdProfesional(resultSet.getInt(1));
+                    p.setNombre(resultSet.getString(2));
+                    p.setRol(resultSet.getString(3));
+                    listap.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+        return listap;
+    }
+
+
     public  BPeliculas obtener_pelicula(int id,ArrayList<BPeliculas> lista){
         for (BPeliculas bPeliculas : lista){
             if (bPeliculas.getIdpeliculas() == id){
