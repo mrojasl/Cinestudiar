@@ -19,7 +19,9 @@ public class CarritoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         CarritoDao carritoDao= new CarritoDao();
-        request.setAttribute("carritoDcompras",carritoDao.listarUsuario());
+
+
+        request.setAttribute("carritoDcompras",carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
 
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/carrito_compras/checkout.jsp");
         requestDispatcher.forward(request,response);

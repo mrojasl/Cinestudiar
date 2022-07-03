@@ -131,7 +131,7 @@ public class UsuariosDao extends BaseDao{
     public BUser validarPass(String password, String codigoPucp){
         BUser usuario = null;
 
-        String sql = "select * from usuarios where codigo_pucp=? and contraseña=?";
+        String sql = "select * from usuarios where codigo_pucp=? and contraseña=sha2(?,256)";
 
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);) {

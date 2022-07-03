@@ -29,42 +29,48 @@ import javax.mail.internet.MimeMultipart;
 
 
 
-
-
-
-
 public class CarritoDao extends BaseDao {
 
-    public ArrayList<BCarrito> listarUsuario(){
-        ArrayList<BCarrito> listausuarios = new ArrayList<>();
-        try (Connection connection = this.getConnection();
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador,cf.idfuncion,cf.idhistorialdecompras,p.idpelicula,u.correo from usuarios u\n" +
-                     "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
-                     "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
-                     "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
-                     "                     inner join salas sala on (sala.idsala=f.idsala)\n" +
-                     "                     where u.codigo_pucp=20196044 AND cf.asistencia=4;");) {
+    public ArrayList<BCarrito> listarUsuario(String codigo){
 
-            while(rs.next()){
-                BCarrito bCarrito = new BCarrito();
-                bCarrito.setImagen(rs.getString(1));
-                bCarrito.setIdpelicula(rs.getInt(13));
-                bCarrito.setNombre_pelicula(rs.getString(2));
-                bCarrito.setFecha(rs.getString(3));
-                bCarrito.setHora(rs.getString(4));
-                bCarrito.setNombre_sede(rs.getString(5));
-                bCarrito.setCantidad_funcion(rs.getInt(6));
-                bCarrito.setPrecio_ticket(rs.getInt(7));
-                bCarrito.setCodigoEstudiante(rs.getString(8));
-                bCarrito.setIdcompra(rs.getInt(9));
-                bCarrito.setAforoOperador(rs.getInt(10));
-                bCarrito.setIdfuncion(rs.getInt(11));
-                bCarrito.setHistorialcompra(rs.getInt(12));
-                bCarrito.setCorreopucp(rs.getString(14));
-                listausuarios.add(bCarrito);
+        String sql="select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador,cf.idfuncion,cf.idhistorialdecompras,p.idpelicula,u.correo from usuarios u\n" +
+                "\t\t\t\t\t\t\t\t\t\tinner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
+                "\t\t\t\t\t\t\t\t\t\tinner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
+                "\t\t\t\t\t\t\t\t\t\tinner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
+                "\t\t\t\t\t\t\t\t\t\tinner join salas sala on (sala.idsala=f.idsala)\n" +
+                "\t\t\t\t\t\t\t\t\t\twhere u.codigo_pucp=? AND cf.asistencia=4;";
+
+
+
+        ArrayList<BCarrito> listausuarios = new ArrayList<>();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setString(1, codigo);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                //ResultSet rs = stmt.executeQuery("");) {
+
+                while (rs.next()) {
+                    BCarrito bCarrito = new BCarrito();
+                    bCarrito.setImagen(rs.getString(1));
+                    bCarrito.setIdpelicula(rs.getInt(13));
+                    bCarrito.setNombre_pelicula(rs.getString(2));
+                    bCarrito.setFecha(rs.getString(3));
+                    bCarrito.setHora(rs.getString(4));
+                    bCarrito.setNombre_sede(rs.getString(5));
+                    bCarrito.setCantidad_funcion(rs.getInt(6));
+                    bCarrito.setPrecio_ticket(rs.getInt(7));
+                    bCarrito.setCodigoEstudiante(rs.getString(8));
+                    bCarrito.setIdcompra(rs.getInt(9));
+                    bCarrito.setAforoOperador(rs.getInt(10));
+                    bCarrito.setIdfuncion(rs.getInt(11));
+                    bCarrito.setHistorialcompra(rs.getInt(12));
+                    bCarrito.setCorreopucp(rs.getString(14));
+                    listausuarios.add(bCarrito);
+                }
             }
-        } catch (SQLException e) {
+        }
+            catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
