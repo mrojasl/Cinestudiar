@@ -13,7 +13,7 @@
 <%@ page import="java.util.Collections" %>
 
 
-
+<jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="perfilDusuario" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPerfil>" />
 <jsp:useBean id="usuarioFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BUsuarioFuncion>" />
 <html lang="en">
@@ -40,7 +40,9 @@
 
 </head>
 <body>
-<jsp:include page="cabecera_usuario.jsp"/>
+<jsp:include page="headerSesionIniciada.jsp">
+    <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+</jsp:include>
 
 </body>
 <head>
