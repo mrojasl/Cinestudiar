@@ -80,13 +80,14 @@ public class CarritoDao extends BaseDao {
 
     public void actualiza(BCarrito idfuncion) {
 
-        String sql = "UPDATE compradefunciones set cantidad_por_funcion=? where idfuncion=?;";
+        String sql = "UPDATE compradefunciones set cantidad_por_funcion=? where idfuncion=? and usuarios_codigo_pucp=?;";
 
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
             pstmt.setInt(1, idfuncion.getCantidad_funcion());
             pstmt.setInt(2, idfuncion.getIdfuncion());
+            pstmt.setString(3,idfuncion.getCodigoEstudiante());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -188,7 +189,7 @@ public class CarritoDao extends BaseDao {
         final String username = "cinestudiariweb@gmail.com";
         final String password = "qmkekwbccsvfuhpo";
 
-        System.out.println(correo_pucp);
+        //System.out.println(correo_pucp);
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");

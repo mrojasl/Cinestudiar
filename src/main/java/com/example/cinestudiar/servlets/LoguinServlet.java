@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name = "LoguinServlet", value = "/loguin")
 public class LoguinServlet extends HttpServlet {
@@ -30,16 +31,21 @@ public class LoguinServlet extends HttpServlet {
         UsuariosDao usuariosDao = new UsuariosDao();
         String codigo= request.getParameter("codigo");
         String contraseña = request.getParameter("password");
-        System.out.println(codigo+contraseña);
+        //System.out.println(codigo+contraseña);
 
         BUser usuario = usuariosDao.validarPass(contraseña,codigo);
 
-        if(usuario !=null){
+        if(usuario !=null && !Objects.equals(usuario.getCodigoPucp(), "")){
             session.setAttribute("usuario",usuario);
+            //System.out.println(session.getAttribute("usuario")+"xdsesion");
+
             session.setMaxInactiveInterval(60*60);
             session.setAttribute("codigo_pucp",codigo);
+
+            session.setAttribute("usuarioLogueado", usuario);
+
             String rol=usuario.getRol();
-            System.out.println(usuario.getRol());
+            //System.out.println(usuario.getRol());
             switch (rol){
                 case "admin"->{
                     response.sendRedirect(request.getContextPath()+"/ServAdmin");

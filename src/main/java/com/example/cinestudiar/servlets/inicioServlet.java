@@ -27,12 +27,12 @@ public class inicioServlet extends HttpServlet {
         UsuariosDao usuariosDao = new UsuariosDao();
         PeliculasDao peliculasDao = new PeliculasDao();
         RequestDispatcher view;
-        System.out.println(peliculasDao.cointaner(peliculasDao.listasPeliculas().size()));
-        System.out.println(peliculasDao.valor(peliculasDao.listasPeliculas().size()));
+        //System.out.println(peliculasDao.cointaner(peliculasDao.listasPeliculas().size()));
+        //System.out.println(peliculasDao.valor(peliculasDao.listasPeliculas().size()));
 
         switch (action){
             case ""->{
-                System.out.println("registrado");
+                //System.out.println("registrado");
                 ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
                 request.setAttribute("listapeliculas",listapeliculas);
                 request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
@@ -41,8 +41,8 @@ public class inicioServlet extends HttpServlet {
                 view.forward(request, response);
             }
             case "registrado"->{
-                System.out.println("Añadiendo");
-                System.out.println(request.getSession().getAttribute("codigo_pucp"));
+                //System.out.println("Añadiendo");
+                //System.out.println(request.getSession().getAttribute("codigo_pucp"));
 
 
                 ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
@@ -53,14 +53,14 @@ public class inicioServlet extends HttpServlet {
                 view.forward(request, response);
             }
             case "cerrar"->{
-                System.out.println("cerrando");
+                //System.out.println("cerrando");
                 request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath());
                 ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
                 request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
                 request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
                 request.setAttribute("listapeliculas",listapeliculas);
-                view = request.getRequestDispatcher("Usuario/index.jsp");
-                view.forward(request, response);
+
             }
             case "detalles"->{
                 request.setAttribute("pelicula",peliculasDao.obtener_pelicula(Integer.parseInt(request.getParameter("id")),peliculasDao.listasPeliculas()));
@@ -109,16 +109,16 @@ public class inicioServlet extends HttpServlet {
         String direccion = request.getParameter("direccion");
         //Codigo para guardar una imagen en sql
         Part foto = request.getPart("picture");
-        System.out.println(telefono);
-        System.out.println(nombre);
-        System.out.println(foto);
+        //System.out.println(telefono);
+        //System.out.println(nombre);
+        //System.out.println(foto);
         InputStream fotoinput = null;
         if (foto.getSize() > 0) {
             fotoinput = foto.getInputStream();
         }
         String tarjeta = request.getParameter("tarjeta");
 
-        System.out.println(codigo_pucp + nombre + apellido + telefono + dni + contraseña + correo + fecha_nacimiento + direccion + fotoinput + tarjeta);
+        //System.out.println(codigo_pucp + nombre + apellido + telefono + dni + contraseña + correo + fecha_nacimiento + direccion + fotoinput + tarjeta);
 
         return new BUser(codigo_pucp, nombre, apellido, rol, dni, telefono, correo, contraseña, fecha_nacimiento, direccion, fotoinput, tarjeta);
     }
