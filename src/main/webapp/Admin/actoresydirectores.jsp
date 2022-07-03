@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
         <link rel="stylesheet" href="Admin/style_admin.css">
     </head>
-    <body class='snippet-body'>
+    <body class='snippet-body' STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
         <jsp:include page="cabecera_admin.jsp"/>
 
         <ul class="nav nav-tabs topside">
@@ -149,7 +149,7 @@
                         </div>
 
                         <div class="input-group mb-3 col">
-                            <h6 style="color: black">Nombre:<br> <%= p.getNombre()%>    <%= p.getApellido()%> <br><br> <%= rol%> </h6>
+                            <h6 style="color: white">Nombre:<br> <%= p.getNombre()%>    <%= p.getApellido()%> <br><br> <%= rol%> </h6>
                         </div>
                         <div class="input-group mb-3 col">
                         </div>

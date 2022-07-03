@@ -4,6 +4,8 @@
 
 <jsp:useBean id="Peliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="listarFunciones" scope="request" type="java.lang.String"/>
+<jsp:useBean type="java.lang.String" scope="request" id="txtbuscado" class="java.lang.String"/>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -66,22 +68,25 @@
 
 
 
+            <div class="row">
 
 
+                <div class="input-group mb-3 col">
 
+                <!-- Button trigger modal -->
+                <button style="height: 40px"
+                        type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
+                                 data-bs-target="#staticBackdrop">
+                    Crear Película
+                </button>
 
+                </div>
 
+                <div class="input-group mb-3 col">
+                </div>
+                <div class="input-group mb-3 col">
+                </div>
 
-
-
-
-
-            <!-- Button trigger modal -->
-            <center> <button type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
-                             data-bs-target="#staticBackdrop">
-                Crear Película
-            </button></center>
-            <br>
 
 
             <!-- Modal -->
@@ -151,10 +156,20 @@
                 </div>
             </div>
 
+                <div class="input-group mb-3 col">
+
+
+                    <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=buscarpelicula">
+
+                        <input
+                                name="txtbuscar" class="form-control" type="text" placeholder="Buscar por titulo"
+                               aria-label="default input example" value="<%=txtbuscado%>">
+                    </form>
+                </div>
 
 
 
-
+            </div>
 
 
 

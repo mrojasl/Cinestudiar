@@ -152,6 +152,7 @@ public class OperadorServlet extends HttpServlet {
         OperadorDao operadorDao = null;
         operadorDao = new OperadorDao();
         String filtro;
+        PeliculasDao peliculasDao = new PeliculasDao();
         RequestDispatcher view;
 
         //ArrayList<BFuncion> lista = operadorDao.TodasLasFunciones();
@@ -195,7 +196,6 @@ public class OperadorServlet extends HttpServlet {
 
             }
             case "crearpeli" ->{
-                PeliculasDao peliculasDao = new PeliculasDao();
                 String titulo = request.getParameter("titulo");
                 int duracion = Integer.parseInt(request.getParameter("duracion"));
                 String genero = request.getParameter("genero");
@@ -206,6 +206,16 @@ public class OperadorServlet extends HttpServlet {
 
                 peliculasDao.crearPelicula(titulo,duracion,genero,fotoinput,descripcion);
                 response.sendRedirect(request.getContextPath() + "/OperadorServlet?action=peliculas");
+
+            }
+            case "buscarpelicula" ->{
+                String txtbuscar = request.getParameter("txtbuscar");
+
+                request.setAttribute("txtbuscado",txtbuscar);
+                request.setAttribute("listarFunciones", "");
+                request.setAttribute("Peliculas", peliculasDao.buscarPeliculaporNombre(txtbuscar));
+                view = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
+                view.forward(request, response);
 
             }
 

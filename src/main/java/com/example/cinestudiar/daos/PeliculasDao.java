@@ -2,6 +2,7 @@ package com.example.cinestudiar.daos;
 
 import com.example.cinestudiar.beans.BPeliculas;
 import com.example.cinestudiar.beans.BProfesional;
+import com.example.cinestudiar.beans.BUser;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -188,5 +189,42 @@ public class PeliculasDao extends BaseDao{
         }
 
 
+    }
+    public ArrayList<BPeliculas> buscarPeliculaporNombre(String txtBuscar) {
+        ArrayList<BPeliculas> listaPeliculas = new ArrayList<>();
+
+        String sql = "select p.idpelicula,p.nombre,p.calificacion,p.duracion,p.genero,p.informacion,subq.existeCompra\n" +
+                "from peliculas p left join (select p.idpelicula,idcompra as 'existeCompra' from peliculas p left join funciones f\n" +
+                "on (p.idpelicula=f.idpelicula) left join compradefunciones cf\n" +
+                "on (cf.idfuncion=f.idfuncion) group by p.idpelicula) subq\n" +
+                "on (p.idpelicula=subq.idpelicula)\n" +
+                "where (lower(p.nombre) like ?)";
+
+
+        try (Connection conn= this.getConnection();
+             PreparedStatement pstmt= conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%" + txtBuscar.toLowerCase() + "%");
+
+            try(ResultSet rs = pstmt.executeQuery()){
+            while (rs.next()) {
+                int idpelicula = rs.getInt(1);
+                String nombre = rs.getString(2);
+                double calificacion = rs.getDouble(3);
+                int duracion = rs.getInt(4);
+                String genero = rs.getString(5);
+                String informacion = rs.getString(6);
+                int existeCompra = rs.getInt(7);
+                BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion,existeCompra);
+                listaPeliculas.add(peliculas);
+            }
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+
+        return listaPeliculas;
     }
 }
