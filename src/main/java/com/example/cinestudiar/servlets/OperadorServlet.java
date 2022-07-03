@@ -61,16 +61,16 @@ public class OperadorServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             }
-            case "borrar"->{
+            case "borrarpeli"->{
                 if (request.getParameter("id") != null) {
                     String idpeliString = request.getParameter("id");
                     int idpeli = 0;
                     try {
                         idpeli = Integer.parseInt(idpeliString);
 
-                        request.setAttribute("listaViaje", peliculasDao.listasPeliculas());
+                        request.setAttribute("Peliculas", peliculasDao.listasPeliculas());
                     } catch (NumberFormatException ex) {
-                        response.sendRedirect("ViajesServlet");
+                        response.sendRedirect("OperadorServlet?action=peliculas");
                     }
 
                     BPeliculas peli = peliculasDao.obtenerPelicula(idpeli);
@@ -80,9 +80,7 @@ public class OperadorServlet extends HttpServlet {
                         peliculasDao.borrarPelicula(idpeli);
                     }
                 }
-
-                requestDispatcher = request.getRequestDispatcher("Todas_Peli.jsp");
-                requestDispatcher.forward(request, response);
+                response.sendRedirect("OperadorServlet?action=peliculas");
                 break;
         }
 

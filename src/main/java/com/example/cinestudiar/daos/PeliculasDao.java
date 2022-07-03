@@ -132,6 +132,7 @@ public class PeliculasDao extends BaseDao{
 
         try(Connection conn= this.getConnection();
             PreparedStatement pstmt= conn.prepareStatement(sql)){
+
             pstmt.setInt(1,idpelicula );;
             pstmt.executeUpdate();
 

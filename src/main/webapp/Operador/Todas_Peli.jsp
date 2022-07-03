@@ -170,6 +170,7 @@
                         <th class="text-white">Genero</th>
                         <th class="text-white">Descripción</th>
                         <th class="text-white">Calificacion Promedio</th>
+                        <th class="text-white">Borrar</th>
 
                     </tr>
 
@@ -270,6 +271,15 @@
                             <i class="fa fa-star checked"></i>
                         </td>
                         <%}%>
+
+                        <td>
+                            <a onclick="return confirm('¿Estas seguro de borrar?\nSe eliminarán todas las funciones que contengan esta película');"
+                               href="<%=request.getContextPath()%>/OperadorServlet?action=borrarpeli&id=<%=pelicula.getIdpeliculas()%>"
+                               type="button" class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+
                     </tr>
 
                     <%
