@@ -9,10 +9,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -69,6 +66,9 @@ public class inicioServlet extends HttpServlet {
                 view.forward(request, response);
             }
             case "registrar"->{
+
+
+
                 view = request.getRequestDispatcher("Usuario/registro.jsp");
                 view.forward(request, response);
             }
@@ -81,13 +81,23 @@ public class inicioServlet extends HttpServlet {
         RequestDispatcher view;
         BUser usuario =leerParametrosRequest2(request);
 
+        HttpSession session = request.getSession();
+
+
         if (usuariosDao.buscarPorId(usuario.getCodigoPucp())==null && usuariosDao.buscarPorCorreo(usuario.getCorreo())==null){
             usuariosDao.agregar(usuario);
-            response.sendRedirect(request.getContextPath()+"/inicio?action=registrado");
+
+            session.setAttribute("indicador2","error");
+            response.sendRedirect(request.getContextPath()+"/inicio?action=registrar");
+
+
+
+
+
+
         }else{
-            request.setAttribute("indicador","error");
-            view = request.getRequestDispatcher("Usuario/registro.jsp");
-            view.forward(request, response);
+            session.setAttribute("indicador","error");
+            response.sendRedirect(request.getContextPath()+"/inicio?action=registrar");
         }
 
 

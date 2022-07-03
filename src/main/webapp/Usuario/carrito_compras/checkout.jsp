@@ -10,6 +10,7 @@
 <jsp:useBean id="carritoDcompras" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BCarrito>" />
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" />
 <jsp:useBean id="usuarioLogueado" class="com.example.cinestudiar.beans.BUser" scope="session" type="com.example.cinestudiar.beans.BUser"/>
+<jsp:useBean id="listapeliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 
 <html>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
@@ -124,7 +125,8 @@
                 preciototal = preciototal + carrito.getPrecio_ticket() * carrito.getCantidad_funcion();%>
         <tr>
             <td>
-                <img src="Usuario/carrito_compras/error_cruce_horarios/idpelicula_<%=carrito.getIdpelicula()%>.jpg" alt="perfil foto" style="width:110px;height:150px;">
+                <!--<img src="Usuario/carrito_compras/error_cruce_horarios/idpelicula_<%=carrito.getIdpelicula()%>.jpg" alt="perfil foto" style="width:110px;height:150px;">-->
+                <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=carrito.getIdpelicula()%>" alt="perfil foto" style="width:110px;height:150px;">
                 <div class="d-flex flex-column bd-highlight mb-3">
                     <div class="p-2 bd-highlight" style="color:White;font-size: 20px "><%=carrito.getNombre_pelicula()%></div>
                     <div class="p-2 bd-highlight" style="color:White "><%=carrito.getFecha()%></div>
@@ -143,7 +145,7 @@
                     <input type="hidden" name="contadorfuncion" value="<%=hitsCount%>" />
                     <input type="hidden" name="nombre_sede" value="<%=carrito.getNombre_sede()%>" />
                     <input type="hidden" name="precio_ticket" value="<%=carrito.getPrecio_ticket()%>" />
-                    <input type="hidden" name="imagen" value="<%=carrito.getImagen()%>" />
+
                     <input type="hidden" name="codigoEstudiante" value="<%=usuario.getCodigoPucp()%>" />
 
                     <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=carrito.getIdcompra()%>" >

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Objects" %><%--
   Created by IntelliJ IDEA.
   User: jesus
   Date: 5/06/2022
@@ -6,7 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="indicador" scope="request" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="indicador" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="indicador2" scope="session" type="java.lang.String" class="java.lang.String"/>
+
+
+
 
 
 <!DOCTYPE html>
@@ -233,6 +237,21 @@
 <body STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;" >
 <!-- Navbar -->
 
+<%if (session.getAttribute("indicador2").equals("error")){%>
+
+
+<div class="d-inline-flex p-2" style="margin-top: 15px">
+    <div class="alert alert-success" role="alert">Registrado con Éxito!!, ahora puedes loguearte dando click a "iniciar sesion"
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+
+<%session.removeAttribute("indicador2");%>
+<%}%>
+
 <br>
 <br>
 <br>
@@ -258,6 +277,13 @@
                                 </style>
 
                                 <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir" enctype="multipart/form-data">
+
+
+
+
+
+
+
                                     <!-- Nombre completo-->
                                     <div class="form-group">
                                         <input type="text" style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*"  required="required"
@@ -303,12 +329,12 @@
                                     <div class="form-group">
                                         <input type="file" name="picture">
                                     </div>
-                                    <%if (request.getAttribute("indicador").equals("error")){%>
+                                    <%if (session.getAttribute("indicador").equals("error")){%>
                                     </br>
                                     <div class="text-danger nb-2">
                                         Error código Pucp o correo!!!
                                     </div>
-                                    <%request.removeAttribute("indicador");%>
+                                    <%session.removeAttribute("indicador");%>
                                     <%}%>
                                     <button type="submit" class="btn btn-primary" >Crear Usuario</button>
                                     <hr>

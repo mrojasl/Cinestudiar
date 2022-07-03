@@ -78,7 +78,7 @@ public class CarritoServlet extends HttpServlet {
         int cantidad_funcion= Integer.parseInt(request.getParameter("cantidad_funcion"));
         int precio_ticket= Integer.parseInt(request.getParameter("precio_ticket"));
         int idfuncion= Integer.parseInt(request.getParameter("idfuncion"));
-        String imagen=request.getParameter("imagen");
+
         String codigoEstudiante=request.getParameter("codigoEstudiante");
         int idcompra= Integer.parseInt(request.getParameter("idcompra"));
 
@@ -90,7 +90,7 @@ public class CarritoServlet extends HttpServlet {
         bCarrito.setNombre_sede(nombre_sede);
         bCarrito.setCantidad_funcion(cantidad_funcion);
         bCarrito.setPrecio_ticket(precio_ticket);
-        bCarrito.setImagen(imagen);
+
         bCarrito.setIdfuncion(idfuncion);
         bCarrito.setCodigoEstudiante(codigoEstudiante);
         bCarrito.setIdcompra(idcompra);
