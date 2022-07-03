@@ -87,7 +87,8 @@ public class PeliculasDao extends BaseDao{
                     BProfesional p = new BProfesional();
                     p.setIdProfesional(resultSet.getInt(1));
                     p.setNombre(resultSet.getString(2));
-                    p.setRol(resultSet.getString(3));
+                    p.setApellido(resultSet.getString(3));
+                    p.setRol(resultSet.getString(4));
                     listap.add(p);
                 }
             }
@@ -111,7 +112,60 @@ public class PeliculasDao extends BaseDao{
                     BProfesional p = new BProfesional();
                     p.setIdProfesional(resultSet.getInt(1));
                     p.setNombre(resultSet.getString(2));
-                    p.setRol(resultSet.getString(3));
+                    p.setApellido(resultSet.getString(3));
+                    p.setRol(resultSet.getString(4));
+                    listap.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+        return listap;
+    }
+
+    public ArrayList<BProfesional> listaActor() {
+
+        ArrayList<BProfesional> listap = new ArrayList<>();
+        String sql = "select peliculas_idpelicula, po.idprofesional,po.nombre,po.apellido,po.rol from peliculas_has_profesionales ph inner join profesionales po\n" +
+                "on (ph.profesionales_idprofesional=po.idprofesional) where  po.rol = 'a'\n" +
+                "order by po.nombre desc;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            try (ResultSet resultSet = pstmt.executeQuery();) {
+                while (resultSet.next()) {
+                    BProfesional p = new BProfesional();
+                    p.setIdPelicula(resultSet.getInt(1));
+                    p.setIdProfesional(resultSet.getInt(2));
+                    p.setNombre(resultSet.getString(3));
+                    p.setApellido(resultSet.getString(4));
+                    p.setRol(resultSet.getString(5));
+                    listap.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+        return listap;
+    }
+
+    public ArrayList<BProfesional> listaDirector() {
+
+        ArrayList<BProfesional> listap = new ArrayList<>();
+        String sql = "select peliculas_idpelicula, po.idprofesional,po.nombre,po.apellido,po.rol from peliculas_has_profesionales ph inner join profesionales po\n" +
+                "on (ph.profesionales_idprofesional=po.idprofesional) where  po.rol = 'd'\n" +
+                "order by po.nombre desc;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            try (ResultSet resultSet = pstmt.executeQuery();) {
+                while (resultSet.next()) {
+                    BProfesional p = new BProfesional();
+                    p.setIdPelicula(resultSet.getInt(1));
+                    p.setIdProfesional(resultSet.getInt(2));
+                    p.setNombre(resultSet.getString(3));
+                    p.setApellido(resultSet.getString(4));
+                    p.setRol(resultSet.getString(5));
                     listap.add(p);
                 }
             }

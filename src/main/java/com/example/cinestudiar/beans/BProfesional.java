@@ -4,11 +4,20 @@ import java.sql.Blob;
 
 public class BProfesional {
     private int idProfesional;
+    private int idPelicula;
     private String nombre;
     private String apellido;
     private String rol;
     private Blob foto;
     private float calificacion;
+
+    public int getIdPelicula() {
+        return idPelicula;
+    }
+
+    public void setIdPelicula(int idPelicula) {
+        this.idPelicula = idPelicula;
+    }
 
     public BProfesional() {
     }
