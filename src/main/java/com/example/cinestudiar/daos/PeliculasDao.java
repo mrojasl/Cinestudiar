@@ -94,6 +94,54 @@ public class PeliculasDao extends BaseDao{
 
 
     }
+
+    public BPeliculas obtenerPelicula(int idpelicula) {
+
+        BPeliculas p = null;
+
+        String sql = "select * FROM peliculas WHERE  idpelicula = ? ";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, idpelicula);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                while (rs.next()){
+                    p = new BPeliculas();
+                    p.setIdpeliculas(rs.getInt(1));
+                    p.setNombre(rs.getString(2));
+                    p.setDuracion(rs.getInt(3));
+                    p.setCalificacion(rs.getInt(4));
+                    p.setGenero(rs.getString(5));
+                    p.setFoto(rs.getBlob(6));
+                    p.setInformación(rs.getString(7));
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión en obtenerViaje!");
+            e.printStackTrace();
+        }
+        return p;
+
+    }
+
+    public void borrarPelicula(int idpelicula)  {
+
+        String sql = "DELETE FROM peliculas WHERE idpelicula = ?";
+
+        try(Connection conn= this.getConnection();
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setInt(1,idpelicula );;
+            pstmt.executeUpdate();
+
+        }catch(SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+
+
+    }
     public Integer cointaner(int tamaño){
         if(tamaño%6==0){
             return tamaño/6;
