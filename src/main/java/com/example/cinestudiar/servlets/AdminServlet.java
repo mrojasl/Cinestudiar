@@ -167,11 +167,11 @@ public class AdminServlet extends HttpServlet {
 
             }
             case "actualizarfoto"->{
-                String idProf = request.getParameter("idprof");
+                String id = request.getParameter("id");
                 Part foto = request.getPart("fotonueva");
                 InputStream fotoinput = null;
                 fotoinput = foto.getInputStream();
-                AdminDao.actualizarFotoProf(idProf,fotoinput);
+                AdminDao.actualizarFotoProf(id,fotoinput);
                 response.sendRedirect(request.getContextPath()+"/ServAdmin?admin=profesional");
             }
 

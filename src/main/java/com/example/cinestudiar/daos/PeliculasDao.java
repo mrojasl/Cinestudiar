@@ -227,4 +227,23 @@ public class PeliculasDao extends BaseDao{
 
         return listaPeliculas;
     }
+    public void ActualizarPortadaPeli(int id, InputStream foto) {
+
+        String sql = "UPDATE peliculas set foto=? where idpelicula=?;";
+
+        try (Connection conn= this.getConnection();
+             PreparedStatement pstmt= conn.prepareStatement(sql)) {
+
+            pstmt.setBlob(1, foto);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
 }

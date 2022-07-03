@@ -183,8 +183,9 @@
                         <th class="text-white">Título</th>
                         <th class="text-white">Duracion (minutos)</th>
                         <th class="text-white">Genero</th>
-                        <th class="text-white">Descripción</th>
                         <th class="text-white">Calificacion Promedio</th>
+                        <th class="text-white">Descripción</th>
+                        <th class="text-white">Portada</th>
                         <th class="text-white">Borrar</th>
 
                     </tr>
@@ -200,10 +201,10 @@
                         <td class="text-white"><%=pelicula.getNombre()%> </td>
                         <td class="text-white"><%=pelicula.getDuracion()%></td>
                         <td class="text-white"><%=pelicula.getGenero()%></td>
-                        <td class="text-white"><button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#descripcion<%=pelicula.getIdpeliculas()%>">Ver</button></td>
 
 
-                        <!-- Modal -->
+
+                        <!-- ModalDescripcion -->
                         <div class="modal fade" id="descripcion<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="descripcion<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
                             <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarDesc">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -216,6 +217,36 @@
                                             <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
                                             <div class="input-group">
                                                 <textarea name="descripcion" style="height:500px;font-size:14pt;" maxlength="1000" class="form-control"><%=pelicula.getInformación()%></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <!-- ModalPortada -->
+                        <div class="modal fade" id="foto<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="foto<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
+                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarPort" enctype="multipart/form-data">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel2">Descripción</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
+                                            <div class="input-group">
+                                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="portada" style="width:250px;height:380px;margin-left: 100px "/>
+
+                                            </div>
+                                            <div style="margin-top: 20px">
+                                                <label class="input-group-text" for="inputGroupFile01">Editar Portada</label>
+                                                <input type="file" class="form-control" name="fotonueva">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -286,6 +317,30 @@
                             <i class="fa fa-star checked"></i>
                         </td>
                         <%}%>
+
+
+                        <td class="text-white">
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#descripcion<%=pelicula.getIdpeliculas()%>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                </svg>
+                            </button>
+                        </td>
+
+
+
+
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#foto<%=pelicula.getIdpeliculas()%>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                </svg>
+                            </button>
+                        </td>
+
+
                         <%if (pelicula.getExisteCompra()==0){%>
                         <td>
 

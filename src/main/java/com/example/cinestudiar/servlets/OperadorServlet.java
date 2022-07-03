@@ -195,6 +195,15 @@ public class OperadorServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/OperadorServlet?action=peliculas");
 
             }
+            case "editarPort" ->{
+                int id = Integer.parseInt(request.getParameter("id"));
+                Part foto = request.getPart("fotonueva");
+                InputStream fotoinput = null;
+                fotoinput = foto.getInputStream();
+                peliculasDao.ActualizarPortadaPeli(id,fotoinput);
+                response.sendRedirect(request.getContextPath() + "/OperadorServlet?action=peliculas");
+
+            }
             case "crearpeli" ->{
                 String titulo = request.getParameter("titulo");
                 int duracion = Integer.parseInt(request.getParameter("duracion"));
