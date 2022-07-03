@@ -10,7 +10,7 @@
 <jsp:useBean id="carritoDcompras" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BCarrito>" />
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" />
 <jsp:useBean id="usuarioLogueado" class="com.example.cinestudiar.beans.BUser" scope="session" type="com.example.cinestudiar.beans.BUser"/>
-<jsp:useBean id="listapeliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
+
 
 <html>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
