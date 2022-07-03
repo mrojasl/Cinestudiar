@@ -64,6 +64,14 @@ public class PeliculasDao extends BaseDao{
         return lista;
     }
 
+    public  BPeliculas obtener_pelicula(int id,ArrayList<BPeliculas> lista){
+        for (BPeliculas bPeliculas : lista){
+            if (bPeliculas.getIdpeliculas() == id){
+                return bPeliculas;
+            }
+        }
+        return null;
+    }
 
     public void crearPelicula(String nombre, int duracion, String genero, InputStream foto, String informacion)  {
 
