@@ -30,6 +30,23 @@
         .checked {
             color: orange;
         }
+        input[type="date"]::before {
+            content: attr(placeholder);
+            position: absolute;
+            color: #000000;
+        }
+
+        input[type="date"] {
+            color: #ffffff;
+        }
+        input[type="date"]:focus{
+            color: #666666;
+        }
+
+        input[type="date"]:focus::before {
+            content: "";
+        }
+
     </style>
 
      <link rel="stylesheet" href="Operador/operador_style.css">
@@ -60,90 +77,178 @@
         </ul>
 
     </section>
-    <section>
-        <div class="d-flex justify-content-evenly">
-            <div class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu">Crear Función</a>
-            </div>
+    <div class="container">
 
-            <div class="ms-auto p-2 bd-highlight botones">
-                <button data-bs-toggle="modal" class = "btn btn-secondary" data-bs-target="#exporta_reporte">Exportar reporte</button>
-                <div class="modal fade" id="exporta_reporte" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Reporte de Sala</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form class="p-2 mx-2 mb-2 d-flex-row ">
-                                    <div class="d-flex flex-column bd-highlight mb-3">
-                                        <div class="p-2 bd-highlight">
-                                            <label class="fw-bold">Sede:</label>
-                                            <br>
-                                            <select style="width: 30%" class="mx-1 custom-select my-1 mr-sm-2" id="sede" name="Sede">
-                                                <option value="San Miguel">San Miguel</option>
-                                                <option value="Miraflores">Miraflores</option>
-                                                <option value="Surco">Surco</option>
-                                                <option value="Pueblo Libre">Pueblo Libre</option>
-                                            </select>
-                                        </div>
-                                        <div class="p-2 bd-highlight">
-                                            <label class="fw-bold">Sala</label><br>
-                                            <select style="width: 30%" class="custom-select my-1 mr-sm-2" id="sala">
-                                                <option selected></option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select>
-                                        </div>
-                                        <div class="p-2 bd-highlight">
-                                            <label class="fw-bold" for="fecha">Fecha:</label><br>
-                                            <input class="mx-1 my-2" type="date" id="fecha" name="fecha">
-                                        </div>
-                                    </div>
-                                </form>
+        <div class="d-flex justify-content-between">
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-secondary" data-bs-target="#reporte_exportado" >Exportar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="input-group mb-3 col">
+
+                <!-- Button trigger modal -->
+                <button style="height: 40px"
+                        type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                    Crear Función
+                </button>
 
             </div>
+            <form class="d-flex justify-content-between" method="POST" action="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">
 
-        </div>
-    </section>
-    <form method="POST" class = "d-flex justify-content-around" action="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">
-    <div class="d-flex justify-content-around">
-        <div  class="form-outline form-white w-25">
-            <label class="fw-bold mx-1 my-2 text-white" >Fecha de inicio:</label>
-            <input name = "fecha_in" class="form-control form-control-lg" type="date" id="fechainicio">
-        </div>
+            <div class="input-group mb-3 col">
 
-        <div class="form-outline form-white w-25">
-            <label class="fw-bold mx-1 my-2 text-white" >Fecha de fin:</label>
-            <input name = "fecha_fin" class="form-control form-control-lg" type="date" id="fechafin">
-        </div>
-        <div class="form-outline form-white">
-            <label class="fw-bold mx-1 my-2 text-white" >Ordenar por:</label>
-               <select id ="selection_option" name="listarFunciones" class=" form-control form-control-lg" onchange="update()" >
-                    <option selected value="defecto"<%=listarFunciones.equals("defecto")?"selected":""%>>Selecione su opción</option>
+
+                <input name = "fecha_in" class="form-control" type="date"  placeholder="Fecha de Inicio:" aria-label="default input example">
+
+            </div>
+            <div class="input-group mb-3 col">
+
+
+                <input
+                        name="fecha_fin" class="form-control" type="date" placeholder="Fecha fin"
+                        aria-label="default input example">
+
+            </div>
+            <div class = "input-group mb-3 col">
+
+
+                <select name="listarFunciones"class="form-control" aria-label="default input example" onchange="update()" >
+                    <option selected value="defecto"<%=listarFunciones.equals("defecto")?"selected":""%>>Ordenar por:</option>
                     <option value="Funciones Disponibles" <%=listarFunciones.equals("Funciones Disponibles")?"selected":""%>>Funciones Disponibles</option>
                     <option value="Mejor calificado" <%=listarFunciones.equals("Mejor calificado")?"selected":""%>>Mejor calificado</option>
                     <option value="Mas visto"<%=listarFunciones.equals("Mas visto")?"selected":""%>>Más visto</option>
                     <option value="Menos visto"<%=listarFunciones.equals("Menos visto")?"selected":""%>>Menos visto</option>
                 </select>
+
+            </div>
+            <div class ="input-group mb-3 col">
+
+                <button style="height: 40px; background-color: #003f9e; text-decoration-color: #dedee1" class="btn btn-success buttonmargin" type = "submit">Filtrar</button>
+
+            </div>
+            </form>
+
+            <div class="input-group mb-3 col">
+                <button data-bs-toggle="modal" class = "btn btn-secondary" data-bs-target="#exporta_reporte">Exportar reporte</button>
+                <div class="ms-auto p-2 bd-highlight botones">
+
+                    <div class="modal fade" id="exporta_reporte" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Reporte de Sala</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="p-2 mx-2 mb-2 d-flex-row ">
+                                        <div class="d-flex flex-column bd-highlight mb-3">
+                                            <div class="p-2 bd-highlight">
+                                                <label class="fw-bold">Sede:</label>
+                                                <br>
+                                                <select style="width: 30%" class="mx-1 custom-select my-1 mr-sm-2" id="sede" name="Sede">
+                                                    <option value="San Miguel">San Miguel</option>
+                                                    <option value="Miraflores">Miraflores</option>
+                                                    <option value="Surco">Surco</option>
+                                                    <option value="Pueblo Libre">Pueblo Libre</option>
+                                                </select>
+                                            </div>
+                                            <div class="p-2 bd-highlight">
+                                                <label class="fw-bold">Sala</label><br>
+                                                <select style="width: 30%" class="custom-select my-1 mr-sm-2" id="sala">
+                                                    <option selected></option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                            <div class="p-2 bd-highlight">
+                                                <label class="fw-bold" for="fecha">Fecha:</label><br>
+                                                <input class="mx-1 my-2" type="date" id="fecha" name="fecha">
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-target="#reporte_exportado" >Exportar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Crear Película</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="" enctype="multipart/form-data">
+                                <div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Titulo</span>
+                                        <input name="titulo" type="text" class="form-control" placeholder="Título" required="required"
+                                               aria-label="Sala 1"
+                                               aria-describedby="button-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Duracion</span>
+                                        <input name="duracion" type="number" class="form-control" placeholder="Duración" required="required"
+                                               aria-label="Sala 1" min="0" max="400"
+                                               aria-describedby="button-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Genero</span>
+                                        <select type="text" id="genero" name="genero" class="form-control form-control-lg">
+                                            <option selected></option>
+                                            <option value="accion">accion</option>
+                                            <option value="animación">animación</option>
+                                            <option value="aventura">aventura</option>
+                                            <option value="ciencia_ficcion">ciencia ficcion</option>
+                                            <option value="comedia">comedia</option>
+                                            <option value="drama">drama</option>>
+                                            <option value="misterio">misterio</option>
+                                            <option value="suspenso">suspenso</option>
+                                            <option value="terror">terror</option>
+                                        </select>
+                                    </div>
+                                    <label>Descripción</label>
+                                    <div class="input-group mb-3">
+
+                                        <textarea name="descripcion" style="height:300px;font-size:14pt;" maxlength="1000" class="form-control"></textarea>
+
+                                    </div>
+                                    <div class="input-group mb-3 ">
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text" for="inputGroupFile01">Portada</label>
+                                            <input name="fotopeli" type="file" class="form-control" id="inputGroupFile01">
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="outline">
-            <button type = "submit" class = "form-control form-control-lg text-white" style="background-color: #003f9e; text-decoration-color: #dedee1">Filtrar</button>
-        </div>
-    </div>
-    </form>
+
     <div class="container">
         <div class="row ">
 
@@ -234,6 +339,7 @@
 
             </table>
         </div>
+    </div>
     </div>
 
 
