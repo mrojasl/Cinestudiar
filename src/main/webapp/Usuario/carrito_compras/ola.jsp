@@ -103,6 +103,9 @@
                     <input type="hidden" name="imagen" value="<%=carrito.getImagen()%>" />
                     <input type="hidden" name="historialcompra" value="<%=carrito.getHistorialcompra()%>" />
                     <input type="hidden" name="codigoEstudiante" value="<%=carrito.getCodigoEstudiante()%>" />
+
+                    <input type="hidden" name="reducirTickets" value="<%=carrito.getAforoOperador()%>" />
+
                     <input type="hidden" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" value="<%=carrito.getCantidad_funcion()%>" >
                     <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=hitsCount-hitsCountresta%>" >
 

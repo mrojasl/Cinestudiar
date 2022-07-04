@@ -26,6 +26,18 @@ public class BCarrito {
 
     private String correopucp;
 
+    private int duracionpelicula;
+
+
+
+
+    public int getDuracionpelicula() {
+        return duracionpelicula;
+    }
+
+    public void setDuracionpelicula(int duracionpelicula) {
+        this.duracionpelicula = duracionpelicula;
+    }
 
     public String getCorreopucp() {
         return correopucp;
@@ -68,7 +80,6 @@ public class BCarrito {
 
     private int idcompra;
     private int aforoOperador;
-
 
     public int getAforoOperador() {
         return aforoOperador;

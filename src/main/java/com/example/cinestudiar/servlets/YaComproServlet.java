@@ -26,6 +26,11 @@ public class YaComproServlet extends HttpServlet {
         if ("yacompro".equals(action)) {
             BCarrito bCarrito = leerParametrosRequest(request);
             carritoDao.yacompro(bCarrito);
+
+            int funcion= Integer.parseInt(request.getParameter("idfuncion"));
+            int reduccionAforoxCompra= Integer.parseInt(request.getParameter("cantidad_funcion"));
+
+            carritoDao.reducciondeAforoxCompra(reduccionAforoxCompra,funcion);
             response.sendRedirect(request.getContextPath() + "/ola");
         }
     }

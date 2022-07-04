@@ -95,9 +95,9 @@
 
     <% if (fechaigual==1){ %>
     <div class="alert alert-danger d-flex justify-content-start" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+
         <div>
-            ERROR: existe un cruce de horarios en su compra, por favor, revise su orden.
+            <i class="bi bi-exclamation-square-fill"></i> ERROR: existe un cruce de horarios en su compra, por favor, revise su orden. <i class="bi bi-exclamation-square-fill"></i>
         </div>
     </div>
     <%}%>
@@ -105,7 +105,7 @@
         <thead>
         <tr class="titulos">
             <th style="color:White ">Película(s)</th>
-            <th style="color:White ">Sede</th>
+            <th style="color:White ">Información</th>
             <th style="color:White ">Entradas</th>
             <th style="color:White ">Precio por Entrada</th>
             <th style="color:White ">Subtotal</th>
@@ -115,26 +115,46 @@
         </thead>
         <tbody>
         <%
-
-
-
             for (BCarrito carrito : carritoDcompras) {
                 codigo_puke=usuario.getCodigoPucp();
                 correo_pucp=carrito.getCorreopucp();
-
                 preciototal = preciototal + carrito.getPrecio_ticket() * carrito.getCantidad_funcion();%>
         <tr>
             <td>
                 <!--<img src="Usuario/carrito_compras/error_cruce_horarios/idpelicula_<%=carrito.getIdpelicula()%>.jpg" alt="perfil foto" style="width:110px;height:150px;">-->
                 <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=carrito.getIdpelicula()%>" alt="perfil foto" style="width:110px;height:150px;">
                 <div class="d-flex flex-column bd-highlight mb-3">
-                    <div class="p-2 bd-highlight" style="color:White;font-size: 20px "><%=carrito.getNombre_pelicula()%></div>
-                    <div class="p-2 bd-highlight" style="color:White "><%=carrito.getFecha()%></div>
-                    <div class="p-2 bd-highlight" style="color:White "><%=carrito.getHora()%></div>
                     <% contador_carrito++;%>
-                </div></td>
+                </div>
+            </td>
             <td style="color:White ">
-                <%=carrito.getNombre_sede()%>
+                <div style="color:White;font-size: 20px "><strong><%=carrito.getNombre_pelicula()%></strong></div>
+                <br>
+                <strong>Sede:</strong> <%=carrito.getNombre_sede()%>
+                <br>
+                <% String fechanSplit=carrito.getFecha();%>
+                <% String[] fechaSplit=fechanSplit.split("-");%>
+                <strong>Fecha:</strong> <%=fechaSplit[2]+"/"+fechaSplit[1]+"/"+fechaSplit[0]%>
+                <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Fecha en formato (dd/mm/yyyy)">
+                    <i class="bi bi-info-circle-fill"></i>
+                </span>
+                <br>
+                <strong>Hora:</strong> <%=carrito.getHora()%>
+                <br>
+                <% int horas=0;
+                   int minutos=carrito.getDuracionpelicula();
+                    while (minutos>=60){
+                        minutos-=60;
+                        horas++;
+                    }%>
+
+                <strong>Duración:</strong> <%=horas%> hora(s), <%=minutos%> minuto(s).
+                <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Formato de 24 horas (hh:mm:ss)">
+                    <i class="bi bi-info-circle-fill"></i>
+                    </span>
+
+
+
             </td>
             <td>
                 <form method="POST" action="<%=request.getContextPath()%>/Checkout?a=actualizar">
@@ -149,8 +169,8 @@
                     <input type="hidden" name="codigoEstudiante" value="<%=usuario.getCodigoPucp()%>" />
 
                     <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=carrito.getIdcompra()%>" >
-                    <p STYLE="color: White"> Maximo aforo: <%=carrito.getAforoOperador()%></p>
-                    <input type="number" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" min="1" max="<%=carrito.getAforoOperador()%>" value="<%=carrito.getCantidad_funcion()%>" >
+                    <p STYLE="color: White"> Entradas Disponibles: <%=carrito.getAforoOperador()%></p>
+                    <input type="number" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" min="1" max="<%=carrito.getAforoOperador()%>" value="<%=carrito.getCantidad_funcion()%>" > <br>
                     <%totaldetickets=totaldetickets+carrito.getCantidad_funcion();%>
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
@@ -247,27 +267,14 @@
                                             <label for="correo_puke" class="form-label"></label>
                                             <input type="hidden" class="form-control" name="correo_puke" id="correo_puke" value="<%=correo_pucp%>">
 
+                                            <input type="hidden" class="form-control" name="" id="reducirTickets" value="">
+
                                             <button type="submit" class="btn btn-success" >Pagar</button>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                         </div>
                     </div>
@@ -284,6 +291,10 @@
 
 
 <script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+
     function modifyInput(ele) {
 
         if (ele.value.length === 2)
@@ -300,10 +311,6 @@
             ele.value = ele.value + ' '
         if (ele.value.length === 14)
             ele.value = ele.value + ' '
-        if (ele.value.length === 19)
-            ele.value = ele.value + ' '
-
-
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"

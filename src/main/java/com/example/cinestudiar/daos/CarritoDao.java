@@ -33,7 +33,7 @@ public class CarritoDao extends BaseDao {
 
     public ArrayList<BCarrito> listarUsuario(String codigo){
 
-        String sql="select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,sala.aforo_operador,cf.idfuncion,cf.idhistorialdecompras,p.idpelicula,u.correo from usuarios u\n" +
+        String sql="select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,f.aforo_operador,cf.idfuncion,cf.idhistorialdecompras,p.idpelicula,u.correo,p.duracion from usuarios u\n" +
                 "\t\t\t\t\t\t\t\t\t\tinner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
                 "\t\t\t\t\t\t\t\t\t\tinner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
                 "\t\t\t\t\t\t\t\t\t\tinner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
@@ -66,6 +66,7 @@ public class CarritoDao extends BaseDao {
                     bCarrito.setIdfuncion(rs.getInt(11));
                     bCarrito.setHistorialcompra(rs.getInt(12));
                     bCarrito.setCorreopucp(rs.getString(14));
+                    bCarrito.setDuracionpelicula(rs.getInt(15));
                     listausuarios.add(bCarrito);
                 }
             }
@@ -157,6 +158,33 @@ public class CarritoDao extends BaseDao {
         }
 
     }
+
+    public void reducciondeAforoxCompra(int reduccionAforoxCompra,int idfuncion) {
+
+
+        String sql = "update funciones set aforo_operador=aforo_operador-? where idfuncion=?;";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+            pstmt.setInt(1,reduccionAforoxCompra);
+            pstmt.setInt(2,idfuncion);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 
 
     public static String sha256(final String base) {
