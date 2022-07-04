@@ -321,14 +321,31 @@
                                     <input type="date" id="start" name="fecha_nacimiento" required="required"
                                            value="--/--/--"
                                            min="1950-01-01" max="2003-01-01">
-                                    <!-- Contraseña-->
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Contraseña" name="password" required="required">
-                                    </div>
+
                                     <div class="form-group">
                                         <input type="file" name="picture">
                                     </div>
+
+
+
+
+                                    <!-- Contraseña-->
+                                    <div class="form-group">
+                                        <input type="password" onkeyup='check();' class="form-control form-control-user" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
+                                               id="exampleInputPassword" placeholder="Contraseña" name="password" required="required">
+                                    </div>
+
+                                    <!-- Confirmar Contraseña-->
+                                    <div class="form-group">
+                                        <input type="password" onkeyup='check();' class="form-control form-control-user"
+                                               id="confirmPassword" placeholder="Confirmar contraseña" name="confirmPassword" required="required">
+                                    </div>
+                                    <span id='message'></span>
+
+
+
+
+
                                     <%if (session.getAttribute("indicador").equals("error")){%>
                                     </br>
                                     <div class="text-danger nb-2">
@@ -336,7 +353,8 @@
                                     </div>
                                     <%session.removeAttribute("indicador");%>
                                     <%}%>
-                                    <button type="submit" class="btn btn-primary" >Crear Usuario</button>
+                                    <div id="ocultocontra"> </div>
+                                    <!--<button type="submit" class="btn btn-primary" >Crear Usuario</button>-->
                                     <hr>
                                 </form>
 
@@ -349,6 +367,25 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    var check = function() {
+        if (document.getElementById('exampleInputPassword').value ==
+            document.getElementById('confirmPassword').value) {
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'Las contraseñas coinciden :)';
+            document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-primary btn-lg">Registrarse</button>';
+        } else {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'Las contraseñas no coinciden';
+            document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-primary btn-lg " disabled>Registrarse</button>';
+        }
+    }
+</script>
+
+
+
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
