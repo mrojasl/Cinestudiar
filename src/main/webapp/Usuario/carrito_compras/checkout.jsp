@@ -162,7 +162,11 @@
 
                 <%="S/." + carrito.getPrecio_ticket() * carrito.getCantidad_funcion()%>
             </td>
-            <td><a href="<%=request.getContextPath()%>/Checkout?a=borrar&id=<%=carrito.getIdfuncion()%>" class="btn btn-danger">Eliminar Reserva</a></td>
+            <td><form method="POST" action="<%=request.getContextPath()%>/Checkout?a=borrar">
+                <input type="hidden" name="idborrar" value="<%=carrito.getIdfuncion()%>">
+                <button type="submit" class="btn btn-danger" >Borrar Reserva</button>
+                </form>
+            </td>
 
             <%
                 } %>
