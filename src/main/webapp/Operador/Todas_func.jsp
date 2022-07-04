@@ -96,14 +96,14 @@
             <div class="input-group mb-3 col">
 
 
-                <input name = "fecha_in" class="form-control" type="date"  placeholder="Fecha de Inicio:" aria-label="default input example">
+                <input name = "fecha_in" class="form-control" type="date"  placeholder="Desde:" aria-label="default input example">
 
             </div>
             <div class="input-group mb-3 col">
 
 
                 <input
-                        name="fecha_fin" class="form-control" type="date" placeholder="Fecha fin"
+                        name="fecha_fin" class="form-control" type="date" placeholder="Hasta:"
                         aria-label="default input example">
 
             </div>
@@ -127,7 +127,7 @@
             </form>
 
             <div class="input-group mb-3 col">
-                <button data-bs-toggle="modal" class = "btn btn-secondary" data-bs-target="#exporta_reporte">Exportar reporte</button>
+                <button style="height: 40px; background-color: #6c6e7e; text-decoration-color: #dedee1" data-bs-toggle="modal" class = "btn btn-success buttonmargin" data-bs-target="#exporta_reporte">Exportar reporte</button>
                 <div class="ms-auto p-2 bd-highlight botones">
 
                     <div class="modal fade" id="exporta_reporte" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -186,7 +186,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Crear Película</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Crear Función</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                         </div>
@@ -194,47 +194,81 @@
                             <form method="post" action="" enctype="multipart/form-data">
                                 <div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Titulo</span>
-                                        <input name="titulo" type="text" class="form-control" placeholder="Título" required="required"
+                                        <span class="input-group-text">Titulo</span> <!--RECIBIRÁ DE BASE -->
+                                        <select type="text" id="pelicula" name="pelicula" class="form-control form-control-lg">
+                                            <option selected></option>
+                                            <option value="peli1">Peli1</option>
+                                            <option value="peli2">Peli2</option>
+                                            <option value="peli3">Peli3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Director</span> <!--RECIBIRÁ DE BASE Uso de VALUE-->
+                                        <input name="director" type="text" class="form-control" placeholder="Director" required="required"
                                                aria-label="Sala 1"
                                                aria-describedby="button-addon1">
                                     </div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Duracion</span>
-                                        <input name="duracion" type="number" class="form-control" placeholder="Duración" required="required"
-                                               aria-label="Sala 1" min="0" max="400"
+                                        <span class="input-group-text">Edad mínima</span>
+                                        <input name="edad_minima" type="text" class="form-control" placeholder="Edad Mínima" required="required"
+                                               aria-label="Sala 1"
                                                aria-describedby="button-addon1">
                                     </div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Genero</span>
-                                        <select type="text" id="genero" name="genero" class="form-control form-control-lg">
+                                        <span class="input-group-text">Género</span><!--RECIBIRÁ DE BASE Uso de VALUE-->
+                                        <input name="genero" type="text" class="form-control" placeholder="Género" required="required"
+                                               aria-label="Sala 1"
+                                               aria-describedby="button-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Sede</span><!--RECIBIRÁ DE BASE -->
+                                        <select type="text" id="sede" name="sede" class="form-control form-control-lg">
                                             <option selected></option>
-                                            <option value="accion">accion</option>
-                                            <option value="animación">animación</option>
-                                            <option value="aventura">aventura</option>
-                                            <option value="ciencia_ficcion">ciencia ficcion</option>
-                                            <option value="comedia">comedia</option>
-                                            <option value="drama">drama</option>>
-                                            <option value="misterio">misterio</option>
-                                            <option value="suspenso">suspenso</option>
-                                            <option value="terror">terror</option>
+                                            <option value="sede1">Sede1</option>
+                                            <option value="sede2">Sede2</option>
+                                            <option value="sede3">Sede3</option>
                                         </select>
                                     </div>
-                                    <label>Descripción</label>
                                     <div class="input-group mb-3">
-
-                                        <textarea name="descripcion" style="height:300px;font-size:14pt;" maxlength="1000" class="form-control"></textarea>
-
+                                        <span class="input-group-text">Sala</span><!--RECIBIRÁ DE BASE -->
+                                        <select type="text" id="Sala" name="Sala" class="form-control form-control-lg">
+                                            <option selected></option>
+                                            <option value="sala1">Sala1</option>
+                                            <option value="sala2">Sala2</option>
+                                            <option value="sala3">Sala3</option>
+                                        </select>
                                     </div>
-                                    <div class="input-group mb-3 ">
-                                        <div class="input-group mb-3">
-                                            <label class="input-group-text" for="inputGroupFile01">Portada</label>
-                                            <input name="fotopeli" type="file" class="form-control" id="inputGroupFile01">
-                                        </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Aforo</span><!--RECIBIRÁ DE BASE | Recibirá el de admin para modif-->
+                                        <input name="aforo" type="text" class="form-control" placeholder="Aforo" required="required"
+                                               aria-label="Sala 1"
+                                               aria-describedby="button-addon1">
                                     </div>
 
 
 
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Hora</span>
+                                        <input name="hora" type="time" class="form-control"  required="required"
+                                               aria-label="Sala 1"
+                                               aria-describedby="button-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Personal de Mantenimiento</span><!--RECIBIRÁ DE BASE lista -->
+                                        <select type="text" id="mantenimiento" name="mantenimiento" class="form-control form-control-lg">
+                                            <option selected></option>
+                                            <option value="mante1">Mante1</option>
+                                            <option value="mante2">Mante2</option>
+                                            <option value="mante3">Mante3</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Costo de Ticket</span>
+                                        <input name="costo" type="text" class="form-control" placeholder="Costo de Ticket" required="required"
+                                               aria-label="Sala 1"
+                                               aria-describedby="button-addon1">
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar
@@ -253,7 +287,7 @@
         <div class="row ">
 
             <table class="table" id = "tableUp">
-                <head>
+
                     <tr>
                         <th class="text-white">IdFunción</th>
                         <th class="text-white">Película</th>
@@ -265,7 +299,6 @@
                         <th class="text-white">Calificacion Promedio</th>
 
                     </tr>
-                </head>
                 <tbody>
 
                 <%
