@@ -275,6 +275,8 @@
                         <th class="text-white">Sala</th>
                         <th class="text-white">Precio de ticket</th>
                         <th class="text-white">Calificacion Promedio</th>
+                        <th class="text-white">Borrar</th>
+
 
                     </tr>
                 <tbody>

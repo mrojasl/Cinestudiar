@@ -86,6 +86,13 @@ public class OperadorServlet extends HttpServlet {
                 response.sendRedirect("OperadorServlet?action=peliculas");
                 break;
         }
+            case "agregarFun"->{ //ESTO VA PARA LA CREACIÓN DE FUNCIÓN
+                request.setAttribute("listaFunciones_1",operadorDao.obtenerlistaPeliculas());
+                request.setAttribute("listaSalas", operadorDao.obtenerSala());
+                request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
+                requestDispatcher=request.getRequestDispatcher("Operador/Todas_func.jsp");
+                requestDispatcher.forward(request,response);
+            }
 
             /*case " " -> {
                 //ArrayList<BFuncion> lista = null;
@@ -157,7 +164,7 @@ public class OperadorServlet extends HttpServlet {
         String filtro;
         PeliculasDao peliculasDao = new PeliculasDao();
         RequestDispatcher view;
-
+        BFuncion funciones;
         //ArrayList<BFuncion> lista = operadorDao.TodasLasFunciones();
         String filtro2;
 
@@ -183,14 +190,7 @@ public class OperadorServlet extends HttpServlet {
                 break;
             }
 
-            case "crearFuncion" -> {
-                System.out.println("Añadiendo");
-                BFuncion funcion = leerParametrosCrearFuncion(request);
-                operadorDao.crearFuncion(funcion);
-                view = request.getRequestDispatcher("Usuario/registro.jsp");
-                view.forward(request, response);
-                break;
-            }
+
             case "editarDesc" ->{
                 int id = Integer.parseInt(request.getParameter("id"));
                 String desc = request.getParameter("descripcion");
@@ -230,7 +230,19 @@ public class OperadorServlet extends HttpServlet {
                 view.forward(request, response);
 
             }
+            case "crearFunciones"->{
+                funciones =new BFuncion();
+                funciones.setFecha(request.getParameter("fecha"));
+                funciones.setHora(request.getParameter("hora"));
+                funciones.setPrecioTicket(Integer.parseInt(request.getParameter("precio_ticket")));
+                funciones.setEdadMinima(Integer.parseInt(request.getParameter("edad_minima")));
+                funciones.setIdPersonal(Integer.parseInt(request.getParameter("idPersonal")));
+                funciones.setIdSala(Integer.parseInt(request.getParameter("idSala")));
+                funciones.setAforoOperador(Integer.parseInt(request.getParameter("aforoOperador")));
+                operadorDao.crearFuncion(funciones);
 
+                response.sendRedirect("OperadorServlet");
+            }
         }
     }
     public BFuncion leerParametrosCrearFuncion (HttpServletRequest request) throws IOException, ServletException {
