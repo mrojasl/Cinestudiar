@@ -25,11 +25,7 @@ public class CarritoServlet extends HttpServlet {
 
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/carrito_compras/checkout.jsp");
         requestDispatcher.forward(request,response);
-        if ("borrar".equals(action)) {
-            String id = request.getParameter("id");
-            carritoDao.borrarReserva(id);
-            response.sendRedirect(request.getContextPath() + "/Checkout");
-        }
+
 
     }
 
@@ -43,6 +39,13 @@ public class CarritoServlet extends HttpServlet {
             carritoDao.actualiza(bCarrito);
             response.sendRedirect(request.getContextPath() + "/Checkout");
         }
+
+        if ("borrar".equals(action)) {
+            String id = request.getParameter("idborrar");
+            carritoDao.borrarReserva(id);
+            response.sendRedirect(request.getContextPath() + "/Checkout");
+        }
+
 
         if ("comprar".equals(action)) {
 
