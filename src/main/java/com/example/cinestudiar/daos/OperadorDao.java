@@ -1,9 +1,6 @@
 package com.example.cinestudiar.daos;
 
-import com.example.cinestudiar.beans.BFuncion;
-import com.example.cinestudiar.beans.BPeliculas;
-import com.example.cinestudiar.beans.BProfesional;
-import com.example.cinestudiar.beans.BEquipoLimpieza;
+import com.example.cinestudiar.beans.*;
 /*import com.example.cinestudiar.beans.BUser;*/
 
 import java.sql.*;
@@ -318,7 +315,7 @@ public class OperadorDao extends BaseDao {
     }
 
     //CREAR FUNCIONES
-    private static String sql_crear_func="INSERT INTO funciones (fecha,hora,precio_ticket,edad_minima,idpersonal,idsala,idpelicula) VALUES (?,?,?,?,?,?,?);";
+    private static String sql_crear_func="INSERT INTO funciones (fecha,hora,precio_ticket,edad_minima,idpersonal,idsala,idpelicula, aforo_operador) VALUES (?,?,?,?,?,?,?,?);";
 
     public void crearFuncion(BFuncion funcion) {
 
@@ -333,6 +330,7 @@ public class OperadorDao extends BaseDao {
             pstmt.setInt(5, funcion.getIdPersonal());
             pstmt.setInt(6, funcion.getIdSala());
             pstmt.setInt(7, funcion.getIdPelicula());
+            pstmt.setInt(8,funcion.getAforoOperador());
             pstmt.executeUpdate();
 
         }catch (SQLException error) {
@@ -353,6 +351,142 @@ public class OperadorDao extends BaseDao {
 
         }catch (SQLException error) {
             error.printStackTrace();
+        }
+    }
+    public ArrayList<BPeliculas> obtenerlistaPeliculas() {
+
+        ArrayList<BPeliculas> listaPeliculas = new ArrayList<>();
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select p.idpelicula,p.nombre, concat(pro.nombre, ' ', pro.apellido)from peliculas p\n" +
+                     "inner join peliculas_has_profesionales php on (p.idpelicula = php.peliculas_idpelicula)\n" +
+                     "inner join profesionales pro on (pro.idprofesional=php.profesionales_idprofesional);");) {
+
+            while (rs.next()) {
+                BPeliculas peliculas = new BPeliculas();
+                peliculas.setIdpeliculas(rs.getInt(1));
+                peliculas.setDirector(rs.getString(2));
+                listaPeliculas.add(peliculas);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaPeliculas;
+    }
+    public ArrayList<BEquipoLimpieza> obtenerPersonal() {
+
+        ArrayList<BEquipoLimpieza> listaequipoLimpiezas = new ArrayList<>();
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT idpersonal FROM mysystem4.equiposdelimpieza;");) {
+
+            while (rs.next()) {
+                BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
+                equipoLimpieza.setIdpersonal(rs.getInt(1));
+                listaequipoLimpiezas.add(equipoLimpieza);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaequipoLimpiezas;
+    }
+
+    public ArrayList<BSedeYSala> obtenerSala() {
+
+        ArrayList<BSedeYSala> listaSala = new ArrayList<>();
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT idsala, nombre_sede FROM mysystem4.salas;");) {
+
+            while (rs.next()) {
+                BSedeYSala sedeYSala = new BSedeYSala();
+                sedeYSala.setIdSala(rs.getInt(1));
+                sedeYSala.setSede(rs.getString(2));
+                listaSala.add(sedeYSala);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaSala;
+    }
+    public BSedeYSala obtenerAforoAdmin(int idSala) {
+
+        BSedeYSala aforoAdmin = null;
+
+        String sql = "SELECT aforo_administrador FROM mysystem4.salas;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, idSala);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    aforoAdmin = new BSedeYSala();
+                    aforoAdmin.setAforoAdministrador(rs.getString(1));
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return aforoAdmin;
+    }
+
+    public ArrayList<BEquipoLimpieza> obtenerEquipoLimpieza() {
+
+        ArrayList<BEquipoLimpieza> equipoLimpiezas = new ArrayList<>();
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT idsala, nombre_sede FROM mysystem4.salas;");) {
+
+            while (rs.next()) {
+                BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
+                equipoLimpieza.setIdpersonal(rs.getInt(1));
+                equipoLimpiezas.add(equipoLimpieza);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return equipoLimpiezas;
+    }
+    public void actualizarFunción(String fecha, String hora, int precioTicket, int edadMinima, int idpersonal, int idsala, int idpelicula, int aforoOperador) {
+
+        try (Connection conn = this.getConnection();) {
+            String sql = "UPDATE funciones SET fecha = ?, hora = ?, precio_ticket = ?, edad_minima=?, idpersonal=?, idsala=?, idpelicula=?, aforo_operador=? "
+                    + "WHERE idfuncion = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, fecha);
+                pstmt.setString(2, hora);
+                pstmt.setInt(3, precioTicket);
+                pstmt.setInt(4, edadMinima);
+                pstmt.setInt(5, idpersonal);
+                pstmt.setInt(6, idsala);
+                pstmt.setInt(7, idpelicula);
+                pstmt.setInt(8, aforoOperador);
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void borarFuncion(String idfuncion) {
+
+        try (Connection conn = this.getConnection();) {
+            String sql = "DELETE FROM funciones WHERE idfuncion = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, idfuncion);
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

@@ -12,6 +12,16 @@ public class BFuncion extends BSedeYSala{
     private float calificacion;
     private float asistencia;
     private int idPelicula;
+    private int aforoOperador;
+
+    @Override
+    public int getAforoOperador() {
+        return aforoOperador;
+    }
+
+    public void setAforoOperador(int aforoOperador) {
+        this.aforoOperador = aforoOperador;
+    }
 
     public int getIdPelicula() {
         return idPelicula;

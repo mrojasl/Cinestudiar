@@ -120,4 +120,7 @@ public class BPeliculas {
         public void setInformación(String información) {
                 this.información = información;
         }
+
+    public void setDirector(String string) {
+    }
 }

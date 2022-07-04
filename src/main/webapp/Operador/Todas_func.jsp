@@ -203,32 +203,10 @@
                                         </select>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Director</span> <!--RECIBIRÁ DE BASE Uso de VALUE-->
-                                        <input name="director" type="text" class="form-control" placeholder="Director" required="required"
-                                               aria-label="Sala 1"
-                                               aria-describedby="button-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
                                         <span class="input-group-text">Edad mínima</span>
                                         <input name="edad_minima" type="text" class="form-control" placeholder="Edad Mínima" required="required"
                                                aria-label="Sala 1"
                                                aria-describedby="button-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Género</span><!--RECIBIRÁ DE BASE Uso de VALUE-->
-                                        <input name="genero" type="text" class="form-control" placeholder="Género" required="required"
-                                               aria-label="Sala 1"
-                                               aria-describedby="button-addon1">
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">Sede</span><!--RECIBIRÁ DE BASE -->
-                                        <select type="text" id="sede" name="sede" class="form-control form-control-lg">
-                                            <option selected></option>
-                                            <option value="sede1">Sede1</option>
-                                            <option value="sede2">Sede2</option>
-                                            <option value="sede3">Sede3</option>
-                                        </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Sala</span><!--RECIBIRÁ DE BASE -->

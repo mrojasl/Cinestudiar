@@ -39,7 +39,7 @@ public class BSedeYSala {
         this.aforoAdministrador = aforoAdministrador;
     }
 
-    public String getAforoOperador() {
+    public int getAforoOperador() {
         return aforoOperador;
     }
 
