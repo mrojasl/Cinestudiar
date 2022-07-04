@@ -317,7 +317,7 @@
 
     }
 </style>
-<jsp:include page="cabecera_operador.jsp">
+<jsp:include page="cabecera_admin.jsp">
     <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
 </jsp:include>
 

@@ -21,15 +21,41 @@ public class PerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
+
         PerfilDao perfilDao= new PerfilDao();
 
-        request.setAttribute("perfilDusuario",perfilDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
-        request.setAttribute("usuarioFunciones",perfilDao.listarFunciones((String) request.getSession().getAttribute("codigo_pucp")));
-
-        RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/perfilUsuario.jsp");
-        requestDispatcher.forward(request,response);
 
 
+        if ("perfil".equals(action)) {
+
+            request.setAttribute("perfilDusuario",perfilDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
+            request.setAttribute("usuarioFunciones",perfilDao.listarFunciones((String) request.getSession().getAttribute("codigo_pucp")));
+
+            RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/perfilUsuario.jsp");
+            requestDispatcher.forward(request,response);
+        }
+        if ("perfilOpe".equals(action)) {
+
+            request.setAttribute("perfilDusuario",perfilDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
+
+            RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Operador/perfilOperador.jsp");
+            requestDispatcher.forward(request,response);
+        }
+        if ("perfilAdmin".equals(action)) {
+
+            request.setAttribute("perfilDusuario",perfilDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
+
+            RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Admin/perfilAdmin.jsp");
+            requestDispatcher.forward(request,response);
+        }
+
+        if ("tickets".equals(action)) {
+
+            request.setAttribute("usuarioFunciones",perfilDao.listarFunciones((String) request.getSession().getAttribute("codigo_pucp")));
+
+            RequestDispatcher view = request.getRequestDispatcher("/Usuario/misTickets.jsp");
+            view.forward(request, response);
+        }
 
 
 
@@ -46,7 +72,7 @@ public class PerfilServlet extends HttpServlet {
             bPerfil.setNumero(telefono);
             bPerfil.setCodigopucp(codigo);
             perfilDao.actualizatelefono(bPerfil);
-            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
+            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario?a=perfil");
         }
 
         if ("actualizardir".equals(action)) {
@@ -56,7 +82,7 @@ public class PerfilServlet extends HttpServlet {
             bPerfil.setDireccion(direccion);
             bPerfil.setCodigopucp(codigo);
             perfilDao.actualizadireccion(bPerfil);
-            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
+            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario?a=perfil");
         }
         if ("actualizarcon".equals(action)) {
             BPerfil bPerfil= new BPerfil();
@@ -65,7 +91,7 @@ public class PerfilServlet extends HttpServlet {
             bPerfil.setContrasenha(contrasenha);
             bPerfil.setCodigopucp(codigo);
             perfilDao.actualizacontra(bPerfil);
-            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
+            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario?a=perfil");
         }
         if ("actualizarfoto".equals(action)) {
             BPerfil bPerfil= new BPerfil();
@@ -76,7 +102,7 @@ public class PerfilServlet extends HttpServlet {
             bPerfil.setFotoperfil(fotoinput);
             bPerfil.setCodigopucp(codigo);
             perfilDao.actualizafoto(bPerfil);
-            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario");
+            response.sendRedirect(request.getContextPath() + "/PerfildeUsuario?a=perfil");
         }
 
 
