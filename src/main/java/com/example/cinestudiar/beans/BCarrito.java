@@ -28,8 +28,15 @@ public class BCarrito {
 
     private int duracionpelicula;
 
+    private int diferenciaHoraria;
 
+    public int getDiferenciaHoraria() {
+        return diferenciaHoraria;
+    }
 
+    public void setDiferenciaHoraria(int diferenciaHoraria) {
+        this.diferenciaHoraria = diferenciaHoraria;
+    }
 
     public int getDuracionpelicula() {
         return duracionpelicula;

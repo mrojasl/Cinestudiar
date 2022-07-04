@@ -33,7 +33,7 @@ public class CarritoDao extends BaseDao {
 
     public ArrayList<BCarrito> listarUsuario(String codigo){
 
-        String sql="select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,f.aforo_operador,cf.idfuncion,cf.idhistorialdecompras,p.idpelicula,u.correo,p.duracion from usuarios u\n" +
+        String sql="select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,f.precio_ticket,u.codigo_pucp,cf.idcompra,f.aforo_operador,cf.idfuncion,cf.idhistorialdecompras,p.idpelicula,u.correo,p.duracion,TIMESTAMPDIFF(minute,CURRENT_TIMESTAMP(),concat(f.fecha,' ',f.hora)) from usuarios u\n" +
                 "\t\t\t\t\t\t\t\t\t\tinner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
                 "\t\t\t\t\t\t\t\t\t\tinner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
                 "\t\t\t\t\t\t\t\t\t\tinner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
@@ -67,6 +67,9 @@ public class CarritoDao extends BaseDao {
                     bCarrito.setHistorialcompra(rs.getInt(12));
                     bCarrito.setCorreopucp(rs.getString(14));
                     bCarrito.setDuracionpelicula(rs.getInt(15));
+                    bCarrito.setDiferenciaHoraria(rs.getInt(16));
+                    //System.out.println(rs.getInt(16));
+                    //System.out.println(bCarrito.getDiferenciaHoraria());
                     listausuarios.add(bCarrito);
                 }
             }

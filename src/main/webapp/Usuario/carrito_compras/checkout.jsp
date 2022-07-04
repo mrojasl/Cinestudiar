@@ -48,6 +48,7 @@
 <%  double preciototal = 0;
     int totaldetickets=0;
     String correo_pucp="";
+    int fechas_caducadas=0;
 
     String codigo_puke="";%>
 <div class="container">
@@ -101,6 +102,29 @@
         </div>
     </div>
     <%}%>
+
+
+
+
+    <% for (BCarrito carrito : carritoDcompras) {
+        int restaDeFechas = carrito.getDiferenciaHoraria();
+        if (restaDeFechas <= 0) {
+            fechas_caducadas++;
+        }
+        }%>
+
+
+
+
+    <% if (fechas_caducadas >= 1){ %>
+    <div class="alert alert-danger d-flex justify-content-start" role="alert">
+
+        <div>
+            <i class="bi bi-exclamation-square-fill"></i> ERROR: Existe uno o más funciones cuyas fechas han caducado (Una función se considera caducada a partir de cuando las horas y minutos de la función coinciden con las horas y minutos actuales). <i class="bi bi-exclamation-square-fill"></i>
+        </div>
+    </div>
+    <%}%>
+
     <table class="table">
         <thead>
         <tr class="titulos">
@@ -119,6 +143,9 @@
                 codigo_puke=usuario.getCodigoPucp();
                 correo_pucp=carrito.getCorreopucp();
                 preciototal = preciototal + carrito.getPrecio_ticket() * carrito.getCantidad_funcion();%>
+
+
+
         <tr>
             <td>
                 <!--<img src="Usuario/carrito_compras/error_cruce_horarios/idpelicula_<%=carrito.getIdpelicula()%>.jpg" alt="perfil foto" style="width:110px;height:150px;">-->
@@ -139,7 +166,12 @@
                     <i class="bi bi-info-circle-fill"></i>
                 </span>
                 <br>
-                <strong>Hora:</strong> <%=carrito.getHora()%>
+                <% String horanSplit=carrito.getHora();%>
+                <% String[] horaSplit=horanSplit.split(":");%>
+                <strong>Hora:</strong> <%=horaSplit[0]+":"+horaSplit[1]+" horas"%>
+                <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Formato de 24 horas (hh:mm)">
+                    <i class="bi bi-info-circle-fill"></i>
+                    </span>
                 <br>
                 <% int horas=0;
                    int minutos=carrito.getDuracionpelicula();
@@ -149,9 +181,10 @@
                     }%>
 
                 <strong>Duración:</strong> <%=horas%> hora(s), <%=minutos%> minuto(s).
-                <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Formato de 24 horas (hh:mm:ss)">
-                    <i class="bi bi-info-circle-fill"></i>
-                    </span>
+                <br>
+
+
+
 
 
 
@@ -201,7 +234,7 @@
 
 
 
-    <% if (contador_carrito!=0 && fechaigual==0){ %>
+    <% if (contador_carrito!=0 && fechaigual==0 && fechas_caducadas==0){ %>
 
     <div class="d-flex justify-content-end" style="color:White;font-size: 25px;margin-top: 0px" >Total a pagar: S/<%=preciototal%></div>
 
