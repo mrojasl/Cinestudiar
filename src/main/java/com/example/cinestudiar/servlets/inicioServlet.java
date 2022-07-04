@@ -2,6 +2,7 @@ package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BPeliculas;
 import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.daos.FuncionesDao;
 import com.example.cinestudiar.daos.PeliculasDao;
 import com.example.cinestudiar.daos.UsuariosDao;
 
@@ -23,6 +24,8 @@ public class inicioServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
         UsuariosDao usuariosDao = new UsuariosDao();
         PeliculasDao peliculasDao = new PeliculasDao();
+        FuncionesDao funcionesDao = new FuncionesDao();
+
         RequestDispatcher view;
         //System.out.println(peliculasDao.cointaner(peliculasDao.listasPeliculas().size()));
         //System.out.println(peliculasDao.valor(peliculasDao.listasPeliculas().size()));
@@ -41,7 +44,6 @@ public class inicioServlet extends HttpServlet {
                 //System.out.println("Añadiendo");
                 //System.out.println(request.getSession().getAttribute("codigo_pucp"));
 
-
                 ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
                 request.setAttribute("listapeliculas",listapeliculas);
                 request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
@@ -59,22 +61,16 @@ public class inicioServlet extends HttpServlet {
                 request.setAttribute("listapeliculas",listapeliculas);
 
             }
-            case "detalles"->{
-                request.setAttribute("pelicula",peliculasDao.obtener_pelicula(Integer.parseInt(request.getParameter("id")),peliculasDao.listasPeliculas()));
-                request.setAttribute("lista_profesionales",peliculasDao.listapeliculaprofesional(Integer.parseInt(request.getParameter("id"))));
-                view = request.getRequestDispatcher("Usuario/detalles.jsp");
-                view.forward(request, response);
-            }
             case "registrar"->{
-
-
 
                 view = request.getRequestDispatcher("Usuario/registro.jsp");
                 view.forward(request, response);
             }
-        }
 
+        }
     }
+
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UsuariosDao usuariosDao = new UsuariosDao();
@@ -89,12 +85,6 @@ public class inicioServlet extends HttpServlet {
 
             session.setAttribute("indicador2","error");
             response.sendRedirect(request.getContextPath()+"/inicio?action=registrar");
-
-
-
-
-
-
         }else{
             session.setAttribute("indicador","error");
             response.sendRedirect(request.getContextPath()+"/inicio?action=registrar");

@@ -8,9 +8,12 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
+<%@ page import="com.example.cinestudiar.beans.BFuncionUsuario" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="lista_profesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
+<jsp:useBean id="listafunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncionUsuario>"/>
 <jsp:useBean id="pelicula" class="com.example.cinestudiar.beans.BPeliculas" scope="request" type="com.example.cinestudiar.beans.BPeliculas"/>
+<jsp:useBean id="indicador3" scope="session" type="java.lang.String" class="java.lang.String"/>
 
 <html>
     <head>
@@ -303,8 +306,6 @@
                                         <%}else{%>
                                         <p>Todavía no contamos con una descripción disponible</p>
                                         <%}%>
-
-
                                         <H6>Duración:</H6>
                                         <p><%=pelicula.getDuracion()%> minutos</p>
                                         <H6>Género:</H6>
@@ -330,7 +331,60 @@
                                         <%}%>
                                         <%}%>
 
+                                        <%if (usuario.getNombres()==null){%>
 
+                                        <table class="table" style="background-color:beige">
+                                            <thead>
+                                                <tr><th style="color: black">Funcion</th><th style="color: black">Precio</th><th style="color: black">Edad Minima</th><th style="color: black">Sede</th><th style="color: black">Aforo</th></tr>
+                                            </thead>
+
+                                            <%for (BFuncionUsuario bFuncionUsuario: listafunciones) {%>
+                                            <tr>
+                                                <td> <%=bFuncionUsuario.getFecha()+bFuncionUsuario.getHora()%></td>
+                                                <td> <%=bFuncionUsuario.getPrecioTicket()%></td >
+                                                <%if (bFuncionUsuario.getEdadMinima()==0){%>
+                                                <td> Todas las edades</td>
+                                                <%}else{%>
+                                                <td> <%=bFuncionUsuario.getEdadMinima()%></td >
+                                                <%}%>
+                                                <td> <%=bFuncionUsuario.getbSedeUsuario().getSede()%></td >
+                                                <td> <%=bFuncionUsuario.getbSedeUsuario().getAforoOperador()%></td >
+                                            </tr>
+                                            <%}%>
+                                        </table>
+
+
+                                        <%} else {%>
+                                        <%if (session.getAttribute("indicador3").equals("error")){%>
+                                        </br>
+                                        <div class="text-danger nb-2">
+                                            Ya agrego esta funcion
+                                        </div>
+                                        <%session.removeAttribute("indicador3");%>
+                                        <%}%>
+                                        <table class="table" style="background-color:beige">
+                                            <thead>
+                                                <tr><th style="color: black">Funcion</th><th style="color: black">Precio</th><th style="color: black">Edad Minima</th><th style="color: black">Sede</th><th style="color: black">Aforo</th></tr>
+                                            </thead>
+
+                                            <%for (BFuncionUsuario bFuncionUsuario: listafunciones) {%>
+                                            <tr>
+                                                <td> <%=bFuncionUsuario.getFecha()+bFuncionUsuario.getHora()%></td>
+                                                <td> <%=bFuncionUsuario.getPrecioTicket()%></td >
+                                                <%if (bFuncionUsuario.getEdadMinima()==0){%>
+                                                <td> Todas las edades</td>
+                                                <%}else{%>
+                                                <td> <%=bFuncionUsuario.getEdadMinima()%></td >
+                                                <%}%>
+                                                <td> <%=bFuncionUsuario.getbSedeUsuario().getSede()%></td >
+                                                <td> <%=bFuncionUsuario.getbSedeUsuario().getAforoOperador()%></td >
+                                                <td> <a  type="submit" role="button" class="btn btn-outline-info" href="<%=request.getContextPath()%>/detalles?action=agregar&idFuncion=<%=bFuncionUsuario.getIdFuncion()%>&id=<%=pelicula.getIdpeliculas()%>">
+                                                    Agregar</a></td>
+                                            </tr>
+                                            <%}%>
+                                        </table>
+
+                                        <%}%>
 
                                         <hr>
 

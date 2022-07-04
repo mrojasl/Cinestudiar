@@ -39,6 +39,11 @@ public class BPeliculas {
                 this.profesional = profesional;
         }
 
+        public BPeliculas(int idpeliculas, String nombre) {
+                this.idpeliculas = idpeliculas;
+                this.nombre = nombre;
+        }
+
         public BPeliculas(int idpeliculas, String nombre, int duracion, double calificacion, String genero, String información) {
                 this.idpeliculas = idpeliculas;
                 this.nombre = nombre;
@@ -121,6 +126,6 @@ public class BPeliculas {
                 this.información = información;
         }
 
-    public void setDirector(String string) {
-    }
+        public void setDirector(String string) {
+        }
 }
