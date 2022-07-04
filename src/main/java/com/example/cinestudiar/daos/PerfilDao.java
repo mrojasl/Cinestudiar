@@ -152,7 +152,7 @@ public class PerfilDao extends BaseDao{
             throw new RuntimeException(e);
         }
 
-        String sql = "UPDATE usuarios set contraseña=? where codigo_pucp=?;";
+        String sql = "UPDATE usuarios set contraseña=sha2(?,256) where codigo_pucp=?;";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {

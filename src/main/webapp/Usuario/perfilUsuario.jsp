@@ -25,8 +25,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!--link-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel = "icon" href =
@@ -382,12 +383,37 @@
                     <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>
                     <label>05/04/2001</label>
                     <li><i class="icono fas fa-user-check"></i> Contraseña:</li>
+
+                    <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#demo1" aria-expanded="false">Actualizar Contraseña</button>
                     <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarcon">
-                        <div class="input-group mb-3">
+
+                        <div id="demo1" class="collapse">
+
                             <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
-                            <input type="password" class="form-control" name="contranueva" id="contranueva" pattern=".{5,}" title="La contraseña es muy corta" value="**********">
-                            <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                            <input type="hidden" id="antiguacontra" value="<%=perfil.getContrasenha()%>">
+
+                                <input type="password" onkeyup='checkAntiguacontra();' name="contrasenha" id="contrasenha" class="form-control" placeholder="Ingrese la contraseña anterior" required="required" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}"
+                                       title="La contraseña contiene, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)">
+
+                                <input type="password" onkeyup='checkAntiguacontra();' required="required" placeholder="Ingrese la contraseña nueva" class="form-control" name="contranueva" id="contranueva" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña nueva debe contener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)" >
+
+                                <input type="password" onkeyup='checkAntiguacontra();' required="required" placeholder="Repita la contraseña nueva" class="form-control" name="confirmapassword" id="confirmapassword" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña nueva debe contener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)" >
+
+
+
+                                <span id='message'></span>
+                                <div id="ocultocontra"> </div>
+
+
+
                         </div>
+
+
+
+
+
+
+
                     </form>
                     <% } %>
 
@@ -404,5 +430,23 @@
 
     </section>
 </body>
+
+<script>
+
+    var checkAntiguacontra = function() {
+    var pruebas= CryptoJS.SHA256(document.getElementById('contrasenha').value);
+
+    if ( (
+        pruebas==document.getElementById('antiguacontra').value) && (document.getElementById('contranueva').value == document.getElementById('confirmapassword').value)) {
+        document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info ">Cambiar contraseña</button>';
+        document.getElementById('message').style.color = 'green';
+        document.getElementById('message').innerHTML = 'Los datos coinciden';
+    } else {
+        document.getElementById('message').style.color = 'red';
+        document.getElementById('message').innerHTML = 'Los datos no coinciden';
+        document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info  " disabled>Cambiar contraseña</button>';
+    }
+}
+</script>
 
 </html>
