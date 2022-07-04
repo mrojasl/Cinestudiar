@@ -5,7 +5,7 @@ public class BSedeYSala {
     private String direccion;
     private int idSala;
     private String aforoAdministrador;
-    private String aforoOperador;
+    private int aforoOperador;
 
     public String getSede() {
         return sede;
@@ -43,7 +43,7 @@ public class BSedeYSala {
         return aforoOperador;
     }
 
-    public void setAforoOperador(String aforoOperador) {
+    public void setAforoOperador(int aforoOperador) {
         this.aforoOperador = aforoOperador;
     }
 }

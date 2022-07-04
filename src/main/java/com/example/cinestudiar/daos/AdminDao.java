@@ -87,7 +87,7 @@ public class AdminDao {
                 sa.setSede(rs.getString(1));
                 sa.setIdSala(rs.getInt(2));
                 sa.setAforoAdministrador(rs.getString(3));
-                sa.setAforoOperador(rs.getString(4));
+                sa.setAforoOperador(rs.getInt(4));
 
                 listaSedesySalas.add(sa);
             }
