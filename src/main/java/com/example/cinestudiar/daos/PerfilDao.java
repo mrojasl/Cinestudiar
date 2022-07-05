@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class PerfilDao extends BaseDao{
 
-    private static String sql_select1="select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,cf.idhistorialdecompras from usuarios u\n" +
+    private static String sql_select1="select p.idpelicula,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,cf.idhistorialdecompras from usuarios u\n" +
             "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
             "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
             "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
@@ -29,7 +29,7 @@ public class PerfilDao extends BaseDao{
                 System.out.println(rs);
                 while (rs.next()) {
                     BUsuarioFuncion bUsuarioFuncion=new BUsuarioFuncion();
-                    bUsuarioFuncion.setFotofuncion(rs.getBlob(1));
+                    bUsuarioFuncion.setIdpelicula(Integer.parseInt(rs.getString(1)));
                     bUsuarioFuncion.setNombrepelicula(rs.getString(2));
                     bUsuarioFuncion.setFechapelicula(rs.getString(3));
                     bUsuarioFuncion.setHorapelicula(rs.getString(4));
@@ -196,49 +196,7 @@ public class PerfilDao extends BaseDao{
 
     }
 
-    public static ArrayList<BUsuarioFuncion> ObtenerSedesFiltro(String parametro){
-        ArrayList<BUsuarioFuncion> listausuarios = new ArrayList<>();
 
-
-        String user = "root";
-        String pass = "root";
-        String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String sql = "select p.foto,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,cf.idhistorialdecompras from usuarios u\n" +
-                "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
-                "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
-                "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
-                "                     inner join salas sala on (sala.idsala=f.idsala)\n" +
-                "                     where u.codigo_pucp=20190421 AND cf.asistencia=5 AND sala.nombre_sede = ?;";
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
-
-            preparedStatement.setString(1, parametro);
-
-            try (ResultSet rs = preparedStatement.executeQuery();) {
-                while (rs.next()) {
-                    BUsuarioFuncion bUsuarioFuncion=new BUsuarioFuncion();
-                    bUsuarioFuncion.setFotofuncion(rs.getBlob(1));
-                    bUsuarioFuncion.setNombrepelicula(rs.getString(2));
-                    bUsuarioFuncion.setFechapelicula(rs.getString(3));
-                    bUsuarioFuncion.setHorapelicula(rs.getString(4));
-                    bUsuarioFuncion.setSede(rs.getString(5));
-                    bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
-                    listausuarios.add(bUsuarioFuncion);
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return listausuarios;
-    }
 
 
 

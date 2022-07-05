@@ -1,21 +1,19 @@
 package com.example.cinestudiar.beans;
 
-import java.sql.Blob;
-
 public class BUsuarioFuncion {
 
-    private Blob fotofuncion;
+    private int idpelicula;
     private String nombrepelicula;
     private int cantidadtickets;
     private String fechapelicula;
     private String horapelicula;
     private String sede;
 
-    public BUsuarioFuncion() {
-    }
 
-    public BUsuarioFuncion(Blob fotofuncion, String nombrepelicula, int cantidadtickets, String fechapelicula, String horapelicula, String sede) {
-        this.fotofuncion = fotofuncion;
+
+
+    public BUsuarioFuncion() {
+        this.idpelicula = idpelicula;
         this.nombrepelicula = nombrepelicula;
         this.cantidadtickets = cantidadtickets;
         this.fechapelicula = fechapelicula;
@@ -23,12 +21,12 @@ public class BUsuarioFuncion {
         this.sede = sede;
     }
 
-    public Blob getFotofuncion() {
-        return fotofuncion;
+    public int getIdpelicula() {
+        return idpelicula;
     }
 
-    public void setFotofuncion(Blob fotofuncion) {
-        this.fotofuncion = fotofuncion;
+    public void setIdpelicula(int idpelicula) {
+        this.idpelicula = idpelicula;
     }
 
     public String getNombrepelicula() {
@@ -70,4 +68,6 @@ public class BUsuarioFuncion {
     public void setSede(String sede) {
         this.sede = sede;
     }
+
+
 }
