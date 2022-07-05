@@ -25,7 +25,6 @@
   <div class="nav2">
     <a href="${pageContext.request.contextPath}/inicio" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Inicio⠀<i class="bi bi-house-fill"></i> </a>
     <a href="<%=request.getContextPath()%>/loguin" style="width:auto;">Inicio de sesión⠀<i class="bi bi-person-fill"></i></a>
-
     <a href="${pageContext.request.contextPath}/inicio?action=registrar" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Registrarse⠀<i class="bi bi-book"></i></a>
   </div>
 </nav>
