@@ -8,6 +8,7 @@ import com.example.cinestudiar.daos.PeliculasDao;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import javax.ws.rs.core.Request;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Array;
@@ -22,9 +23,9 @@ public class OperadorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "funciones" : request.getParameter("action");
-        OperadorDao operadorDao = null;
+        //OperadorDao operadorDao = null;
         PeliculasDao peliculasDao = new PeliculasDao();
-        operadorDao = new OperadorDao();
+        OperadorDao operadorDao = new OperadorDao();
         String filtro = request.getParameter("listarFunciones");
         //if (filtro == "Funciones Disponibles") {
         //
@@ -32,12 +33,16 @@ public class OperadorServlet extends HttpServlet {
         //  ArrayList<BFuncion> lista = operadorDao.TodasLasFunciones();
         //}
         //ArrayList<BFuncion> lista = operadorDao.FuncionesDisponibles();
+
         RequestDispatcher requestDispatcher;
         switch (action) {
 
             case "funciones" -> {
                 request.setAttribute("listarFunciones", "");
                 request.setAttribute("Funciones", operadorDao.filtradoFunciones(""));
+                request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
+                request.setAttribute("listaSalas", operadorDao.obtenerSala());
+                request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
                 requestDispatcher = request.getRequestDispatcher("Operador/Todas_func.jsp");
                 requestDispatcher.forward(request, response);
                 break;
@@ -86,13 +91,14 @@ public class OperadorServlet extends HttpServlet {
                 response.sendRedirect("OperadorServlet?action=peliculas");
                 break;
         }
-            case "agregarFun"->{ //ESTO VA PARA LA CREACIÓN DE FUNCIÓN
-                request.setAttribute("listaFunciones_1",operadorDao.obtenerlistaPeliculas());
+           /* case "agregarFun"->{ //ESTO VA PARA LA CREACIÓN DE FUNCIÓN
+                request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
                 request.setAttribute("listaSalas", operadorDao.obtenerSala());
                 request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
                 requestDispatcher=request.getRequestDispatcher("Operador/Todas_func.jsp");
                 requestDispatcher.forward(request,response);
-            }
+                break;
+            }*/
 
             /*case " " -> {
                 //ArrayList<BFuncion> lista = null;
@@ -152,6 +158,7 @@ public class OperadorServlet extends HttpServlet {
         }
 
 
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -159,11 +166,12 @@ public class OperadorServlet extends HttpServlet {
         //String action = request.getParameter("action") ;
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action") == null ? "redireccionar" : request.getParameter("action");
-        OperadorDao operadorDao = null;
-        operadorDao = new OperadorDao();
+        //OperadorDao operadorDao = null;
+        OperadorDao operadorDao = new OperadorDao();
         String filtro;
         PeliculasDao peliculasDao = new PeliculasDao();
         RequestDispatcher view;
+
         BFuncion funciones;
         //ArrayList<BFuncion> lista = operadorDao.TodasLasFunciones();
         String filtro2;
@@ -173,6 +181,9 @@ public class OperadorServlet extends HttpServlet {
             case "filtro_func" -> {
                 System.out.println("HOLAAA");
                 filtro = request.getParameter("listarFunciones");
+                request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
+                request.setAttribute("listaSalas", operadorDao.obtenerSala());
+                request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
                 request.setAttribute("Funciones", operadorDao.filtradoFunciones(filtro));
                 request.setAttribute("listarFunciones", filtro);
                 view = request.getRequestDispatcher("Operador/Todas_func.jsp");
@@ -238,6 +249,7 @@ public class OperadorServlet extends HttpServlet {
                 funciones.setEdadMinima(Integer.parseInt(request.getParameter("edad_minima")));
                 funciones.setIdPersonal(Integer.parseInt(request.getParameter("idPersonal")));
                 funciones.setIdSala(Integer.parseInt(request.getParameter("idSala")));
+                funciones.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
                 funciones.setAforoOperador(Integer.parseInt(request.getParameter("aforoOperador")));
                 operadorDao.crearFuncion(funciones);
 

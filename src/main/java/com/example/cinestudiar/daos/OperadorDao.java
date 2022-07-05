@@ -359,14 +359,13 @@ public class OperadorDao extends BaseDao {
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select p.idpelicula,p.nombre, concat(pro.nombre, ' ', pro.apellido)from peliculas p\n" +
-                     "inner join peliculas_has_profesionales php on (p.idpelicula = php.peliculas_idpelicula)\n" +
-                     "inner join profesionales pro on (pro.idprofesional=php.profesionales_idprofesional);");) {
+             ResultSet rs = stmt.executeQuery("select idpelicula,nombre from peliculas;");) {
 
             while (rs.next()) {
                 BPeliculas peliculas = new BPeliculas();
                 peliculas.setIdpeliculas(rs.getInt(1));
-                peliculas.setDirector(rs.getString(2));
+                peliculas.setNombre(rs.getString(2));
+
                 listaPeliculas.add(peliculas);
             }
         } catch (SQLException e) {
@@ -401,7 +400,7 @@ public class OperadorDao extends BaseDao {
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT idsala, nombre_sede FROM mysystem4.salas;");) {
+             ResultSet rs = stmt.executeQuery("SELECT idsala, nombre_sede FROM salas order by idsala asc;");) {
 
             while (rs.next()) {
                 BSedeYSala sedeYSala = new BSedeYSala();
@@ -438,25 +437,7 @@ public class OperadorDao extends BaseDao {
         return aforoAdmin;
     }
 
-    public ArrayList<BEquipoLimpieza> obtenerEquipoLimpieza() {
 
-        ArrayList<BEquipoLimpieza> equipoLimpiezas = new ArrayList<>();
-
-        try (Connection conn = this.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT idsala, nombre_sede FROM mysystem4.salas;");) {
-
-            while (rs.next()) {
-                BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
-                equipoLimpieza.setIdpersonal(rs.getInt(1));
-                equipoLimpiezas.add(equipoLimpieza);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return equipoLimpiezas;
-    }
     public void actualizarFunción(String fecha, String hora, int precioTicket, int edadMinima, int idpersonal, int idsala, int idpelicula, int aforoOperador) {
 
         try (Connection conn = this.getConnection();) {

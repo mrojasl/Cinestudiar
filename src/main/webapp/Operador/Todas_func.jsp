@@ -1,6 +1,13 @@
 <%@ page import="com.example.cinestudiar.beans.BFuncion" %>
+<%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
+<%@ page import="com.example.cinestudiar.beans.BSedeYSala" %>
+<%@ page import="com.example.cinestudiar.beans.BEquipoLimpieza" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
+<jsp:useBean id="listapelicula1" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
+<jsp:useBean id="listaSalas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>"/>
+<jsp:useBean id="listaPersonal" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BEquipoLimpieza>"/>
 <jsp:useBean id="Funciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
 <jsp:useBean id="listarFunciones" scope="request" type="java.lang.String"/>
 <html>
@@ -91,7 +98,7 @@
                 </button>
 
             </div>
-            <form class="d-flex justify-content-between" method="POST" action="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">
+            <form class="d-flex justify-content-between" method="POST" name ="" action="<%=request.getContextPath()%>/OperadorServlet?action=filtro_func">
 
             <div class="input-group mb-3 col">
 
@@ -110,7 +117,7 @@
             <div class = "input-group mb-3 col">
 
 
-                <select name="listarFunciones"class="form-control" aria-label="default input example" onchange="update()" >
+                <select name="listarFunciones" class="form-control" aria-label="default input example" onchange="update()" >
                     <option selected value="defecto"<%=listarFunciones.equals("defecto")?"selected":""%>>Ordenar por:</option>
                     <option value="Funciones Disponibles" <%=listarFunciones.equals("Funciones Disponibles")?"selected":""%>>Funciones Disponibles</option>
                     <option value="Mejor calificado" <%=listarFunciones.equals("Mejor calificado")?"selected":""%>>Mejor calificado</option>
@@ -191,41 +198,48 @@
                                     aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="" enctype="multipart/form-data">
+                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=crearFunciones"  enctype="multipart/form-data">
                                 <div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Titulo</span> <!--RECIBIRÁ DE BASE -->
-                                        <select type="text" id="pelicula" name="pelicula" class="form-control form-control-lg">
+                                        <select type="text" id="pelicula" name="idPelicula" class="form-control form-control-lg">
                                             <option selected></option>
-                                            <option value="peli1">Peli1</option>
-                                            <option value="peli2">Peli2</option>
-                                            <option value="peli3">Peli3</option>
+                                            <% for(BPeliculas peliculas: listapelicula1) { %>
+                                            <option value="<%=peliculas.getIdpeliculas()%>"><%=peliculas.getNombre()%></option>
+                                            <% } %>
                                         </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Edad mínima</span>
                                         <input name="edad_minima" type="text" class="form-control" placeholder="Edad Mínima" required="required"
                                                aria-label="Sala 1"
-                                               aria-describedby="button-addon1">
+                                               aria-describedby="button-addon1" autocomplete="on">
+
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Sala</span><!--RECIBIRÁ DE BASE -->
-                                        <select type="text" id="Sala" name="Sala" class="form-control form-control-lg">
+                                        <select type="text" id="idSala" name="idSala" class="form-control form-control-lg">
                                             <option selected></option>
-                                            <option value="sala1">Sala1</option>
-                                            <option value="sala2">Sala2</option>
-                                            <option value="sala3">Sala3</option>
+                                            <% for(BSedeYSala sala: listaSalas) { %>
+                                            <option value="<%=sala.getIdSala()%>"><%=sala.getIdSala()%>: Sede= <%=sala.getSede()%> </option>
+                                            <% } %>
                                         </select>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Aforo</span><!--RECIBIRÁ DE BASE | Recibirá el de admin para modif-->
-                                        <input name="aforo" type="text" class="form-control" placeholder="Aforo" required="required"
-                                               aria-label="Sala 1"
+                                        <span class="input-group-text">Aforo</span><!--FALTA COLOCAR COMO AFORO MINIMO LO QU RECIBE DE ADMIN-->
+                                        <input name="aforoOperador" type="number" class="form-control" placeholder="Aforo" required="required"
+                                               aria-label="Sala 1" min="1" max ="50"
                                                aria-describedby="button-addon1">
+
                                     </div>
 
 
-
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Fecha</span> <!--/FALTA COLOCAR COMO FECHA MÍNIMA TODAY-->
+                                        <input name="fecha" type="date" class="form-control"  required="required"
+                                               aria-label="Sala 1"
+                                               aria-describedby="button-addon1">
+                                    </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Hora</span>
                                         <input name="hora" type="time" class="form-control"  required="required"
@@ -234,17 +248,17 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Personal de Mantenimiento</span><!--RECIBIRÁ DE BASE lista -->
-                                        <select type="text" id="mantenimiento" name="mantenimiento" class="form-control form-control-lg">
+                                        <select type="text" id="idPersonal" name="idPersonal" class="form-control form-control-lg">
                                             <option selected></option>
-                                            <option value="mante1">Mante1</option>
-                                            <option value="mante2">Mante2</option>
-                                            <option value="mante3">Mante3</option>
+                                            <% for(BEquipoLimpieza limpieza: listaPersonal) { %>
+                                            <option value="<%=limpieza.getIdpersonal()%>"><%=limpieza.getIdpersonal()%></option>
+                                            <% } %>
                                         </select>
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Costo de Ticket</span>
-                                        <input name="costo" type="text" class="form-control" placeholder="Costo de Ticket" required="required"
-                                               aria-label="Sala 1"
+                                        <input name="precio_ticket" type="number" class="form-control" placeholder="Costo de Ticket" required="required"
+                                               aria-label="Sala 1" min="1"
                                                aria-describedby="button-addon1">
                                     </div>
                                 </div>
