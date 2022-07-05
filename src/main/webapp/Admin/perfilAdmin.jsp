@@ -1,27 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
   User: jesus
-  Date: 3/07/2022
-  Time: 21:55
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page import="com.example.cinestudiar.beans.BPerfil" %>
-<%@ page import="com.example.cinestudiar.beans.BUsuarioFuncion" %><%--
-  Created by IntelliJ IDEA.
-  User: jesus
   Date: 5/06/2022
   Time: 17:53
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.*" %>
-<%@ page import="java.util.Collections" %>
-
 
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="perfilDusuario" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPerfil>" />
+
+<%@ page import="com.example.cinestudiar.beans.BPerfil" %>
+<%@ page import="java.net.URL" %>
 
 <html lang="en">
 <head>
@@ -32,8 +23,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!--link-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel = "icon" href =
@@ -189,8 +181,8 @@
 
     .seccion-perfil-usuario .perfil-usuario-avatar {
         display: flex;
-        width: 160px;
-        height: 160px;
+        width: 140px;
+        height: 140px;
         align-items: center;
         justify-content: center;
         border: rgba(213, 8, 8, 0.2);
@@ -198,8 +190,8 @@
         border-radius: 50%;
 
         position: absolute;
-        bottom: -20px;
-        left: calc(50% - 35px);
+        bottom: 20px;
+        left: calc(50% - 20px);
         z-index: 1;
     }
 
@@ -331,14 +323,28 @@
 
                 <% for (BPerfil foto: perfilDusuario){ %>
 
+                <%String contextpath= request.getContextPath() ;%>
+                <%String stringcode=foto.getCodigopucp(); %>
+                <% String rutaImagen="http://localhost:8080"+contextpath+"/Image?action=usuarios&id="+stringcode;%>
+
+                <% URL url=new URL(rutaImagen);
+                    int cant=url.openConnection().getContentLength();%>
+
+                <% if (cant==0 || cant==1291){ %>
+
+                <img src="Imagenes/sin_foto.png" />
+                <%}%>
+                <% if (cant!=0 && cant!=1291){ %>
                 <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=foto.getCodigopucp()%>"/>
+                <% }%>
+
 
 
                 <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarfoto" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <input type="hidden" name="codigopuke" value="<%=foto.getCodigopucp()%>" />
-                        <input type="file" class="form-control" name="fotonueva" id="fotonueva">
-                        <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                        <input type="file" class="form-control btn-sm" name="fotonueva" id="fotonueva" accept=".jpg,.jpeg,.png" onchange="validateFileType()" required>
+                        <button class="btn btn-secondary btn-sm" type="submit" >Actualizar</button>
                     </div>
                 </form>
 
@@ -389,12 +395,37 @@
                 <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>
                 <label>05/04/2001</label>
                 <li><i class="icono fas fa-user-check"></i> Contraseña:</li>
+
+                <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#demo1" aria-expanded="false">Actualizar Contraseña</button>
                 <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarcon">
-                    <div class="input-group mb-3">
+
+                    <div id="demo1" class="collapse">
+
                         <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
-                        <input type="password" class="form-control" name="contranueva" id="contranueva" pattern=".{5,}" title="La contraseña es muy corta" value="**********">
-                        <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                        <input type="hidden" id="antiguacontra" value="<%=perfil.getContrasenha()%>">
+
+                        <input type="password" onkeyup='checkAntiguacontra();' name="contrasenha" id="contrasenha" class="form-control" placeholder="Ingrese la contraseña anterior" required="required"
+                               title="La contraseña contiene, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)">
+
+                        <input type="password" onkeyup='checkAntiguacontra();' required="required" placeholder="Ingrese la contraseña nueva" class="form-control" name="contranueva" id="contranueva" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña nueva debe contener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)" >
+
+                        <input type="password" onkeyup='checkAntiguacontra();' required="required" placeholder="Repita la contraseña nueva" class="form-control" name="confirmapassword" id="confirmapassword" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña nueva debe contener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)" >
+
+
+
+                        <span id='message'></span>
+                        <div id="ocultocontra"> </div>
+
+
+
                     </div>
+
+
+
+
+
+
+
                 </form>
                 <% } %>
 
@@ -412,4 +443,34 @@
 </section>
 </body>
 
+<script>
+
+    var checkAntiguacontra = function() {
+        var pruebas= CryptoJS.SHA256(document.getElementById('contrasenha').value);
+
+        if ( (
+            pruebas==document.getElementById('antiguacontra').value) && (document.getElementById('contranueva').value == document.getElementById('confirmapassword').value)) {
+            document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info ">Cambiar contraseña</button>';
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'Los datos coinciden';
+        } else {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'Los datos no coinciden';
+            document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info  " disabled>Cambiar contraseña</button>';
+        }
+    }
+</script>
+<script type="text/javascript">
+    function validateFileType(){
+        var fileName = document.getElementById("fotonueva").value;
+
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+
+        }else{
+            alert("(Error) Selecciona un archivo de imagen!");
+        }
+    }
+</script>
 </html>

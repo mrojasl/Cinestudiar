@@ -1,4 +1,6 @@
 <%@ page import="com.example.cinestudiar.beans.BPerfil" %>
+<%@ page import="java.net.URL" %>
+
 <%@ page import="com.example.cinestudiar.beans.BUsuarioFuncion" %><%--
   Created by IntelliJ IDEA.
   User: jesus
@@ -8,9 +10,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.*" %>
-<%@ page import="java.util.Collections" %>
 
 
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
@@ -183,8 +182,8 @@
 
         .seccion-perfil-usuario .perfil-usuario-avatar {
             display: flex;
-            width: 160px;
-            height: 160px;
+            width: 140px;
+            height: 140px;
             align-items: center;
             justify-content: center;
             border: rgba(213, 8, 8, 0.2);
@@ -192,8 +191,8 @@
             border-radius: 50%;
 
             position: absolute;
-            bottom: -20px;
-            left: calc(50% - 35px);
+            bottom: 20px;
+            left: calc(50% - 20px);
             z-index: 1;
         }
 
@@ -325,14 +324,28 @@
 
                     <% for (BPerfil foto: perfilDusuario){ %>
 
+                    <%String contextpath= request.getContextPath() ;%>
+                    <%String stringcode=foto.getCodigopucp(); %>
+                    <% String rutaImagen="http://localhost:8080"+contextpath+"/Image?action=usuarios&id="+stringcode;%>
+
+                    <% URL url=new URL(rutaImagen);
+                        int cant=url.openConnection().getContentLength();%>
+
+                    <% if (cant==0 || cant==1291){ %>
+
+                    <img src="Imagenes/sin_foto.png" />
+                    <%}%>
+                    <% if (cant!=0 && cant!=1291){ %>
                     <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=foto.getCodigopucp()%>"/>
+                    <% }%>
+
 
 
                     <form method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=actualizarfoto" enctype="multipart/form-data">
                         <div class="input-group mb-3">
                             <input type="hidden" name="codigopuke" value="<%=foto.getCodigopucp()%>" />
-                            <input type="file" class="form-control" name="fotonueva" id="fotonueva">
-                            <button class="btn btn-outline-secondary" type="submit" >Actualizar</button>
+                            <input type="file" class="form-control btn-sm" name="fotonueva" id="fotonueva" accept=".jpg,.jpeg,.png" onchange="validateFileType()" required>
+                            <button class="btn btn-secondary btn-sm" type="submit" >Actualizar</button>
                         </div>
                     </form>
 
@@ -392,7 +405,7 @@
                             <input type="hidden" name="codigopuke" value="<%=perfil.getCodigopucp()%>" />
                             <input type="hidden" id="antiguacontra" value="<%=perfil.getContrasenha()%>">
 
-                                <input type="password" onkeyup='checkAntiguacontra();' name="contrasenha" id="contrasenha" class="form-control" placeholder="Ingrese la contraseña anterior" required="required" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}"
+                                <input type="password" onkeyup='checkAntiguacontra();' name="contrasenha" id="contrasenha" class="form-control" placeholder="Ingrese la contraseña anterior" required="required"
                                        title="La contraseña contiene, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)">
 
                                 <input type="password" onkeyup='checkAntiguacontra();' required="required" placeholder="Ingrese la contraseña nueva" class="form-control" name="contranueva" id="contranueva" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña nueva debe contener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)" >
@@ -448,5 +461,17 @@
     }
 }
 </script>
+<script type="text/javascript">
+    function validateFileType(){
+        var fileName = document.getElementById("fotonueva").value;
 
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+
+        }else{
+            alert("(Error) Selecciona un archivo de imagen!");
+        }
+    }
+</script>
 </html>
