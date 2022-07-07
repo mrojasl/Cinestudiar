@@ -67,7 +67,7 @@
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                                            <input type="password" id="password" name="password" class="form-control form-control-lg" pattern=".{5,}" title="Ingrese más de 5 caracteres"/>
                                             <label class="form-label" for="password">Contraseña</label>
                                         </div>
 

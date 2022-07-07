@@ -234,7 +234,7 @@
     <jsp:include page="/Usuario/headerSesionNoIniciada.jsp"/>
 
 </head>
-<body STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;" >
+<body background = 'Imagenes/fondo.jpg'; background-size="cover"; >
 <!-- Navbar -->
 
 <%if (session.getAttribute("indicador2").equals("error")){%>
@@ -255,119 +255,123 @@
 <br>
 <br>
 <br>
-<div class="container my-10">
-    <div class="row justify-content-center">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <div class="row">
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-6">
 
-                            <div class="p-5">
-
-                                <div class="text-center">
-                                    <b STYLE="color: #2f7cff;font-size: 25px">Registro de Usuario</b>
-                                </div>
-                                <br>
-
-                                <style>
-
-
-                                </style>
-
-                                <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir" enctype="multipart/form-data">
-
-
-
-
-
-
-
-                                    <!-- Nombre completo-->
-                                    <div class="form-group">
-                                        <input type="text" style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*"  required="required"
-                                               placeholder="Nombre(Solo se permiten letras)" >
-
-                                    </div>
-                                    <!-- Apellido completo-->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" pattern="^[a-zA-Z][\sa-zA-Z]*" id="apellidos"
-                                               placeholder="Apellidos(Solo se permiten letras)" name="apellido" required="required">
-                                    </div>
-                                    <!-- DNI--->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="exampleDNI" name="dni" pattern="[0-9]*" required="required" placeholder="DNI"  minlength="8" maxlength = "8">
-                                    </div>
-                                    <!-- Código-->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="exampleCodigo" pattern="[0-9]*" required="required" placeholder="Código PUCP" name="codigo_pucp" minlength="8" maxlength = "8">
-                                    </div>
-                                    <!-- Correo-->
-                                    <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Correo" name="correo" required="required">
-                                    </div>
-                                    <!-- Dirección de domicilio-->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Dirección de domicilio" name="direccion" pattern="^[a-zA-Z0-9][\sa-zA-Z0-9]*" required="required">
-                                    </div>
-                                    <!-- Número de Celular-->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="exampleInputNumber" placeholder="Numero de Celular" name="telefono" pattern="[0-9]*" minlength="9" maxlength = "9" required="required">
-                                    </div>
-                                    <!-- Fecha de nacimiento-->
-                                    <label for="start">Fecha de Nacimiento:</label>
-
-                                    <input type="date" id="start" name="fecha_nacimiento" required="required"
-                                           value="--/--/--"
-                                           min="1950-01-01" max="2003-01-01">
-
-                                    <div class="form-group">
-                                        <input type="file" name="picture">
-                                    </div>
-
-
-
-
-                                    <!-- Contraseña-->
-                                    <div class="form-group">
-                                        <input type="password" onkeyup='check();' class="form-control form-control-user" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
-                                               id="exampleInputPassword" placeholder="Contraseña" name="password" required="required">
-                                    </div>
-
-                                    <!-- Confirmar Contraseña-->
-                                    <div class="form-group">
-                                        <input type="password" onkeyup='check();' class="form-control form-control-user"
-                                               id="confirmPassword" placeholder="Confirmar contraseña" name="confirmPassword" required="required">
-                                    </div>
-                                    <span id='message'></span>
-
-
-
-
-
-                                    <%if (session.getAttribute("indicador").equals("error")){%>
-                                    </br>
-                                    <div class="text-danger nb-2">
-                                        Error código Pucp o correo!!!
-                                    </div>
-                                    <%session.removeAttribute("indicador");%>
-                                    <%}%>
-                                    <div id="ocultocontra"> </div>
-                                    <!--<button type="submit" class="btn btn-primary" >Crear Usuario</button>-->
-                                    <hr>
-                                </form>
-
+<section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 1rem;">
+                        <div class="card-body p-5">
+                            <div class="text text-center mb-5">
+                                <i class="bi bi-people fa-3x me-3" style="color: #0e0e6b;"></i>
+                                <span class="h1 fw-bold mb-0">Crea una cuenta</span>
 
                             </div>
+
+                            <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir" enctype="multipart/form-data">
+
+                                <!-- Nombre completo-->
+                                <div class="form-outline mb-4">
+                                    <input type="text" style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" required="required">
+                                    <label class="form-label" for="nombre">Nombres</label>
+                                </div>
+                                <!-- Apellido completo-->
+                                <div class="form-outline mb-4">
+                                    <input type="text" class="form-control form-control-user" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" id="apellidos"
+                                           name="apellido" required="required">
+                                    <label class="form-label" for="apellidos">Apellidos</label>
+                                </div>
+                                <!-- DNI--->
+                                <div class="form-outline mb-4">
+                                    <input type="text" class="form-control" id="exampleDNI" name="dni" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" >
+                                    <label class="form-label" for="exampleDNI">DNI</label>
+                                </div>
+                                <!-- Código-->
+                                <div class="form-outline mb-4">
+                                    <input type="text" class="form-control" id="exampleCodigo" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos"required="required" name="codigo_pucp" >
+                                    <label class="form-label" for="exampleCodigo">Código PUCP</label>
+                                </div>
+                                <!-- Correo-->
+                                <div class="form-outline mb-4">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"  name="correo" title="Debe ingresar un correo válido" required="required">
+                                    <label class="form-label" for="exampleInputEmail">Correo</label>
+                                </div>
+                                <!-- Dirección de domicilio-->
+                                <div class="form-outline mb-4">
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"  name="direccion" pattern="^[a-zA-Z0-9][\sa-zA-Z0-9]*" title="Ingrese direccion válida"required="required">
+                                    <label class="form-label" for="exampleFirstName">Dirección</label>
+                                </div>
+                                <!-- Número de Celular-->
+                                <div class="form-outline mb-4">
+                                    <input type="text" class="form-control form-control-user" id="exampleInputNumber"  name="telefono" pattern="[0-9]*" minlength="9" maxlength = "9" title="Debe ingresar 9 dígitos numericos" required="required">
+                                    <label class="form-label" for="exampleInputNumber">Celular</label>
+                                </div>
+                                <!-- Fecha de nacimiento-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="start">Fecha de nacimiento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
+                                    <input type="date" id="start" name="fecha_nacimiento" required="required"
+                                           value="--/--/--"
+                                           min="1980-01-01" max="2005-12-31">
+
+                                </div>
+                                <!-- Foto-->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="start">Foto (opcional) &nbsp;&nbsp; </label>
+                                    <input type="file" name="picture">
+                                </div>
+
+                                <!-- Contraseña-->
+                                <div class="form-outline mb-4">
+                                    <input type="password" onkeyup='check();' class="form-control form-control-user" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
+                                           id="exampleInputPassword" name="password" required="required">
+                                    <label class="form-label" for="exampleInputPassword">Contraseña</label>
+                                </div>
+
+                                <!-- Confirmar Contraseña-->
+                                <div class="form-outline mb-4">
+                                    <input type="password" onkeyup='check();' class="form-control form-control-user"
+                                           id="confirmPassword"  name="confirmPassword" required="required">
+                                    <label class="form-label" for="confirmPassword">Confirmar contraseña</label>
+                                </div>
+                                <span id='message'></span>
+
+
+
+
+
+                                <%if (session.getAttribute("indicador").equals("error")){%>
+                                </br>
+                                <div class="text-danger nb-2">
+                                    Error código Pucp o correo!!!
+                                </div>
+                                <%session.removeAttribute("indicador");%>
+                                <%}%>
+                                <div id="ocultocontra"> </div>
+                                <!--<button type="submit" class="btn btn-primary" >Crear Usuario</button>-->
+                                <hr>
+
+
+
+
+
+                                <p class="text-center text-muted mt-5 mb-0">¿Ya tienes una cuenta? <a href="<%=request.getContextPath()%>/loguin"
+                                                                                                      class="fw-bold text-body"><u>Ingresa aquí</u></a></p>
+
+
+
+                            </form>
                         </div>
                     </div>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+</section>
+<br>
+<br>
 
 <script>
     var check = function() {
@@ -375,11 +379,12 @@
             document.getElementById('confirmPassword').value) {
             document.getElementById('message').style.color = 'green';
             document.getElementById('message').innerHTML = 'Las contraseñas coinciden :)';
-            document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-primary btn-lg">Registrarse</button>';
+            document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button">Registrarse</button>';
+
         } else {
             document.getElementById('message').style.color = 'red';
             document.getElementById('message').innerHTML = 'Las contraseñas no coinciden';
-            document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-primary btn-lg " disabled>Registrarse</button>';
+            document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button" disabled>Registrarse</button>';
         }
     }
 </script>
@@ -396,11 +401,11 @@
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-            crossorigin="anonymous"></script>
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-            crossorigin="anonymous"></script>
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
