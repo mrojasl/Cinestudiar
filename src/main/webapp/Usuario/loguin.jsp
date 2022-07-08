@@ -81,7 +81,7 @@
 
 
                                         <p class="mb-5 pb-lg-2" style="color: #393f81;">¿No tienes cuenta? <a href="${pageContext.request.contextPath}/inicio?action=registrar"
-                                                                                                                  style="color: #393f81;">Registrate aqui</a></p>
+                                                                                                                  style="color: #0156e0;">Registrate aqui</a></p>
 
                                     </form>
                                     <%if (session.getAttribute("indicador").equals("error")){%>

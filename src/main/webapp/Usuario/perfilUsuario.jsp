@@ -44,7 +44,7 @@
 
 
 
-<body>
+<body onload="disabledButton()">
 
     <style type="text/css">
         /*=====================================
@@ -448,18 +448,22 @@
 </body>
 
 <script>
+    var disabledButton=function (){
+        document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-info" type="submit" role="button" disabled>Cambiar contraseña</button>';
+    }
 
     var checkAntiguacontra = function() {
     var pruebas= CryptoJS.SHA256(document.getElementById('contrasenha').value);
 
     if ( (
-        pruebas==document.getElementById('antiguacontra').value) && (document.getElementById('contranueva').value == document.getElementById('confirmapassword').value)) {
+        pruebas==document.getElementById('antiguacontra').value) && (document.getElementById('contranueva').value == document.getElementById('confirmapassword').value) &&(document.getElementById('contrasenha').value!="")
+         && (document.getElementById('confirmapassword').value!="") ) {
         document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info ">Cambiar contraseña</button>';
         document.getElementById('message').style.color = 'green';
         document.getElementById('message').innerHTML = 'Los datos coinciden';
     } else {
         document.getElementById('message').style.color = 'red';
-        document.getElementById('message').innerHTML = 'Los datos no coinciden';
+        document.getElementById('message').innerHTML = 'Los datos no coinciden/existen campos vacíos';
         document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info  " disabled>Cambiar contraseña</button>';
     }
 }

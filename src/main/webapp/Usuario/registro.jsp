@@ -229,12 +229,15 @@
         }
 
 
+
+
+
     </style>
 
     <jsp:include page="/Usuario/headerSesionNoIniciada.jsp"/>
 
 </head>
-<body background = 'Imagenes/fondo.jpg'; background-size="cover"; >
+<body onload="disabledButton()" >
 <!-- Navbar -->
 
 <%if (session.getAttribute("indicador2").equals("error")){%>
@@ -265,47 +268,51 @@
                         <div class="card-body p-5">
                             <div class="text text-center mb-5">
                                 <i class="bi bi-people fa-3x me-3" style="color: #0e0e6b;"></i>
-                                <span class="h1 fw-bold mb-0">Crea una cuenta</span>
+                                <span class="h1 fw-bold mb-0">Crea una cuenta<hr></span>
 
                             </div>
 
-                            <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir" enctype="multipart/form-data">
+                            <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir" enctype="multipart/form-data" >
 
                                 <!-- Nombre completo-->
                                 <div class="form-outline mb-4">
-                                    <input type="text" style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" required="required">
-                                    <label class="form-label" for="nombre">Nombres</label>
+
+                                    <input type="text" placeholder="Nombre"  style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" required="required">
+
                                 </div>
                                 <!-- Apellido completo-->
                                 <div class="form-outline mb-4">
-                                    <input type="text" class="form-control form-control-user" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" id="apellidos"
+
+                                    <input type="text" placeholder="Apellido" class="form-control form-control-user" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" id="apellidos"
                                            name="apellido" required="required">
-                                    <label class="form-label" for="apellidos">Apellidos</label>
+
                                 </div>
                                 <!-- DNI--->
                                 <div class="form-outline mb-4">
-                                    <input type="text" class="form-control" id="exampleDNI" name="dni" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" >
-                                    <label class="form-label" for="exampleDNI">DNI</label>
+
+                                    <input type="text" placeholder="DNI" class="form-control" id="exampleDNI" name="dni" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" maxlength="8" >
+
                                 </div>
                                 <!-- Código-->
                                 <div class="form-outline mb-4">
-                                    <input type="text" class="form-control" id="exampleCodigo" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos"required="required" name="codigo_pucp" >
-                                    <label class="form-label" for="exampleCodigo">Código PUCP</label>
+
+                                    <input type="text" placeholder="Codigo PUCP" class="form-control" id="exampleCodigo" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" name="codigo_pucp" maxlength="8" >
+
                                 </div>
                                 <!-- Correo-->
                                 <div class="form-outline mb-4">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"  name="correo" title="Debe ingresar un correo válido" required="required">
-                                    <label class="form-label" for="exampleInputEmail">Correo</label>
+                                    <input type="email" placeholder="Correo" class="form-control form-control-user" id="exampleInputEmail"  name="correo" title="Debe ingresar un correo válido" required="required">
+
                                 </div>
                                 <!-- Dirección de domicilio-->
                                 <div class="form-outline mb-4">
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"  name="direccion" pattern="^[a-zA-Z0-9][\sa-zA-Z0-9]*" title="Ingrese direccion válida"required="required">
-                                    <label class="form-label" for="exampleFirstName">Dirección</label>
+                                    <input type="text" placeholder="Dirección" class="form-control form-control-user" id="exampleFirstName"  name="direccion" pattern="^[a-zA-Z0-9][\sa-zA-Z0-9]*" title="Ingrese direccion válida"required="required">
+
                                 </div>
                                 <!-- Número de Celular-->
                                 <div class="form-outline mb-4">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputNumber"  name="telefono" pattern="[0-9]*" minlength="9" maxlength = "9" title="Debe ingresar 9 dígitos numericos" required="required">
-                                    <label class="form-label" for="exampleInputNumber">Celular</label>
+                                    <input type="text" placeholder="Celular" class="form-control form-control-user" id="exampleInputNumber"  name="telefono" pattern="[0-9]*" minlength="9" maxlength = "9" title="Debe ingresar 9 dígitos numericos" required="required">
+
                                 </div>
                                 <!-- Fecha de nacimiento-->
                                 <div class="form-outline mb-4">
@@ -323,16 +330,17 @@
 
                                 <!-- Contraseña-->
                                 <div class="form-outline mb-4">
-                                    <input type="password" onkeyup='check();' class="form-control form-control-user" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
+
+                                    <input type="password" placeholder="Contraseña" onkeyup='check();' class="form-control form-control-user" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
                                            id="exampleInputPassword" name="password" required="required">
-                                    <label class="form-label" for="exampleInputPassword">Contraseña</label>
+
                                 </div>
 
                                 <!-- Confirmar Contraseña-->
                                 <div class="form-outline mb-4">
-                                    <input type="password" onkeyup='check();' class="form-control form-control-user"
+                                    <input type="password" placeholder="Confirmar contraseña" onkeyup='check();' class="form-control form-control-user"
                                            id="confirmPassword"  name="confirmPassword" required="required">
-                                    <label class="form-label" for="confirmPassword">Confirmar contraseña</label>
+
                                 </div>
                                 <span id='message'></span>
 
@@ -355,8 +363,8 @@
 
 
 
-                                <p class="text-center text-muted mt-5 mb-0">¿Ya tienes una cuenta? <a href="<%=request.getContextPath()%>/loguin"
-                                                                                                      class="fw-bold text-body"><u>Ingresa aquí</u></a></p>
+                                <p  class="text-center text-muted mt-5 mb-0">¿Ya tienes una cuenta? <a style="text-decoration: none" href="<%=request.getContextPath()%>/loguin"
+                                                                                                      > <span style="color:rgba(1,86,224,0.82)">Ingresa aquí</span>    </a></p>
 
 
 
@@ -370,22 +378,33 @@
         </div>
     </div>
 </section>
-<br>
-<br>
+
 
 <script>
+
+    var disabledButton=function (){
+        document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button" disabled>Registrarse</button>';
+    }
+
     var check = function() {
-        if (document.getElementById('exampleInputPassword').value ==
-            document.getElementById('confirmPassword').value) {
+        if ((document.getElementById('exampleInputPassword').value ==
+            document.getElementById('confirmPassword').value) && document.getElementById('exampleInputPassword').value!="") {
             document.getElementById('message').style.color = 'green';
             document.getElementById('message').innerHTML = 'Las contraseñas coinciden :)';
             document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button">Registrarse</button>';
 
-        } else {
+        } else if ((document.getElementById('exampleInputPassword').value !=
+            document.getElementById('confirmPassword').value)) {
             document.getElementById('message').style.color = 'red';
             document.getElementById('message').innerHTML = 'Las contraseñas no coinciden';
             document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button" disabled>Registrarse</button>';
         }
+        else if ((document.getElementById('exampleInputPassword').value ==
+            "") || (document.getElementById('confirmPassword').value=="")) {
+            document.getElementById('message').innerHTML = '';
+            document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button" disabled>Registrarse</button>';
+        }
+
     }
 </script>
 
