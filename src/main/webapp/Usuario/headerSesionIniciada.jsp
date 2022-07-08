@@ -26,7 +26,7 @@
         <a href="${pageContext.request.contextPath}/inicio?action=registrado" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Inicio⠀<i class="bi bi-house-fill"></i> </a>
         <a href="${pageContext.request.contextPath}/Checkout" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Carrito de Compras⠀<i class="bi bi-cart-fill"></i> </a>
         <a href="${pageContext.request.contextPath}/PerfildeUsuario?a=perfil" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk"><%=request.getParameter("perfil")%>⠀<i class="bi bi-person-circle"></i></a>
-        <a href="${pageContext.request.contextPath}/PerfildeUsuario?a=tickets" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk"> Mis tickets <i class="bi bi-ticket-perforated"></i> </a>
+        <a href="${pageContext.request.contextPath}/PerfildeUsuario?a=tickets" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk"> Mis tickets⠀<i class="bi bi-ticket-perforated"></i> </a>
         <a href="${pageContext.request.contextPath}/inicio?action=cerrar" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Cerrar Sesión⠀<i class="bi bi-box-arrow-right"></i></a>
     </div>
 </nav>
@@ -47,7 +47,7 @@
         background-position: center center;
         background-attachment: fixed;
     }
-    @font-face { font-family: "Akzidenz-Grotesk"; src: url('/Imagenes/akzidenz.otf'); }
+    @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
 
 </style>
 

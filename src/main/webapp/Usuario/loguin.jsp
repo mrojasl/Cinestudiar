@@ -17,28 +17,29 @@
         <jsp:include page="headerSesionNoIniciada.jsp"/>
         <meta charset="UTF-8">
         <title>Cinestudiar</title>
+
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <!--link-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!--link-->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <link rel = "icon" href =
-                "https://assets.website-files.com/60b56cdf18d38e15ce088579/60c111551dc75d6dc896a30e_pucp-favicon.png"
-              type = "image/x-icon">
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-        <link href="header_style.css" rel="stylesheet">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+        <style>
+            @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
+            a {
+                text-decoration: none !important;
+            }
+        </style>
     </head>
-    <body background="Imagenes/fondo.jpg">
+    <body >
     <section class="vh-100" >
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -56,19 +57,22 @@
 
                                         <div class="d-flex align-items-center mb-3 pb-1">
                                             <i class="fa fa-film fa-2x me-3" style="color: #ff6219;"></i>
-                                            <span class="h1 fw-bold mb-0">Cinestudiar</span>
+                                            <span class="h1 fw-bold mb-0" STYLE="font-family: Akzidenz-Grotesk">Cinestudiar</span>
                                         </div>
 
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Ingresa a tu cuenta</h5>
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;font-family: Akzidenz-Grotesk">Ingresa a tu cuenta</h5>
+
 
                                         <div class="form-outline mb-4">
-                                            <input type="number" id="codigo" name="codigo" class="form-control form-control-lg" />
                                             <label class="form-label" for="codigo">Codigo PUCP</label>
+                                            <input type="number" id="codigo" name="codigo" class="form-control form-control-lg" />
+
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="password" name="password" class="form-control form-control-lg" pattern=".{5,}" title="Ingrese más de 5 caracteres"/>
                                             <label class="form-label" for="password">Contraseña</label>
+                                            <input type="password" id="password" name="password" class="form-control form-control-lg" pattern=".{5,}" title="Ingrese más de 5 caracteres"/>
+
                                         </div>
 
                                         <div class="pt-1 mb-4">

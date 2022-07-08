@@ -1,7 +1,8 @@
 <%@ page import="com.example.cinestudiar.beans.BPerfil" %>
 <%@ page import="java.net.URL" %>
 
-<%@ page import="com.example.cinestudiar.beans.BUsuarioFuncion" %><%--
+<%@ page import="com.example.cinestudiar.beans.BUsuarioFuncion" %>
+<%@ page import="java.net.Inet4Address" %><%--
   Created by IntelliJ IDEA.
   User: jesus
   Date: 5/06/2022
@@ -313,6 +314,7 @@
     <jsp:include page="headerSesionIniciada.jsp">
         <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
     </jsp:include>
+    <% int puerto=request.getLocalPort();%>
 
     <section class="seccion-perfil-usuario">
 
@@ -322,11 +324,12 @@
 
                 <div class="perfil-usuario-avatar">
 
+
                     <% for (BPerfil foto: perfilDusuario){ %>
 
                     <%String contextpath= request.getContextPath() ;%>
                     <%String stringcode=foto.getCodigopucp(); %>
-                    <% String rutaImagen="http://localhost:8080"+contextpath+"/Image?action=usuarios&id="+stringcode;%>
+                    <% String rutaImagen="http://localhost:"+puerto+contextpath+"/Image?action=usuarios&id="+stringcode;%>
 
                     <% URL url=new URL(rutaImagen);
                         int cant=url.openConnection().getContentLength();%>

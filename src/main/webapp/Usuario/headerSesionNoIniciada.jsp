@@ -13,6 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
@@ -24,7 +26,7 @@
   <h1 class="titulo" style="color: white; ">⠀<img src="${pageContext.request.contextPath}/Imagenes/cinestudiarlogo.png" alt="cinEstudiar" style="height: 85px;width: 320px;margin-top: -5px" ></h1>
   <div class="nav2">
     <a href="${pageContext.request.contextPath}/inicio" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Inicio⠀<i class="bi bi-house-fill"></i> </a>
-    <a href="<%=request.getContextPath()%>/loguin" style="width:auto;">Inicio de sesión⠀<i class="bi bi-person-fill"></i></a>
+    <a href="${pageContext.request.contextPath}/loguin" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Inicio de sesión⠀<i class="bi bi-person-fill"></i></a>
     <a href="${pageContext.request.contextPath}/inicio?action=registrar" class="my-1 mx-1" style="color: white;font-weight: bold;font-size: 17px;font-family: Akzidenz-Grotesk">Registrarse⠀<i class="bi bi-book"></i></a>
   </div>
 </nav>
@@ -45,7 +47,7 @@
     background-position: center center;
     background-attachment: fixed;
   }
-  @font-face { font-family: "Akzidenz-Grotesk"; src: url('/Imagenes/akzidenz.otf'); }
+  @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
 
 </style>
 
