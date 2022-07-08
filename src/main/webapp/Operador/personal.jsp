@@ -150,7 +150,7 @@
                 <div class="input-group mb-3 col">
 
 
-                    <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=buscarProf">
+                    <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=buscarpersonal">
 
                         <input
                                 name="txtbuscar" class="form-control" type="text" placeholder="Buscar por nombre"

@@ -262,6 +262,15 @@ public class OperadorServlet extends HttpServlet {
                 String jefe = request.getParameter("jefe");
                 String p1 = request.getParameter("p1");
                 String p2 = request.getParameter("p2");
+                operadorDao.crearPersonal(jefe,p1,p2);
+                response.sendRedirect("OperadorServlet?action=crearFu");
+            }
+            case "buscarpersonal" ->{
+                String txtbuscar = request.getParameter("txtbuscar");
+                request.setAttribute("txtbuscado",txtbuscar);
+                request.setAttribute("listaPersonal",operadorDao.obtenerPersonalPorNombre(txtbuscar));
+                view = request.getRequestDispatcher("Operador/personal.jsp");
+                view.forward(request, response);
 
             }
 

@@ -535,6 +535,40 @@ public class OperadorDao extends BaseDao {
         return listaequipoLimpiezas;
     }
 
+    public ArrayList<BEquipoLimpieza> obtenerPersonalPorNombre(String txtBuscar) {
+
+        ArrayList<BEquipoLimpieza> listaequipoLimpiezas = new ArrayList<>();
+
+        String sql="SELECT * FROM mysystem4.equiposdelimpieza " +
+                "where (lower(jefe) like ?) or (lower(limpiador1) like ?) or (lower(limpiador2) like ?)";
+
+        try (Connection conn= this.getConnection();
+             PreparedStatement pstmt= conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%" + txtBuscar.toLowerCase() + "%");
+            pstmt.setString(2, "%" + txtBuscar.toLowerCase() + "%");
+            pstmt.setString(3, "%" + txtBuscar.toLowerCase() + "%");
+
+
+            try(ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
+                    equipoLimpieza.setIdpersonal(rs.getInt(1));
+                    equipoLimpieza.setJefe(rs.getString(2));
+                    equipoLimpieza.setLimpiador1(rs.getString(3));
+                    equipoLimpieza.setLimpiador2(rs.getString(4));
+                    listaequipoLimpiezas.add(equipoLimpieza);
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaequipoLimpiezas;
+    }
+
 
 }
 
