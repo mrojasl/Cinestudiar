@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "MyFilter",servletNames = {"CarritoServlet","PerfilServlet","YaComproServlet","AdminServlet"})
+@WebFilter(filterName = "MyFilter",servletNames = {"CarritoServlet","PerfilServlet","YaComproServlet","ServAdmin"})
 public class MyFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
@@ -25,7 +25,6 @@ public class MyFilter implements Filter {
 
 
         if (usuarioLogueado==null){
-
             response.sendRedirect(request.getContextPath()+"/inicio");
         }
         else{
