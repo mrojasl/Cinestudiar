@@ -48,7 +48,8 @@ public class OperadorServlet extends HttpServlet {
                 break;
             }
             case "crearFu" ->{
-                requestDispatcher = request.getRequestDispatcher("Operador/crearFuncion.jsp");
+                request.setAttribute("listaPersonal",operadorDao.obtenerPersonal());
+                requestDispatcher = request.getRequestDispatcher("Operador/personal.jsp");
                 requestDispatcher.forward(request, response);
                 break;
             }

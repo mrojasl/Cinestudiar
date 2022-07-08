@@ -380,11 +380,14 @@ public class OperadorDao extends BaseDao {
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT idpersonal FROM mysystem4.equiposdelimpieza;");) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM mysystem4.equiposdelimpieza;");) {
 
             while (rs.next()) {
                 BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
                 equipoLimpieza.setIdpersonal(rs.getInt(1));
+                equipoLimpieza.setJefe(rs.getString(2));
+                equipoLimpieza.setLimpiador1(rs.getString(3));
+                equipoLimpieza.setLimpiador2(rs.getString(4));
                 listaequipoLimpiezas.add(equipoLimpieza);
             }
         } catch (SQLException e) {
