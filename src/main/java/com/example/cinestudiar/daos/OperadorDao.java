@@ -381,7 +381,7 @@ public class OperadorDao extends BaseDao {
 
         ArrayList<BFuncion> listaFuncionesP = new ArrayList<>();
         String sql = "SELECT idfuncion, fecha, hora, precio_ticket, edad_minima, idsala, idpelicula, aforo_operador FROM funciones\n" +
-                "where idpersonal=?;";
+                "where idpersonal=? order by fecha desc;";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
             pstmt.setInt(1, idpersonal);

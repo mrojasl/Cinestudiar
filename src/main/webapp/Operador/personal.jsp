@@ -106,43 +106,22 @@
                                 <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=crearpersonal" enctype="multipart/form-data">
                                     <div>
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text">Titulo</span>
-                                            <input name="titulo" type="text" class="form-control" placeholder="Título" required="required"
+                                            <span class="input-group-text">Jefe</span>
+                                            <input name="jefe" type="text" class="form-control" placeholder="Nombre Completo" required="required"
                                                    aria-label="Sala 1"
                                                    aria-describedby="button-addon1">
                                         </div>
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text">Duracion</span>
-                                            <input name="duracion" type="number" class="form-control" placeholder="Duración" required="required"
-                                                   aria-label="Sala 1" min="0" max="400"
+                                            <span class="input-group-text">Personal 1</span>
+                                            <input name="p1" type="text" class="form-control" placeholder="Nombre Completo" required="required"
+                                                   aria-label="Sala 1"
                                                    aria-describedby="button-addon1">
                                         </div>
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text">Genero</span>
-                                            <select type="text" id="genero" name="genero" class="form-control form-control-lg">
-                                                <option selected></option>
-                                                <option value="accion">accion</option>
-                                                <option value="animación">animación</option>
-                                                <option value="aventura">aventura</option>
-                                                <option value="ciencia_ficcion">ciencia ficcion</option>
-                                                <option value="comedia">comedia</option>
-                                                <option value="drama">drama</option>>
-                                                <option value="misterio">misterio</option>
-                                                <option value="suspenso">suspenso</option>
-                                                <option value="terror">terror</option>
-                                            </select>
-                                        </div>
-                                        <label>Descripción</label>
-                                        <div class="input-group mb-3">
-
-                                            <textarea name="descripcion" style="height:300px;font-size:14pt;" maxlength="1000" class="form-control"></textarea>
-
-                                        </div>
-                                        <div class="input-group mb-3 ">
-                                            <div class="input-group mb-3">
-                                                <label class="input-group-text" for="inputGroupFile01">Portada</label>
-                                                <input name="fotopeli" type="file" class="form-control" id="inputGroupFile01">
-                                            </div>
+                                            <span class="input-group-text">Personal 2</span>
+                                            <input name="p2" type="text" class="form-control" placeholder="Nombre Completo" required="required"
+                                                   aria-label="Sala 1"
+                                                   aria-describedby="button-addon1">
                                         </div>
 
 
@@ -206,6 +185,9 @@
 
                         for (BEquipoLimpieza p : listaPersonal) { %>
 
+
+
+
                     <tr>
 
                         <td class="text-white"><%=p.getIdpersonal()%> </td>
@@ -222,72 +204,6 @@
                                 </svg>
                             </button>
                         </td>
-
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop<%=p.getIdpersonal()%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel<%=p.getIdpersonal()%>" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel<%=p.getIdpersonal()%>">Modal title</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <%OperadorDao operadorDao = new OperadorDao();
-                                        ArrayList<BFuncion> lista = operadorDao.listaFuncionesdeunPersonal(p.getIdpersonal());%>
-
-                                        <table class="table" id = "tableUpModal">
-
-                                            <tr>
-
-                                                <th>Id Funcion</th>
-                                                <th>Fecha</th>
-                                                <th>Hora</th>
-                                                <th>Id Sala</th>
-
-                                            </tr>
-                                            <%for (BFuncion f : lista){%>
-                                            <tr>
-
-
-                                                <td> <%=f.getIdFuncion()%></td>
-                                                <td> <%=f.getFecha()%></td>
-
-                                                <td> <%=f.getHora()%></td>
-
-                                                <td> <%=f.getIdSala()%></td>
-
-
-
-
-
-
-
-                                            </tr>
-                                            <%}%>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Understood</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </tr>
 
                     <%
@@ -303,5 +219,63 @@
 
 
     </body>
+
+
+<%for (BEquipoLimpieza p : listaPersonal) { %>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop<%=p.getIdpersonal()%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel<%=p.getIdpersonal()%>" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel<%=p.getIdpersonal()%>">Funciones</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <%OperadorDao operadorDao = new OperadorDao();
+                        ArrayList<BFuncion> lista = operadorDao.listaFuncionesdeunPersonal(p.getIdpersonal());%>
+
+
+
+
+
+
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id Función</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Id Sala</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%for (BFuncion f : lista){%>
+                            <tr>
+                                <th scope="row"><%=f.getIdFuncion()%></th>
+                                <td><%=f.getFecha()%></td>
+                                <td><%=f.getHora()%></td>
+                                <td><%=f.getIdSala()%></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}%>
+
+
+
+
 </html>
 

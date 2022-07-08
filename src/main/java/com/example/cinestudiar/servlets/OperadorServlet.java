@@ -258,6 +258,12 @@ public class OperadorServlet extends HttpServlet {
 
                 response.sendRedirect("OperadorServlet");
             }
+            case "crearpersonal" ->{
+                String jefe = request.getParameter("jefe");
+                String p1 = request.getParameter("p1");
+                String p2 = request.getParameter("p2");
+
+            }
 
         }
     }
