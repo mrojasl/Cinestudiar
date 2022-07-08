@@ -407,7 +407,22 @@ public class OperadorDao extends BaseDao {
         return listaFuncionesP;
     }
 
+    public void crearPersonal(String jefe,String limpiador1,String limpiador2)  {
 
+        String sql = "INSERT INTO equiposdelimpieza(jefe,limpiador1, limpiador2)\n" +
+                "VALUES (?,?,?);";
+
+        try(Connection conn= this.getConnection();
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setString(1, jefe);
+            pstmt.setString(2, limpiador1);
+            pstmt.setString(3,limpiador2 );
+            pstmt.executeUpdate();
+        }catch(SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+    }
 
     public ArrayList<BSedeYSala> obtenerSala() {
 
