@@ -256,6 +256,21 @@ public class PeliculasDao extends BaseDao{
 
 
     }
+
+    public void borrarFunciondeunaPelicula(int idpelicula)  {
+        String sql = "DELETE FROM funciones WHERE idpelicula = ?";
+        try(Connection conn= this.getConnection();
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+
+            pstmt.setInt(1,idpelicula );;
+            pstmt.executeUpdate();
+
+        }catch(SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+    }
+
     public Integer cointaner(int tamaño){
         if(tamaño%6==0){
             return tamaño/6;
