@@ -356,6 +356,32 @@
                         <i class="fa fa-star checked"></i>
                     </td>
                     <%}%>
+
+
+
+                    <%if (funcion.getExisteCompra()==0){%>
+                    <td>
+
+                        <a onclick="return confirm('¿Estas seguro de borrar?');"
+                           href="<%=request.getContextPath()%>/OperadorServlet?action=borrarfuncion&id=<%=funcion.getIdFuncion()%>"
+                           type="button" class="btn btn-danger">
+
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                    <%} else{%>
+                    <td class="text-white">No aplica</td>
+                    <%}%>
+
+
+
+
+
+
+
+
+
+
                 </tr>
 
                 <%

@@ -13,6 +13,15 @@ public class BFuncion extends BSedeYSala{
     private float asistencia;
     private int idPelicula;
     private int aforoOperador;
+    private int existeCompra;
+
+    public int getExisteCompra() {
+        return existeCompra;
+    }
+
+    public void setExisteCompra(int existeCompra) {
+        this.existeCompra = existeCompra;
+    }
 
     @Override
     public int getAforoOperador() {

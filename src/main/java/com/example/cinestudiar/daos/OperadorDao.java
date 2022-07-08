@@ -38,21 +38,25 @@ public class OperadorDao extends BaseDao {
         if (filtro.equals("") || filtro.equals("defecto")){
             ArrayList<BFuncion> todasLasFunciones = new ArrayList<>();
             try {
-                String sql = "select f.idfuncion as 'IdFunción',p.nombre     as `Título de Película`,\n" +
-                        "f.fecha,f.hora,\n" +
-                        "se.nombre_sede as `Sede`,\n" +
-                        "sa.idsala as `Sala`,\n" +
-                        "f.precio_ticket as `Precio`,\n" +
-                        "round(p.calificacion) as `Calificacion`\n" +
-                        "from funciones f\n" +
-                        "inner join salas sa on (f.idsala=sa.idsala)\n" +
-                        "inner join sedes se on (sa.nombre_sede=se.nombre_sede)\n" +
-                        "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
-                        "order by se.nombre_sede,sa.idsala,f.fecha desc;";
+                String sql = "select f.idfuncion as 'IdFunción',p.nombre as `Título de Película`,\n" +
+                        "                        f.fecha,f.hora,\n" +
+                        "                        se.nombre_sede as `Sede`,\n" +
+                        "                        sa.idsala as `Sala`,\n" +
+                        "                        f.precio_ticket as `Precio`,\n" +
+                        "                        round(p.calificacion) as `Calificacion`,\n" +
+                        "                        subq.existeCompra\n" +
+                        "                        from funciones f\n" +
+                        "                        inner join salas sa on (f.idsala=sa.idsala)\n" +
+                        "                        inner join sedes se on (sa.nombre_sede=se.nombre_sede)\n" +
+                        "                        inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
+                        "                        left join (select p.idpelicula,idcompra as 'existeCompra' from peliculas p left join funciones f\n" +
+                        "                on (p.idpelicula=f.idpelicula) left join compradefunciones cf\n" +
+                        "                on (cf.idfuncion=f.idfuncion) group by p.idpelicula) subq\n" +
+                        "                on (subq.idpelicula=f.idpelicula)\n" +
+                        "order by f.fecha,se.nombre_sede,sa.idsala desc;";
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
-                System.out.println("PORBAAAAAANDO SI LLEGGA");
                 while (rs.next()){
                     BFuncion fu = new BFuncion();
                     fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
@@ -63,8 +67,7 @@ public class OperadorDao extends BaseDao {
                     fu.setIdSala(rs.getInt(6));
                     fu.setPrecioTicket(rs.getInt(7));
                     fu.setCalificacion(rs.getInt(8));
-
-
+                    fu.setExisteCompra(rs.getInt(9));
 
                     todasLasFunciones.add(fu);
                 }
