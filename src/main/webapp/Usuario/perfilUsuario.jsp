@@ -455,15 +455,24 @@
     var checkAntiguacontra = function() {
     var pruebas= CryptoJS.SHA256(document.getElementById('contrasenha').value);
 
+
     if ( (
-        pruebas==document.getElementById('antiguacontra').value) && (document.getElementById('contranueva').value == document.getElementById('confirmapassword').value) &&(document.getElementById('contrasenha').value!="")
-         && (document.getElementById('confirmapassword').value!="") ) {
-        document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info ">Cambiar contraseña</button>';
-        document.getElementById('message').style.color = 'green';
-        document.getElementById('message').innerHTML = 'Los datos coinciden';
+        pruebas==document.getElementById('antiguacontra').value) && (document.getElementById('contranueva').value == document.getElementById('confirmapassword').value)) {
+
+        if ((document.getElementById('contranueva').value!="") || (document.getElementById('confirmapassword').value!="")){
+            document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info ">Cambiar contraseña</button>';
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'Los datos coinciden';
+        }
+        else{
+            document.getElementById('message').innerHTML = '';
+            document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info  " disabled>Cambiar contraseña</button>';
+        }
+
+
     } else {
         document.getElementById('message').style.color = 'red';
-        document.getElementById('message').innerHTML = 'Los datos no coinciden/existen campos vacíos';
+        document.getElementById('message').innerHTML = 'Los datos no coinciden';
         document.getElementById('ocultocontra').innerHTML = '<button type="submit" class="btn btn-info  " disabled>Cambiar contraseña</button>';
     }
 }

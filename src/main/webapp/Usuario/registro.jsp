@@ -229,9 +229,11 @@
         }
 
 
+        a {
+            text-decoration: none !important;
+        }
 
-
-
+        @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
     </style>
 
     <jsp:include page="/Usuario/headerSesionNoIniciada.jsp"/>
@@ -268,7 +270,7 @@
                         <div class="card-body p-5">
                             <div class="text text-center mb-5">
                                 <i class="bi bi-people fa-3x me-3" style="color: #0e0e6b;"></i>
-                                <span class="h1 fw-bold mb-0">Crea una cuenta<hr></span>
+                                <span class="h1 fw-bold mb-0" STYLE="font-family: Akzidenz-Grotesk">Crea una cuenta<hr></span>
 
                             </div>
 
@@ -390,7 +392,7 @@
         if ((document.getElementById('exampleInputPassword').value ==
             document.getElementById('confirmPassword').value) && document.getElementById('exampleInputPassword').value!="") {
             document.getElementById('message').style.color = 'green';
-            document.getElementById('message').innerHTML = 'Las contraseñas coinciden :)';
+            document.getElementById('message').innerHTML = 'Las contraseñas coinciden';
             document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button">Registrarse</button>';
 
         } else if ((document.getElementById('exampleInputPassword').value !=

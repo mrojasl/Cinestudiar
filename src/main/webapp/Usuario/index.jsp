@@ -249,6 +249,9 @@
             left2{
                 margin-right: 75px;
             }
+            @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
+
+
         </style>
 
             <title>Inicio-Cinestudiar</title>
@@ -350,6 +353,7 @@
                         <%  int h=1;
                             for (int n = 1; n<cointaner+1; n++) {%>
                         <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">
+                            <p class="d-flex justify-content-end" style="color: white;font-family: Akzidenz-Grotesk;margin-top: 15px" >Página: <%=n%> de <%=cointaner%></p>
                             <div class="container">
                                 <%for (int m= 1 ; m<valor+1;m++){%>
                                 <div class="row align-items-start">
