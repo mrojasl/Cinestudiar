@@ -374,28 +374,7 @@ public class OperadorDao extends BaseDao {
 
         return listaPeliculas;
     }
-    public ArrayList<BEquipoLimpieza> obtenerPersonal() {
 
-        ArrayList<BEquipoLimpieza> listaequipoLimpiezas = new ArrayList<>();
-
-        try (Connection conn = this.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM mysystem4.equiposdelimpieza;");) {
-
-            while (rs.next()) {
-                BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
-                equipoLimpieza.setIdpersonal(rs.getInt(1));
-                equipoLimpieza.setJefe(rs.getString(2));
-                equipoLimpieza.setLimpiador1(rs.getString(3));
-                equipoLimpieza.setLimpiador2(rs.getString(4));
-                listaequipoLimpiezas.add(equipoLimpieza);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return listaequipoLimpiezas;
-    }
 
     public ArrayList<BSedeYSala> obtenerSala() {
 
@@ -473,6 +452,41 @@ public class OperadorDao extends BaseDao {
             e.printStackTrace();
         }
     }
+    public void borrarPersonal(int idPersonal) {
+
+        try (Connection conn = this.getConnection();) {
+            String sql = "DELETE FROM equiposdelimpieza WHERE idpersonal = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, idPersonal);
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public ArrayList<BEquipoLimpieza> obtenerPersonal() {
+
+        ArrayList<BEquipoLimpieza> listaequipoLimpiezas = new ArrayList<>();
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM mysystem4.equiposdelimpieza;");) {
+
+            while (rs.next()) {
+                BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
+                equipoLimpieza.setIdpersonal(rs.getInt(1));
+                equipoLimpieza.setJefe(rs.getString(2));
+                equipoLimpieza.setLimpiador1(rs.getString(3));
+                equipoLimpieza.setLimpiador2(rs.getString(4));
+                listaequipoLimpiezas.add(equipoLimpieza);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaequipoLimpiezas;
+    }
+
 
 }
 

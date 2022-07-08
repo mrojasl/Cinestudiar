@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Admin/operadores.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Admin/perfilAdmin.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Operador/Todas_Peli.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Operador/Todas_func.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Operador" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Operador/perfilOperador.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Operador" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Operador/perfilOrdenar.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Operador" />
@@ -12,7 +13,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/headerSesionNoIniciada.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/in_con_sesion.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
-tickets        <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/misTickets.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/misTickets.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/perfilUsuario.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Usuario/registro.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Usuario" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
