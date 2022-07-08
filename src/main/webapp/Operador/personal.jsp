@@ -2,6 +2,8 @@
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
 <%@ page import="com.example.cinestudiar.beans.BProfesional" %>
 <%@ page import="com.example.cinestudiar.beans.BEquipoLimpieza" %>
+<%@ page import="com.example.cinestudiar.daos.OperadorDao" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="listaPersonal" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BEquipoLimpieza>"/>
@@ -157,8 +159,6 @@
                     </div>
 
 
-
-
                 </div>
 
                 <div class="input-group mb-3 col">
@@ -195,7 +195,7 @@
                         <th class="text-white">Jefe</th>
                         <th class="text-white">Personal 1</th>
                         <th class="text-white">Personal 2</th>
-                        <th class="text-white">Borrar</th>
+                        <th class="text-white">Funciones</th>
 
 
                     </tr>
@@ -215,13 +215,65 @@
                         <td class="text-white"><%=p.getLimpiador2()%></td>
 
                         <td>
-                            <a onclick="return confirm('¿Estas seguro de borrar?');"
-                               href="<%=request.getContextPath()%>/OperadorServlet?action=borrarpersonal&id=<%=p.getIdpersonal()%>"
-                               type="button" class="btn btn-danger">
-
-                                <i class="bi bi-trash"></i>
-                            </a>
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%=p.getIdpersonal()%>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                </svg>
+                            </button>
                         </td>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop<%=p.getIdpersonal()%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel<%=p.getIdpersonal()%>" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel<%=p.getIdpersonal()%>">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <%OperadorDao operadorDao = new OperadorDao();
+                                        ArrayList<BFuncion> lista = operadorDao.listaFuncionesdeunPersonal(p.getIdpersonal());%>
+
+                                        <table class="table" id = "tableUpModal">
+
+                                            <tr>
+
+                                                <th>Id Funcion</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Id Sala</th>
+
+                                            </tr>
+                                            <%for (BFuncion f : lista){%>
+                                            <tr>
+
+
+                                                <td> <%=f.getIdFuncion()%></td>
+                                                <td> <%=f.getFecha()%></td>
+
+                                                <td> <%=f.getHora()%></td>
+
+                                                <td> <%=f.getIdSala()%></td>
+
+
+
+
+
+
+
+                                            </tr>
+                                            <%}%>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Understood</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
 

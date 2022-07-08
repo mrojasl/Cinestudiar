@@ -70,6 +70,7 @@ public class OperadorServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             }
+
             case "borrarpeli"->{
                 if (request.getParameter("id") != null) {
                     String idpeliString = request.getParameter("id");
@@ -235,8 +236,9 @@ public class OperadorServlet extends HttpServlet {
             case "buscarpelicula" ->{
                 String txtbuscar = request.getParameter("txtbuscar");
 
+                request.setAttribute("directores",peliculasDao.listaDirector());
+                request.setAttribute("actores",peliculasDao.listaActor());
                 request.setAttribute("txtbuscado",txtbuscar);
-                request.setAttribute("listarFunciones", "");
                 request.setAttribute("Peliculas", peliculasDao.buscarPeliculaporNombre(txtbuscar));
                 view = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
                 view.forward(request, response);
@@ -256,6 +258,7 @@ public class OperadorServlet extends HttpServlet {
 
                 response.sendRedirect("OperadorServlet");
             }
+
         }
     }
     public BFuncion leerParametrosCrearFuncion (HttpServletRequest request) throws IOException, ServletException {
