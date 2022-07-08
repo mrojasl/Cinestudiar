@@ -377,6 +377,36 @@ public class OperadorDao extends BaseDao {
 
         return listaPeliculas;
     }
+    public ArrayList<BFuncion> listaFuncionesdeunPersonal(int idpersonal) {
+
+        ArrayList<BFuncion> listaFuncionesP = new ArrayList<>();
+        String sql = "SELECT idfuncion, fecha, hora, precio_ticket, edad_minima, idsala, idpelicula, aforo_operador FROM funciones\n" +
+                "where idpersonal=?;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, idpersonal);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    BFuncion peliculas = new BFuncion();
+                    peliculas.setIdFuncion(rs.getInt(1));
+                    peliculas.setFecha(rs.getString(2));
+                    peliculas.setHora(rs.getString(3));
+                    peliculas.setPrecioTicket(rs.getInt(4));
+                    peliculas.setEdadMinima(rs.getInt(5));
+                    peliculas.setIdSala(rs.getInt(6));
+                    peliculas.setIdPelicula(rs.getInt(7));
+                    peliculas.setAforoOperador(rs.getInt(8));
+
+                    listaFuncionesP.add(peliculas);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaFuncionesP;
+    }
+
 
 
     public ArrayList<BSedeYSala> obtenerSala() {
