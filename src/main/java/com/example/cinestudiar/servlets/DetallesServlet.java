@@ -31,8 +31,8 @@ public class DetallesServlet extends HttpServlet {
             case "agregar" -> {
                 String idFuncion = request.getParameter("idFuncion");
                 String id = request.getParameter("id");
-                System.out.println(idFuncion);
-                System.out.println(request.getSession().getAttribute("codigo_pucp"));
+                //System.out.println(idFuncion);
+                //System.out.println(request.getSession().getAttribute("codigo_pucp"));
                 if (idFuncion != null) {
                     funcionesDao.agregarCarrito((String) request.getSession().getAttribute("codigo_pucp"), Integer.parseInt(idFuncion));
                     System.out.println("Se agrego al carrito");

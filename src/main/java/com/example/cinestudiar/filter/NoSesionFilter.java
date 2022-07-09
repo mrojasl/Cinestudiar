@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebFilter(filterName = "NoSesionFilter",servletNames = {"InicioSinSesionServlet","LoguinServlet"})
+@WebFilter(filterName = "NoSesionFilter",servletNames = {"InicioSinSesionServlet","LoguinServlet","DetallesSinSesion"})
 public class NoSesionFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }

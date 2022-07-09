@@ -9,11 +9,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
 <%@ page import="com.example.cinestudiar.beans.BFuncionUsuario" %>
+<%@ page import="java.util.Objects" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="lista_profesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="listafunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncionUsuario>"/>
 <jsp:useBean id="pelicula" class="com.example.cinestudiar.beans.BPeliculas" scope="request" type="com.example.cinestudiar.beans.BPeliculas"/>
 <jsp:useBean id="indicador3" scope="session" type="java.lang.String" class="java.lang.String"/>
+
+<jsp:useBean id="indicadorNologin" scope="session" type="java.lang.String" class="java.lang.String"/>
 
 <html>
     <head>
@@ -25,15 +28,6 @@
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
         <style>
-            body {
-                background-image: url("Imagenes/fondo_registro.jpg");
-                background-color: #ffffff;
-                background-size: cover;
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center center;
-                background-attachment: fixed;
-            }
             .desc1back{
                 color: white;
                 background-color: #45698a;
@@ -284,6 +278,17 @@
         <%}%>
 
 
+
+        <%if (session.getAttribute("indicadorNologuin") !=null){%>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="bi bi-info-circle-fill"></i><%=session.getAttribute("indicadorNologuin")%>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <%session.removeAttribute("indicadorNologuin");%>
+        <%}%>
+
+
         <div class="container my-10">
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-12 col-md-9">
@@ -349,6 +354,15 @@
                                                 <%}%>
                                                 <td> <%=bFuncionUsuario.getbSedeUsuario().getSede()%></td >
                                                 <td> <%=bFuncionUsuario.getbSedeUsuario().getAforoOperador()%></td >
+
+                                                <td>
+                                                    <form class="user" method="POST" action="<%=request.getContextPath()%>/DetallesPelicula?action=añadir" >
+                                                    <input type="hidden" name="peli" value="<%=pelicula.getIdpeliculas()%>">
+                                                    <button class="btn btn-outline-info" type="submit" role="button" >Agregar</button>
+                                                    </form>
+                                                </td>
+
+
                                             </tr>
                                             <%}%>
                                         </table>

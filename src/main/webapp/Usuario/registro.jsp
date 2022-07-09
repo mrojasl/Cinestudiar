@@ -29,206 +29,6 @@
 
     <style>
 
-        .buttonswipe{
-            text-align: right;
-        }
-        .rigthup{
-            float:left;
-        }
-        .leftfinal{
-            text-align: center;
-            color: white;
-        }
-        .spaceleft{
-            margin-left: 25px;
-            color: #989898;
-        }
-        .leftrighttext{
-            margin-left: 270px;
-        }
-        .leftlefttext{
-            width: 200px;
-            height: 20px;float: left;
-        }
-        .textchoosereserv{
-            color: white;
-            margin-left: 20px;
-        }
-        .centradoleftstar{
-            margin-left: 105px;
-        }
-        .centradoleft{
-            margin-left: 75px;
-        }
-        .buttonsize{
-            width: 250px;
-            height: 40px;
-            margin-bottom: 10px;
-
-        }
-        .boxfuncion{
-            color: white;
-            text-align: center;
-            background-color: #111523;
-            width: 250px;
-        }
-        .funcionestxt{
-            height: 80px;
-            color: white;
-            padding:20px;
-            margin-left: 40px;
-        }
-        .sugerencia {
-            background-color: #111523;
-            height: 80px;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .rightside{
-            float: right;
-            height: 1100px;
-            width: 1200px;
-        }
-        .leftside{
-            float: left;
-            background-color: #012154;
-            height: 1100px;
-            width: 400px;
-        }
-        .general{
-            margin: auto;
-            width: 1600px;
-            height: 1000px;
-        }
-
-
-
-
-        p.emptytxt{
-            margin-top: 45px;
-            font-size:20px;
-            color:white;
-            font-weight: bold;
-
-        }
-        /* Full-width input fields */
-
-        input[id=rememberme]{
-            font-family: Arial, Helvetica, sans-serif;
-            color: #2b2e31;
-            text-decoration-color: black;
-        }
-
-        /* Extra styles for the cancel button */
-        .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            margin-right: 5px;
-            background-color: #f44336;
-        }
-
-        /* Center the image and position the close button */
-        .imgcontainer {
-            text-align: center;
-            margin: 6px 0 3px 0;
-            width: 30%;
-            height: 10%;
-            position: center;
-        }
-
-        img.avatar {
-            width: 40%;
-            border-radius: 50%;
-        }
-
-        .container {
-            padding: 16px;
-            long: 16px;
-        }
-
-        span.psw {
-            float: right;
-            padding-top: 16px;
-            color: blue;
-        }
-
-        /* The Modal (background) */
-        .modalh1 {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
-        /* Modal Content/Box */
-        .modal-contenth1 {
-            background-color: #fefefe;
-            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-            width: 30%; /* Could be more or less, depending on screen size */
-        }
-
-        /* The Close Button (x) */
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: red;
-            cursor: pointer;
-        }
-
-        /* Add Zoom Animation */
-        .animate {
-            -webkit-animation: animatezoom 0.6s;
-            animation: animatezoom 0.6s
-        }
-
-        @-webkit-keyframes animatezoom {
-            from {-webkit-transform: scale(0)}
-            to {-webkit-transform: scale(1)}
-        }
-
-        @keyframes animatezoom {
-            from {transform: scale(0)}
-            to {transform: scale(1)}
-        }
-
-        /* Change styles for span and cancel button on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-            .cancelbtn {
-                width: 100%;
-            }
-        }
-        button {
-            background-color: #04AA6D;
-            color: white;
-            padding: 14px 20px;
-            margin: 4px 0;
-            border: none;
-            cursor: pointer;
-
-        }
-
-
         a {
             text-decoration: none !important;
         }
@@ -246,16 +46,24 @@
 
 
 
-<div class="d-inline-flex p-2" style="margin-top: 15px">
-    <div class="alert alert-success" role="alert">Registrado con Éxito!!, ahora puedes loguearte dando click a "iniciar sesion"
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <i class="bi bi-info-circle-fill"></i> Registrado con Éxito!!, ahora puedes loguearte dando click a "iniciar sesion"
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
 <%session.removeAttribute("indicador2");%>
 <%}%>
+
+<%if (session.getAttribute("indicador").equals("error")){%>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <i class="bi bi-exclamation-triangle-fill"></i> Error al registrarse: El código o el correo PUCP que se han ingresado ya se encuentran registrados.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<%session.removeAttribute("indicador");%>
+<%}%>
+
+
 
 <br>
 <br>
@@ -350,13 +158,7 @@
 
 
 
-                                <%if (session.getAttribute("indicador").equals("error")){%>
-                                </br>
-                                <div class="text-danger nb-2">
-                                    Error código Pucp o correo!!!
-                                </div>
-                                <%session.removeAttribute("indicador");%>
-                                <%}%>
+
                                 <div id="ocultocontra"> </div>
                                 <!--<button type="submit" class="btn btn-primary" >Crear Usuario</button>-->
                                 <hr>
