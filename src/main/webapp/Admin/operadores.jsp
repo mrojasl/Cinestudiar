@@ -1,5 +1,6 @@
 <%@ page import="com.example.cinestudiar.beans.BUser" %>
 <%@ page import="com.example.cinestudiar.servlets.AdminServlet" %>
+<%@ page import="com.example.cinestudiar.beans.BUsuarioFuncion" %>
 <%--
   Created by IntelliJ IDEA.
   User: Jon
@@ -106,43 +107,65 @@
                 <div class="input-group mb-3 col">
                     <h5 class="col" style="padding: 14px;color: white;width: 250px">Buscar por nombre:</h5>
                 </div>
-                    <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
-                        <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=buscaroperador">
+                <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
+                    <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=buscaroperador">
 
                         <input name="txtbuscar" class="form-control" type="text" placeholder="Buscar por nombre"
                                aria-label="default input example" value="<%=txtbuscado%>">
-                        </form>
+                    </form>
 
-                    </div>
-            </div>
-            <div class="topmargin" >
-
-                <div>
-                    <%for (BUser op : listaOperadores) {%>
-                    <div class="row" >
-                        <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=op.getCodigoPucp()%>" alt="perfil foto" style="width:100px;height:100px;"/>
-
-                        <div class="input-group mb-3 col">
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6 style="color: white">Nombre:<br><%=op.getNombres()%> <br><br>Código PUCP:<br><%=op.getCodigoPucp()%> </h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6 style="color: white">Correo PUCP:<br><%=op.getCodigoPucp()%> <br><br>Celular:<br><%=op.getTelefono()%></h6>
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <a href="<%=request.getContextPath()%>/ServAdmin?admin=borraroperador&opcodigo=<%=op.getCodigoPucp()%>"><button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button></a>
-                        </div>
-                        <hr>
-
-                    </div>
-                <%}%>
                 </div>
-
             </div>
+            <div class="topmargin container" >
+
+                <table class="table" id = "tableUp">
+
+                    <tr>
+                        <th class="text-white">Foto</th>
+                        <th class="text-white">Nombre y Apellido</th>
+                        <th class="text-white">Código PUCP</th>
+                        <th class="text-white">Correo PUCP</th>
+                        <th class="text-white">Celular</th>
+                        <th class="text-white">Eliminar</th>
+
+
+                    </tr>
+                    <tbody>
+
+                        <%
+                            for (BUser op : listaOperadores) { %>
+
+                        <tr>
+                            <td class="text-white">
+                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=op.getCodigoPucp()%>" alt="perfil foto" style="width:30px;height:30px;"/>
+                            </td>
+                            <td class="text-white"><%=op.getNombres()%> </td>
+                            <td class="text-white"><%=op.getCodigoPucp()%></td>
+                            <td class="text-white"><%=op.getCorreo()%></td>
+                            <td class="text-white"><%=op.getTelefono() %></td>
+                            <td>
+                                <a onclick="return confirm('¿Estas seguro de borrar?');"
+                                   href="<%=request.getContextPath()%>/ServAdmin?admin=borraroperador&opcodigo=<%=op.getCodigoPucp()%>"
+                                   type="button" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+
+
+                        </tr>
+
+                        <%
+                            } %>
+                    </tbody>
+
+                    <!-- Large modal -->
+
+                </table>
+            </div>
+
+
+
+        </div>
         </div>
     </body>
 </html>

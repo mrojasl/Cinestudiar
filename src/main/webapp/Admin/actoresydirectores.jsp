@@ -132,68 +132,96 @@
 
             </form>
 
-            <div class="topmargin">
+            <div class="topmargin container">
 
 
-                <%for (BProfesional p: listaProfesionales){
-                String rol;
-                if (p.getRol().equalsIgnoreCase("a")){
-                    rol= "Actor";
-                }else{rol= "Director";}%>
-                <div>
-                    <div class="row">
-                        <div class="input-group mb-3 col">
+                <table class="table" id = "tableUp">
 
-                            <img class="crop" src="${pageContext.request.contextPath}/Image?action=profesionales&id=<%=p.getIdProfesional()%>" alt="perfil foto" style="width:100px;height:100px;"/>
-
-                        </div>
-
-                        <div class="input-group mb-3 col">
-                            <h6 style="color: white">Nombre:<br> <%= p.getNombre()%>    <%= p.getApellido()%> <br><br> <%= rol%> </h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
+                    <tr>
+                        <th class="text-white">Foto</th>
+                        <th class="text-white">Nombre y Apellido</th>
+                        <th class="text-white">Rol</th>
+                        <th class="text-white">Editar foto</th>
+                        <th class="text-white">Eliminar</th>
 
 
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                Editar
-                            </button>
+                    </tr>
 
-                            <!-- Modal -->
-                            <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=actualizarfoto" enctype="multipart/form-data">
-                                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 style="color: black" class="modal-title" id="exampleModalLabel">Editar</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div style="color: black" class="modal-body">
-                                                <p><Strong>Obras</Strong><br>
-                                                <input type="hidden" name="idprof" value="<%=p.getIdProfesional()%>"/>
-                                                <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
-                                                <input type="file" class="form-control" name="fotonueva">
 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <a href="<%=request.getContextPath()%>/ServAdmin?admin=borrarprofesional&proid=<%=p.getIdProfesional()%>"><button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px">Borrar
-                            </button></a>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <%}%>
+                    <tbody>
+
+
+
+
+                                    <%for (BProfesional p: listaProfesionales){
+                                    String rol;
+                                    if (p.getRol().equalsIgnoreCase("a")){
+                                        rol= "Actor";
+                                    }else{rol= "Director";}%>
+                                <tr>
+
+
+                                        <td>
+
+                                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=profesionales&id=<%=p.getIdProfesional()%>" alt="perfil foto" style="width:30px;height:30px;"/>
+
+                                        </td>
+
+                                    <td class="text-white"><%=p.getNombre()%> <%=p.getApellido()%> </td>
+                                    <td class="text-white"><%=rol%> </td>
+
+
+
+                                            <td>
+
+
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2<%=p.getIdProfesional()%>">
+                                                    Editar
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=actualizarfoto" enctype="multipart/form-data">
+                                                    <div class="modal fade" id="exampleModal2<%=p.getIdProfesional()%>" tabindex="-1" aria-labelledby="exampleModalLabel2<%=p.getIdProfesional()%>" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 style="color: black" class="modal-title" id="exampleModalLabel">Editar</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div style="color: black" class="modal-body">
+                                                                    <input type="hidden" name="id" value="<%=p.getIdProfesional()%>"/>
+                                                                    <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
+                                                                    <input type="file" class="form-control" name="fotonueva">
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+
+                                    </td>
+
+                                            <td>
+                                                <a href="<%=request.getContextPath()%>/ServAdmin?admin=borrarprofesional&proid=<%=p.getIdProfesional()%>"><button type="button" class="btn btn-danger btn-sm" >Borrar
+                                                </button></a>
+                                    </td>
+
+
+                                </tr>
+                                    <%}%>
+
+
+                    </tbody>
+
+
+
+                </table>
 
             </div>
         </div>

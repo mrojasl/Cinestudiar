@@ -24,7 +24,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
+        AdminDao adminDao = new AdminDao();
         BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
 
         String action = request.getParameter("admin") == null? "sala" : request.getParameter("admin");
@@ -32,9 +32,8 @@ public class AdminServlet extends HttpServlet {
         if (Objects.equals(usuarioLogueado.getRol(), "admin")){
             switch(action){
                 case "sala":
-                    ArrayList<BSedeYSala> listaSedesYSalas = AdminDao.obtenerSedesySalas();
-                    request.setAttribute("listaSedesYSalas",listaSedesYSalas);
-
+                    ArrayList<BSedeYSala> listaSedes = AdminDao.obtenerSedes();
+                    request.setAttribute("listaSedes",listaSedes);
                     RequestDispatcher rd1 =request.getRequestDispatcher("Admin/salas.jsp");
                     rd1.forward(request,response);
 
@@ -108,10 +107,10 @@ public class AdminServlet extends HttpServlet {
                     int aforo2 = Integer.parseInt(request.getParameter("aforo2"));
                     String sede2 = request.getParameter("sede2");
                     int id = Integer.parseInt(request.getParameter("id"));
-                    int aforo_op=Integer.parseInt(request.getParameter("aforo_op"));
+
 
                     if (request.getParameter("editar")!=null){
-                        AdminDao.editarSala(id,aforo2,aforo_op,sede2);
+                        AdminDao.editarSala(id,aforo2,aforo2,sede2);
                     } else if (request.getParameter("borrar")!=null){
                         AdminDao.borrarSala(id);
                     }

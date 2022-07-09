@@ -1,17 +1,11 @@
 <%@ page import="com.example.cinestudiar.beans.BSedeYSala" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.cinestudiar.funciones.Operaciones" %>
+<%@ page import="com.example.cinestudiar.daos.AdminDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>" scope="request" id="listaSedesYSalas"/>
+<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>" scope="request" id="listaSedes"/>
 
-<%
-    ArrayList<String> listaSedes = new ArrayList<>();
-    for (BSedeYSala se : listaSedesYSalas) {
-        listaSedes.add(se.getSede());
-    }
-    ArrayList<String> listaSedesSinRepetir = Operaciones.quitarDuplicados(listaSedes);
-%>
-<html lang="en">
+<html lang="es">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
             crossorigin="anonymous"></script>
@@ -102,68 +96,77 @@
                 </div>
                 <div class="margintopsala">
 
-                    <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <%for (String se : listaSedesSinRepetir) {
-                            int i = 1;%>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-heading<%=i%>">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapse<%=i%>" aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapse<%=i%>">
-                                    <%=se%>
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapse<%=i%>" class="accordion-collapse collapse"
-                                 aria-labelledby="panelsStayOpen-heading<%=i%>">
-                                <div class="accordion-body">
-
-                                    <div>
-                                        <%for (BSedeYSala sa : listaSedesYSalas) {
-                                        if(sa.getSede().equals(se)) {%>
-                                        <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=editaroborrarsala&id=<%=sa.getIdSala()%>">
-                                            <input type="hidden" name="aforo_op" value="<%=sa.getAforoOperador()%>" />
-                                            <div class="row">
-                                                    <h4 class="shortwidth">Sala</h4>
-                                                    <h4 class="shortwidth"><%=sa.getIdSala()%></h4>
-                                                    <div class="input-group mb-3 col">
-                                                        <span class="input-group-text">Aforo</span>
-                                                        <input value="<%=sa.getAforoAdministrador()%>" type="number" name="aforo2" min="1"
-                                                               max="100">
-                                                    </div>
-                                                    <div class="input-group mb-3 col">
-                                                        <label class="input-group-text" for="inputGroupSelect01">Sede</label>
-                                                        <select name="sede2" class="form-select">
-                                                            <option selected><%=se%></option>
-                                                            <%for (String se2 : listaSedesSinRepetir) {
-                                                            if (!se2.equals(se)) {%>
-                                                            <option><%=se2%></option>
-                                                            <%}}%>
-                                                        </select>
-                                                    </div>
-                                                    <div class="input-group mb-3 col">
-
-                                                    </div>
-                                                    <div class="input-group mb-3 col">
-                                                        <button name="editar" type="submit" class="btn btn-success">Guardar</button>
-                                                    </div>
-                                                    <div class="input-group mb-3 col">
-                                                        <button name="borrar" type="submit" class="btn btn-danger">Borrar</button>
-                                                    </div>
-                                                    <hr>
-                                            </div>
-                                        </form>
 
 
-                                        <%}}%>
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <%int i = 0;%>
+                            <%for (BSedeYSala se : listaSedes) {%>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne<%=i%>">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne<%=i%>" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne<%=i%>">
+                                        <%=se.getSede()%>
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne<%=i%>" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne<%=i%>">
+                                    <div class="accordion-body">
+
+                                        <div>
+
+                                            <%AdminDao adminDao = new AdminDao();
+                                            ArrayList<BSedeYSala> listaSalas = adminDao.obtenerSaladeSede(se.getSede());%>
+
+                                            <%for (BSedeYSala sa : listaSalas) {%>
+                                            <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=editaroborrarsala&id=<%=sa.getIdSala()%>">
+                                                <div class="row">
+                                                        <h4 class="shortwidth">Sala</h4>
+
+                                                        <h4 class="shortwidth"><%=sa.getIdSala()%></h4>
+
+                                                            <div class="input-group mb-3 col">
+                                                                <span class="input-group-text">Aforo</span>
+                                                                <input value="<%=sa.getAforoAdministrador()%>" type="number" name="aforo2" min="1"
+                                                                       max="100">
+                                                            </div>
+
+                                                            <div class="input-group mb-3 col">
+                                                                <label class="input-group-text" for="inputGroupSelect01">Sede</label>
+                                                                <select name="sede2" class="form-select">
+                                                                    <option selected><%=se.getSede()%></option>
+                                                                    <%for (BSedeYSala se2 : listaSedes) {%>
+                                                                    <%if (!se.getSede().equals(se2.getSede())) {%>
+                                                                    <option><%=se2.getSede()%></option>
+                                                                    <%}}%>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="input-group mb-3 col">
+
+                                                            </div>
+
+                                                            <div class="input-group mb-3 col">
+                                                                <button name="editar" type="submit" class="btn btn-success">Guardar</button>
+                                                            </div>
+
+                                                            <div class="input-group mb-3 col">
+                                                                <button name="borrar" type="submit" class="btn btn-danger">Borrar</button>
+                                                            </div>
+
+                                                        <hr>
+                                                </div>
+
+                                            </form>
+
+
+                                            <%}%>
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
+
+                            <%i++;
+                            }%>
                         </div>
-                        <%i++;
-                        }%>
-                    </div>
 
                 </div>
             </div>
