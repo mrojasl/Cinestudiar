@@ -439,6 +439,20 @@ public class OperadorDao extends BaseDao {
         }
     }
 
+    public void borrarProfesionaldePelicula(int peliculas_idpelicula,int profesionales_idprofesional) {
+
+        try (Connection conn = this.getConnection();) {
+            String sql = "DELETE FROM peliculas_has_profesionales WHERE (peliculas_idpelicula = ?) and (profesionales_idprofesional = ?);";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, peliculas_idpelicula);
+                pstmt.setInt(2, profesionales_idprofesional);
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<BSedeYSala> obtenerSala() {
 
         ArrayList<BSedeYSala> listaSala = new ArrayList<>();
