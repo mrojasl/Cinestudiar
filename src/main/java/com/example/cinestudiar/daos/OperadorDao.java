@@ -1,5 +1,6 @@
 package com.example.cinestudiar.daos;
 
+import com.example.cinestudiar.DTO.DTOpeliculas_has_profesionales;
 import com.example.cinestudiar.beans.*;
 /*import com.example.cinestudiar.beans.BUser;*/
 
@@ -404,6 +405,31 @@ public class OperadorDao extends BaseDao {
             e.printStackTrace();
         }
 
+        return listaFuncionesP;
+    }
+
+    public ArrayList<DTOpeliculas_has_profesionales> listaPeliculasdeProfesional(int profesionales_idprofesional) {
+
+        ArrayList<DTOpeliculas_has_profesionales> listaFuncionesP = new ArrayList<>();
+        String sql = "\n" +
+                "select php.peliculas_idpelicula ,php.profesionales_idprofesional, p.nombre from peliculas_has_profesionales php\n" +
+                "left join  peliculas p on (p.idpelicula = php.peliculas_idpelicula)\n" +
+                "where profesionales_idprofesional= ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, profesionales_idprofesional);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    DTOpeliculas_has_profesionales peliculas = new DTOpeliculas_has_profesionales();
+                    peliculas.setPeliculas_idpelicula(rs.getInt(1));
+                    peliculas.setProfesionales_idprofesional(rs.getInt(2));
+                    peliculas.setPelicula(rs.getString(3));
+                    listaFuncionesP.add(peliculas);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return listaFuncionesP;
     }
 
