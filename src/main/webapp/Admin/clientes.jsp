@@ -79,72 +79,78 @@
 
             </form>
 
-            <div class="topmargin">
+            <div class="topmargin container">
 
-                <div>
-                    <%for (BUser cl : listaClientes) {%>
-                    <div class="row">
-                        <div class="input-group mb-3 col">
-                            <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=cl.getCodigoPucp()%>" alt="perfil foto" style="width:100px;height:100px;"/>
-                        </div>
+                <table class="table" id = "tableUp">
 
-                        <div class="input-group mb-3 col">
-                            <h6 style="color: white">Nombre:<br><%=cl.getNombres()+""+cl.getApellidos()%> <br><br>Código PUCP:<br><%=cl.getCodigoPucp()%></h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                            <h6 style="color: white">Correo PUCP:<br><%=cl.getCorreo()%> <br><br>Celular:<br><%=cl.getTelefono()%></h6>
-                        </div>
-                        <div class="input-group mb-3 col">
-                        </div>
-                        <div class="input-group mb-3 col">
+                    <tr>
+                        <th class="text-white">Foto</th>
+                        <th class="text-white">Nombre y Apellido</th>
+                        <th class="text-white">Código PUCP</th>
+                        <th class="text-white">Correo PUCP</th>
+                        <th class="text-white">Celular</th>
+                        <th class="text-white">Historial</th>
 
-                            <!-- Button trigger modal -->
-                                <button style="height: 40px;margin-top: 30px" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal<%=cl.getCodigoPucp()%>">
+                    </tr>
+                    <tbody>
+
+                        <%for (BUser cl : listaClientes) { %>
+
+                        <tr>
+                            <td class="text-white">
+                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=cl.getCodigoPucp()%>" alt="perfil foto" style="width:30px;height:30px;"/>
+                            </td>
+                            <td class="text-white"><%=cl.getNombres()%> </td>
+                            <td class="text-white"><%=cl.getCodigoPucp()%></td>
+                            <td class="text-white"><%=cl.getCorreo()%></td>
+                            <td class="text-white"><%=cl.getTelefono() %></td>
+                            <td>
+
+                                <!-- Button trigger modal -->
+                                <button style="" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal<%=cl.getCodigoPucp()%>">
                                     Historial de compras
                                 </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal<%=cl.getCodigoPucp()%>" tabindex="-1" aria-labelledby="exampleModalLabel<%=cl.getCodigoPucp()%>" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 style="color:black;" class="modal-title" id="exampleModalLabel2">Historia de compras</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div style="color: black" class="modal-body">
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal<%=cl.getCodigoPucp()%>" tabindex="-1" aria-labelledby="exampleModalLabel<%=cl.getCodigoPucp()%>" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 style="color:black;" class="modal-title" id="exampleModalLabel2">Historia de compras</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div style="color: black" class="modal-body">
 
-                                            <%for (BCompra com : historialdecompracliente) {%>
+                                                <%for (BCompra com : historialdecompracliente) {%>
 
-                                            <%if (cl.getCodigoPucp().equals(com.getCodigoPucp())) {%>
+                                                <%if (cl.getCodigoPucp().equals(com.getCodigoPucp())) {%>
 
-                                            <h5><Strong>S/<%=com.getPago_total()%></Strong></h5>
-                                            <p><%=com.getFecha_compra()%> - <%=com.getHora_compra()%> - Tickets:<%=com.getCantidad_tikets()%></p>
-                                            <hr>
-                                            <%}
-                                            }%>
+                                                <h5><Strong>S/<%=com.getPago_total()%></Strong></h5>
+                                                <p><%=com.getFecha_compra()%> - <%=com.getHora_compra()%> - Tickets:<%=com.getCantidad_tikets()%></p>
+                                                <hr>
+                                                <%}
+                                                }%>
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
 
+                            </td>
 
 
+                        </tr>
+
+                        <%
+                            } %>
+                    </tbody>
 
 
-
-
-
-                        </div>
-                        <hr>
-                    </div>
-                    <%}%>
-
-
+                </table>
 
 
                 </div>

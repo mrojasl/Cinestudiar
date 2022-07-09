@@ -3,14 +3,8 @@
 <%@ page import="com.example.cinestudiar.funciones.Operaciones" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>" scope="request" id="listaSedesYSalas"/>
+<jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>" scope="request" id="listaSedes"/>
 
-<%
-    ArrayList<String> listaSedes = new ArrayList<>();
-    for (BSedeYSala se : listaSedesYSalas) {
-        listaSedes.add(se.getSede());
-    }
-    ArrayList<String> listaSedesSinRepetir = Operaciones.quitarDuplicados(listaSedes);
-%>
 <html lang="en">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -103,7 +97,7 @@
                 <div class="margintopsala">
 
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <%for (String se : listaSedesSinRepetir) {
+                        <%for (BSedeYSala se : listaSedes) {
                             int i = 1;%>
 
                         <div class="accordion-item">
@@ -111,7 +105,7 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapse<%=i%>" aria-expanded="true"
                                         aria-controls="panelsStayOpen-collapse<%=i%>">
-                                    <%=se%>
+                                    <%=se.getSede()%>
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapse<%=i%>" class="accordion-collapse collapse"
@@ -120,7 +114,7 @@
 
                                     <div>
                                         <%for (BSedeYSala sa : listaSedesYSalas) {
-                                        if(sa.getSede().equals(se)) {%>
+                                        if(sa.getSede().equals(se.getSede())) {%>
                                         <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=editaroborrarsala&id=<%=sa.getIdSala()%>">
                                             <input type="hidden" name="aforo_op" value="<%=sa.getAforoOperador()%>" />
                                             <div class="row">
@@ -135,9 +129,9 @@
                                                         <label class="input-group-text" for="inputGroupSelect01">Sede</label>
                                                         <select name="sede2" class="form-select">
                                                             <option selected><%=se%></option>
-                                                            <%for (String se2 : listaSedesSinRepetir) {
-                                                            if (!se2.equals(se)) {%>
-                                                            <option><%=se2%></option>
+                                                            <%for (BSedeYSala se2 : listaSedes) {
+                                                            if (!se2.getSede().equals(se.getSede())) {%>
+                                                            <option><%=se2.getSede()%></option>
                                                             <%}}%>
                                                         </select>
                                                     </div>
