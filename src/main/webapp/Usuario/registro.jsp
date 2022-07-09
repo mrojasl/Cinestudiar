@@ -245,6 +245,7 @@
 <%if (session.getAttribute("indicador2").equals("error")){%>
 
 
+
 <div class="d-inline-flex p-2" style="margin-top: 15px">
     <div class="alert alert-success" role="alert">Registrado con Éxito!!, ahora puedes loguearte dando click a "iniciar sesion"
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -252,7 +253,6 @@
         </button>
     </div>
 </div>
-
 
 <%session.removeAttribute("indicador2");%>
 <%}%>
@@ -274,7 +274,7 @@
 
                             </div>
 
-                            <form class="user" method="POST" action="<%=request.getContextPath()%>/inicio?action=añadir" enctype="multipart/form-data" >
+                            <form class="user" method="POST" action="<%=request.getContextPath()%>/registro?action=añadir" enctype="multipart/form-data" >
 
                                 <!-- Nombre completo-->
                                 <div class="form-outline mb-4">

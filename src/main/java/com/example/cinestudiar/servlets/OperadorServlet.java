@@ -34,56 +34,60 @@ public class OperadorServlet extends HttpServlet {
         //}
         //ArrayList<BFuncion> lista = operadorDao.FuncionesDisponibles();
 
+        BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
+        String rol=usuarioLogueado.getRol();
         RequestDispatcher requestDispatcher;
-        switch (action) {
 
-            case "funciones" -> {
-                request.setAttribute("listarFunciones", "");
-                request.setAttribute("Funciones", operadorDao.filtradoFunciones(""));
-                request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
-                request.setAttribute("listaSalas", operadorDao.obtenerSala());
-                request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
-                requestDispatcher = request.getRequestDispatcher("Operador/Todas_func.jsp");
-                requestDispatcher.forward(request, response);
-                break;
-            }
-            case "crearFu" ->{
-                request.setAttribute("listaPersonal",operadorDao.obtenerPersonal());
-                requestDispatcher = request.getRequestDispatcher("Operador/personal.jsp");
-                requestDispatcher.forward(request, response);
-                break;
-            }
-            case "crearPe" ->{
-                ArrayList<BProfesional> listaProfesionales= AdminDao.obtenerProfesionales();
-                request.setAttribute("listaProfesionales",listaProfesionales);
-                requestDispatcher = request.getRequestDispatcher("Operador/profesionalOperador.jsp");
-                requestDispatcher.forward(request, response);
-                break;
-            }
-            case "peliculas"->{
-                ArrayList<BPeliculas> listaPeliculas = peliculasDao.listasPeliculas();
+        if (Objects.equals(usuarioLogueado.getRol(), "operador")){
+            switch (action) {
 
-                request.setAttribute("directores",peliculasDao.listaDirector());
-                request.setAttribute("actores",peliculasDao.listaActor());
-                request.setAttribute("Peliculas", listaPeliculas);
-                requestDispatcher = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
-                requestDispatcher.forward(request, response);
-                break;
-            }
+                case "funciones" -> {
+                    request.setAttribute("listarFunciones", "");
+                    request.setAttribute("Funciones", operadorDao.filtradoFunciones(""));
+                    request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
+                    request.setAttribute("listaSalas", operadorDao.obtenerSala());
+                    request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
+                    requestDispatcher = request.getRequestDispatcher("Operador/Todas_func.jsp");
+                    requestDispatcher.forward(request, response);
+                    break;
+                }
+                case "crearFu" ->{
+                    request.setAttribute("listaPersonal",operadorDao.obtenerPersonal());
+                    requestDispatcher = request.getRequestDispatcher("Operador/personal.jsp");
+                    requestDispatcher.forward(request, response);
+                    break;
+                }
+                case "crearPe" ->{
+                    ArrayList<BProfesional> listaProfesionales= AdminDao.obtenerProfesionales();
+                    request.setAttribute("listaProfesionales",listaProfesionales);
+                    requestDispatcher = request.getRequestDispatcher("Operador/profesionalOperador.jsp");
+                    requestDispatcher.forward(request, response);
+                    break;
+                }
+                case "peliculas"->{
+                    ArrayList<BPeliculas> listaPeliculas = peliculasDao.listasPeliculas();
 
-            case "borrarpeli"->{
-                if (request.getParameter("id") != null) {
-                    String idpeliString = request.getParameter("id");
-                    int idpeli = 0;
-                    try {
-                        idpeli = Integer.parseInt(idpeliString);
+                    request.setAttribute("directores",peliculasDao.listaDirector());
+                    request.setAttribute("actores",peliculasDao.listaActor());
+                    request.setAttribute("Peliculas", listaPeliculas);
+                    requestDispatcher = request.getRequestDispatcher("Operador/Todas_Peli.jsp");
+                    requestDispatcher.forward(request, response);
+                    break;
+                }
 
-                        request.setAttribute("Peliculas", peliculasDao.listasPeliculas());
-                    } catch (NumberFormatException ex) {
-                        response.sendRedirect("OperadorServlet?action=peliculas");
-                    }
+                case "borrarpeli"->{
+                    if (request.getParameter("id") != null) {
+                        String idpeliString = request.getParameter("id");
+                        int idpeli = 0;
+                        try {
+                            idpeli = Integer.parseInt(idpeliString);
 
-                    BPeliculas peli = peliculasDao.obtenerPelicula(idpeli);
+                            request.setAttribute("Peliculas", peliculasDao.listasPeliculas());
+                        } catch (NumberFormatException ex) {
+                            response.sendRedirect("OperadorServlet?action=peliculas");
+                        }
+
+                        BPeliculas peli = peliculasDao.obtenerPelicula(idpeli);
 
                     if ( peli != null) {
                         peliculasDao.borrarFunciondeunaPelicula(idpeli);
@@ -157,7 +161,26 @@ public class OperadorServlet extends HttpServlet {
             }
 
              */
+            }
         }
+        else if (Objects.equals(rol, "cliente")){
+            response.sendRedirect(request.getContextPath() + "/inicio?action=registrado");
+        }
+        else if (Objects.equals(rol, "admin")){
+            response.sendRedirect(request.getContextPath() + "/ServAdmin");
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "/inicio");
+        }
+
+
+
+
+
+
+
+
+
 
 
 

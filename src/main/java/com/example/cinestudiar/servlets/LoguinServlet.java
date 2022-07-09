@@ -18,6 +18,7 @@ public class LoguinServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         RequestDispatcher view = request.getRequestDispatcher("Usuario/loguin.jsp");
         view.forward(request, response);
 

@@ -20,8 +20,6 @@ import java.util.Objects;
 @WebServlet(name = "ServAdmin", value = "/ServAdmin")
 public class AdminServlet extends HttpServlet {
 
-
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -75,12 +73,15 @@ public class AdminServlet extends HttpServlet {
 
             }
         }
+        else if (Objects.equals(usuarioLogueado.getRol(), "cliente")){
+            response.sendRedirect(request.getContextPath() + "/inicio?action=registrado");
+        }
+        else if (Objects.equals(usuarioLogueado.getRol(), "operador")){
+            response.sendRedirect(request.getContextPath() + "/OperadorServlet");
+        }
         else{
             response.sendRedirect(request.getContextPath() + "/inicio");
         }
-
-
-
     }
 
     @Override

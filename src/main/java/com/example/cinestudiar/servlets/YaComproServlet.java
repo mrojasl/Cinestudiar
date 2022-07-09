@@ -1,12 +1,14 @@
 package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BCarrito;
+import com.example.cinestudiar.beans.BUser;
 import com.example.cinestudiar.daos.CarritoDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name = "YaComproServlet", value = "/ola")
 public class YaComproServlet extends HttpServlet {
@@ -14,9 +16,25 @@ public class YaComproServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         CarritoDao carritoDao= new CarritoDao();
-        request.setAttribute("carritodecompras",carritoDao.listarUsuario(((String) request.getSession().getAttribute("codigo_pucp"))));
-        RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/carrito_compras/ola.jsp");
-        requestDispatcher.forward(request,response);
+
+        BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
+        String rol=usuarioLogueado.getRol();
+        if (Objects.equals(rol, "cliente")){
+            request.setAttribute("carritodecompras",carritoDao.listarUsuario(((String) request.getSession().getAttribute("codigo_pucp"))));
+            RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/carrito_compras/ola.jsp");
+            requestDispatcher.forward(request,response);
+        }
+        else if (Objects.equals(rol, "admin")){
+            response.sendRedirect(request.getContextPath() + "/ServAdmin");
+        }
+        else if (Objects.equals(rol, "operador")){
+            response.sendRedirect(request.getContextPath() + "/OperadorServlet");
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "");
+        }
+
+
     }
 
     @Override

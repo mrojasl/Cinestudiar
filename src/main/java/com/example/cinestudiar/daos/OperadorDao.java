@@ -424,6 +424,21 @@ public class OperadorDao extends BaseDao {
         }
     }
 
+    public void asignarProfesionalaPelicula(int peliculas_idpelicula,int profesionales_idprofesional)  {
+
+        String sql = "INSERT INTO peliculas_has_profesionales (peliculas_idpelicula, profesionales_idprofesional) VALUES (?,?);";
+
+        try(Connection conn= this.getConnection();
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setInt(1, peliculas_idpelicula);
+            pstmt.setInt(2, profesionales_idprofesional);
+            pstmt.executeUpdate();
+        }catch(SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<BSedeYSala> obtenerSala() {
 
         ArrayList<BSedeYSala> listaSala = new ArrayList<>();
