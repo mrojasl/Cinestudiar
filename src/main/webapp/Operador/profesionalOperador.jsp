@@ -86,10 +86,10 @@
                 <div class="input-group mb-3 col">
 
 
-                    <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=buscarProf">
+                    <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=buscarprofesional">
 
                         <input
-                                name="txtbuscar" class="form-control" type="text" placeholder="Buscar por nombre"
+                                name="txtbuscar" class="form-control" type="text" placeholder="Buscar por nombre o apellido"
                                 aria-label="default input example" value="<%=txtbuscado%>">
                     </form>
                 </div>

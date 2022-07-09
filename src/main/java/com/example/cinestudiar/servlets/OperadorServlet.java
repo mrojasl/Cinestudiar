@@ -86,7 +86,7 @@ public class OperadorServlet extends HttpServlet {
                     BPeliculas peli = peliculasDao.obtenerPelicula(idpeli);
 
                     if ( peli != null) {
-
+                        peliculasDao.borrarFunciondeunaPelicula(idpeli);
                         peliculasDao.borrarPelicula(idpeli);
                     }
                 }
@@ -270,6 +270,15 @@ public class OperadorServlet extends HttpServlet {
                 request.setAttribute("txtbuscado",txtbuscar);
                 request.setAttribute("listaPersonal",operadorDao.obtenerPersonalPorNombre(txtbuscar));
                 view = request.getRequestDispatcher("Operador/personal.jsp");
+                view.forward(request, response);
+
+            }
+            case "buscarprofesional" ->{
+                String txtbuscar = request.getParameter("txtbuscar");
+                request.setAttribute("txtbuscado",txtbuscar);
+                ArrayList<BProfesional> listaProfesionales= operadorDao.obtenerProfesionalesPorNombre(txtbuscar);
+                request.setAttribute("listaProfesionales",listaProfesionales);
+                view = request.getRequestDispatcher("Operador/profesionalOperador.jsp");
                 view.forward(request, response);
 
             }

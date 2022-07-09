@@ -569,7 +569,38 @@ public class OperadorDao extends BaseDao {
         return listaequipoLimpiezas;
     }
 
+    public ArrayList<BProfesional> obtenerProfesionalesPorNombre(String txtBuscar) {
 
+        ArrayList<BProfesional> lista = new ArrayList<>();
+
+        String sql="SELECT idprofesional,nombre,apellido,rol " +
+                "FROM profesionales where lower(nombre) like ? or lower(apellido) like ?";
+
+
+        try (Connection conn= this.getConnection();
+             PreparedStatement pstmt= conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%" + txtBuscar.toLowerCase() + "%");
+            pstmt.setString(2, "%" + txtBuscar.toLowerCase() + "%");
+
+            try(ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    BProfesional pr = new BProfesional();
+                    pr.setIdProfesional(rs.getInt(1));
+                    pr.setNombre(rs.getString(2));
+                    pr.setApellido(rs.getString(3));
+                    pr.setRol(rs.getString(4));
+                    lista.add(pr);
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
 }
 
 
