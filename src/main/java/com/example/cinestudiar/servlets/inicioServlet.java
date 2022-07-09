@@ -51,7 +51,9 @@ public class inicioServlet extends HttpServlet {
                     //System.out.println(request.getSession().getAttribute("codigo_pucp"));
 
                     ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculasCliente();
+                    ArrayList<BPeliculas> listaradom= peliculasDao.listaradom();
                     request.setAttribute("listapeliculas",listapeliculas);
+                    request.setAttribute("listaradom",listaradom);
                     request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
                     request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
                     view = request.getRequestDispatcher("Usuario/in_con_sesion.jsp");
