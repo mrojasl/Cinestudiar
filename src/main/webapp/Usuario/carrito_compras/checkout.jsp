@@ -25,7 +25,7 @@
     <meta charset='utf-8'>
 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Checkout-CinEstudiar</title>
+    <title>Carrito-CinEstudiar</title>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="Usuario/carrito_compras/chekout.css">

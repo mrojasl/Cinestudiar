@@ -16,7 +16,7 @@
     <head >
         <jsp:include page="headerSesionNoIniciada.jsp"/>
         <meta charset="UTF-8">
-        <title>Cinestudiar</title>
+        <title>Iniciar Sesión-Cinestudiar</title>
 
         <meta charset='utf-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,7 +80,7 @@
                                         </div>
 
 
-                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">¿No tienes cuenta? <a href="${pageContext.request.contextPath}/inicio?action=registrar"
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">¿No tienes cuenta? <a href="${pageContext.request.contextPath}/?action=registrar"
                                                                                                                   style="color: #0156e0;">Registrate aqui</a></p>
 
                                     </form>

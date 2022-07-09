@@ -12,6 +12,8 @@ public class PeliculasDao extends BaseDao{
     private static String sql_select="select idpelicula,nombre,calificacion,duracion,genero,informacion from peliculas;";
     private static String sql_select2="select po.idprofesional,po.nombre,po.apellido,po.rol from peliculas_has_profesionales ph inner join profesionales po " +
             "on (ph.profesionales_idprofesional=po.idprofesional) where peliculas_idpelicula=?;";
+    int variable=0;
+
 
     public ArrayList<BPeliculas> listasPeliculas() {
 
@@ -38,6 +40,59 @@ public class PeliculasDao extends BaseDao{
                 int existeCompra = rs.getInt(7);
                 BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion,existeCompra);
                 listaBpeliculas.add(peliculas);
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+        return listaBpeliculas;
+    }
+
+
+
+
+
+
+
+
+    public ArrayList<BPeliculas> listasPeliculasCliente() {
+
+        ArrayList<BPeliculas> listaBpeliculas = new ArrayList<>();
+
+        String sql = "select p.idpelicula,p.nombre,p.calificacion,p.duracion,p.genero,p.informacion,subq.existeCompra,timestampdiff(minute,now(),concat(subq.fecha,' ',subq.hora))\n" +
+                "                from peliculas p left join (select p.idpelicula,idcompra as 'existeCompra',f.fecha as 'fecha',f.hora as 'hora' from peliculas p left join funciones f\n" +
+                "                on (p.idpelicula=f.idpelicula) left join compradefunciones cf\n" +
+                "                on (cf.idfuncion=f.idfuncion) group by f.idfuncion) subq\n" +
+                "                on (p.idpelicula=subq.idpelicula);";
+
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql);) {
+            int i=0;
+
+            while (rs.next()) {
+                int idpelicula = rs.getInt(1);
+                String nombre = rs.getString(2);
+                double calificacion = rs.getDouble(3);
+                int duracion = rs.getInt(4);
+                String genero = rs.getString(5);
+                String informacion = rs.getString(6);
+                int existeCompra = rs.getInt(7);
+
+
+                int tiempotranscurrido=rs.getInt(8);
+
+                if (tiempotranscurrido>0){
+                    BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion,existeCompra);
+                    if(peliculas.getIdpeliculas()!=variable){
+                        listaBpeliculas.add(peliculas);
+
+                    }
+                    variable=peliculas.getIdpeliculas();
+                }
+
+              i++;
             }
         } catch (SQLException e) {
             System.out.println("Hubo un error en la conexión!");

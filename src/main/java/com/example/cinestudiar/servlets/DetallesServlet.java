@@ -1,5 +1,8 @@
 package com.example.cinestudiar.servlets;
 
+import com.example.cinestudiar.beans.BCarrito;
+import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.daos.CarritoDao;
 import com.example.cinestudiar.daos.FuncionesDao;
 import com.example.cinestudiar.daos.PeliculasDao;
 
@@ -18,9 +21,16 @@ public class DetallesServlet extends HttpServlet {
         String action = request.getParameter("action");
         FuncionesDao funcionesDao = new FuncionesDao();
         PeliculasDao peliculasDao = new PeliculasDao();
+
+        CarritoDao carritoDao= new CarritoDao();
+
         RequestDispatcher view;
         switch (action) {
             case "detalles"->{
+
+
+                request.setAttribute("carritodeCliente",carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
+
                 request.setAttribute("listafunciones",funcionesDao.listaFuncionesPorPelicula(Integer.parseInt(request.getParameter("id"))));
                 request.setAttribute("pelicula",peliculasDao.obtener_pelicula(Integer.parseInt(request.getParameter("id")),peliculasDao.listasPeliculas()));
                 request.setAttribute("lista_profesionales",peliculasDao.listapeliculaprofesional(Integer.parseInt(request.getParameter("id"))));
@@ -28,26 +38,40 @@ public class DetallesServlet extends HttpServlet {
                 view.forward(request, response);
             }
 
-            case "agregar" -> {
-                String idFuncion = request.getParameter("idFuncion");
-                String id = request.getParameter("id");
-                //System.out.println(idFuncion);
-                //System.out.println(request.getSession().getAttribute("codigo_pucp"));
-                if (idFuncion != null) {
-                    funcionesDao.agregarCarrito((String) request.getSession().getAttribute("codigo_pucp"), Integer.parseInt(idFuncion));
-                    System.out.println("Se agrego al carrito");
-                    response.sendRedirect(request.getContextPath()+"/detalles?action=detalles&id="+id);
-                } else {
-                    request.getSession().setAttribute("indicador3", "error");
-                    response.sendRedirect(request.getContextPath() + "/inicio?action=detalles");
-                }
-            }
+
         }
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        FuncionesDao funcionesDao = new FuncionesDao();
+        PeliculasDao peliculasDao = new PeliculasDao();
+
+
+
+
+
+
+        switch (action) {
+
+            case "agregar" -> {
+                String idFuncion = request.getParameter("idFuncion");
+                String id = request.getParameter("id");
+
+
+                if (idFuncion != null) {
+                    funcionesDao.agregarCarrito((String) request.getSession().getAttribute("codigo_pucp"), Integer.parseInt(idFuncion));
+                    //System.out.println("Se agrego al carrito");
+                    response.sendRedirect(request.getContextPath()+"/detalles?action=detalles&id="+id);
+                } else {
+                    request.getSession().setAttribute("indicador3", "error");
+                    response.sendRedirect(request.getContextPath() + "/inicio?action=detalles");
+                }
+            }
+
+        }
 
     }
 }

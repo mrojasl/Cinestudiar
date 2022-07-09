@@ -1,6 +1,7 @@
 package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.daos.CarritoDao;
 import com.example.cinestudiar.daos.UsuariosDao;
 
 import javax.servlet.RequestDispatcher;
@@ -30,6 +31,10 @@ public class LoguinServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         UsuariosDao usuariosDao = new UsuariosDao();
+
+        CarritoDao carritoDao= new CarritoDao();
+
+
         String codigo= request.getParameter("codigo");
         String contraseña = request.getParameter("password");
         //System.out.println(codigo+contraseña);
@@ -44,6 +49,10 @@ public class LoguinServlet extends HttpServlet {
             session.setAttribute("codigo_pucp",codigo);
 
             session.setAttribute("usuarioLogueado", usuario);
+
+
+
+
 
             String rol=usuario.getRol();
             //System.out.println(usuario.getRol());

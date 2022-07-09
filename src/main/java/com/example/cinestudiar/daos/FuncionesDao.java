@@ -14,7 +14,7 @@ public class FuncionesDao extends BaseDao{
 
     String sql_funciones="SELECT f.idfuncion,p.nombre, f.fecha, f.hora, f.precio_ticket, f.edad_minima, s.nombre_sede as `Sede`, \n" +
             "s.aforo_operador as `Aforo Total` , s.idsala FROM peliculas p join funciones f on (f.idpelicula = p.idpelicula)\n" +
-            "join salas s on (f.idsala = s.idsala) where p.idpelicula = ?;";
+            "join salas s on (f.idsala = s.idsala) where p.idpelicula = ? and timestampdiff(minute,now(),concat(f.fecha,' ',f.hora))>0;";
     String sql_agregar="insert into compradefunciones " +
             "(idfuncion,cantidad_por_funcion,usuarios_codigo_pucp) values(?,1,?);";
 

@@ -22,7 +22,7 @@
     <meta charset='utf-8'>
 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Inicio-Cinestudiar</title>
+    <title>Registrarse-Cinestudiar</title>
 
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
 

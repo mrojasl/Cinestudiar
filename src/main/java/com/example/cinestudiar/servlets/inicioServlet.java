@@ -50,7 +50,7 @@ public class inicioServlet extends HttpServlet {
                     //System.out.println("Añadiendo");
                     //System.out.println(request.getSession().getAttribute("codigo_pucp"));
 
-                    ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
+                    ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculasCliente();
                     request.setAttribute("listapeliculas",listapeliculas);
                     request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
                     request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
@@ -61,7 +61,7 @@ public class inicioServlet extends HttpServlet {
                     //System.out.println("cerrando");
                     request.getSession().invalidate();
                     response.sendRedirect(request.getContextPath());
-                    ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
+                    ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculasCliente();
                     request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
                     request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
                     request.setAttribute("listapeliculas",listapeliculas);
@@ -78,7 +78,7 @@ public class inicioServlet extends HttpServlet {
                     //System.out.println("cerrando");
                     request.getSession().invalidate();
                     response.sendRedirect(request.getContextPath());
-                    ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
+                    ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculasCliente();
                     request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
                     request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
                     request.setAttribute("listapeliculas",listapeliculas);
@@ -93,7 +93,7 @@ public class inicioServlet extends HttpServlet {
                     //System.out.println("cerrando");
                     request.getSession().invalidate();
                     response.sendRedirect(request.getContextPath());
-                    ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
+                    ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculasCliente();
                     request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
                     request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
                     request.setAttribute("listapeliculas",listapeliculas);

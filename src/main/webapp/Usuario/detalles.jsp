@@ -10,6 +10,7 @@
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
 <%@ page import="com.example.cinestudiar.beans.BFuncionUsuario" %>
 <%@ page import="java.util.Objects" %>
+<%@ page import="com.example.cinestudiar.beans.BCarrito" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="lista_profesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="listafunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncionUsuario>"/>
@@ -18,12 +19,19 @@
 
 <jsp:useBean id="indicadorNologin" scope="session" type="java.lang.String" class="java.lang.String"/>
 
+
+
+<jsp:useBean id="carritodeCliente" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BCarrito>"  />
+
+
+
+
 <html>
     <head>
         <meta charset='utf-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="https://assets.website-files.com/60b56cdf18d38e15ce088579/60c111551dc75d6dc896a30e_pucp-favicon.png" type="image/x-icon">
-        <title>Inicio-Cinestudiar</title>
+        <title>Detalles de Pelicula-Cinestudiar</title>
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -267,6 +275,10 @@
     </head>
     <body>
 
+
+
+
+
         <%if (usuario!=null && usuario.getNombres()!=null){%>
 
         <jsp:include page="headerSesionIniciada.jsp">
@@ -392,8 +404,38 @@
                                                 <%}%>
                                                 <td> <%=bFuncionUsuario.getbSedeUsuario().getSede()%></td >
                                                 <td> <%=bFuncionUsuario.getbSedeUsuario().getAforoOperador()%></td >
-                                                <td> <a  type="submit" role="button" class="btn btn-outline-info" href="<%=request.getContextPath()%>/detalles?action=agregar&idFuncion=<%=bFuncionUsuario.getIdFuncion()%>&id=<%=pelicula.getIdpeliculas()%>">
-                                                    Agregar</a></td>
+                                                <td>
+                                                    <form class="user" method="POST" action="<%=request.getContextPath()%>/detalles?action=agregar" >
+                                                        <input type="hidden" name="id" value="<%=pelicula.getIdpeliculas()%>">
+                                                        <input type="hidden" name="idFuncion" value="<%=bFuncionUsuario.getIdFuncion()%>">
+                                                        <%boolean coincidencia=false; %>
+                                                        <%for (BCarrito carrito : carritodeCliente) {%>
+
+                                                        <%
+                                                            if (carrito.getIdfuncion() == bFuncionUsuario.getIdFuncion()) {
+                                                                coincidencia = true;
+                                                                break;
+                                                            }%>
+
+                                                        <%}%>
+
+                                                        <%if (coincidencia){%>
+                                                        <button class="btn btn-info disabled" type="submit">Agregar</button>
+                                                        <%}else{%>
+                                                        <button class="btn btn-outline-info" type="submit">Agregar</button>
+                                                        <%}%>
+
+
+
+
+
+                                                    </form>
+
+
+
+
+
+                                                </td>
                                             </tr>
                                             <%}%>
                                         </table>

@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
+<%@ page import="java.util.Random" %>
+<%@ page import="java.util.stream.IntStream" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="listapeliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="cointaner" scope="request" type="java.lang.Integer"/>
@@ -30,15 +32,7 @@
     <link rel="stylesheet" href="carritocomprasvacio.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <style>
-        body {
-            background-image: url("Imagenes/fondo_registro.jpg");
-            background-color: #ffffff;
-            background-size: cover;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-        }
+
         .desc1back{
             color: white;
             background-color: #45698a;
@@ -48,9 +42,7 @@
             padding-right: 0 !important;
             padding-left: 0 !important;
         }
-        .buttonswipe{
-            text-align: right;
-        }
+
         .rigthup{
             float:left;
         }
@@ -86,6 +78,9 @@
 
         }
         .boxfuncion{
+            margin-left: 30px;
+            margin-top: 30px;
+            border-radius: 25px;
             color: white;
             text-align: center;
             background-color: #111523;
@@ -274,6 +269,17 @@
         left2{
             margin-right: 75px;
         }
+
+        .carousel-control-prev-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+        }
+
+        .carousel .carousel-indicators li {  background-color: white;border-radius: 100%;height: 10px;width: 10px }
+        .carousel .carousel-indicators li.active { background-color: blue;border-radius: 100%;height: 10px;width: 10px }
+
+
+
+
     </style>
 </head>
 
@@ -281,88 +287,125 @@
         <jsp:include page="headerSesionIniciada.jsp">
             <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
         </jsp:include>
-        <div class="d-flex justify-content-between">
-            <div class="leftside d-flex flex-column">
-                <div class="sugerencia p-2" ><h3>Sugerencias</h3></div>
-                <br>
-                <div class="px-5">
-                    <div class="boxfuncion " >
-                        <h5>El Hombre Araña 2</h5>
-                        <img  src="Imagenes/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
-                    </div>
-                    <button type="button" class="btn btn-info buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver detalles</button>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Detalles de película</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="desc1back">
-                                        <h4>El Hombre Araña 2</h4>
-                                        <p>Spider-Man 2 | Parker (Tobey Maguire) está en la universidad, sigue enamorado de Mary Jane Watson (Kirsten Dunst) y tiene muchos problemas: su trabajo de héroe no le deja tiempo para estudiar, ni para ganar dinero para pagarse los estudios, ni para ayudar a su tía. Además, a veces pierde sus poderes.</p>
-                                    </div>
-                                    <div class="desc2back">
-                                        <p>Director:<br>Sam Raimi</p>
-                                        <p>Género:<br>Acción, superhéroes, ciencia, ficción, drama</p>
-                                        <p>Duración:<br>180 minutos</p>
-                                        <p>Actores:<br>Tobey Maguire, Kirsten Dunst, James Franco, Alfred Molina, Rosemary Harris, Donna Murphy</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="height: 600px">
+            <ol class="carousel-indicators">
+
+
+
+
+
+                <li class="active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"  aria-current="true"></li>
+                <li class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"  aria-current="true"></li>
+                <li class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"  aria-current="true"></li>
+                <li class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"  aria-current="true"></li>
+                <li class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"  aria-current="true"></li>
+                </ol>
+
+            <div class="carousel-inner">
+
+
+                <div class="carousel-item active">
+                    <img src="..." class="d-block w-100" alt="...">
                 </div>
-                <div class="px-5" >
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
+
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
                 </div>
-                <br>
-                <div class="px-5">
-                    <h5 class="textchoosereserv">Sede:</h5>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>San Miguel</option>
-                        <option value="1">Pueblo Libre</option>
-                        <option value="2">Miraflores</option>
-                        <option value="3">Surco</option>
-                    </select>
-                    <br>
-                    <h5 class="textchoosereserv">Horario:</h5>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Mar. 20/05/2022 14:00-16:00</option>
-                        <option value="1">Miér. 21/05/2022 15:00-16:30</option>
-                        <option value="2">Juev. 22/05/2022 18:00-21:00</option>
-                        <option value="3">Vier. 23/05/2022 18:00-19:45</option>
-                    </select>
-                    <br>
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
                 </div>
-                <div class="px-5" >
-                    <h5 class="textchoosereserv">Cantidad de tickets:</h5>
-                </div>
-                <div class="px-5">
-                    <input type="number" name="tentacles" min="1" max="35">
-                </div>
-                <h6 class="spaceleft">Tickets disponibles: 35</h6>
-                <h6 class="spaceleft">Precio por ticket: S/25.00</h6>
-                <br>
-                <div class="leftfinal px-5">
-                    <h4>TOTAL: S/50.00</h4>
-                    <button type="button" class="btn btn-success">Reservar</button>
-                </div>
+
             </div>
-            <div style="margin-right: 150px">
+
+
+
+        </div>
+
+
+        <div class="d-flex justify-content-around">
+<%--            <div class="leftside d-flex flex-column">--%>
+<%--                <div class="sugerencia p-2" ><h3>Sugerencias</h3></div>--%>
+<%--                <br>--%>
+<%--                <div class="px-5">--%>
+<%--                    <div class="boxfuncion " >--%>
+<%--                        <h5>El Hombre Araña 2</h5>--%>
+<%--                        <img  src="Imagenes/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">--%>
+<%--                    </div>--%>
+<%--                    <button type="button" class="btn btn-info buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver detalles</button>--%>
+
+<%--                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
+<%--                        <div class="modal-dialog modal-dialog-centered">--%>
+<%--                            <div class="modal-content">--%>
+<%--                                <div class="modal-header">--%>
+<%--                                    <h5 class="modal-title" id="exampleModalLabel">Detalles de película</h5>--%>
+<%--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
+<%--                                </div>--%>
+<%--                                <div class="modal-body">--%>
+<%--                                    <div class="desc1back">--%>
+<%--                                        <h4>El Hombre Araña 2</h4>--%>
+<%--                                        <p>Spider-Man 2 | Parker (Tobey Maguire) está en la universidad, sigue enamorado de Mary Jane Watson (Kirsten Dunst) y tiene muchos problemas: su trabajo de héroe no le deja tiempo para estudiar, ni para ganar dinero para pagarse los estudios, ni para ayudar a su tía. Además, a veces pierde sus poderes.</p>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="desc2back">--%>
+<%--                                        <p>Director:<br>Sam Raimi</p>--%>
+<%--                                        <p>Género:<br>Acción, superhéroes, ciencia, ficción, drama</p>--%>
+<%--                                        <p>Duración:<br>180 minutos</p>--%>
+<%--                                        <p>Actores:<br>Tobey Maguire, Kirsten Dunst, James Franco, Alfred Molina, Rosemary Harris, Donna Murphy</p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="modal-footer">--%>
+<%--                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="px-5" >--%>
+<%--                    <img src="Imagenes/estrella.png" height="35px" width="35px">--%>
+<%--                    <img src="Imagenes/estrella.png" height="35px" width="35px">--%>
+<%--                    <img src="Imagenes/estrella.png" height="35px" width="35px">--%>
+<%--                    <img src="Imagenes/estrella.png" height="35px" width="35px">--%>
+<%--                    <img src="Imagenes/estrella.png" height="35px" width="35px">--%>
+<%--                </div>--%>
+<%--                <br>--%>
+<%--                <div class="px-5">--%>
+<%--                    <h5 class="textchoosereserv">Sede:</h5>--%>
+<%--                    <select class="form-select" aria-label="Default select example">--%>
+<%--                        <option selected>San Miguel</option>--%>
+<%--                        <option value="1">Pueblo Libre</option>--%>
+<%--                        <option value="2">Miraflores</option>--%>
+<%--                        <option value="3">Surco</option>--%>
+<%--                    </select>--%>
+<%--                    <br>--%>
+<%--                    <h5 class="textchoosereserv">Horario:</h5>--%>
+<%--                    <select class="form-select" aria-label="Default select example">--%>
+<%--                        <option selected>Mar. 20/05/2022 14:00-16:00</option>--%>
+<%--                        <option value="1">Miér. 21/05/2022 15:00-16:30</option>--%>
+<%--                        <option value="2">Juev. 22/05/2022 18:00-21:00</option>--%>
+<%--                        <option value="3">Vier. 23/05/2022 18:00-19:45</option>--%>
+<%--                    </select>--%>
+<%--                    <br>--%>
+<%--                </div>--%>
+<%--                <div class="px-5" >--%>
+<%--                    <h5 class="textchoosereserv">Cantidad de tickets:</h5>--%>
+<%--                </div>--%>
+<%--                <div class="px-5">--%>
+<%--                    <input type="number" name="tentacles" min="1" max="35">--%>
+<%--                </div>--%>
+<%--                <h6 class="spaceleft">Tickets disponibles: 35</h6>--%>
+<%--                <h6 class="spaceleft">Precio por ticket: S/25.00</h6>--%>
+<%--                <br>--%>
+<%--                <div class="leftfinal px-5">--%>
+<%--                    <h4>TOTAL: S/50.00</h4>--%>
+<%--                    <button type="button" class="btn btn-success">Reservar</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+            <div >
                 <div >
-                    <div class="buttonswipe" >
+                    <div  >
                         <br>
-                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+
+                        <button  type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
                             <i class="bi bi-arrow-left-square-fill"></i> Anterior
                         </button>
                         <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
