@@ -85,7 +85,7 @@ public class PeliculasDao extends BaseDao{
                     BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion,existeCompra);
 
                     if(peliculas.getIdpeliculas()!=variable){
-                        //System.out.println(peliculas.getIdpeliculas());
+                        //XDSystem.out.println(peliculas.getIdpeliculas());
                         listaBpeliculas.add(peliculas);
 
                     }
