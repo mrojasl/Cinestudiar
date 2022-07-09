@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @MultipartConfig
 @WebServlet(name = "OperadorServlet", urlPatterns = {"/OperadorServlet"})
