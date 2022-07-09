@@ -32,8 +32,6 @@ public class AdminServlet extends HttpServlet {
         if (Objects.equals(usuarioLogueado.getRol(), "admin")){
             switch(action){
                 case "sala":
-                    ArrayList<BSedeYSala> listaSedesYSalas = AdminDao.obtenerSedesySalas();
-                    request.setAttribute("listaSedesYSalas",listaSedesYSalas);
                     ArrayList<BSedeYSala> listaSedes = AdminDao.obtenerSedes();
                     request.setAttribute("listaSedes",listaSedes);
                     RequestDispatcher rd1 =request.getRequestDispatcher("Admin/salas.jsp");
@@ -47,7 +45,7 @@ public class AdminServlet extends HttpServlet {
                     rd2.forward(request,response);
 
                 case "cliente":
-                    ArrayList<BUser> listaClientes= adminDao.obtenerClientes();
+                    ArrayList<BUser> listaClientes= AdminDao.obtenerClientes();
                     request.setAttribute("listaClientes",listaClientes);
                     ArrayList<BCompra> historialesCompras = AdminDao.ObtenerHistorialCompra();
                     request.setAttribute("historialdecompracliente",historialesCompras);
@@ -109,10 +107,10 @@ public class AdminServlet extends HttpServlet {
                     int aforo2 = Integer.parseInt(request.getParameter("aforo2"));
                     String sede2 = request.getParameter("sede2");
                     int id = Integer.parseInt(request.getParameter("id"));
-                    int aforo_op=Integer.parseInt(request.getParameter("aforo_op"));
+
 
                     if (request.getParameter("editar")!=null){
-                        AdminDao.editarSala(id,aforo2,aforo_op,sede2);
+                        AdminDao.editarSala(id,aforo2,aforo2,sede2);
                     } else if (request.getParameter("borrar")!=null){
                         AdminDao.borrarSala(id);
                     }
