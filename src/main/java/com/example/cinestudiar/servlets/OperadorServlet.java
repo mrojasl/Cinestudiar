@@ -61,6 +61,7 @@ public class OperadorServlet extends HttpServlet {
                 case "crearPe" ->{
                     ArrayList<BProfesional> listaProfesionales= AdminDao.obtenerProfesionales();
                     request.setAttribute("listaProfesionales",listaProfesionales);
+                    request.setAttribute("listaPeliculas", peliculasDao.listasPeliculas());
                     requestDispatcher = request.getRequestDispatcher("Operador/profesionalOperador.jsp");
                     requestDispatcher.forward(request, response);
                     break;
@@ -300,11 +301,24 @@ public class OperadorServlet extends HttpServlet {
             case "buscarprofesional" ->{
                 String txtbuscar = request.getParameter("txtbuscar");
                 request.setAttribute("txtbuscado",txtbuscar);
+                request.setAttribute("listaPeliculas", peliculasDao.listasPeliculas());
                 ArrayList<BProfesional> listaProfesionales= operadorDao.obtenerProfesionalesPorNombre(txtbuscar);
                 request.setAttribute("listaProfesionales",listaProfesionales);
                 view = request.getRequestDispatcher("Operador/profesionalOperador.jsp");
                 view.forward(request, response);
 
+            }
+            case "asignarpelicula" ->{
+                int idProf = Integer.parseInt(request.getParameter("id"));
+                int idPel = Integer.parseInt(request.getParameter("idPel"));
+                operadorDao.asignarProfesionalaPelicula(idPel,idProf);
+                response.sendRedirect("OperadorServlet?action=crearPe");
+            }
+            case "retirarpelicula" ->{
+                int idProf = Integer.parseInt(request.getParameter("id"));
+                int idPel2 = Integer.parseInt(request.getParameter("idPel2"));
+                operadorDao.borrarProfesionaldePelicula(idPel2,idProf);
+                response.sendRedirect("OperadorServlet?action=crearPe");
             }
 
         }

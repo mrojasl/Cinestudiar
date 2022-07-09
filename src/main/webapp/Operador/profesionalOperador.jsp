@@ -1,10 +1,16 @@
 <%@ page import="com.example.cinestudiar.beans.BFuncion" %>
 <%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
 <%@ page import="com.example.cinestudiar.beans.BProfesional" %>
+<%@ page import="com.example.cinestudiar.daos.OperadorDao" %>
+<%@ page import="java.lang.reflect.Array" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.cinestudiar.DTO.DTOpeliculas_has_profesionales" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="listaProfesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BProfesional>"/>
 <jsp:useBean type="java.lang.String" scope="request" id="txtbuscado" class="java.lang.String"/>
+<jsp:useBean id="listaPeliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
+
 
 <html>
     <head>
@@ -132,20 +138,67 @@
 
 
                         <!-- ModalDescripcion -->
-                        <div class="modal fade" id="descripcion<%=p.getIdProfesional()%>" tabindex="-1" aria-labelledby="descripcion<%=p.getIdProfesional()%>" aria-hidden="true">
-                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarDesc">
+                        <div class="modal fade" id="profesionales<%=p.getIdProfesional()%>" tabindex="-1" aria-labelledby="profesionales<%=p.getIdProfesional()%>" aria-hidden="true">
+                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=asignarpelicula&id=<%=p.getIdProfesional()%>">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Descripción</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel<%=p.getIdProfesional()%>">Agregar</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            uahd9uashdiuasd
+
+
+                                            <label for="">Agregar a Pelicula:</label>
+                                            <select class="form-select" name="idPel" id="">
+                                                <%for (BPeliculas pel : listaPeliculas){%>
+                                                <option value="<%=pel.getIdpeliculas()%>">
+                                                    <%=pel.getIdpeliculas()%> - <%=pel.getNombre()%>
+                                                </option>
+                                                <%}%>
+                                            </select>
+
+
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                             <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                        <!-- ModalDescripcion -->
+                        <div class="modal fade" id="retirar<%=p.getIdProfesional()%>" tabindex="-1" aria-labelledby="retirar<%=p.getIdProfesional()%>" aria-hidden="true">
+                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=retirarpelicula&id=<%=p.getIdProfesional()%>">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel<%=p.getIdProfesional()%>">Retirar</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <%OperadorDao operadorDao = new OperadorDao();%>
+                                            <%ArrayList<DTOpeliculas_has_profesionales> listaOwo = operadorDao.listaPeliculasdeProfesional(p.getIdProfesional());%>
+
+                                            <label for="">Retirar de Película:</label>
+                                            <select class="form-select" name="idPel2" id="">
+                                                <%for (DTOpeliculas_has_profesionales dto : listaOwo){%>
+                                                <option value="<%=dto.getPeliculas_idpelicula()%>">
+                                                    <%=dto.getPeliculas_idpelicula()%> - <%=dto.getPelicula()%>
+                                                </option>
+                                                <%}%>
+                                            </select>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-danger">Retirar</button>
                                         </div>
                                     </div>
                                 </div>
