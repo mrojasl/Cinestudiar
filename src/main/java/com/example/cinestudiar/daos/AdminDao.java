@@ -98,6 +98,32 @@ public class AdminDao {
 
         return listaSedesySalas;
     }
+
+    public static ArrayList<BSedeYSala> obtenerSalas(){
+        ArrayList<BSedeYSala> listaSedes = new ArrayList<>();
+        try {
+            String user = "root";
+            String pass = "root";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String sql = "SELECT * FROM mysystem4.sedes;";
+            Connection conn = DriverManager.getConnection(url,user,pass);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()){
+                BSedeYSala sa = new BSedeYSala();
+                sa.setSede(rs.getString(1));
+                sa.setDireccion(rs.getString(2));
+                listaSedes.add(sa);
+            }
+
+        } catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
+
+        return listaSedes;
+    }
     public static ArrayList<BProfesional> obtenerProfesionales(){
         ArrayList<BProfesional> listaProfesionales = new ArrayList<>();
         try {
