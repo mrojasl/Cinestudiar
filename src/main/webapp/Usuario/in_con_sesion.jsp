@@ -275,6 +275,9 @@
             background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
         }
 
+
+
+
         .carousel .carousel-indicators li {  background-color: white;border-radius: 100%;height: 10px;width: 10px }
         .carousel .carousel-indicators li.active { background-color: blue;border-radius: 100%;height: 10px;width: 10px }
 
@@ -289,8 +292,8 @@
             <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
         </jsp:include>
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="height: 600px">
-            <ol class="carousel-indicators">
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height: 600px">
+            <ol class="carousel-indicators" style="z-index: 999">
                 <%for(int j=0 ; j< listaradom.size();j++){%>
                 <li class="<%=(j==0)?"active":""%>" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%=j%>"  aria-current="true"></li>
                 <%}%>
@@ -300,7 +303,36 @@
                 <%for(int l=0 ; l< listaradom.size();l++){%>
 
                 <div class="<%=(l==0)?"carousel-item active":"carousel-item"%>">
-                    <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listaradom.get(l).getIdpeliculas()%>" class="d-block w-100" alt="...">
+
+                    <img src="${pageContext.request.contextPath}/Imagenes/fondo_de_cine.jpg" alt="..." class="d-block w-100" style="height: 600px;filter: blur(8px) brightness(70%);-webkit-filter: blur(8px) brightness(70%)">
+
+                    <div class="carousel-caption d-flex justify-content-between " STYLE="padding-bottom: 40px;padding-top: 0px">
+                        <div>
+                            <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listaradom.get(l).getIdpeliculas()%>" class="d-block" style="height: 500px;width: 300px; padding-bottom: 0px" alt="...">
+                        </div>
+
+
+                        <div>
+                            <h6 style="font-size: 30px"><%=listaradom.get(l).getNombre()%></h6>
+                            <br>
+                            <br>
+                            <div class="card" style="width: 45rem;background-color: transparent">
+                                <div class="card-body">
+                                    <%if (listaradom.get(l).getInformación()!=null){%>
+                                    <p class="card-text"><%=listaradom.get(l).getInformación()%></p>
+                                    <%}else{%>
+                                    <p class="card-text">Todavía no contamos con una descripción disponible</p>
+                                    <%}%>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
                 </div>
                 <%}%>
             </div>
