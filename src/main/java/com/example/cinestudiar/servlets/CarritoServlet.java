@@ -3,6 +3,7 @@ package com.example.cinestudiar.servlets;
 
 
 import com.example.cinestudiar.beans.BCarrito;
+import com.example.cinestudiar.beans.BUser;
 import com.example.cinestudiar.daos.CarritoDao;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name = "CarritoServlet", urlPatterns = {"/Checkout"})
 public class CarritoServlet extends HttpServlet {
@@ -20,13 +22,22 @@ public class CarritoServlet extends HttpServlet {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         CarritoDao carritoDao= new CarritoDao();
 
-
-        request.setAttribute("carritoDcompras",carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
-
-        RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/carrito_compras/checkout.jsp");
-        requestDispatcher.forward(request,response);
-
-
+        BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
+        String rol=usuarioLogueado.getRol();
+        if (Objects.equals(rol, "cliente")){
+            request.setAttribute("carritoDcompras",carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
+            RequestDispatcher requestDispatcher=request.getRequestDispatcher("/Usuario/carrito_compras/checkout.jsp");
+            requestDispatcher.forward(request,response);
+        }
+        else if (Objects.equals(rol, "admin")){
+            response.sendRedirect(request.getContextPath() + "/ServAdmin");
+        }
+        else if (Objects.equals(rol, "operador")){
+            response.sendRedirect(request.getContextPath() + "/OperadorServlet");
+        }
+        else{
+            response.sendRedirect(request.getContextPath() + "");
+        }
     }
 
     @Override

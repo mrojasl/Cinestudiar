@@ -2,6 +2,7 @@ package com.example.cinestudiar.servlets;
 
 
 import com.example.cinestudiar.beans.BPerfil;
+import com.example.cinestudiar.beans.BUser;
 import com.example.cinestudiar.daos.PerfilDao;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 @MultipartConfig
 @WebServlet(name = "PerfilServlet", value = "/PerfildeUsuario")
@@ -23,6 +25,10 @@ public class PerfilServlet extends HttpServlet {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
 
         PerfilDao perfilDao= new PerfilDao();
+
+
+        BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
+        String rol=usuarioLogueado.getRol();
 
 
 
@@ -50,11 +56,21 @@ public class PerfilServlet extends HttpServlet {
         }
 
         if ("tickets".equals(action)) {
+            if (Objects.equals(rol, "cliente")){
+                request.setAttribute("usuarioFunciones",perfilDao.listarFunciones((String) request.getSession().getAttribute("codigo_pucp")));
 
-            request.setAttribute("usuarioFunciones",perfilDao.listarFunciones((String) request.getSession().getAttribute("codigo_pucp")));
-
-            RequestDispatcher view = request.getRequestDispatcher("/Usuario/misTickets.jsp");
-            view.forward(request, response);
+                RequestDispatcher view = request.getRequestDispatcher("/Usuario/misTickets.jsp");
+                view.forward(request, response);
+            }
+            else if (Objects.equals(rol, "admin")){
+                response.sendRedirect(request.getContextPath() + "/ServAdmin");
+            }
+            else if (Objects.equals(rol, "operador")){
+                response.sendRedirect(request.getContextPath() + "/OperadorServlet");
+            }
+            else{
+                response.sendRedirect(request.getContextPath() + "");
+            }
         }
 
 
