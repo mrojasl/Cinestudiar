@@ -6,6 +6,15 @@ public class BSedeYSala {
     private int idSala;
     private String aforoAdministrador;
     private int aforoOperador;
+    private int existeFuncion;
+
+    public int getExisteFuncion() {
+        return existeFuncion;
+    }
+
+    public void setExisteFuncion(int existeFuncion) {
+        this.existeFuncion = existeFuncion;
+    }
 
     public String getSede() {
         return sede;

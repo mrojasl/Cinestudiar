@@ -148,11 +148,20 @@
                                                                 <button name="editar" type="submit" class="btn btn-success">Guardar</button>
                                                             </div>
 
+
                                                             <div class="input-group mb-3 col">
+                                                                <%if (sa.getExisteFuncion()==0){%>
                                                                 <button name="borrar" type="submit" class="btn btn-danger">Borrar</button>
+                                                                <%} else{%>
+                                                                <span class="input-group-text">No aplica</span>
+
+                                                                <%}%>
+
                                                             </div>
 
-                                                        <hr>
+
+
+                                                    <hr>
                                                 </div>
 
                                             </form>

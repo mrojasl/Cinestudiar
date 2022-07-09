@@ -279,11 +279,10 @@ public class AdminDao extends BaseDao {
 
         ArrayList<BSedeYSala> listasalasdeSede = new ArrayList<>();
 
-        String sql="select se.nombre_sede,sa.idsala,sa.aforo_administrador,sa.aforo_operador\n" +
-                "from sedes se inner join salas sa\n" +
-                "on (se.nombre_sede=sa.nombre_sede)\n" +
-                "where se.nombre_sede= ? \n" +
-                "order by se.nombre_sede,sa.idsala;";
+        String sql="select se.nombre_sede,sa.idsala,sa.aforo_administrador,sa.aforo_operador,f.idfuncion\n" +
+                "from sedes se inner join salas sa on (se.nombre_sede=sa.nombre_sede)\n" +
+                "left join funciones f on (sa.idsala=f.idsala)\n" +
+                "where se.nombre_sede= ? group by sa.idsala\n";
 
         try (Connection conn= this.getConnection();
              PreparedStatement pstmt= conn.prepareStatement(sql)) {
@@ -297,6 +296,8 @@ public class AdminDao extends BaseDao {
                     salasdeSede.setIdSala(rs.getInt(2));
                     salasdeSede.setAforoAdministrador(rs.getString(3));
                     salasdeSede.setAforoOperador(rs.getInt(4));
+                    salasdeSede.setExisteFuncion(rs.getInt(5));
+
                     listasalasdeSede.add(salasdeSede);
                 }
             }
