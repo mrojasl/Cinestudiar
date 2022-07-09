@@ -83,7 +83,9 @@ public class PeliculasDao extends BaseDao{
                 int tiempotranscurrido=rs.getInt(8);
                 if (tiempotranscurrido>0){
                     BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion,existeCompra);
+
                     if(peliculas.getIdpeliculas()!=variable){
+                        //XDSystem.out.println(peliculas.getIdpeliculas());
                         listaBpeliculas.add(peliculas);
 
                     }
