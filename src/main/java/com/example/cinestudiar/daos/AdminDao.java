@@ -99,7 +99,7 @@ public class AdminDao extends BaseDao {
         return listaSedesySalas;
     }
 
-    public static ArrayList<BSedeYSala> obtenerSalas(){
+    public static ArrayList<BSedeYSala> obtenerSedes(){
         ArrayList<BSedeYSala> listaSedes = new ArrayList<>();
         try {
             String user = "root";

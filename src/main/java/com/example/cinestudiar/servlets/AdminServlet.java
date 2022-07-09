@@ -24,7 +24,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
+        AdminDao adminDao = new AdminDao();
         BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
 
         String action = request.getParameter("admin") == null? "sala" : request.getParameter("admin");
@@ -34,7 +34,8 @@ public class AdminServlet extends HttpServlet {
                 case "sala":
                     ArrayList<BSedeYSala> listaSedesYSalas = AdminDao.obtenerSedesySalas();
                     request.setAttribute("listaSedesYSalas",listaSedesYSalas);
-
+                    ArrayList<BSedeYSala> listaSedes = AdminDao.obtenerSedes();
+                    request.setAttribute("listaSedes",listaSedes);
                     RequestDispatcher rd1 =request.getRequestDispatcher("Admin/salas.jsp");
                     rd1.forward(request,response);
 
@@ -46,7 +47,7 @@ public class AdminServlet extends HttpServlet {
                     rd2.forward(request,response);
 
                 case "cliente":
-                    ArrayList<BUser> listaClientes= AdminDao.obtenerClientes();
+                    ArrayList<BUser> listaClientes= adminDao.obtenerClientes();
                     request.setAttribute("listaClientes",listaClientes);
                     ArrayList<BCompra> historialesCompras = AdminDao.ObtenerHistorialCompra();
                     request.setAttribute("historialdecompracliente",historialesCompras);
