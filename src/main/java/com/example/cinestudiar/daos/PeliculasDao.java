@@ -7,6 +7,7 @@ import com.example.cinestudiar.beans.BUser;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PeliculasDao extends BaseDao{
     private static String sql_select="select idpelicula,nombre,calificacion,duracion,genero,informacion from peliculas;";
@@ -79,10 +80,7 @@ public class PeliculasDao extends BaseDao{
                 String genero = rs.getString(5);
                 String informacion = rs.getString(6);
                 int existeCompra = rs.getInt(7);
-
-
                 int tiempotranscurrido=rs.getInt(8);
-
                 if (tiempotranscurrido>0){
                     BPeliculas peliculas = new BPeliculas(idpelicula, nombre, duracion, calificacion, genero, informacion,existeCompra);
                     if(peliculas.getIdpeliculas()!=variable){
@@ -99,6 +97,30 @@ public class PeliculasDao extends BaseDao{
             e.printStackTrace();
         }
         return listaBpeliculas;
+    }
+
+
+    public ArrayList<BPeliculas> listaradom(){
+        ArrayList<BPeliculas> lista= this.listasPeliculasCliente();
+        ArrayList<BPeliculas> listaradom = new ArrayList<>();
+        int tamano ;
+        if (lista.size()>=5){
+            tamano=5;
+        }else{
+            tamano=lista.size();
+        }
+        Random rand = new Random();
+        int i = 0;
+        while (i<tamano){
+            int randomIndex = rand.nextInt(lista.size());
+            if (!listaradom.contains(lista.get(randomIndex))){
+                listaradom.add(lista.get(randomIndex));
+                i++;
+            }
+
+        }
+
+        return listaradom;
     }
 
     public ArrayList<BPeliculas> listapeliculaprofesional(int id) {

@@ -11,6 +11,7 @@
 <%@ page import="java.util.stream.IntStream" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="listapeliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
+<jsp:useBean id="listaradom" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="cointaner" scope="request" type="java.lang.Integer"/>
 <jsp:useBean id="valor" scope="request" type="java.lang.Integer"/>
 <html lang="en">
@@ -290,35 +291,19 @@
 
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="height: 600px">
             <ol class="carousel-indicators">
-
-
-
-
-
-                <li class="active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"  aria-current="true"></li>
-                <li class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"  aria-current="true"></li>
-                <li class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"  aria-current="true"></li>
-                <li class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"  aria-current="true"></li>
-                <li class="" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"  aria-current="true"></li>
+                <%for(int j=0 ; j< listaradom.size();j++){%>
+                <li class="<%=(j==0)?"active":""%>" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%=j%>"  aria-current="true"></li>
+                <%}%>
                 </ol>
 
             <div class="carousel-inner">
+                <%for(int l=0 ; l< listaradom.size();l++){%>
 
-
-                <div class="carousel-item active">
-                    <img src="..." class="d-block w-100" alt="...">
+                <div class="<%=(l==0)?"carousel-item active":"carousel-item"%>">
+                    <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listaradom.get(l).getIdpeliculas()%>" class="d-block w-100" alt="...">
                 </div>
-
-                <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                </div>
-
+                <%}%>
             </div>
-
-
 
         </div>
 
