@@ -275,7 +275,36 @@ public class AdminDao extends BaseDao {
         }
 
     }
+    public ArrayList<BSedeYSala> obtenerSaladeSede(String nombre_sede) {
 
+        ArrayList<BSedeYSala> listasalasdeSede = new ArrayList<>();
+
+        String sql="select se.nombre_sede,sa.idsala,sa.aforo_administrador,sa.aforo_operador\n" +
+                "from sedes se inner join salas sa\n" +
+                "on (se.nombre_sede=sa.nombre_sede)\n" +
+                "where se.nombre_sede= ? \n" +
+                "order by se.nombre_sede,sa.idsala;";
+
+        try (Connection conn= this.getConnection();
+             PreparedStatement pstmt= conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,nombre_sede);
+
+            try(ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    BSedeYSala salasdeSede = new BSedeYSala();
+                    salasdeSede.setSede(rs.getString(1));
+                    salasdeSede.setIdSala(rs.getInt(2));
+                    salasdeSede.setAforoAdministrador(rs.getString(3));
+                    salasdeSede.setAforoOperador(rs.getInt(4));
+                    listasalasdeSede.add(salasdeSede);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listasalasdeSede;
+    }
     public static void editarSala(int id, int aforo_ad,int aforo_op, String sede) {
 
         String user = "root";
