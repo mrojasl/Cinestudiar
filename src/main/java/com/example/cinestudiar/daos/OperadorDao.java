@@ -1,5 +1,6 @@
 package com.example.cinestudiar.daos;
 
+import com.example.cinestudiar.DTO.DTOfunciones_peliculas;
 import com.example.cinestudiar.DTO.DTOpeliculas_has_profesionales;
 import com.example.cinestudiar.beans.*;
 /*import com.example.cinestudiar.beans.BUser;*/
@@ -431,6 +432,31 @@ public class OperadorDao extends BaseDao {
             e.printStackTrace();
         }
         return listaFuncionesP;
+    }
+
+    public ArrayList<DTOfunciones_peliculas> listaFuncionesDuracion() {
+
+        ArrayList<DTOfunciones_peliculas> listap = new ArrayList<>();
+        String sql = "select f.idfuncion, f.fecha, f.hora,pe.duracion , pe.idpelicula from funciones f \n" +
+                "inner join peliculas pe on (f.idpelicula=pe.idpelicula);";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            try (ResultSet resultSet = pstmt.executeQuery();) {
+                while (resultSet.next()) {
+                    DTOfunciones_peliculas p = new DTOfunciones_peliculas();
+                    p.setIdFuncion(resultSet.getInt(1));
+                    p.setFecha(resultSet.getString(2));
+                    p.setHora(resultSet.getString(3));
+                    p.setDuracion(resultSet.getInt(4));
+                    p.setIdPelicula(resultSet.getInt(5));
+                    listap.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+        return listap;
     }
 
     public void crearPersonal(String jefe,String limpiador1,String limpiador2)  {
