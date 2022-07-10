@@ -434,10 +434,12 @@
                     <div class="carousel-inner">
 
                         <%  int h=1;
-                            for (int n = 1; n<cointaner+1; n++) {%>
+                            int b=1;
+
+                            for (int n = 1; n<2+1; n++) {%>
                         <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">
                             <div class="container">
-                                <%for (int m= 1 ; m<valor+1;m++){%>
+                                <%for (int m= b; m<3+1;m++){%>
                                 <div class="row align-items-start">
                                     <%for (int k=h;k<listapeliculas.size()+1;k++){%>
                                     <div class="col">
@@ -455,11 +457,13 @@
                                     <%}%>
                                 </div>
                                 <% if (m%2==0) {
+                                    b=m+1;
                                     break;
                                 }%>
                                 <%}%>
                             </div>
                         </div>
+
                         <%}%>
                     </div>
                 </div>
