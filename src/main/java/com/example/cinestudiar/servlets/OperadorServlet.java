@@ -1,4 +1,5 @@
 package com.example.cinestudiar.servlets;
+import com.example.cinestudiar.DTO.DTOfunciones_peliculas;
 import com.example.cinestudiar.beans.*;
 import com.example.cinestudiar.daos.AdminDao;
 import com.example.cinestudiar.daos.OperadorDao;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Array;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -271,15 +273,36 @@ public class OperadorServlet extends HttpServlet {
             }
             case "crearFunciones"->{
                 funciones =new BFuncion();
-                funciones.setFecha(request.getParameter("fecha"));
-                funciones.setHora(request.getParameter("hora"));
-                funciones.setPrecioTicket(Integer.parseInt(request.getParameter("precio_ticket")));
-                funciones.setEdadMinima(Integer.parseInt(request.getParameter("edad_minima")));
-                funciones.setIdPersonal(Integer.parseInt(request.getParameter("idPersonal")));
-                funciones.setIdSala(Integer.parseInt(request.getParameter("idSala")));
-                funciones.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
-                funciones.setAforoOperador(Integer.parseInt(request.getParameter("aforoOperador")));
-                operadorDao.crearFuncion(funciones);
+                String fecha = request.getParameter("fecha");
+                String hora = request.getParameter("hora");
+                LocalTime horaTime = LocalTime.parse(hora);
+                int idSala = Integer.parseInt(request.getParameter("idSala"));
+                funciones.setFecha(fecha);
+                funciones.setHora(hora);
+                funciones.setIdSala(idSala);
+
+                int centi = 0;
+                ArrayList<DTOfunciones_peliculas> listaFuConDu = operadorDao.listaFuncionesDuracion();
+                for (DTOfunciones_peliculas fu : listaFuConDu){
+                    if (fu.getIdSala()==idSala){
+                        if(fu.getFecha().equals(fecha)){
+                            if(horaTime.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTime.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))){
+                                request.getSession().setAttribute("errorCrear","Intento fallido, cruce con la función de ID: "+fu.getIdFuncion());
+                                centi = 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (centi==0){
+                    funciones.setPrecioTicket(Integer.parseInt(request.getParameter("precio_ticket")));
+                    funciones.setEdadMinima(Integer.parseInt(request.getParameter("edad_minima")));
+                    funciones.setIdPersonal(Integer.parseInt(request.getParameter("idPersonal")));
+                    funciones.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
+                    funciones.setAforoOperador(Integer.parseInt(request.getParameter("aforoOperador")));
+                    operadorDao.crearFuncion(funciones);
+                }
 
                 response.sendRedirect("OperadorServlet");
             }

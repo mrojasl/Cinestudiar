@@ -245,14 +245,14 @@
 
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Fecha</span> <!--/FALTA COLOCAR COMO FECHA MÍNIMA TODAY-->
-                                        <input name="fecha" type="date" class="form-control"  required="required"
-                                               aria-label="Sala 1"
+                                        <input style="color: black" name="fecha" type="date" class="form-control"  required="required"
+                                               aria-label="Sala 1" min="<%=java.time.LocalDate.now()%>"
                                                aria-describedby="button-addon1">
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Hora</span>
                                         <input name="hora" type="time" class="form-control"  required="required"
-                                               aria-label="Sala 1"
+                                               aria-label="Sala 1" min="<%=java.time.LocalTime.now()%>"
                                                aria-describedby="button-addon1">
                                     </div>
                                     <div class="input-group mb-3">
@@ -283,6 +283,15 @@
             </div>
 
         </div>
+
+        <% if (session.getAttribute("errorCrear") != null){%>
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <%=session.getAttribute("errorCrear")%>
+            </div>
+        </div>
+        <%session.removeAttribute("errorCrear");%>
+        <%}%>
 
     <div class="container">
         <div class="row ">
