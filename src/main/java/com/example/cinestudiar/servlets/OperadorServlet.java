@@ -275,36 +275,41 @@ public class OperadorServlet extends HttpServlet {
                 funciones =new BFuncion();
                 String fecha = request.getParameter("fecha");
                 String hora = request.getParameter("hora");
-                LocalTime horaTime = LocalTime.parse(hora);
+                LocalTime horaTimeInicio = LocalTime.parse(hora);
                 int idSala = Integer.parseInt(request.getParameter("idSala"));
-                funciones.setFecha(fecha);
-                funciones.setHora(hora);
-                funciones.setIdSala(idSala);
+                int idPelicula = Integer.parseInt(request.getParameter("idPelicula"));
+                LocalTime horaTimeFinal = horaTimeInicio.plusMinutes(operadorDao.obtenerDuracionPelicula(idPelicula));
+
 
                 int centi = 0;
                 ArrayList<DTOfunciones_peliculas> listaFuConDu = operadorDao.listaFuncionesDuracion();
                 for (DTOfunciones_peliculas fu : listaFuConDu){
-                    if (fu.getIdSala()==idSala){
-                        if(fu.getFecha().equals(fecha)){
-                            if(horaTime.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTime.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))){
-                                request.getSession().setAttribute("errorCrear","Intento fallido, cruce con la función de ID: "+fu.getIdFuncion());
-                                centi = 1;
-                                break;
+                    if (fu.getIdSala()==idSala && fu.getFecha().equals(fecha)){
+                            if((horaTimeInicio.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTimeInicio.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))) || (horaTimeFinal.isAfter(LocalTime.parse(fu.getHora())) && horaTimeFinal.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion())))){
+
+                                    request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la función de ID: " + fu.getIdFuncion());
+                                    centi = 1;
+                                    break;
+
                             }
-                        }
                     }
                 }
 
                 if (centi==0){
+                    funciones.setFecha(fecha);
+                    funciones.setHora(hora);
+                    funciones.setIdSala(idSala);
+                    funciones.setIdPelicula(idPelicula);
+
                     funciones.setPrecioTicket(Integer.parseInt(request.getParameter("precio_ticket")));
                     funciones.setEdadMinima(Integer.parseInt(request.getParameter("edad_minima")));
                     funciones.setIdPersonal(Integer.parseInt(request.getParameter("idPersonal")));
-                    funciones.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
                     funciones.setAforoOperador(Integer.parseInt(request.getParameter("aforoOperador")));
                     operadorDao.crearFuncion(funciones);
                 }
 
                 response.sendRedirect("OperadorServlet");
+
             }
             case "crearpersonal" ->{
                 String jefe = request.getParameter("jefe");
