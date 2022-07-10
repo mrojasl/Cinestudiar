@@ -255,6 +255,31 @@ public class OperadorDao extends BaseDao {
 
         return duracion;
     }
+
+    public int  obtenerDuracionFuncion(int  idfuncion) {
+
+        Integer duracion = null;
+        String sql = "select pe.duracion  from funciones f \n" +
+                "inner join peliculas pe on (f.idpelicula=pe.idpelicula)\n" +
+                "where idfuncion = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setInt(1, idfuncion);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    duracion = rs.getInt(1);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return duracion;
+    }
+
     public ArrayList<BPeliculas> filtradoPelicula(String filtro2){
         if (filtro2.equals("") || filtro2.equals("defecto")){
             ArrayList<BPeliculas> todasLasPeliculas = new ArrayList<>();
@@ -615,6 +640,20 @@ public class OperadorDao extends BaseDao {
             e.printStackTrace();
         }
     }
+
+    public void borrarFuncion(int idfuncion) {
+
+        try (Connection conn = this.getConnection();) {
+            String sql = "DELETE FROM funciones WHERE (idfuncion = ?);";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, idfuncion);
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<BEquipoLimpieza> obtenerPersonal() {
 
         ArrayList<BEquipoLimpieza> listaequipoLimpiezas = new ArrayList<>();
