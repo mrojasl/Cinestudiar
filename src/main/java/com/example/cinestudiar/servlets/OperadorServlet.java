@@ -100,7 +100,13 @@ public class OperadorServlet extends HttpServlet {
                 }
                 response.sendRedirect("OperadorServlet?action=peliculas");
                 break;
-        }
+                }
+                case "borrarfuncion" ->{
+                    operadorDao.borrarFuncion(Integer.parseInt(request.getParameter("id")));
+                    response.sendRedirect("OperadorServlet");
+                    break;
+                }
+
            /* case "agregarFun"->{ //ESTO VA PARA LA CREACIÓN DE FUNCIÓN
                 request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
                 request.setAttribute("listaSalas", operadorDao.obtenerSala());
@@ -350,10 +356,33 @@ public class OperadorServlet extends HttpServlet {
             }
             case "editarFuncion" ->{
                 int idFuncion = Integer.parseInt(request.getParameter("id"));
+                int idSala = Integer.parseInt(request.getParameter("idSala"));
+                int idPelicula = Integer.parseInt(request.getParameter("idPelicula"));
                 String fecha = request.getParameter("fecha");
                 String hora = request.getParameter("hora");
-                int precio = Integer.parseInt(request.getParameter("precio"));
-                peliculasDao.actualizarFuncion(fecha,hora,precio,idFuncion);
+                LocalTime horaTimeInicio = LocalTime.parse(hora);
+                LocalTime horaTimeFinal = horaTimeInicio.plusMinutes(operadorDao.obtenerDuracionFuncion(idFuncion));
+
+
+                int centi = 0;
+                ArrayList<DTOfunciones_peliculas> listaFuConDu = operadorDao.listaFuncionesDuracion();
+                for (DTOfunciones_peliculas fu : listaFuConDu){
+                    if (fu.getIdSala()==idSala && fu.getFecha().equals(fecha)){
+                        if((horaTimeInicio.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTimeInicio.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))) || (horaTimeFinal.isAfter(LocalTime.parse(fu.getHora())) && horaTimeFinal.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion())))){
+                            if (idFuncion!=fu.getIdFuncion()) {
+                                request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la función de ID: " + fu.getIdFuncion());
+                                centi = 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (centi == 0) {
+                    int precio = Integer.parseInt(request.getParameter("precio"));
+                    peliculasDao.actualizarFuncion(fecha, hora, precio, idFuncion);
+                }
+
                 response.sendRedirect("OperadorServlet?action=funciones");
 
             }

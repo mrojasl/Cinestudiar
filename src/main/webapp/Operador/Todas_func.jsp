@@ -400,7 +400,10 @@
                                 <div class="modal-body">
 
                                         <div class="mb-3">
-                                        <label class="form-label">Fecha</label>
+                                            <input name="idSala" hidden type="text" value="<%=funcion.getIdSala()%>">
+                                            <input name="idPelicula" hidden type="text" value="<%=funcion.getIdPelicula()%>">
+
+                                            <label class="form-label">Fecha</label>
                                         <input style="color: black" type="date" id="fechafunc" name="fecha" required="required"
                                                value="<%=funcion.getFecha()%>"
                                                min="<%=java.time.LocalDate.now()%>">
