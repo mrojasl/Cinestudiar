@@ -54,7 +54,7 @@ public class OperadorDao extends BaseDao {
                         "                on (p.idpelicula=f.idpelicula) left join compradefunciones cf\n" +
                         "                on (cf.idfuncion=f.idfuncion) group by p.idpelicula) subq\n" +
                         "                on (subq.idpelicula=f.idpelicula)\n" +
-                        "order by f.fecha,se.nombre_sede,sa.idsala desc;";
+                        "order by f.fecha desc;";
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);

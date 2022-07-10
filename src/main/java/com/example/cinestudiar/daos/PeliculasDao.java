@@ -336,17 +336,17 @@ public class PeliculasDao extends BaseDao{
 
 
     }
-    public void actualizarFuncion(BFuncion funcion) {
+    public void actualizarFuncion(String fecha, String hora, int precio, int id) {
 
         String sql = "update funciones set fecha = ?, hora =?, precio_ticket=? \n" +
                 "where idfuncion= ?;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
-            pstmt.setString(1, funcion.getFecha());
-            pstmt.setString(2, funcion.getHora());
-            pstmt.setInt(3, funcion.getPrecioTicket());
-            pstmt.setInt(4, funcion.getIdFuncion());
+            pstmt.setString(1, fecha);
+            pstmt.setString(2, hora);
+            pstmt.setInt(3, precio);
+            pstmt.setInt(4, id);
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {

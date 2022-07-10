@@ -320,6 +320,15 @@ public class OperadorServlet extends HttpServlet {
                 operadorDao.borrarProfesionaldePelicula(idPel2,idProf);
                 response.sendRedirect("OperadorServlet?action=crearPe");
             }
+            case "editarFuncion" ->{
+                int idFuncion = Integer.parseInt(request.getParameter("id"));
+                String fecha = request.getParameter("fecha");
+                String hora = request.getParameter("hora");
+                int precio = Integer.parseInt(request.getParameter("precio"));
+                peliculasDao.actualizarFuncion(fecha,hora,precio,idFuncion);
+                response.sendRedirect("OperadorServlet?action=funciones");
+
+            }
 
         }
     }
