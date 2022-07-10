@@ -234,17 +234,15 @@ public class OperadorDao extends BaseDao {
         }
         return null;
     }
-    public int  obtenerDuracionFuncion(int  idfuncion) {
+    public int  obtenerDuracionPelicula(int  idpelicula) {
 
         Integer duracion = null;
-        String sql = "select pe.duracion  from funciones f \n" +
-                "inner join peliculas pe on (f.idpelicula=pe.idpelicula)\n" +
-                "where idfuncion = ?";
+        String sql = "select duracion from peliculas where idpelicula=? ;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setInt(1, idfuncion);
+            pstmt.setInt(1, idpelicula);
 
             try (ResultSet rs = pstmt.executeQuery();) {
                 if (rs.next()) {
