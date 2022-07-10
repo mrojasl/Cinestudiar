@@ -301,32 +301,26 @@
         <%}%>
 
 
-        <div class="container my-10">
-            <div class="row justify-content-center">
-                <div class="col-xl-10 col-lg-12 col-md-9">
-                    <div class="card o-hidden border-0 shadow-lg my-5">
-                        <div class="card-body p-0">
-                            <div class="row">
-                                <div class="col-sm-3"></div>
+        <section class="h-100 gradient-form" >
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                        <div class="card rounded-3 text-black">
+                            <div class="row g-0">
+                                <div class="card-body p-4">
+                                    <div class="text text-center">
+                                        <i class="bi bi-camera-reels fa-3x me-3" style="color: #0e0e6b;"></i>
+                                        <span class="h1 fw-bold mb-0" STYLE="font-family: Akzidenz-Grotesk">Detalles de la obra<hr></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
                                 <div class="col-sm-6">
 
                                     <div class="p-5">
-
-                                        <div class="text-center">
-                                            <a class=""><b>Detalles de la obra:</b></a>
-                                        </div>
+                                        <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="poster_movie" width="450px" height="520px" >
                                         <br>
-                                        <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
-                                        <h5><%=pelicula.getNombre()%></h5>
-                                        <%if (pelicula.getInformación()!=null){%>
-                                        <p><%=pelicula.getInformación()%></p>
-                                        <%}else{%>
-                                        <p>Todavía no contamos con una descripción disponible</p>
-                                        <%}%>
-                                        <H6>Duración:</H6>
-                                        <p><%=pelicula.getDuracion()%> minutos</p>
-                                        <H6>Género:</H6>
-                                        <p><%=pelicula.getGenero()%></p>
+                                        <br>
+
                                         <%int i =1;%>
                                         <%int j=1;%>
                                         <%for(BPeliculas bPeliculas : lista_profesionales) {%>
@@ -390,15 +384,15 @@
                                         <%}%>
                                         <table class="table" style="background-color:beige">
                                             <thead>
-                                                <tr><th style="color: black">Funcion</th><th style="color: black">Precio</th><th style="color: black">Edad Minima</th><th style="color: black">Sede</th><th style="color: black">Aforo</th></tr>
+                                                <tr><th style="color: black">Funcion(D/H)</th><th style="color: black">Precio</th><th style="color: black">Edad Minima</th><th style="color: black">Sede</th><th style="color: black">Aforo</th></tr>
                                             </thead>
 
                                             <%for (BFuncionUsuario bFuncionUsuario: listafunciones) {%>
                                             <tr>
-                                                <td> <%=bFuncionUsuario.getFecha()+bFuncionUsuario.getHora()%></td>
+                                                <td> <%=bFuncionUsuario.getFecha()+"/"+bFuncionUsuario.getHora()%></td>
                                                 <td> <%=bFuncionUsuario.getPrecioTicket()%></td >
                                                 <%if (bFuncionUsuario.getEdadMinima()==0){%>
-                                                <td> Todas las edades</td>
+                                                <td>No hay</td>
                                                 <%}else{%>
                                                 <td> <%=bFuncionUsuario.getEdadMinima()%></td >
                                                 <%}%>
@@ -442,18 +436,40 @@
 
                                         <%}%>
 
-                                        <hr>
 
                                     </div>
                                 </div>
-                            </div>
+
+                                </div>
+                                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                    <div class="text-black px-3 py-4 p-md-5 mx-md-4">
+                                        <H4>Título:</H4>
+                                        <hr>
+                                        <p><%=pelicula.getNombre()%></p>
+                                        <H4>Duración:</H4>
+                                        <hr>
+                                        <p><%=pelicula.getDuracion()%> minutos</p>
+                                        <H4>Género:</H4>
+                                        <hr>
+                                        <p><%=pelicula.getGenero()%></p>
+                                        <h4 class="mb-4">Sinopsis:</h4>
+                                        <hr>
+                                        <%if (pelicula.getInformación()!=null){%>
+                                        <p><%=pelicula.getInformación()%></p>
+                                        <%}else{%>
+                                        <p>Todavía no contamos con una descripción disponible</p>
+                                        <%}%>
+                                    </div>
+                                </div>
                         </div>
                     </div>
+                        <br>
+                        <br>
+                        <br>
                 </div>
             </div>
         </div>
-
-
+        </section>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
                 integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
                 crossorigin="anonymous"></script>
