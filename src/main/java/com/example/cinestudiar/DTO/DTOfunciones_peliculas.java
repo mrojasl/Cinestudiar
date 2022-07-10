@@ -6,6 +6,15 @@ public class DTOfunciones_peliculas {
     private String hora;
     private int duracion;
     private int idPelicula;
+    private int idSala;
+
+    public int getIdSala() {
+        return idSala;
+    }
+
+    public void setIdSala(int idSala) {
+        this.idSala = idSala;
+    }
 
     public int getIdFuncion() {
         return idFuncion;

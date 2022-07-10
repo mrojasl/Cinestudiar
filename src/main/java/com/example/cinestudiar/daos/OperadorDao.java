@@ -437,7 +437,7 @@ public class OperadorDao extends BaseDao {
     public ArrayList<DTOfunciones_peliculas> listaFuncionesDuracion() {
 
         ArrayList<DTOfunciones_peliculas> listap = new ArrayList<>();
-        String sql = "select f.idfuncion, f.fecha, f.hora,pe.duracion , pe.idpelicula from funciones f \n" +
+        String sql = "select f.idfuncion, f.fecha, f.hora,pe.duracion , pe.idpelicula , f.idsala from funciones f \n" +
                 "inner join peliculas pe on (f.idpelicula=pe.idpelicula);";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -449,6 +449,7 @@ public class OperadorDao extends BaseDao {
                     p.setHora(resultSet.getString(3));
                     p.setDuracion(resultSet.getInt(4));
                     p.setIdPelicula(resultSet.getInt(5));
+                    p.setIdSala(resultSet.getInt(6));
                     listap.add(p);
                 }
             }
