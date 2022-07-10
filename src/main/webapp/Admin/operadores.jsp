@@ -77,7 +77,7 @@
                                             <span class="input-group-text">Codigo PUCP</span>
                                             <input name="operadorcodigo" type="text" class="form-control" placeholder="Código PUCP"
                                                    aria-label="Sala 1"
-                                                   aria-describedby="button-addon1">
+                                                   aria-describedby="button-addon1" required="required">
 
                                         </div>
                                         <div class="input-group mb-3 ">

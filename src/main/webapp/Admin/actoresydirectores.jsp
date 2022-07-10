@@ -70,11 +70,11 @@
                                             <span class="input-group-text">Nombre</span>
                                             <input name="nombre" type="text" class="form-control" placeholder="Nombre"
                                                    aria-label="Sala 1"
-                                                   aria-describedby="button-addon1">
+                                                   aria-describedby="button-addon1" required="required">
                                             <span class="input-group-text">Apellido</span>
                                             <input name="apellido" type="text" class="form-control" placeholder="Apellido"
                                                    aria-label="Sala 1"
-                                                   aria-describedby="button-addon1">
+                                                   aria-describedby="button-addon1" required="required">
                                         </div>
                                         <div class="input-group mb-3">
                                             <select name="profesion" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -208,8 +208,14 @@
                                     </td>
 
                                             <td>
+                                                <%if (p.getEnPelicula()==0){%>
                                                 <a href="<%=request.getContextPath()%>/ServAdmin?admin=borrarprofesional&proid=<%=p.getIdProfesional()%>"><button type="button" class="btn btn-danger btn-sm" >Borrar
                                                 </button></a>
+                                                <%} else {%>
+                                                <button disabled type="button" class="btn btn-danger btn-sm" >No aplica
+                                                </button>
+                                                <%}%>
+
                                     </td>
 
 

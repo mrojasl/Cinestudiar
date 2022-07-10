@@ -66,7 +66,7 @@
                                     <div>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">Aforo</span>
-                                            <input placeholder="1-100" type="number" name="aforo" min="1" max="100">
+                                            <input placeholder="1-100" type="number" name="aforo" min="1" max="100" required="required">
                                         </div>
                                         <div class="input-group mb-3 ">
                                             <label class="input-group-text" for="inputGroupSelect01">Sede</label>
@@ -153,7 +153,7 @@
                                                                 <%if (sa.getExisteFuncion()==0){%>
                                                                 <button name="borrar" type="submit" class="btn btn-danger">Borrar</button>
                                                                 <%} else{%>
-                                                                <span class="input-group-text">No aplica</span>
+                                                                <button disabled name="borrar" type="submit" class="btn btn-danger">No aplica</button>
 
                                                                 <%}%>
 

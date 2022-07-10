@@ -131,8 +131,10 @@ public class AdminDao extends BaseDao {
             String pass = "root";
             String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql = "SELECT idprofesional,nombre,apellido,rol\n" +
-                    "FROM profesionales;";
+
+            String sql = "select idprofesional,nombre,apellido,rol,peliculas_idpelicula from profesionales p left join peliculas_has_profesionales php\n" +
+                    "on (p.idprofesional=php.profesionales_idprofesional);";
+
             Connection conn = DriverManager.getConnection(url,user,pass);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -143,6 +145,8 @@ public class AdminDao extends BaseDao {
                 pr.setNombre(rs.getString(2));
                 pr.setApellido(rs.getString(3));
                 pr.setRol(rs.getString(4));
+                pr.setEnPelicula(rs.getInt(5));
+
                 listaProfesionales.add(pr);
             }
 

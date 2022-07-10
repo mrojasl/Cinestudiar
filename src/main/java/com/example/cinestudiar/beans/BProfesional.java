@@ -10,6 +10,15 @@ public class BProfesional {
     private String rol;
     private Blob foto;
     private float calificacion;
+    private int enPelicula;
+
+    public int getEnPelicula() {
+        return enPelicula;
+    }
+
+    public void setEnPelicula(int enPelicula) {
+        this.enPelicula = enPelicula;
+    }
 
     public int getIdPelicula() {
         return idPelicula;
