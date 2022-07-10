@@ -1,5 +1,6 @@
 package com.example.cinestudiar.daos;
 
+import com.example.cinestudiar.beans.BFuncion;
 import com.example.cinestudiar.beans.BPeliculas;
 import com.example.cinestudiar.beans.BProfesional;
 import com.example.cinestudiar.beans.BUser;
@@ -335,7 +336,24 @@ public class PeliculasDao extends BaseDao{
 
 
     }
+    public void actualizarFuncion(BFuncion funcion) {
 
+        String sql = "update funciones set fecha = ?, hora =?, precio_ticket=? \n" +
+                "where idfuncion= ?;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setString(1, funcion.getFecha());
+            pstmt.setString(2, funcion.getHora());
+            pstmt.setInt(3, funcion.getPrecioTicket());
+            pstmt.setInt(4, funcion.getIdFuncion());
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Hubo un error en la conexión obteneter actualizar!");
+            ex.printStackTrace();
+        }
+    }
     public void borrarFunciondeunaPelicula(int idpelicula)  {
         String sql = "DELETE FROM funciones WHERE idpelicula = ?";
         try(Connection conn= this.getConnection();
