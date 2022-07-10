@@ -350,12 +350,14 @@
                 </div>
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
                     <div class="carousel-inner">
+
                         <%  int h=1;
+                            int b=1;
+
                             for (int n = 1; n<cointaner+1; n++) {%>
                         <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">
-                            <p class="d-flex justify-content-end" style="color: white;font-family: Akzidenz-Grotesk;margin-top: 15px" >Página: <%=n%> de <%=cointaner%></p>
                             <div class="container">
-                                <%for (int m= 1 ; m<valor+1;m++){%>
+                                <%for (int m= b; m<valor +1;m++){%>
                                 <div class="row align-items-start">
                                     <%for (int k=h;k<listapeliculas.size()+1;k++){%>
                                     <div class="col">
@@ -363,21 +365,23 @@
                                         <div class="boxfuncion">
                                             <h5><%=listapeliculas.get(k-1).getNombre()%></h5>
                                             <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
-                                            <a type="button" class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/DetallesPelicula?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
+                                            <a type="button" class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/detalles?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
                                         </div>
                                     </div>
                                     <% if (k%3==0) {
-                                            h=k+1;
-                                            break;
-                                        }%>
+                                        h=k+1;
+                                        break;
+                                    }%>
                                     <%}%>
                                 </div>
                                 <% if (m%2==0) {
+                                    b=m+1;
                                     break;
                                 }%>
                                 <%}%>
                             </div>
                         </div>
+
                         <%}%>
                     </div>
                 </div>
