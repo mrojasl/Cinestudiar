@@ -1,12 +1,14 @@
 package com.example.cinestudiar.daos;
 
 import com.example.cinestudiar.beans.BCarrito;
+import com.example.cinestudiar.beans.BUsuarioFuncion;
 import com.fasterxml.jackson.databind.ser.Serializers;
 
 
 import java.security.MessageDigest;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.Properties;
@@ -68,8 +70,7 @@ public class CarritoDao extends BaseDao {
                     bCarrito.setCorreopucp(rs.getString(14));
                     bCarrito.setDuracionpelicula(rs.getInt(15));
                     bCarrito.setDiferenciaHoraria(rs.getInt(16));
-                    //System.out.println(rs.getInt(16));
-                    //System.out.println(bCarrito.getDiferenciaHoraria());
+
                     listausuarios.add(bCarrito);
                 }
             }
@@ -84,7 +85,7 @@ public class CarritoDao extends BaseDao {
 
     public void actualiza(BCarrito idfuncion) {
 
-        String sql = "UPDATE compradefunciones set cantidad_por_funcion=? where idfuncion=? and usuarios_codigo_pucp=?;";
+        String sql = "UPDATE compradefunciones set cantidad_por_funcion=? where idfuncion=? and usuarios_codigo_pucp=? and idhistorialdecompras=?;";
 
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -92,6 +93,7 @@ public class CarritoDao extends BaseDao {
             pstmt.setInt(1, idfuncion.getCantidad_funcion());
             pstmt.setInt(2, idfuncion.getIdfuncion());
             pstmt.setString(3,idfuncion.getCodigoEstudiante());
+            pstmt.setInt(4, idfuncion.getHistorialcompra());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -118,24 +120,55 @@ public class CarritoDao extends BaseDao {
 
     }
 
-    public void compra(int cantidad_tickets, double pago_total, String codigo_pucp,String correo_pucp) {
+
+
+    //SE SOLICITA EL IDCOMPRA DE LA TABLA COMPRA:::
+    public String SolicitaidCompras(String fecha, String hora, String codigo_pucp) {
 
         //String xd=codigo_pucp+cantidad_tickets+pago_total;
-        String qerre=enviaCorreo(cantidad_tickets,pago_total,codigo_pucp,correo_pucp);
+
         //String qerre=sha256(codigo_pucp+cantidad_tickets+pago_total);
         //System.out.println(xd);
 
+        String sql = "select idcompra from compras where fecha_compra=? and hora_compra=? and codigo_pucp=?";
 
-
-        String sql = "INSERT INTO compras(qr,cantidad_tickets,pago_total,fecha_compra,hora_compra,codigo_pucp) VALUES (?,?,?,now(),now(),?);";
-
+        String idcompras=null;
 
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
-            pstmt.setString(1,qerre);
-            pstmt.setInt(2, cantidad_tickets);
-            pstmt.setDouble(3, pago_total);
-            pstmt.setString(4, codigo_pucp);
+            //System.out.println(fecha  + hora + codigo_pucp);
+            pstmt.setString(1,fecha);
+            pstmt.setString(2, hora);
+            pstmt.setString(3, codigo_pucp);
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    //System.out.println("aqui");
+                    idcompras=(rs.getString(1));
+
+                }
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        //System.out.println("El id compras es de "+idcompras);
+
+        return idcompras;
+    }
+
+    public void seteaIdCompra(int historialCompra, String idcompras) {
+
+
+        String sql = "update compradefunciones set idcompra=? where idhistorialdecompras=?;";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, idcompras);
+            pstmt.setInt(2, historialCompra);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -144,16 +177,23 @@ public class CarritoDao extends BaseDao {
 
     }
 
-    public void yacompro(BCarrito idcompra) {
 
 
-        String sql = "UPDATE compradefunciones set asistencia=?,idcompra=? where idhistorialdecompras=? and usuarios_codigo_pucp=20196044;";
+
+    public void yacompro(int idCompra,int historialCompra,String codigoEstudiante) {
+
+
+        String sql = "UPDATE compradefunciones set asistencia=?,idcompra=? where idhistorialdecompras=? and usuarios_codigo_pucp=?;";
 
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+
+            //System.out.println("El historial de compra es el::"+historialCompra);
             pstmt.setInt(1,5);
-            pstmt.setInt(2,idcompra.getIdcompra());
-            pstmt.setInt(3, idcompra.getHistorialcompra());
+            pstmt.setInt(2,idCompra);
+            pstmt.setInt(3, historialCompra);
+            pstmt.setString(4, codigoEstudiante);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -210,17 +250,24 @@ public class CarritoDao extends BaseDao {
 
 
 
+    public void enviaCorreo(int cantidad_tickets, double pago_total, String codigo_pucp,String correo_pucp,String dias,String horas,String nombres,ArrayList<BCarrito> Comprascarrito) {
 
-
-    public static String enviaCorreo(int cantidad_tickets, double pago_total, String codigo_pucp,String correo_pucp) {
-
-        String querre=sha256(codigo_pucp+cantidad_tickets+pago_total);
+        String querre=sha256(codigo_pucp+cantidad_tickets+pago_total+dias+horas);
         //String querre="Codigo: "+codigo_pucp+"numero de tickets"+cantidad_tickets+"pago:"+pago_total;
         String fotoqr="<img src='https://chart.googleapis.com/chart?cht=qr&chl="+querre+"&chs=180x180&choe=UTF-8&chld=L|2'>";
         final String username = "cinestudiariweb@gmail.com";
         final String password = "qmkekwbccsvfuhpo";
 
         //System.out.println(correo_pucp);
+//        System.out.println("--------------");
+//        System.out.println(dias);
+//        System.out.println(horas);
+//        System.out.println(codigo_pucp);
+//
+        String resultado=this.SolicitaidCompras(dias,horas,codigo_pucp);
+        System.out.println("resultado: "+resultado);
+        //System.out.println("Envia correo dice::"+resultado);
+//        System.out.println("--------------");
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -246,6 +293,7 @@ public class CarritoDao extends BaseDao {
             );
             String someHtmlMessage="<html lang=\"en\">\n" +
                     "<head>\n" +
+
                     "    <meta charset=\"UTF-8\">\n" +
                     "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
                     "    \n" +
@@ -253,9 +301,11 @@ public class CarritoDao extends BaseDao {
                     "    <img src=\"https://drive.google.com/uc?id=1a4PgZwW8H4jfXKVJ86rq5FkMQI5ra27f\"\n" +
                     "</head>\n" +
                     "<body>\n" +
-                    "    <p> Hola!<br>Muchas Gracias por tu compra!<br>Debajo se adjunta un código QR que te permitirá ingresar a tu(s) sala(s) Respectivas ;)</p>\n" +
-                    "\n" +
+                    "    <p> Hola "+nombres+"!<br>Muchas Gracias por tu compra!<br>Debajo se adjunta información general de tu compra, y el código QR que te permitirá ingresar a tu(s) sala(s) Respectivas<br><strong>Nota: " +
+                    "Las funciones que reservaste con esta compra las podrás ver en la seccion: 'Mis Tickets', y puedes comparar cúal pertenece a esta compra comparando el Número de ID de la compra</strong></p>\n" +
+                    "\n" +"ID de tu compra "+Comprascarrito.get(0).getIdcompra()+"<br>"+
                     fotoqr +
+                    "<br>Que disfrutes tu(s) funcion(es)! =D"+
                     "</body>\n" +
                     "</html>";
 
@@ -264,13 +314,59 @@ public class CarritoDao extends BaseDao {
 
             Transport.send(message);
 
-            System.out.println("Done");
+            System.out.println("Envio de correo dice: enviado");
 
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-        return querre;
     }
+
+
+    public ArrayList <String> compra(int cantidad_tickets, double pago_total, String codigo_pucp,String correo_pucp,String nombres, ArrayList<BCarrito> Comprascarrito) {
+
+        //String xd=codigo_pucp+cantidad_tickets+pago_total;
+
+        //String qerre=sha256(codigo_pucp+cantidad_tickets+pago_total);
+        //System.out.println(xd);
+
+        ArrayList<String> compra = new ArrayList<String>();
+
+        String sql = "INSERT INTO compras(qr,cantidad_tickets,pago_total,fecha_compra,hora_compra,codigo_pucp) VALUES (?,?,?,?,?,?);";
+
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            String dias = new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
+            String horas = new SimpleDateFormat("HH:mm:ss").format(new java.util.Date());
+
+            String codigo_qr=sha256(codigo_pucp+cantidad_tickets+pago_total+dias+horas);
+
+
+            compra.add(dias);
+            compra.add(horas);
+
+            pstmt.setString(1,codigo_qr);
+            pstmt.setInt(2, cantidad_tickets);
+            pstmt.setDouble(3, pago_total);
+
+            pstmt.setString(4,dias);
+            pstmt.setString(5,horas);
+
+            pstmt.setString(6, codigo_pucp);
+
+            pstmt.executeUpdate();
+
+            this.enviaCorreo(cantidad_tickets,pago_total,codigo_pucp,correo_pucp,dias,horas,nombres,Comprascarrito);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return compra;
+    }
+
+
+
 
 }
 //check

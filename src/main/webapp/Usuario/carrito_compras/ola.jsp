@@ -1,6 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BCarrito"%>
-<jsp:useBean id="carritodecompras" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BCarrito>" />
+<%@ page import="java.util.Objects" %>
+
+<jsp:useBean id="indicadorCompraexitosa" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="indicadorComprafallida" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="Borrarboton" scope="session" type="java.lang.String" class="java.lang.String"/>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,8 +58,7 @@
         $("#staticBackdrop").modal('show');
     });
 </script>
-<% int contador= carritodecompras.size();
-    %>
+
 
 
 <!-- Modal -->
@@ -61,67 +66,87 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Compra Realizada con Éxito</h5>
+                <h5 class="modal-title" id="staticBackdropLabel"></h5>
 
             </div>
 
             <div class="modal-footer">
+<%--                <%if (session.getAttribute("indicadorCompraexitosa") !="xd"){%>--%>
 
 
-                <% if (contador!=0) {%>
+                <%if (Objects.equals(session.getAttribute("indicadorCompraexitosa"), "BuenaCompra")) {%>
+                    <script>
+                        document.getElementById('staticBackdropLabel').innerHTML = 'Compra Realizada con Éxito';
+                    </script>
                 <div class="modal-body">
-                    Se está procesando su orden, NO CIERRE ESTA VENTANA!!
-                </div>
-                <% } %>
-                <% if (contador==0) {%>
 
-                <div class="modal-body">
-                    --Orden Procesada--
-                    <% hitsCountresta=0;%>
-                    <br>
 
-                    Se ha realizado la compra con éxito.<br>
-                    Puedes ver tus tickets en el perfil de usuario.<br>
-                    Los Datos de ingreso han sido enviados a su correo electrónico =)
-                    <br>
-                    <br>
+                    <p> Se ha realizado la compra con éxito.<br>
+                        Puedes ver tus tickets en el perfil de usuario.<br>
+                        Los Datos de ingreso han sido enviados a su correo electrónico ;)</p>
                     <a href="<%=request.getContextPath()%>/Checkout"><button type="button" class="btn btn-success">Volver a mi Carrito de Compras</button></a>
                 </div>
-                <% } %>
+                <%session.removeAttribute("indicadorCompraexitosa");%>
+                <%session.removeAttribute("Borrarboton");%>
+                <%}%>
 
-                <%for (BCarrito carrito : carritodecompras) { %>
+<%--                <%if (session.getAttribute("indicadorComprafallida") !=null){%>--%>
+
+                <%if (Objects.equals(session.getAttribute("indicadorComprafallida"), "CompraFallida")) {%>
+                    <script>
+                         document.getElementById('staticBackdropLabel').innerHTML = 'Proceso de Compra Fallido';
+                    </script>
+
+                <div class="modal-body">
+                    <p>Proceso de compra fallido, existe una o más funciones<br>
+                       Las cuales ya no cuentan con el stock requerido. Por favor<br>
+                       Verifica la cantidad de tickets nuevamente en la página del<br>
+                       Carrito de compras.</p>
+                    <a href="<%=request.getContextPath()%>/Checkout"><button type="button" class="btn btn-success">Volver a mi Carrito de Compras</button></a>
+                </div>
+                <%session.removeAttribute("indicadorComprafallida");%>
+                <%session.removeAttribute("Borrarboton");%>
+               <%}%>
+
+                <%if (session.getAttribute("Borrarboton") !=null ) {%>
+                    <script>
+                        document.getElementById('staticBackdropLabel').innerHTML = 'Procesando compra...';
+                    </script>
+                <div class="modal-body">
+                    <p>Se está procesando su orden y comprobando su cantidad de tickets requeridos con el sistema<br>
+                        Espere, por favor.</p>
+                    <form id="formularioenvio"  method="POST" action="<%=request.getContextPath()%>/ola?a=yacompro">
+<%--                        <button id= "cambios" type="submit" class="btn btn-outline-info" >COMPRACOMPRACOMPRACOMPRACOMPRA</button>--%>
+                    </form>
+                    <script type="text/javascript">
+                        function formAutoSubmit () {
+                            var frm = document.getElementById("formularioenvio");
+                            frm.submit();
+                        }
+                        window.onload = formAutoSubmit;
+                    </script>
+                </div>
+                <%}%>
 
 
 
-                <form method="POST" action="<%=request.getContextPath()%>/ola?a=yacompro">
-                    <input type="hidden" name="nombre_pelicula" value="<%=carrito.getNombre_pelicula()%>" />
-                    <input type="hidden" name="fecha" value="<%=carrito.getFecha()%>" />
-                    <input type="hidden" name="hora" value="<%=carrito.getHora()%>" />
-                    <input type="hidden" name="idfuncion" value="<%=carrito.getIdfuncion()%>" />
-                    <input type="hidden" name="nombre_sede" value="<%=carrito.getNombre_sede()%>" />
-                    <input type="hidden" name="precio_ticket" value="<%=carrito.getPrecio_ticket()%>" />
-                    <input type="hidden" name="imagen" value="<%=carrito.getImagen()%>" />
-                    <input type="hidden" name="historialcompra" value="<%=carrito.getHistorialcompra()%>" />
-                    <input type="hidden" name="codigoEstudiante" value="<%=carrito.getCodigoEstudiante()%>" />
 
-                    <input type="hidden" name="reducirTickets" value="<%=carrito.getAforoOperador()%>" />
 
-                    <input type="hidden" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" value="<%=carrito.getCantidad_funcion()%>" >
-                    <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=hitsCount-hitsCountresta%>" >
+<%--                <div class="modal-body">--%>
+<%--                    --Orden Procesada----%>
+<%--                    <% hitsCountresta=0;%>--%>
+<%--                    <br>--%>
+<%--                    Se ha realizado la compra con éxito.<br>--%>
+<%--                    Puedes ver tus tickets en el perfil de usuario.<br>--%>
+<%--                    Los Datos de ingreso han sido enviados a su correo electrónico =)--%>
+<%--                    <br>--%>
+<%--                    <br>--%>
+<%--                    --%>
+<%--                </div>--%>
 
-                    <button id= "cambios" type="submit" class="btn btn-outline-light" STYLE="height: 0px; width: 0px; color: transparent"></button>
-                    <script>window.onload = function(){
-                        var button = document.getElementById('cambios');
-                        setInterval(function(){
-                            button.click();
-                        },100);  // this will make it click again every 50 miliseconds
-                    };</script>
-                </form>
-                <%
 
-                        contador--; }%>
+
             </div>
-
 
 
 
@@ -129,4 +154,14 @@
     </div>
 </div>
 </body>
+
+<%--<script>window.onload = function(){--%>
+<%--    var button = document.getElementById('cambios');--%>
+<%--    setInterval(function(){--%>
+<%--        button.click();--%>
+<%--    },100);  // this will make it click again every 50 miliseconds--%>
+<%--};</script>--%>
+
+
+
 </html>

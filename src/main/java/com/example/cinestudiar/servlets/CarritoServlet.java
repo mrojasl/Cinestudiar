@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @WebServlet(name = "CarritoServlet", urlPatterns = {"/Checkout"})
@@ -78,18 +79,35 @@ public class CarritoServlet extends HttpServlet {
             String correo_pucp=request.getParameter("correo_puke");
 
 
-            try {
-                int cantidad_tickets = Integer.parseInt(cantidad_ticketsStr);
-                double pago_total=Double.parseDouble(pago_totalStr);
+            ArrayList<BCarrito> ComprasdelCarrito = carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp"));
 
-                carritoDao.compra(cantidad_tickets,pago_total,codigo_pucp,correo_pucp);
-                response.sendRedirect(request.getContextPath() + "/ola");
-
-            } catch (NumberFormatException e) {
-                System.out.println("error al parsear");
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Usuario/carrito_compras/checkout.jsp");
-                requestDispatcher.forward(request, response);
+            boolean sePuedeComprar=true;
+            for (BCarrito bCarrito : ComprasdelCarrito) {
+                if (bCarrito.getCantidad_funcion()>bCarrito.getAforoOperador()){
+                    sePuedeComprar=false;
+                    break;
+                }
+                else if (bCarrito.getCantidad_funcion()<=0){
+                    sePuedeComprar=false;
+                    break;
+                }
             }
+
+                if (sePuedeComprar){
+                    int cantidad_tickets = Integer.parseInt(cantidad_ticketsStr);
+                    double pago_total=Double.parseDouble(pago_totalStr);
+
+                    request.getSession().setAttribute("cantidad_tickets", cantidad_tickets);
+                    request.getSession().setAttribute("pago_total", pago_total);
+
+
+                    response.sendRedirect(request.getContextPath() + "/ola");
+                }
+                else{
+                    request.getSession().setAttribute("Carritofallido", "CompraFallida");
+                    response.sendRedirect(request.getContextPath() + "/Checkout");
+                }
+
         }
 
 
@@ -108,6 +126,8 @@ public class CarritoServlet extends HttpServlet {
         String codigoEstudiante=request.getParameter("codigoEstudiante");
         int idcompra= Integer.parseInt(request.getParameter("idcompra"));
 
+        int historialdelacompra=Integer.parseInt(request.getParameter("historialdelacompra"));
+
         BCarrito bCarrito= new BCarrito();
 
         bCarrito.setNombre_pelicula(nombre_pelicula);
@@ -116,6 +136,7 @@ public class CarritoServlet extends HttpServlet {
         bCarrito.setNombre_sede(nombre_sede);
         bCarrito.setCantidad_funcion(cantidad_funcion);
         bCarrito.setPrecio_ticket(precio_ticket);
+        bCarrito.setHistorialcompra(historialdelacompra);
 
         bCarrito.setIdfuncion(idfuncion);
         bCarrito.setCodigoEstudiante(codigoEstudiante);
@@ -124,31 +145,31 @@ public class CarritoServlet extends HttpServlet {
 
         return bCarrito;
     }
-    public BCarrito leerParametrosRequest1(HttpServletRequest request) {
-        String nombre_pelicula=request.getParameter("nombre_pelicula");
-        String fecha=request.getParameter("fecha");
-        String hora=request.getParameter("hora");
-        String nombre_sede=request.getParameter("nombre_sede");
-        int cantidad_funcion= Integer.parseInt(request.getParameter("cantidad_funcion"));
-        int precio_ticket= Integer.parseInt(request.getParameter("precio_ticket"));
-        String imagen=request.getParameter("imagen");
-        String codigoEstudiante=request.getParameter("codigoEstudiante");
-        int idcompranuevo= Integer.parseInt(request.getParameter("contadorfuncion"));
-        int idfuncion=Integer.parseInt(request.getParameter("idfuncion"));
-
-        BCarrito bCarrito= new BCarrito();
-
-        bCarrito.setNombre_pelicula(nombre_pelicula);
-        bCarrito.setFecha(fecha);
-        bCarrito.setHora(hora);
-        bCarrito.setNombre_sede(nombre_sede);
-        bCarrito.setCantidad_funcion(cantidad_funcion);
-        bCarrito.setPrecio_ticket(precio_ticket);
-        bCarrito.setImagen(imagen);
-        bCarrito.setCodigoEstudiante(codigoEstudiante);
-        bCarrito.setIdcompra(idcompranuevo);
-
-
-        return bCarrito;
-    }
+//    public BCarrito leerParametrosRequest1(HttpServletRequest request) {
+//        String nombre_pelicula=request.getParameter("nombre_pelicula");
+//        String fecha=request.getParameter("fecha");
+//        String hora=request.getParameter("hora");
+//        String nombre_sede=request.getParameter("nombre_sede");
+//        int cantidad_funcion= Integer.parseInt(request.getParameter("cantidad_funcion"));
+//        int precio_ticket= Integer.parseInt(request.getParameter("precio_ticket"));
+//        String imagen=request.getParameter("imagen");
+//        String codigoEstudiante=request.getParameter("codigoEstudiante");
+//        int idcompranuevo= Integer.parseInt(request.getParameter("contadorfuncion"));
+//        int idfuncion=Integer.parseInt(request.getParameter("idfuncion"));
+//
+//        BCarrito bCarrito= new BCarrito();
+//
+//        bCarrito.setNombre_pelicula(nombre_pelicula);
+//        bCarrito.setFecha(fecha);
+//        bCarrito.setHora(hora);
+//        bCarrito.setNombre_sede(nombre_sede);
+//        bCarrito.setCantidad_funcion(cantidad_funcion);
+//        bCarrito.setPrecio_ticket(precio_ticket);
+//        bCarrito.setImagen(imagen);
+//        bCarrito.setCodigoEstudiante(codigoEstudiante);
+//        bCarrito.setIdcompra(idcompranuevo);
+//
+//
+//        return bCarrito;
+//    }
 }
