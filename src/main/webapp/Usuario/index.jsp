@@ -3,6 +3,8 @@
 <jsp:useBean id="listapeliculas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="cointaner" scope="request" type="java.lang.Integer"/>
 <jsp:useBean id="valor" scope="request" type="java.lang.Integer"/>
+<jsp:useBean id="listaradom" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -249,6 +251,10 @@
             left2{
                 margin-right: 75px;
             }
+            .carousel .carousel-indicators li {  background-color: white;border-radius: 100%;height: 10px;width: 10px }
+            .carousel .carousel-indicators li.active { background-color: blue;border-radius: 100%;height: 10px;width: 10px }
+
+
             @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
 
 
@@ -259,156 +265,128 @@
     </head>
     <body>
 
-        <div class="d-flex justify-content-between">
-            <div class="leftside d-flex flex-column">
-                <div class="sugerencia p-2" ><h3>Sugerencias</h3></div>
-                <br>
-                <div class="px-5">
-                    <div class="boxfuncion " >
-                        <h5>El Hombre Araña 2</h5>
-                        <img  src="Imagenes/poster_movie13.webp" alt="poster_movie" width="250px" height="380px">
-                    </div>
-                    <button type="button" class="btn btn-info buttonsize" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver detalles</button>
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height: 600px">
+        <ol class="carousel-indicators" style="z-index: 999">
+            <%for(int j=0 ; j< listaradom.size();j++){%>
+            <li class="<%=(j==0)?"active":""%>" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%=j%>"  aria-current="true"></li>
+            <%}%>
+        </ol>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Detalles de película</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="desc1back">
-                                        <h4>El Hombre Araña 2</h4>
-                                        <p>Spider-Man 2 | Parker (Tobey Maguire) está en la universidad, sigue enamorado de Mary Jane Watson (Kirsten Dunst) y tiene muchos problemas: su trabajo de héroe no le deja tiempo para estudiar, ni para ganar dinero para pagarse los estudios, ni para ayudar a su tía. Además, a veces pierde sus poderes.</p>
-                                    </div>
-                                    <div class="desc2back">
-                                        <p>Director:<br>Sam Raimi</p>
-                                        <p>Género:<br>Acción, superhéroes, ciencia, ficción, drama</p>
-                                        <p>Duración:<br>180 minutos</p>
-                                        <p>Actores:<br>Tobey Maguire, Kirsten Dunst, James Franco, Alfred Molina, Rosemary Harris, Donna Murphy</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
+        <div class="carousel-inner">
+            <%for(int l=0 ; l< listaradom.size();l++){%>
+
+            <div class="<%=(l==0)?"carousel-item active":"carousel-item"%>">
+
+                <img src="${pageContext.request.contextPath}/Imagenes/fondo_de_cine.jpg" alt="..." class="d-block w-100" style="height: 600px;filter: blur(8px) brightness(70%);-webkit-filter: blur(8px) brightness(70%)">
+
+                <div class="carousel-caption d-flex justify-content-between " STYLE="padding-bottom: 40px;padding-top: 0px">
+                    <div>
+                        <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listaradom.get(l).getIdpeliculas()%>" class="d-block" style="height: 500px;width: 300px; padding-bottom: 0px" alt="...">
+                    </div>
+
+
+                    <div>
+                        <h6 style="font-size: 30px"><%=listaradom.get(l).getNombre()%></h6>
+                        <br>
+                        <br>
+                        <div class="card" style="width: 45rem;background-color: transparent">
+                            <div class="card-body">
+                                <%if (listaradom.get(l).getInformación()!=null){%>
+                                <p class="card-text"><%=listaradom.get(l).getInformación()%></p>
+                                <%}else{%>
+                                <p class="card-text">Todavía no contamos con una descripción disponible</p>
+                                <%}%>
+
+
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
-                <div class="px-5" >
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                    <img src="Imagenes/estrella.png" height="35px" width="35px">
-                </div>
-                <br>
-                <div class="px-5">
-                    <h5 class="textchoosereserv">Sede:</h5>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>San Miguel</option>
-                        <option value="1">Pueblo Libre</option>
-                        <option value="2">Miraflores</option>
-                        <option value="3">Surco</option>
-                    </select>
+
+            </div>
+            <%}%>
+        </div>
+
+    </div>
+
+    <button  type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+        <i class="bi bi-arrow-left-square-fill"></i> Anterior
+    </button>
+    <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+        Siguiente <i class="bi bi-arrow-right-square-fill"></i>
+    </button>
+
+    <div class="d-flex justify-content-around">
+        <div >
+            <div >
+                <div>
                     <br>
-                    <h5 class="textchoosereserv">Horario:</h5>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Mar. 20/05/2022 14:00-16:00</option>
-                        <option value="1">Miér. 21/05/2022 15:00-16:30</option>
-                        <option value="2">Juev. 22/05/2022 18:00-21:00</option>
-                        <option value="3">Vier. 23/05/2022 18:00-19:45</option>
-                    </select>
-                    <br>
-                </div>
-                <div class="px-5" >
-                    <h5 class="textchoosereserv">Cantidad de tickets:</h5>
-                </div>
-                <div class="px-5">
-                    <input type="number" name="tentacles" min="1" max="35">
-                </div>
-                <h6 class="spaceleft">Tickets disponibles: 35</h6>
-                <h6 class="spaceleft">Precio por ticket: S/25.00</h6>
-                <br>
-                <div class="leftfinal px-5">
-                    <h4>TOTAL: S/50.00</h4>
-                    <button type="button" class="btn btn-success">Reservar</button>
+
                 </div>
             </div>
-            <div style="margin-right: 150px">
-                <div >
-                    <div class="buttonswipe" >
-                        <br>
-                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-                            <i class="bi bi-arrow-left-square-fill"></i> Anterior
-                        </button>
-                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-                            Siguiente <i class="bi bi-arrow-right-square-fill"></i>
-                        </button>
-                    </div>
-                </div>
-                <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-                    <div class="carousel-inner">
+            <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                <div class="carousel-inner">
 
-                        <%  int h=1;
-                            int b=1;
-
-                            for (int n = 1; n<cointaner+1; n++) {%>
-                        <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">
-                            <div class="container">
-                                <%for (int m= b; m<valor +1;m++){%>
-                                <div class="row align-items-start">
-                                    <%for (int k=h;k<listapeliculas.size()+1;k++){%>
-                                    <div class="col">
-                                        <br>
-                                        <div class="boxfuncion">
-                                            <h5><%=listapeliculas.get(k-1).getNombre()%></h5>
-                                            <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
-                                            <a type="button" class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/detalles?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
-                                        </div>
+                    <%  int h=1;
+                        int b=1;
+                        for (int n = 1; n<cointaner+1; n++) {%>
+                    <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">
+                        <div class="container">
+                            <%for (int m= b; m<valor+1;m++){%>
+                            <div class="row align-items-start">
+                                <%for (int k=h;k<listapeliculas.size()+1;k++){%>
+                                <div class="col">
+                                    <br>
+                                    <div class="boxfuncion">
+                                        <h5><%=listapeliculas.get(k-1).getNombre()%></h5>
+                                        <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="250px" height="380px">
+                                        <a type="button" class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/DetallesPelicula?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
                                     </div>
-                                    <% if (k%3==0) {
-                                        h=k+1;
-                                        break;
-                                    }%>
-                                    <%}%>
                                 </div>
-                                <% if (m%2==0) {
-                                    b=m+1;
+                                <% if (k%3==0) {
+                                    h=k+1;
                                     break;
                                 }%>
                                 <%}%>
                             </div>
+                            <% if (m%2==0) {
+                                b=m+1;
+                                break;
+                            }%>
+                            <%}%>
                         </div>
-
-                        <%}%>
                     </div>
+
+                    <%}%>
                 </div>
             </div>
         </div>
+    </div>
 
-       <!-- 1-->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-                integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-                crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-                integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-                crossorigin="anonymous"></script>
+    <!-- XD-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
 
-        <script>
-            // Get the modal
-            var modalh1 = document.getElementById('id01');
+    <script>
+        // Get the modal
+        var modalh1 = document.getElementById('id01');
 
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modalh1) {
-                    modalh1.style.display = "none";
-                }
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modalh1) {
+                modalh1.style.display = "none";
             }
-        </script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </body>
 </html>
 

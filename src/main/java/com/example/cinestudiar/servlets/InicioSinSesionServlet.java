@@ -28,8 +28,10 @@ public class InicioSinSesionServlet extends HttpServlet {
 
         switch (action){
             case ""->{
-                ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculas();
+                ArrayList<BPeliculas> listapeliculas= peliculasDao.listasPeliculasCliente();
+                ArrayList<BPeliculas> listaradom= peliculasDao.listaradom();
                 request.setAttribute("listapeliculas",listapeliculas);
+                request.setAttribute("listaradom",listaradom);
                 request.setAttribute("cointaner",peliculasDao.cointaner(listapeliculas.size()));
                 request.setAttribute("valor",peliculasDao.valor(listapeliculas.size()));
                 view = request.getRequestDispatcher("Usuario/index.jsp");
