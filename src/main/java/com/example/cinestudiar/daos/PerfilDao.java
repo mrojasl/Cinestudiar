@@ -35,6 +35,7 @@ public class PerfilDao extends BaseDao{
                     bUsuarioFuncion.setHorapelicula(rs.getString(4));
                     bUsuarioFuncion.setSede(rs.getString(5));
                     bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
+                    bUsuarioFuncion.setHistorialcompra(rs.getInt(7));
                     bUsuarioFuncion.setIdCompras(Integer.parseInt(rs.getString(8)));
                     listausuarios.add(bUsuarioFuncion);
                 }
@@ -78,13 +79,6 @@ public class PerfilDao extends BaseDao{
         return listausuarios;
     }
 
-
-
-
-
-
-
-
     public void actualizatelefono(BPerfil tel) {
 
         String user = "root";
@@ -102,7 +96,6 @@ public class PerfilDao extends BaseDao{
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
-
             pstmt.setString(1, tel.getNumero());
             pstmt.setString(2, tel.getCodigopucp());
             pstmt.executeUpdate();
@@ -110,11 +103,8 @@ public class PerfilDao extends BaseDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-
     public void actualizadireccion(BPerfil dir) {
-
         String user = "root";
         String pass = "root";
         String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
@@ -168,6 +158,8 @@ public class PerfilDao extends BaseDao{
         }
 
     }
+
+
 
     public void actualizafoto(BPerfil fot) {
 

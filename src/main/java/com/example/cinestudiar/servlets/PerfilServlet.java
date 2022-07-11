@@ -3,6 +3,7 @@ package com.example.cinestudiar.servlets;
 
 import com.example.cinestudiar.beans.BPerfil;
 import com.example.cinestudiar.beans.BUser;
+import com.example.cinestudiar.daos.FuncionesDao;
 import com.example.cinestudiar.daos.PerfilDao;
 
 import javax.servlet.RequestDispatcher;
@@ -78,6 +79,7 @@ public class PerfilServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PerfilDao perfilDao= new PerfilDao();
+        FuncionesDao funcionesDao = new FuncionesDao();
         String action = request.getParameter("a") == null ? "lista" : request.getParameter("a");
         if ("actualizartel".equals(action)) {
             BPerfil bPerfil= new BPerfil();
@@ -122,9 +124,8 @@ public class PerfilServlet extends HttpServlet {
             String funcion = request.getParameter("funcion");
             String actor= request.getParameter("actor");
             String historialCompra = request.getParameter("historialCompra");
-            System.out.println(funcion+actor+historialCompra);
 
-
+            funcionesDao.actualizarCalificacionFuncion(historialCompra,funcion);
             response.sendRedirect(request.getContextPath()+"/PerfildeUsuario?a=tickets");
         }
 

@@ -63,6 +63,32 @@ public class FuncionesDao extends BaseDao{
         }
     }
 
+    public void actualizarCalificacionFuncion(String idhistorial , String calificacion) {
+
+        String sql = "update compradefunciones set calificacion=? where idhistorialdecompras=?;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setString(1, calificacion);
+            pstmt.setString(2, idhistorial);
+            System.out.println(calificacion+"----"+idhistorial);
+            System.out.println("Se califico");
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Hubo un error en la conexión obteneter actualizar!");
+            ex.printStackTrace();
+        }
+
+        PeliculasDao peliculasDao = new PeliculasDao();
+        ArrayList<BPeliculas> bPeliculas = peliculasDao.listaPromedio();
+        for (BPeliculas bp : bPeliculas){
+            if(bp.getCalificacion()!=0){
+                peliculasDao.cargarCalificacion(bp.getCalificacion(),bp.getIdpeliculas());
+            }
+        }
+    }
+
 
 
 

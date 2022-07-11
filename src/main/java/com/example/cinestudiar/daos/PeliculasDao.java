@@ -51,8 +51,43 @@ public class PeliculasDao extends BaseDao{
     }
 
 
+    public ArrayList<BPeliculas> listaPromedio() {
 
+        ArrayList<BPeliculas> lista = new ArrayList<>();
+        String sql = "select p.idpelicula, avg(cf.calificacion) from peliculas p  inner join funciones  f on (p.idpelicula=f.idpelicula)\n" +
+                "left join compradefunciones cf on (cf.idfuncion=f.idfuncion)\n" +
+                "group by p.idpelicula;\n";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            try (ResultSet resultSet = pstmt.executeQuery();) {
+                while (resultSet.next()) {
+                    BPeliculas p = new BPeliculas();
+                    p.setIdpeliculas(resultSet.getInt(1));
+                    p.setCalificacion(resultSet.getInt(2));
+                    lista.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexión!");
+            e.printStackTrace();
+        }
+        return lista;
+    }
 
+    public void cargarCalificacion(double calificacion , int idpelicula){
+        String sql = "update peliculas set calificacion=? where idpelicula=?;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setDouble(1, calificacion);
+            pstmt.setInt(2, idpelicula);
+            System.out.println("Se actulizo pelicula");
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Hubo un error en la conexión obteneter actualizar!");
+            ex.printStackTrace();
+        }
+    }
 
 
 
@@ -321,6 +356,11 @@ public class PeliculasDao extends BaseDao{
         return p;
 
     }
+
+
+
+
+
 
     public void borrarPelicula(int idpelicula)  {
 

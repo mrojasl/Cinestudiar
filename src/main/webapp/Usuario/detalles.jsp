@@ -317,6 +317,7 @@
                                 <div class="col-sm-6">
 
                                     <div class="p-5">
+                                        <%=pelicula.getIdpeliculas()%>
                                         <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="poster_movie" width="450px" height="520px" >
                                         <br>
                                         <br>

@@ -368,6 +368,9 @@
                                 <input type="number" class="form-control" name="funcion" placeholder="funcion" required>
                             </div>
                             <div class="mb-3 mt-3 ms-4 me-4">
+                                <input type="hidden" value="<%=funciones.getHistorialcompra()%>" class="form-control" name="historialCompra"  required>
+                            </div>
+                            <div class="mb-3 mt-3 ms-4 me-4">
                                 <input type="number" class="form-control" name="actor" placeholder="actor" required>
                             </div>
                             <div class="mb-3 mt-4">

@@ -315,12 +315,10 @@
             </div>
             <div class="col-lg-6">
               <div class="col-sm-6">
-
                 <div class="p-5">
                   <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="poster_movie" width="420px" height="600px" >
                   <br>
                   <br>
-
                   <%int i =1;%>
                   <%int j=1;%>
                   <%for(BPeliculas bPeliculas : lista_profesionales) {%>
@@ -341,9 +339,6 @@
                   <tr ><%=bPeliculas.getProfesional().getApellido()%></tr >
                   <%}%>
                   <%}%>
-
-
-
                   <table class="table" style="background-color:beige">
                     <thead>
                     <tr><th style="color: black">Funcion</th><th style="color: black">Precio</th><th style="color: black">Edad Minima</th><th style="color: black">Sede</th><th style="color: black">Aforo</th><th style="color: black">Reservar</th></tr>
@@ -360,25 +355,17 @@
                       <%}%>
                       <td> <%=bFuncionUsuario.getbSedeUsuario().getSede()%></td >
                       <td> <%=bFuncionUsuario.getbSedeUsuario().getAforoOperador()%></td >
-
                       <td>
                         <form class="user" method="POST" action="<%=request.getContextPath()%>/DetallesPelicula?action=añadir" >
                           <input type="hidden" name="peli" value="<%=pelicula.getIdpeliculas()%>">
                           <button class="btn btn-outline-info" type="submit" role="button" >Agregar</button>
                         </form>
                       </td>
-
-
                     </tr>
                     <%}%>
                   </table>
-
-
-
-
                 </div>
               </div>
-
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
               <div class="text-black px-3 py-4 p-md-5 mx-md-4">
