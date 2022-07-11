@@ -259,7 +259,7 @@ public class CarritoDao extends BaseDao {
         final String password = "qmkekwbccsvfuhpo";
 
         //System.out.println(correo_pucp);
-//        System.out.println("--------------");
+//        System.out.prxdintln("--------------");
 //        System.out.println(dias);
 //        System.out.println(horas);
 //        System.out.println(codigo_pucp);

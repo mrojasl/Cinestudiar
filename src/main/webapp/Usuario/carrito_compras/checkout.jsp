@@ -122,7 +122,7 @@
         <div>
             <i class="bi bi-exclamation-square-fill"></i>
             Proceso de compra fallido, existe una o más funciones
-            Las cuales ya no cuentan con el stock requerido. Por favor<br>
+            las cuales ya no cuentan con el stock requerido. Por favor<br>
             Verifica la cantidad de tickets nuevamente<i class="bi bi-exclamation-square-fill"></i>
         </div>
     </div>

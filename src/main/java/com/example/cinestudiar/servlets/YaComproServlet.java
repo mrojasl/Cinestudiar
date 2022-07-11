@@ -68,7 +68,7 @@ public class YaComproServlet extends HttpServlet {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            //System.out.println("---------------------------------------------------------------------------------------------------------------");
+            //System.out.println("------xd---------------------------------------------------------------------------------------------------------");
             //System.out.println("funciona?"+random_int);
 
             ArrayList<BCarrito> ComprasdelCarrito = carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp"));

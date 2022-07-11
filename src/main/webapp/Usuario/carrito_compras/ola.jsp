@@ -71,7 +71,7 @@
             </div>
 
             <div class="modal-footer">
-<%--                <%if (session.getAttribute("indicadorCompraexitosa") !="xd"){%>--%>
+<%--                <%if (session.getAttribute("indicxdadorCompraexitosa") !="xd"){%>--%>
 
 
                 <%if (Objects.equals(session.getAttribute("indicadorCompraexitosa"), "BuenaCompra")) {%>

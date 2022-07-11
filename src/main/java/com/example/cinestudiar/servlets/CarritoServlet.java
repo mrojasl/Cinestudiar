@@ -33,7 +33,7 @@ public class CarritoServlet extends HttpServlet {
         if (Objects.equals(rol, "cliente")){
             request.setAttribute("carritoDcompras",carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
 
-            /*---*/
+            /*--xd-*/
 
 
 
