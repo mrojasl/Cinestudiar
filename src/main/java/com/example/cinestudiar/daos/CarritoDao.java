@@ -265,7 +265,23 @@ public class CarritoDao extends BaseDao {
 //        System.out.println(codigo_pucp);
 //
         String resultado=this.SolicitaidCompras(dias,horas,codigo_pucp);
-        System.out.println("resultado: "+resultado);
+
+        String[] fechaSplit=dias.split("-");
+        String anho=fechaSplit[0];
+        String mes=fechaSplit[1];
+        String dia=fechaSplit[2];
+
+        String[] fechaFuncionSplit=Comprascarrito.get(0).getFecha().split("-");
+        String fanho=fechaFuncionSplit[0];
+        String fmes=fechaFuncionSplit[1];
+        String fdia=fechaFuncionSplit[2];
+
+        String[] horaFuncionSplit=Comprascarrito.get(0).getHora().split(":");
+        String fhora=horaFuncionSplit[0];
+        String fminuto=horaFuncionSplit[1];
+
+
+        //System.out.println("resultado: "+resultado);
         //System.out.println("Envia correo dice::"+resultado);
 //        System.out.println("--------------");
 
@@ -301,9 +317,17 @@ public class CarritoDao extends BaseDao {
                     "    <img src=\"https://drive.google.com/uc?id=1a4PgZwW8H4jfXKVJ86rq5FkMQI5ra27f\"\n" +
                     "</head>\n" +
                     "<body>\n" +
-                    "    <p> Hola "+nombres+"!<br>Muchas Gracias por tu compra!<br>Debajo se adjunta información general de tu compra, y el código QR que te permitirá ingresar a tu(s) sala(s) Respectivas<br><strong>Nota: " +
-                    "Las funciones que reservaste con esta compra las podrás ver en la seccion: 'Mis Tickets', y puedes comparar cúal pertenece a esta compra comparando el Número de ID de la compra</strong></p>\n" +
-                    "\n" +"ID de tu compra "+Comprascarrito.get(0).getIdcompra()+"<br>"+
+                    "    <p> Hola "+nombres+"!<br>Muchas Gracias por tu compra!<br>Debajo se adjunta información general de tu compra,<strong>junto a la información de una (1) de tus funciones reservadas</strong>, y el código QR que te permitirá ingresar a tu(s) sala(s) Respectivas<br><strong>Nota: " +
+                    "TODAS las funciones que reservaste con esta compra las podrás ver en la seccion: 'Mis Tickets', y podrás comparar cúal pertenece a esta compra comparando el Número de ID de la compra, la cual se presenta a continuación:<br></strong></p>\n" +
+                    "\n" +"<strong>ID de tu compra: "+resultado+".</strong><br>"+
+                    "<strong>Fecha y hora de tu compra: </strong>"+ "Fecha(dia/mes/año): "+dia+"/"+mes+"/"+anho+" A horas (horas:minutos:segundos):"+horas+".<br>"+
+                    "<strong>Pago total de tu compra: </strong>"+pago_total+" Soles.<br>"+
+                    "<strong>Código Único de tu compra(más abajo se muestra la imagen qr correspondiente a este código): </strong>"+querre+"<br>"+
+                    "-------------------<br>"+
+                    "Nombre de la película reservada: "+Comprascarrito.get(0).getNombre_pelicula()+".<br>"+
+                    "Fecha y hora de tu función: "+"Fecha(dia/mes/año): "+fdia+"/"+fmes+"/"+fanho+" A horas (horas:minutos):"+fhora+":"+fminuto+".<br>"+
+                    "Cantidad de tickets reservados: "+Comprascarrito.get(0).getCantidad_funcion()+" tickets.<br>"+
+                    "-------------------<br>"+
                     fotoqr +
                     "<br>Que disfrutes tu(s) funcion(es)! =D"+
                     "</body>\n" +

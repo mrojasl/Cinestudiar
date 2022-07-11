@@ -117,7 +117,7 @@ public class YaComproServlet extends HttpServlet {
 
                 String idcompra= carritoDao.SolicitaidCompras(datos.get(0),datos.get(1),usuarioLogueado.getCodigoPucp());
 
-                System.out.println("En servlet es:"+idcompra);
+                //System.out.println("En servlet es:"+idcompra);
 
 //                System.out.println("-----------");
 //                System.out.println(datos.get(0));

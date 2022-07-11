@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class PerfilDao extends BaseDao{
 
-    private static String sql_select1="select p.idpelicula,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,cf.idhistorialdecompras from usuarios u\n" +
+    private static String sql_select1="select p.idpelicula,p.nombre,f.fecha,f.hora,sala.nombre_sede,cf.cantidad_por_funcion,cf.idhistorialdecompras,cf.idcompra from usuarios u\n" +
             "                     inner join compradefunciones cf on (cf.usuarios_codigo_pucp=u.codigo_pucp)\n" +
             "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
             "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
             "                     inner join salas sala on (sala.idsala=f.idsala)\n" +
-            "                     where u.codigo_pucp=? AND cf.asistencia=5 order by f.fecha desc, f.hora DESC;";
+            "                     where u.codigo_pucp=? AND cf.asistencia=5 order by cf.idcompra desc;";
     private static String sql_select2="select concat(u.nombre,' ',u.apellido) as `nombre`, " +
             "u.codigo_pucp,u.telefono,u.dni,u.direccion,u.correo,u.foto,u.contraseña from usuarios u\n" +
             "where u.codigo_pucp=?;";
@@ -35,7 +35,7 @@ public class PerfilDao extends BaseDao{
                     bUsuarioFuncion.setHorapelicula(rs.getString(4));
                     bUsuarioFuncion.setSede(rs.getString(5));
                     bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
-                    bUsuarioFuncion.setHistorialcompra(Integer.parseInt(rs.getString(7)));
+                    bUsuarioFuncion.setIdCompras(Integer.parseInt(rs.getString(8)));
                     listausuarios.add(bUsuarioFuncion);
                 }
             }
@@ -77,6 +77,13 @@ public class PerfilDao extends BaseDao{
 
         return listausuarios;
     }
+
+
+
+
+
+
+
 
     public void actualizatelefono(BPerfil tel) {
 
@@ -189,9 +196,6 @@ public class PerfilDao extends BaseDao{
         }
 
     }
-
-
-
 
 
 

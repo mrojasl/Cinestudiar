@@ -346,7 +346,7 @@
                         <h6>Nombre:<br><%=funciones.getNombrepelicula()%><br><br>Fecha:<br><%=funciones.getFechapelicula()%><br><br>Cantidad de tickets:<br><%=funciones.getCantidadtickets()%></h6>
                     </div>
                     <div class="input-group mb-3 col">
-                        <h6>Sede:<br><%=funciones.getSede()%> <br><br>Hora:<br><%=funciones.getHorapelicula()%></h6>
+                        <h6>Sede:<br><%=funciones.getSede()%> <br><br>Hora:<br><%=funciones.getHorapelicula()%><br><br>IdCompra:<br><%=funciones.getIdCompras()%></h6>
                     </div>
 
                     <% String[] split = funciones.getFechapelicula().split("-");

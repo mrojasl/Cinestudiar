@@ -11,20 +11,20 @@ public class BUsuarioFuncion {
 
     private int historialcompra;
 
+    public int getIdCompras() {
+        return idCompras;
+    }
+    private int idCompras;
 
 
-
-    public BUsuarioFuncion() {
-        this.idpelicula = idpelicula;
-        this.nombrepelicula = nombrepelicula;
-        this.cantidadtickets = cantidadtickets;
-        this.fechapelicula = fechapelicula;
-        this.horapelicula = horapelicula;
-        this.sede = sede;
+    public void setIdCompras(int idCompras) {
+        this.idCompras = idCompras;
     }
     public int getHistorialcompra() {
         return historialcompra;
     }
+
+
 
     public void setHistorialcompra(int historialcompra) {
         this.historialcompra = historialcompra;
