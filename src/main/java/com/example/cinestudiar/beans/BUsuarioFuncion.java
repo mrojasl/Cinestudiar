@@ -9,6 +9,8 @@ public class BUsuarioFuncion {
     private String horapelicula;
     private String sede;
 
+    private int historialcompra;
+
 
 
 
@@ -20,7 +22,13 @@ public class BUsuarioFuncion {
         this.horapelicula = horapelicula;
         this.sede = sede;
     }
+    public int getHistorialcompra() {
+        return historialcompra;
+    }
 
+    public void setHistorialcompra(int historialcompra) {
+        this.historialcompra = historialcompra;
+    }
     public int getIdpelicula() {
         return idpelicula;
     }

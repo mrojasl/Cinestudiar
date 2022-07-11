@@ -51,9 +51,6 @@ public class LoguinServlet extends HttpServlet {
             session.setAttribute("usuarioLogueado", usuario);
 
 
-
-
-
             String rol=usuario.getRol();
             //System.out.println(usuario.getRol());
             switch (rol){

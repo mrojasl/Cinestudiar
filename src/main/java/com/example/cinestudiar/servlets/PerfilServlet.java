@@ -30,8 +30,6 @@ public class PerfilServlet extends HttpServlet {
         BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
         String rol=usuarioLogueado.getRol();
 
-
-
         if ("perfil".equals(action)) {
 
             request.setAttribute("perfilDusuario",perfilDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp")));
@@ -119,6 +117,15 @@ public class PerfilServlet extends HttpServlet {
             bPerfil.setCodigopucp(codigo);
             perfilDao.actualizafoto(bPerfil);
             response.sendRedirect(request.getContextPath() + "/PerfildeUsuario?a=perfil");
+        }
+        if("calificar".equals(action)){
+            String funcion = request.getParameter("funcion");
+            String actor= request.getParameter("actor");
+            String historialCompra = request.getParameter("historialCompra");
+            System.out.println(funcion+actor+historialCompra);
+
+
+            response.sendRedirect(request.getContextPath()+"/PerfildeUsuario?a=tickets");
         }
 
 

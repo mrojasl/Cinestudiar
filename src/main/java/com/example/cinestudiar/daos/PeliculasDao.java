@@ -266,6 +266,9 @@ public class PeliculasDao extends BaseDao{
         return null;
     }
 
+
+
+
     public void crearPelicula(String nombre, int duracion, String genero, InputStream foto, String informacion)  {
 
         String sql = "insert into peliculas (nombre, duracion , genero, foto, informacion)\n" +

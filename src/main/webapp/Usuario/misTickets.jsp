@@ -336,18 +336,12 @@
     </div>
     <div class="perfil-usuario-nuevo">
         <ul class="list-group list-group-flush">
-
-
             <li class="list-group-item">
                 <% for (BUsuarioFuncion funciones: usuarioFunciones){ %>
-
                 <div class="row">
                     <div class="input-group mb-3 col">
                         <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=funciones.getIdpelicula()%>" alt="poster_movie" width="120px" height="180px"/>
-
-
                     </div>
-
                     <div class="input-group mb-3 col">
                         <h6>Nombre:<br><%=funciones.getNombrepelicula()%><br><br>Fecha:<br><%=funciones.getFechapelicula()%><br><br>Cantidad de tickets:<br><%=funciones.getCantidadtickets()%></h6>
                     </div>
@@ -369,31 +363,17 @@
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px;left: 45px" disabled>Caducado
                         </button>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Ingresa calificaciones
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
+                        <form class="form-login" method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=calificar">
+                            <div class="mb-3 mt-3 ms-4 me-4">
+                                <input type="number" class="form-control" name="funcion" placeholder="funcion" required>
                             </div>
-                        </div>
+                            <div class="mb-3 mt-3 ms-4 me-4">
+                                <input type="number" class="form-control" name="actor" placeholder="actor" required>
+                            </div>
+                            <div class="mb-3 mt-4">
+                                <button type="submit" class="btn btn-outline-info rounded">Calificar</button>
+                            </div>
+                        </form>
 
                     </div>
 
@@ -401,6 +381,7 @@
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px;left: 45px" disabled>Vigente
                         </button>
+
                     </div>
                     <%} else {
                         /*System.out.println(date1 + " is equal to " + date2);*/
@@ -408,9 +389,21 @@
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px;left: 45px" disabled>Caducado
                         </button>
+                        <form class="form-login" method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=calificar">
+                            <div class="mb-3 mt-3 ms-4 me-4">
+                                <input type="number" class="form-control" name="funcion" placeholder="funcion" required>
+                            </div>
+                            <div class="mb-3 mt-3 ms-4 me-4">
+                                <input type="number" class="form-control" name="actor" placeholder="actor" required>
+                            </div>
+                            <div class="mb-3 mt-3 ms-4 me-4">
+                                <input type="hidden" value="<%=funciones.getHistorialcompra()%>" class="form-control" name="historialCompra" placeholder="actor" required>
+                            </div>
+                            <div class="mb-3 mt-4">
+                                <button type="submit" class="btn btn-outline-info rounded">Calificar</button>
+                            </div>
+                        </form>
                     </div>
-
-
                     <%} else if (diff2 < 0) {%>
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px;left: 45px" disabled>Vigente

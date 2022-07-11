@@ -35,6 +35,7 @@ public class PerfilDao extends BaseDao{
                     bUsuarioFuncion.setHorapelicula(rs.getString(4));
                     bUsuarioFuncion.setSede(rs.getString(5));
                     bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
+                    bUsuarioFuncion.setHistorialcompra(Integer.parseInt(rs.getString(7)));
                     listausuarios.add(bUsuarioFuncion);
                 }
             }
@@ -76,13 +77,6 @@ public class PerfilDao extends BaseDao{
 
         return listausuarios;
     }
-
-
-
-
-
-
-
 
     public void actualizatelefono(BPerfil tel) {
 
@@ -195,6 +189,9 @@ public class PerfilDao extends BaseDao{
         }
 
     }
+
+
+
 
 
 
