@@ -133,7 +133,7 @@ public class AdminDao extends BaseDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             String sql = "select idprofesional,nombre,apellido,rol,peliculas_idpelicula from profesionales p left join peliculas_has_profesionales php\n" +
-                    "on (p.idprofesional=php.profesionales_idprofesional);";
+                    "on (p.idprofesional=php.profesionales_idprofesional) group by idprofesional;";
 
             Connection conn = DriverManager.getConnection(url,user,pass);
             Statement stmt = conn.createStatement();
