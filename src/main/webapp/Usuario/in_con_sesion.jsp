@@ -339,17 +339,21 @@
 
         </div>
 
+
+        <button  type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+            <i class="bi bi-arrow-left-square-fill"></i> Anterior
+        </button>
+        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+            Siguiente <i class="bi bi-arrow-right-square-fill"></i>
+        </button>
+
+
         <div class="d-flex justify-content-around">
             <div >
                 <div >
                     <div>
                         <br>
-                        <button  type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-                            <i class="bi bi-arrow-left-square-fill"></i> Anterior
-                        </button>
-                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-                            Siguiente <i class="bi bi-arrow-right-square-fill"></i>
-                        </button>
+
                     </div>
                 </div>
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
