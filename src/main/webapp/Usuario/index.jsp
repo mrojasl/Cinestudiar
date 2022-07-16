@@ -319,6 +319,7 @@
         Siguiente <i class="bi bi-arrow-right-square-fill"></i>
     </button>
 
+
     <div class="d-flex justify-content-around">
         <div >
             <div >
@@ -329,7 +330,6 @@
             </div>
             <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
                 <div class="carousel-inner">
-
                     <%  int h=1;
                         int b=1;
                         for (int n = 1; n<cointaner+1; n++) {%>
@@ -362,6 +362,7 @@
 
                     <%}%>
                 </div>
+
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@ public class BUsuarioFuncion {
     private String horapelicula;
     private String sede;
 
-    private int historialcompra;
+    private String historialcompra;
 
     public int getIdCompras() {
         return idCompras;
@@ -20,15 +20,15 @@ public class BUsuarioFuncion {
     public void setIdCompras(int idCompras) {
         this.idCompras = idCompras;
     }
-    public int getHistorialcompra() {
+
+    public String getHistorialcompra() {
         return historialcompra;
     }
 
-
-
-    public void setHistorialcompra(int historialcompra) {
+    public void setHistorialcompra(String historialcompra) {
         this.historialcompra = historialcompra;
     }
+
     public int getIdpelicula() {
         return idpelicula;
     }

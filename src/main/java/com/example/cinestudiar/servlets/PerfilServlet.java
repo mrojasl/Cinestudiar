@@ -120,15 +120,6 @@ public class PerfilServlet extends HttpServlet {
             perfilDao.actualizafoto(bPerfil);
             response.sendRedirect(request.getContextPath() + "/PerfildeUsuario?a=perfil");
         }
-        if("calificar".equals(action)){
-            String funcion = request.getParameter("funcion");
-            String actor= request.getParameter("actor");
-            String historialCompra = request.getParameter("historialCompra");
-
-            funcionesDao.actualizarCalificacionFuncion(historialCompra,funcion);
-            response.sendRedirect(request.getContextPath()+"/PerfildeUsuario?a=tickets");
-        }
-
 
     }
 }

@@ -35,7 +35,7 @@ public class PerfilDao extends BaseDao{
                     bUsuarioFuncion.setHorapelicula(rs.getString(4));
                     bUsuarioFuncion.setSede(rs.getString(5));
                     bUsuarioFuncion.setCantidadtickets(Integer.parseInt(rs.getString(6)));
-                    bUsuarioFuncion.setHistorialcompra(rs.getInt(7));
+                    bUsuarioFuncion.setHistorialcompra(rs.getString(7));
                     bUsuarioFuncion.setIdCompras(Integer.parseInt(rs.getString(8)));
                     listausuarios.add(bUsuarioFuncion);
                 }

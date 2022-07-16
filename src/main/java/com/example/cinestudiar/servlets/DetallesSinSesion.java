@@ -21,8 +21,6 @@ public class DetallesSinSesion extends HttpServlet {
         if ("detalles".equals(action)) {
 
 
-
-
             request.setAttribute("listafunciones", funcionesDao.listaFuncionesPorPelicula(Integer.parseInt(request.getParameter("id"))));
             request.setAttribute("pelicula", peliculasDao.obtener_pelicula(Integer.parseInt(request.getParameter("id")), peliculasDao.listasPeliculas()));
             request.setAttribute("lista_profesionales", peliculasDao.listapeliculaprofesional(Integer.parseInt(request.getParameter("id"))));

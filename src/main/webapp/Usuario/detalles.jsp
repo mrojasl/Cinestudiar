@@ -420,16 +420,7 @@
                                                         <button class="btn btn-outline-info" type="submit">Agregar</button>
                                                         <%}%>
 
-
-
-
-
                                                     </form>
-
-
-
-
-
                                                 </td>
                                             </tr>
                                             <%}%>

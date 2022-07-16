@@ -1,21 +1,20 @@
-<%@ page import="com.example.cinestudiar.beans.BPerfil" %>
-<%@ page import="com.example.cinestudiar.beans.BUsuarioFuncion" %><%--
-  Created by IntelliJ IDEA.
-  User: jesus
-  Date: 5/06/2022
-  Time: 17:53
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.cinestudiar.beans.BPerfil" %>
+<%@ page import="com.example.cinestudiar.beans.BUsuarioFuncion" %>
+
+<%@ page import="com.example.cinestudiar.daos.ProfesionalesDao" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.Collections" %>
-
+<%@ page import="com.example.cinestudiar.beans.BProfesional" %>
+<%@ page import="java.util.ArrayList" %>
 
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
-
 <jsp:useBean id="usuarioFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BUsuarioFuncion>" />
+
+<% ProfesionalesDao profesionalesDao = new ProfesionalesDao() ;%>
 
 <html lang="en">
 <head>
@@ -45,6 +44,7 @@
 
 
 <body>
+
 
 <style type="text/css">
     /*=====================================
@@ -334,6 +334,7 @@
         </div>
 
     </div>
+
     <div class="perfil-usuario-nuevo">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -363,28 +364,12 @@
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px;left: 45px" disabled>Caducado
                         </button>
-                        <form class="form-login" method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=calificar">
-                            <div class="mb-3 mt-3 ms-4 me-4">
-                                <input type="number" class="form-control" name="funcion" placeholder="funcion" required>
-                            </div>
-                            <div class="mb-3 mt-3 ms-4 me-4">
-                                <input type="hidden" value="<%=funciones.getHistorialcompra()%>" class="form-control" name="historialCompra"  required>
-                            </div>
-                            <div class="mb-3 mt-3 ms-4 me-4">
-                                <input type="number" class="form-control" name="actor" placeholder="actor" required>
-                            </div>
-                            <div class="mb-3 mt-4">
-                                <button type="submit" class="btn btn-outline-info rounded">Calificar</button>
-                            </div>
-                        </form>
-
+                        <a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>"style="margin-top: 30px;height: 40px;left: 45px"> Calificar </a>
                     </div>
-
                     <%} else if (diff < 0) {%>
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px;left: 45px" disabled>Vigente
                         </button>
-
                     </div>
                     <%} else {
                         /*System.out.println(date1 + " is equal to " + date2);*/
@@ -392,39 +377,18 @@
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px;left: 45px" disabled>Caducado
                         </button>
-                        <form class="form-login" method="POST" action="<%=request.getContextPath()%>/PerfildeUsuario?a=calificar">
-                            <div class="mb-3 mt-3 ms-4 me-4">
-                                <input type="number" class="form-control" name="funcion" placeholder="funcion" required>
-                            </div>
-                            <div class="mb-3 mt-3 ms-4 me-4">
-                                <input type="number" class="form-control" name="actor" placeholder="actor" required>
-                            </div>
-                            <div class="mb-3 mt-3 ms-4 me-4">
-                                <input type="hidden" value="<%=funciones.getHistorialcompra()%>" class="form-control" name="historialCompra" placeholder="actor" required>
-                            </div>
-                            <div class="mb-3 mt-4">
-                                <button type="submit" class="btn btn-outline-info rounded">Calificar</button>
-                            </div>
-                        </form>
+                        <a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>" style="margin-top: 30px;height: 40px;left: 45px"> Calificar </a>
                     </div>
                     <%} else if (diff2 < 0) {%>
                     <div class="input-group mb-3 col">
-                        <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px;left: 45px" disabled>Vigente
-                        </button>
+                        <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px;left: 45px" disabled>Vigente</button>
                     </div>
                     <%}%>
                     <%}%>
-
                     <hr>
                 </div>
-
                 <% } %>
-
-
-
-
             </li>
-
         </ul>
     </div>
 </section>
