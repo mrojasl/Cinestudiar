@@ -4,7 +4,6 @@
 <%@ page import="com.example.cinestudiar.beans.BEquipoLimpieza" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <jsp:useBean id="listapelicula1" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="listaSalas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>"/>
 <jsp:useBean id="listaPersonal" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BEquipoLimpieza>"/>
@@ -145,26 +144,15 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="p-2 mx-2 mb-2 d-flex-row ">
+                                    <form method="post" class="p-2 mx-2 mb-2 d-flex-row ">
                                         <div class="d-flex flex-column bd-highlight mb-3">
                                             <div class="p-2 bd-highlight">
-                                                <label class="fw-bold">Sede:</label>
+                                                <label class="fw-bold">Sala-Sede:</label>
                                                 <br>
-                                                <select style="width: 30%" class="mx-1 custom-select my-1 mr-sm-2" id="sede" name="Sede">
-                                                    <option value="San Miguel">San Miguel</option>
-                                                    <option value="Miraflores">Miraflores</option>
-                                                    <option value="Surco">Surco</option>
-                                                    <option value="Pueblo Libre">Pueblo Libre</option>
-                                                </select>
-                                            </div>
-                                            <div class="p-2 bd-highlight">
-                                                <label class="fw-bold">Sala</label><br>
-                                                <select style="width: 30%" class="custom-select my-1 mr-sm-2" id="sala">
-                                                    <option selected></option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
+                                                <select style="width: 30%" name = "sede" class="mx-1 custom-select my-1 mr-sm-2" id="sede" name="Sede">
+                                                    <% for(BSedeYSala sala: listaSalas) { %>
+                                                    <option value="<%=sala.getIdSala()%>">Sala <%=sala.getIdSala()%>-<%=sala.getSede()%> </option>
+                                                    <% } %>
                                                 </select>
                                             </div>
                                             <div class="p-2 bd-highlight">

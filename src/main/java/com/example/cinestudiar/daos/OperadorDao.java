@@ -94,7 +94,7 @@ public class OperadorDao extends BaseDao {
                         "inner join sedes se on (sa.nombre_sede=se.nombre_sede)\n" +
                         "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
                         "where datediff(f.fecha,now())>=0\n" +
-                        "order by se.nombre_sede,sa.idsala,f.fecha desc;";
+                        "order by f.idfuncion asc;";
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
@@ -388,22 +388,7 @@ public class OperadorDao extends BaseDao {
             error.printStackTrace();
         }
     }
-    public void crearEquiposLimpieza(BEquipoLimpieza equipoLimpieza) {
 
-        String sql = "INSERT INTO equiposdelimpieza ( jefe ,limpiador1, limpiador2)\n" +
-                "VALUES ( ?, ?,?);";
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setString(1, equipoLimpieza.getJefe());
-            pstmt.setString(2, equipoLimpieza.getLimpiador1());
-            pstmt.setString(3, equipoLimpieza.getLimpiador2());
-            pstmt.executeUpdate();
-
-        }catch (SQLException error) {
-            error.printStackTrace();
-        }
-    }
     public ArrayList<BPeliculas> obtenerlistaPeliculas() {
 
         ArrayList<BPeliculas> listaPeliculas = new ArrayList<>();
@@ -616,12 +601,12 @@ public class OperadorDao extends BaseDao {
             e.printStackTrace();
         }
     }
-    public void borarFuncion(String idfuncion) {
+    public void borrarFuncion(int idfuncion) {
 
         try (Connection conn = this.getConnection();) {
             String sql = "DELETE FROM funciones WHERE idfuncion = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, idfuncion);
+                pstmt.setInt(1, idfuncion);
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {
@@ -641,18 +626,7 @@ public class OperadorDao extends BaseDao {
         }
     }
 
-    public void borrarFuncion(int idfuncion) {
 
-        try (Connection conn = this.getConnection();) {
-            String sql = "DELETE FROM funciones WHERE (idfuncion = ?);";
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, idfuncion);
-                pstmt.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public ArrayList<BEquipoLimpieza> obtenerPersonal() {
 
@@ -743,6 +717,8 @@ public class OperadorDao extends BaseDao {
 
         return lista;
     }
+    //PARA EXPORTAR ARCHIvo
+
 }
 
 

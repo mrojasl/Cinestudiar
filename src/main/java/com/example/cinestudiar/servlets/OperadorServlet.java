@@ -48,7 +48,7 @@ public class OperadorServlet extends HttpServlet {
                     request.setAttribute("listarFunciones", "");
                     request.setAttribute("Funciones", operadorDao.filtradoFunciones(""));
                     request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
-                    request.setAttribute("listaSalas", operadorDao.obtenerSala());
+                    request.setAttribute("listaSalas", operadorDao.obtenerSala()); // Para exportar
                     request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
                     requestDispatcher = request.getRequestDispatcher("Operador/Todas_func.jsp");
                     requestDispatcher.forward(request, response);
