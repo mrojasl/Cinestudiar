@@ -19,7 +19,8 @@
 <html style="position:relative;min-height: 100%;padding-bottom: 160px">
 <head>
     <meta charset="UTF-8">
-    <title>Mis Tickets-Cinestudiar</title>
+    <title>Mis Tickets</title>
+
     <!--link-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -222,10 +223,10 @@
         max-width: 750px;
     }
     .seccion-perfil-usuario .perfil-usuario-nuevo{
-        width: 70%;
+        width: 95%;
         position: relative;
         background-color: #fff;
-        max-width: 850px;
+        max-width: 1200px;
         border-radius: 15px;
         padding: 1.5rem 2rem;
 
@@ -324,67 +325,128 @@
         <br>
         <br>
         <div class="perfil-usuario-bio">
-            <h3 class="titulo" type ="button">Mis tickets</h3>
+            <h1 class="titulo" type ="button">Mis tickets</h1>
         </div>
 
     </div>
 
     <div class="perfil-usuario-nuevo">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <% for (BUsuarioFuncion funciones: usuarioFunciones){ %>
-                <div class="row">
-                    <div class="input-group mb-3 col">
-                        <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=funciones.getIdpelicula()%>" alt="poster_movie" width="120px" height="180px"/>
-                    </div>
-                    <div class="input-group mb-3 col">
-                        <h6>Nombre:<br><%=funciones.getNombrepelicula()%><br><br>Fecha:<br><%=funciones.getFechapelicula()%><br><br>Cantidad de tickets:<br><%=funciones.getCantidadtickets()%></h6>
-                    </div>
-                    <div class="input-group mb-3 col">
-                        <h6>Sede:<br><%=funciones.getSede()%> <br><br>Hora:<br><%=funciones.getHorapelicula()%><br><br>IdCompra:<br><%=funciones.getIdCompras()%></h6>
-                    </div>
 
-                    <% String[] split = funciones.getFechapelicula().split("-");
-                        String[] split2 = funciones.getHorapelicula().split(":");%>
-                    <%  LocalDate date1 = LocalDate.now();
-                        LocalDate date2 = LocalDate.of(Integer. parseInt(split[0]), Integer. parseInt(split[1]), Integer. parseInt(split[2]));
-                        LocalTime time1 = LocalTime.now();
-                        LocalTime time2 = LocalTime.of(Integer. parseInt(split2[0]), Integer. parseInt(split2[1]), Integer. parseInt(split2[2]));
-                        // compareTo() method
-                        int diff = date1.compareTo(date2);
-                        int diff2 = time1.compareTo(time2);%>
 
-                    <% if(diff > 0) {%>
-                    <div class="input-group mb-3 col">
-                        <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px;left: 45px" disabled>Caducado
-                        </button>
-                        <a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 30px;height: 40px;left: 45px"> Calificar </a>
-                    </div>
-                    <%} else if (diff < 0) {%>
-                    <div class="input-group mb-3 col">
-                        <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px;left: 45px" disabled>Vigente
-                        </button>
-                    </div>
-                    <%} else {
-                        /*System.out.println(date1 + " is equal to " + date2);*/
-                        if(diff2 > 0) {%>
-                    <div class="input-group mb-3 col">
-                        <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px;left: 45px" disabled>Caducado
-                        </button>
-                        <a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>" style="margin-top: 30px;height: 40px;left: 45px"> Calificar </a>
-                    </div>
-                    <%} else if (diff2 < 0) {%>
-                    <div class="input-group mb-3 col">
-                        <button type="button" class="btn btn-success" style="margin-top: 30px;height: 40px;left: 45px" disabled>Vigente</button>
-                    </div>
-                    <%}%>
-                    <%}%>
-                    <hr>
-                </div>
-                <% } %>
-            </li>
-        </ul>
+                <table id="tablax" class="table table-striped table-hover">
+
+                    <thead>
+                    <tr>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Sede</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col"># Tickets</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Calificar</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <% for (BUsuarioFuncion funciones: usuarioFunciones){ %>
+                        <tr>
+
+                            <td scope="row">  <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=funciones.getIdpelicula()%>" alt="poster_movie" width="60px" height="90px"/></td>
+
+                            <td><p style="font-size: 20px;margin-top: 20px"><%=funciones.getNombrepelicula()%></p></td>
+                            <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getSede()%> </p></td>
+                            <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getFechapelicula()%> </p></td>
+                            <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getHorapelicula()%> </p></td>
+                            <td><p style="font-size: 18px;margin-top: 20px" align="center"><%=funciones.getCantidadtickets()%> </p></td>
+
+                            <% String[] split = funciones.getFechapelicula().split("-");
+                                String[] split2 = funciones.getHorapelicula().split(":");%>
+                            <%  LocalDate date1 = LocalDate.now();
+                                LocalDate date2 = LocalDate.of(Integer. parseInt(split[0]), Integer. parseInt(split[1]), Integer. parseInt(split[2]));
+                                LocalTime time1 = LocalTime.now();
+                                LocalTime time2 = LocalTime.of(Integer. parseInt(split2[0]), Integer. parseInt(split2[1]), Integer. parseInt(split2[2]));
+                                // compareTo() method
+                                int diff = date1.compareTo(date2);
+                                int diff2 = time1.compareTo(time2);%>
+
+                            <% if(diff > 0) {%>
+                            <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado
+                            </button></td>
+                            <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
+                            <%} else if (diff < 0) {%>
+                            <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente
+                            </button></td>
+                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Aún no<br> disponible</p></td>
+
+                            <%} else {
+                                /*System.out.println(date1 + " is equal to " + date2);*/
+                                if(diff2 > 0) {%>
+
+                            <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado
+                            </button></td>
+                            <td> <a type="button" class="btn btn-btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px;"> Calificar </a></td>
+
+                            <%} else if (diff2 < 0) {%>
+
+                            <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente
+                            </button></td>
+                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Aún no<br> disponible</p></td>
+
+                            <%}%>
+                            <%}%>
+
+
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+
+
+
     </div>
+    <br>
+    <br>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+    </script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                scrollY: 520,
+                lengthMenu: [ [4, 8, -1], [4, 8, "All"] ],
+            });
+        });
+    </script>
 </section>
 
 
