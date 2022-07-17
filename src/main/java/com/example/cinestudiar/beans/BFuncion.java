@@ -14,6 +14,15 @@ public class BFuncion extends BSedeYSala{
     private int idPelicula;
     private int aforoOperador;
     private int existeCompra;
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public int getExisteCompra() {
         return existeCompra;
@@ -130,4 +139,6 @@ public class BFuncion extends BSedeYSala{
     public void setAsistencia(float asistencia) {
         this.asistencia = asistencia;
     }
+
+
 }

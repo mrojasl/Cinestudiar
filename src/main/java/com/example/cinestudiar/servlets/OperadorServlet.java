@@ -6,6 +6,7 @@ import com.example.cinestudiar.daos.OperadorDao;
 import com.example.cinestudiar.daos.PeliculasDao;
 
 import java.time.LocalDate;
+import javax.crypto.spec.PSource;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -30,12 +31,8 @@ public class OperadorServlet extends HttpServlet {
         PeliculasDao peliculasDao = new PeliculasDao();
         OperadorDao operadorDao = new OperadorDao();
         String filtro = request.getParameter("listarFunciones");
-        //if (filtro == "Funciones Disponibles") {
-        //
-        //}else {
-        //  ArrayList<BFuncion> lista = operadorDao.TodasLasFunciones();
-        //}
-        //ArrayList<BFuncion> lista = operadorDao.FuncionesDisponibles();
+        String fil_fecha;
+        String fil_sala;
 
         BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
         String rol=usuarioLogueado.getRol();
@@ -50,6 +47,7 @@ public class OperadorServlet extends HttpServlet {
                     request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
                     request.setAttribute("listaSalas", operadorDao.obtenerSala()); // Para exportar
                     request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
+
                     requestDispatcher = request.getRequestDispatcher("Operador/Todas_func.jsp");
                     requestDispatcher.forward(request, response);
                     break;
@@ -58,6 +56,15 @@ public class OperadorServlet extends HttpServlet {
                     request.setAttribute("listaPersonal",operadorDao.obtenerPersonal());
                     requestDispatcher = request.getRequestDispatcher("Operador/personal.jsp");
                     requestDispatcher.forward(request, response);
+                    break;
+                }
+                case "reporte_send"-> {
+                    fil_sala = request.getParameter("sala");
+                    System.out.println("LLEGA SEÑAL");
+                    fil_fecha = request.getParameter("fecha");
+                    System.out.println(fil_fecha + fil_sala);
+                    response.sendRedirect(request.getContextPath() + "/reporte?sala=" + fil_sala + "&fecha=" + fil_fecha);
+
                     break;
                 }
                 case "crearPe" ->{
@@ -107,70 +114,7 @@ public class OperadorServlet extends HttpServlet {
                     break;
                 }
 
-           /* case "agregarFun"->{ //ESTO VA PARA LA CREACIÓN DE FUNCIÓN
-                request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
-                request.setAttribute("listaSalas", operadorDao.obtenerSala());
-                request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
-                requestDispatcher=request.getRequestDispatcher("Operador/Todas_func.jsp");
-                requestDispatcher.forward(request,response);
-                break;
-            }*/
 
-            /*case " " -> {
-                //ArrayList<BFuncion> lista = null;
-                if (request.getParameter("listarFunciones")!=null){
-                    request.setAttribute("Funciones", lista);
-
-                }else{
-                    request.setAttribute("Funciones", operadorDao.filtradoFunciones(filtro, lista));
-                }
-                view= request.getRequestDispatcher("Operador/Todas_func.jsp");
-                view.forward(request,response);
-            }
-            */
-
-            /*
-            case "filtrado" ->{
-
-                if(request.getParameter("id")!= null){
-                    request.setAttribute("funcionesDisponibles", operadorDao.FuncionesDisponibles());
-                    request.setAttribute("listaFunMejorCalif", operadorDao.obtenerFuncionMejorCalificada());
-                    view = request.getRequestDispatcher("employees/formularioEditar.jsp");
-                    view.forward(request, response);
-                }
-                else{
-                    response.sendRedirect("OperadorServlet");
-                }
-            }
-            case "listarFuncionesDisponibles" -> {
-
-                String valor = request.getParameter("funcionesDisponibles");
-                System.out.println(valor);
-                request.setAttribute("funcionesDisponibles", operadorDao.FuncionesDisponibles());
-
-                RequestDispatcher requestDispatcher=request.getRequestDispatcher("Operador/Ordenar_funciones/Func_Disp.jsp");
-                requestDispatcher.forward(request,response);
-            }
-            case "listarFuncionMejorC" -> {
-                request.setAttribute("listaFunMejorCalif", operadorDao.obtenerFuncionMejorCalificada());
-
-                RequestDispatcher requestDispatcher=request.getRequestDispatcher("Operador/Ordenar_funciones/Todas_func.jsp");
-                requestDispatcher.forward(request,response);
-            }
-            case "listarFuncionMasV" -> {
-                request.setAttribute("listaFunMasVis", operadorDao.obtenerFuncionMasVista());
-
-                RequestDispatcher requestDispatcher=request.getRequestDispatcher(("Operador/Ordenar_funciones/Todas_func.jsp"));
-                requestDispatcher.forward(request,response);
-            }
-            case "listarFuncionMenosV" -> {
-                request.setAttribute("listaFunMenVis", operadorDao.obtenerFuncionMenosVista());
-
-                RequestDispatcher requestDispatcher=request.getRequestDispatcher(("Operador/Ordenar_funciones/Todas_func.jsp"));
-                requestDispatcher.forward(request,response);
-            }
-
-             */
             }
         }
         else if (Objects.equals(rol, "cliente")){
@@ -213,6 +157,8 @@ public class OperadorServlet extends HttpServlet {
         String fechainicio;
         String fechafin;
 
+        String fil_fecha;
+        String fil_sala;
         switch (action) {
 
             case "filtro_func" -> {
@@ -251,6 +197,16 @@ public class OperadorServlet extends HttpServlet {
                 break;
             }
 
+            case "reporte"-> {
+                fil_sala= request.getParameter("filtro_sala");
+
+                System.out.println("LLEGA SEÑAL");
+                fil_fecha = request.getParameter("filtro_fecha");
+                System.out.println("HOLA" + fil_sala + fil_fecha);
+                response.sendRedirect(request.getContextPath()+"/OperadorServlet?action=reporte_send&sala="+fil_sala+"&fecha="+fil_fecha);
+
+                break;
+            }
 
             case "editarDesc" ->{
                 int id = Integer.parseInt(request.getParameter("id"));

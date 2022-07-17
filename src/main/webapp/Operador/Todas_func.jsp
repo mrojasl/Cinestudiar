@@ -141,12 +141,12 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" class="p-2 mx-2 mb-2 d-flex-row ">
+                                    <form method="post" class="p-2 mx-2 mb-2 d-flex-row " action="<%=request.getContextPath()%>/OperadorServlet?action=reporte">
                                         <div class="d-flex flex-column bd-highlight mb-3">
                                             <div class="p-2 bd-highlight">
                                                 <label class="fw-bold">Sala-Sede:</label>
                                                 <br>
-                                                <select style="width: 30%" name = "sede" class="mx-1 custom-select my-1 mr-sm-2" id="sede" name="Sede">
+                                                <select name="filtro_sala"  style="width: 30%" name = "sede" class="mx-1 custom-select my-1 mr-sm-2" id="sede" name="Sede">
                                                     <% for(BSedeYSala sala: listaSalas) { %>
                                                     <option value="<%=sala.getIdSala()%>">Sala <%=sala.getIdSala()%>-<%=sala.getSede()%> </option>
                                                     <% } %>
@@ -154,22 +154,25 @@
                                             </div>
                                             <div class="p-2 bd-highlight">
                                                 <label class="fw-bold" for="fecha">Fecha:</label><br>
-                                                <input class="mx-1 my-2" type="date" id="fecha" name="fecha">
+                                                <input name="filtro_fecha" class="mx-1 my-2" type="date" id="fecha" name="fecha">
                                             </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-secondary" data-bs-target="#reporte_exportado">Exportar</button>
                                         </div>
                                     </form>
 
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-target="#reporte_exportado" >Exportar</button>
-                                </div>
+
                             </div>
+
                         </div>
                     </div>
 
                 </div>
             </div>
+
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -411,8 +414,7 @@
                     <td class="text-white">No aplica</td>
                     <%}%>
                 </tr>
-                <%
-                } %>
+                <%}%>
                 </tbody>
                 <!-- Large modal -->
             </table>
