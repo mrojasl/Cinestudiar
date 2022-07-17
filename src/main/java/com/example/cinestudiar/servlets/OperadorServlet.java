@@ -5,7 +5,7 @@ import com.example.cinestudiar.daos.AdminDao;
 import com.example.cinestudiar.daos.OperadorDao;
 import com.example.cinestudiar.daos.PeliculasDao;
 
-
+import java.time.LocalDate;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -46,7 +46,7 @@ public class OperadorServlet extends HttpServlet {
 
                 case "funciones" -> {
                     request.setAttribute("listarFunciones", "");
-                    request.setAttribute("Funciones", operadorDao.filtradoFunciones(""));
+                    request.setAttribute("Funciones", operadorDao.filtradoFunciones("","",""));
                     request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
                     request.setAttribute("listaSalas", operadorDao.obtenerSala()); // Para exportar
                     request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
@@ -210,16 +210,24 @@ public class OperadorServlet extends HttpServlet {
         BFuncion funciones;
         //ArrayList<BFuncion> lista = operadorDao.TodasLasFunciones();
         String filtro2;
+        String fechainicio;
+        String fechafin;
 
         switch (action) {
 
             case "filtro_func" -> {
-                System.out.println("HOLAAA");
                 filtro = request.getParameter("listarFunciones");
+                fechainicio=request.getParameter("fecha_in");
+                fechafin=request.getParameter("fecha_fin");
+                System.out.println("Filtro funcion");
+                System.out.println(filtro);
+                System.out.println(fechainicio);
+                System.out.println(fechafin);
+
                 request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
                 request.setAttribute("listaSalas", operadorDao.obtenerSala());
                 request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
-                request.setAttribute("Funciones", operadorDao.filtradoFunciones(filtro));
+                request.setAttribute("Funciones", operadorDao.filtradoFunciones(filtro,fechainicio,fechafin));
                 request.setAttribute("listarFunciones", filtro);
                 view = request.getRequestDispatcher("Operador/Todas_func.jsp");
                 view.forward(request, response);
@@ -228,6 +236,13 @@ public class OperadorServlet extends HttpServlet {
 
             case "filtro_peli" -> {
                 System.out.println("HOLAAA Peli");
+
+                fechainicio=request.getParameter("fecha_in");
+                fechafin=request.getParameter("fecha_fin");
+                System.out.println("Filtro pelicula");
+                System.out.println(fechainicio);
+                System.out.println(fechafin);
+
                 filtro2 = request.getParameter("listarPeliculas");
                 request.setAttribute("Peliculas", operadorDao.filtradoPelicula(filtro2));
                 request.setAttribute("listarPeliculas", filtro2);

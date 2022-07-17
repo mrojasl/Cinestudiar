@@ -3,14 +3,17 @@ package com.example.cinestudiar.daos;
 import com.example.cinestudiar.DTO.DTOfunciones_peliculas;
 import com.example.cinestudiar.DTO.DTOpeliculas_has_profesionales;
 import com.example.cinestudiar.beans.*;
+import java.time.LocalDate;
 /*import com.example.cinestudiar.beans.BUser;*/
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class OperadorDao extends BaseDao {
 
-
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
 
     public static void EditarDescripcion(int id, String desc){
         String user = "root";
@@ -36,7 +39,7 @@ public class OperadorDao extends BaseDao {
         }
 
     }
-    public ArrayList<BFuncion> filtradoFunciones(String filtro){
+    public ArrayList<BFuncion> filtradoFunciones(String filtro ,String inicio , String fin){
         if (filtro.equals("") || filtro.equals("defecto")){
             ArrayList<BFuncion> todasLasFunciones = new ArrayList<>();
             try {
@@ -61,17 +64,47 @@ public class OperadorDao extends BaseDao {
                 ResultSet rs = stmt.executeQuery(sql);
                 while (rs.next()){
                     BFuncion fu = new BFuncion();
-                    fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
-                    fu.setPelicula(rs.getString(2));
-                    fu.setFecha(rs.getString(3));
-                    fu.setHora(rs.getString(4));
-                    fu.setSede(rs.getString(5));
-                    fu.setIdSala(rs.getInt(6));
-                    fu.setPrecioTicket(rs.getInt(7));
-                    fu.setCalificacion(rs.getInt(8));
-                    fu.setExisteCompra(rs.getInt(9));
+                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                        fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                        fu.setPelicula(rs.getString(2));
+                        fu.setFecha(rs.getString(3));
+                        fu.setHora(rs.getString(4));
+                        fu.setSede(rs.getString(5));
+                        fu.setIdSala(rs.getInt(6));
+                        fu.setPrecioTicket(rs.getInt(7));
+                        fu.setCalificacion(rs.getInt(8));
+                        fu.setExisteCompra(rs.getInt(9));
+                        todasLasFunciones.add(fu);
+                    }else{
+                        if(fin==null || fin.equals("")){
+                            fin="2050-01-01";
+                        }
+                        if(inicio==null || inicio.equals("")){
+                            inicio="0000-00-00";
+                        }
+                        String[] splitinicio = inicio.split("-");
+                        String[] splitfin = fin.split("-");
+                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
 
-                    todasLasFunciones.add(fu);
+                        String fecha= rs.getString(3);
+                        String[] splitfecha = fecha.split("-");
+                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
+                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                            fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                            fu.setPelicula(rs.getString(2));
+                            fu.setFecha(fecha);
+                            fu.setHora(rs.getString(4));
+                            fu.setSede(rs.getString(5));
+                            fu.setIdSala(rs.getInt(6));
+                            fu.setPrecioTicket(rs.getInt(7));
+                            fu.setCalificacion(rs.getInt(8));
+                            fu.setExisteCompra(rs.getInt(9));
+                            todasLasFunciones.add(fu);
+                        }
+                    }
+
+
                 }
             } catch (SQLException e){
                 throw new RuntimeException(e);
@@ -101,17 +134,47 @@ public class OperadorDao extends BaseDao {
 
                 while (rs.next()){
                     BFuncion fu = new BFuncion();
-                    fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
-                    fu.setPelicula(rs.getString(2));
-                    fu.setFecha(rs.getString(3));
-                    fu.setHora(rs.getString(4));
-                    fu.setSede(rs.getString(5));
-                    fu.setIdSala(rs.getInt(6));
-                    fu.setPrecioTicket(rs.getInt(7));
-                    fu.setCalificacion(rs.getInt(8));
+                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                        fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                        fu.setPelicula(rs.getString(2));
+                        fu.setFecha(rs.getString(3));
+                        fu.setHora(rs.getString(4));
+                        fu.setSede(rs.getString(5));
+                        fu.setIdSala(rs.getInt(6));
+                        fu.setPrecioTicket(rs.getInt(7));
+                        fu.setCalificacion(rs.getInt(8));
+                        funcionesDisponibles.add(fu);
+                    }else{
+                        if(fin==null || fin.equals("")){
+                            fin="2050-01-01";
+                        }
+                        if(inicio==null || inicio.equals("")){
+                            inicio="0000-00-00";
+                        }
+                        String[] splitinicio = inicio.split("-");
+                        String[] splitfin = fin.split("-");
+                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
 
-                    funcionesDisponibles.add(fu);
+                        String fecha= rs.getString(3);
+                        String[] splitfecha = fecha.split("-");
+                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
+                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                            fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                            fu.setPelicula(rs.getString(2));
+                            fu.setFecha(fecha);
+                            fu.setHora(rs.getString(4));
+                            fu.setSede(rs.getString(5));
+                            fu.setIdSala(rs.getInt(6));
+                            fu.setPrecioTicket(rs.getInt(7));
+                            fu.setCalificacion(rs.getInt(8));
+                            funcionesDisponibles.add(fu);
+                        }
+                    }
+
+
                 }
+
             } catch (SQLException e){
                 throw new RuntimeException(e);
             }
@@ -138,16 +201,43 @@ public class OperadorDao extends BaseDao {
 
                 while (rs.next()){
                     BFuncion fu = new BFuncion();
-                    fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
-                    fu.setPelicula(rs.getString(2));
-                    fu.setFecha(rs.getString(3));
-                    fu.setHora(rs.getString(4));
-                    fu.setSede(rs.getString(5));
-                    fu.setIdSala(rs.getInt(6));
-                    fu.setPrecioTicket(rs.getInt(7));
-                    fu.setCalificacion(rs.getInt(8));
+                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                        fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                        fu.setPelicula(rs.getString(2));
+                        fu.setFecha(rs.getString(3));
+                        fu.setHora(rs.getString(4));
+                        fu.setSede(rs.getString(5));
+                        fu.setIdSala(rs.getInt(6));
+                        fu.setPrecioTicket(rs.getInt(7));
+                        fu.setCalificacion(rs.getInt(8));
+                        listaFunMejorCalif.add(fu);
+                    }else{
+                        if(fin==null || fin.equals("")){
+                            fin="2050-01-01";
+                        }
+                        if(inicio==null || inicio.equals("")){
+                            inicio="0000-00-00";
+                        }
+                        String[] splitinicio = inicio.split("-");
+                        String[] splitfin = fin.split("-");
+                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
 
-                    listaFunMejorCalif.add(fu);
+                        String fecha= rs.getString(3);
+                        String[] splitfecha = fecha.split("-");
+                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
+                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                            fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                            fu.setPelicula(rs.getString(2));
+                            fu.setFecha(fecha);
+                            fu.setHora(rs.getString(4));
+                            fu.setSede(rs.getString(5));
+                            fu.setIdSala(rs.getInt(6));
+                            fu.setPrecioTicket(rs.getInt(7));
+                            fu.setCalificacion(rs.getInt(8));
+                            listaFunMejorCalif.add(fu);
+                        }
+                    }
                 }
 
             } catch (SQLException e){
@@ -173,19 +263,46 @@ public class OperadorDao extends BaseDao {
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
-                System.out.println("PORBAAAAANDOOO WIWIWIWI");
+
                 while (rs.next()){
                     BFuncion fu = new BFuncion();
-                    fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
-                    fu.setPelicula(rs.getString(2));
-                    fu.setFecha(rs.getString(3));
-                    fu.setHora(rs.getString(4));
-                    fu.setSede(rs.getString(5));
-                    fu.setIdSala(rs.getInt(6));
-                    fu.setPrecioTicket(rs.getInt(7));
-                    fu.setCalificacion(rs.getInt(8));
+                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                        fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                        fu.setPelicula(rs.getString(2));
+                        fu.setFecha(rs.getString(3));
+                        fu.setHora(rs.getString(4));
+                        fu.setSede(rs.getString(5));
+                        fu.setIdSala(rs.getInt(6));
+                        fu.setPrecioTicket(rs.getInt(7));
+                        fu.setCalificacion(rs.getInt(8));
+                        listaFunMasVis.add(fu);
+                    }else{
+                        if(fin==null || fin.equals("")){
+                            fin="2050-01-01";
+                        }
+                        if(inicio==null || inicio.equals("")){
+                            inicio="0000-00-00";
+                        }
+                        String[] splitinicio = inicio.split("-");
+                        String[] splitfin = fin.split("-");
+                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
 
-                    listaFunMasVis.add(fu);
+                        String fecha= rs.getString(3);
+                        String[] splitfecha = fecha.split("-");
+                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
+                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                            fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                            fu.setPelicula(rs.getString(2));
+                            fu.setFecha(fecha);
+                            fu.setHora(rs.getString(4));
+                            fu.setSede(rs.getString(5));
+                            fu.setIdSala(rs.getInt(6));
+                            fu.setPrecioTicket(rs.getInt(7));
+                            fu.setCalificacion(rs.getInt(8));
+                            listaFunMasVis.add(fu);
+                        }
+                    }
                 }
 
             } catch (SQLException e){
@@ -215,16 +332,43 @@ public class OperadorDao extends BaseDao {
 
                 while (rs.next()){
                     BFuncion fu = new BFuncion();
-                    fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
-                    fu.setPelicula(rs.getString(2));
-                    fu.setFecha(rs.getString(3));
-                    fu.setHora(rs.getString(4));
-                    fu.setSede(rs.getString(5));
-                    fu.setIdSala(rs.getInt(6));
-                    fu.setPrecioTicket(rs.getInt(7));
-                    fu.setCalificacion(rs.getInt(8));
+                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                        fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                        fu.setPelicula(rs.getString(2));
+                        fu.setFecha(rs.getString(3));
+                        fu.setHora(rs.getString(4));
+                        fu.setSede(rs.getString(5));
+                        fu.setIdSala(rs.getInt(6));
+                        fu.setPrecioTicket(rs.getInt(7));
+                        fu.setCalificacion(rs.getInt(8));
+                        listaFunMenVis.add(fu);
+                    }else{
+                        if(fin==null || fin.equals("")){
+                            fin="2050-01-01";
+                        }
+                        if(inicio==null || inicio.equals("")){
+                            inicio="0000-00-00";
+                        }
+                        String[] splitinicio = inicio.split("-");
+                        String[] splitfin = fin.split("-");
+                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
 
-                    listaFunMenVis.add(fu);
+                        String fecha= rs.getString(3);
+                        String[] splitfecha = fecha.split("-");
+                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
+                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                            fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
+                            fu.setPelicula(rs.getString(2));
+                            fu.setFecha(fecha);
+                            fu.setHora(rs.getString(4));
+                            fu.setSede(rs.getString(5));
+                            fu.setIdSala(rs.getInt(6));
+                            fu.setPrecioTicket(rs.getInt(7));
+                            fu.setCalificacion(rs.getInt(8));
+                            listaFunMenVis.add(fu);
+                        }
+                    }
                 }
 
             } catch (SQLException e){
@@ -288,7 +432,6 @@ public class OperadorDao extends BaseDao {
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
-                System.out.println("Peliculaaaas");
                 while (rs.next()){
                     BPeliculas fu = new BPeliculas();
                     fu.setIdpeliculas(Integer.parseInt(rs.getString(1)));

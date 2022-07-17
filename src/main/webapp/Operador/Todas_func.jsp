@@ -42,9 +42,9 @@
             color: #000000;
         }
 
-        input[type="date"] {
+        <%--input[type="date"] {
             color: #ffffff;
-        }
+        }--%>
         input[type="date"]:focus{
             color: #666666;
         }
@@ -59,9 +59,6 @@
      <jsp:include page="cabecera_operador.jsp"/>
 </head>
 <body class='snippet-body' bgcolor="#191970" STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
-
-
-
     <section class="administrador">
         <h3 class="mt-1 p-0 mb-0 ">Operador</h3>
     </section>
@@ -102,15 +99,15 @@
             <div class="input-group mb-3 col">
 
 
-                <input name = "fecha_in" class="form-control" type="date"  placeholder="Desde:" aria-label="default input example">
+                <input name = "fecha_in" class="form-control" type="date"  placeholder="" aria-label="">
 
             </div>
             <div class="input-group mb-3 col">
 
 
                 <input
-                        name="fecha_fin" class="form-control" type="date" placeholder="Hasta:"
-                        aria-label="default input example">
+                        name="fecha_fin" class="form-control" type="date" placeholder=""
+                        aria-label="">
 
             </div>
             <div class = "input-group mb-3 col">
@@ -173,17 +170,6 @@
 
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -285,7 +271,6 @@
         <div class="row ">
 
             <table class="table" id = "tableUp">
-
                     <tr>
                         <th class="text-white">IdFunción</th>
                         <th class="text-white">Película</th>
@@ -297,14 +282,10 @@
                         <th class="text-white">Calificacion Promedio</th>
                         <th class="text-white">Editar</th>
                         <th class="text-white">Borrar</th>
-
-
                     </tr>
                 <tbody>
 
-                <%
-
-                    for (BFuncion funcion : Funciones) { %>
+                <%for (BFuncion funcion : Funciones) { %>
 
                 <tr>
                     <td class="text-white"><%=funcion.getIdFuncion()%></td>
@@ -418,57 +399,25 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <%if (funcion.getExisteCompra()==0){%>
                     <td>
-
                         <a onclick="return confirm('¿Estas seguro de borrar?');"
                            href="<%=request.getContextPath()%>/OperadorServlet?action=borrarfuncion&id=<%=funcion.getIdFuncion()%>"
                            type="button" class="btn btn-danger">
-
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
                     <%} else{%>
                     <td class="text-white">No aplica</td>
                     <%}%>
-
-
-
-
-
-
-
-
-
-
                 </tr>
-
                 <%
                 } %>
                 </tbody>
-
                 <!-- Large modal -->
-
             </table>
         </div>
     </div>
     </div>
-
-
-
 </body>
 </html>
