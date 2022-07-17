@@ -106,8 +106,9 @@ public class AdminServlet extends HttpServlet {
                     String sede = request.getParameter("sede");
                     AdminDao.crearSala(aforo, sede);
                     response.sendRedirect(request.getContextPath() + "/ServAdmin");
-
+                    break;
                 }
+
 
                 case "editaroborrarsala" -> {
                     int aforo2 = Integer.parseInt(request.getParameter("aforo2"));
@@ -121,6 +122,7 @@ public class AdminServlet extends HttpServlet {
                         AdminDao.borrarSala(id);
                     }
                     response.sendRedirect(request.getContextPath() + "/ServAdmin");
+                    break;
 
                 }
 
@@ -142,7 +144,7 @@ public class AdminServlet extends HttpServlet {
                     }
 
                     response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
-
+                    break;
 
                 }
 
@@ -152,12 +154,14 @@ public class AdminServlet extends HttpServlet {
                     request.setAttribute("txtbuscado",txtbuscar);
                     RequestDispatcher rd2 =request.getRequestDispatcher("Admin/operadores.jsp");
                     rd2.forward(request,response);
+                    break;
 
                 }
                 case "crearoperador" ->{
                     String operadorcodigo = request.getParameter("operadorcodigo");
                     AdminDao.AsignarOperador(operadorcodigo);
                     response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=operador");
+                    break;
                 }
                 case "filtrosede" ->{
                     String parametro = request.getParameter("filtrosede");
@@ -171,6 +175,7 @@ public class AdminServlet extends HttpServlet {
                         rd3.forward(request,response);
 
                     }
+                    break;
                 }
                 case "filtroprofesional" ->{
                     String parametro = request.getParameter("filtroprof");
@@ -187,7 +192,7 @@ public class AdminServlet extends HttpServlet {
                         RequestDispatcher rd4 =request.getRequestDispatcher("Admin/actoresydirectores.jsp");
                         rd4.forward(request,response);
                     }
-
+                    break;
 
                 }
                 case "actualizarfoto"->{
@@ -197,6 +202,7 @@ public class AdminServlet extends HttpServlet {
                     fotoinput = foto.getInputStream();
                     AdminDao.actualizarFotoProf(id,fotoinput);
                     response.sendRedirect(request.getContextPath()+"/ServAdmin?admin=profesional");
+                    break;
                 }
 
 
