@@ -26,6 +26,7 @@ public class CalificacionServlet extends HttpServlet {
         ProfesionalesDao profesionalesDao = new ProfesionalesDao();
         ArrayList<BProfesional> listaBProfesional = profesionalesDao.listaProfesionalesCompra(request.getParameter("historial"));
         request.setAttribute("historial",request.getParameter("historial"));
+        request.setAttribute("nombre",request.getParameter("nombre"));
         request.setAttribute("listaProfesionales",listaBProfesional);
         view = request.getRequestDispatcher("Usuario/calificar.jsp");
 
