@@ -99,6 +99,32 @@ public class AdminDao extends BaseDao {
         return listaSedesySalas;
     }
 
+    public ArrayList<BSedeYSala> listarSalasAforoAdmin(){
+        ArrayList<BSedeYSala> listaSalaAforo = new ArrayList<>();
+        try {
+            String user = "root";
+            String pass = "root";
+            String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String sql = "SELECT idsala, aforo_administrador FROM salas;";
+            Connection conn = DriverManager.getConnection(url,user,pass);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()){
+                BSedeYSala sa = new BSedeYSala();
+                sa.setIdSala(rs.getInt(1));
+                sa.setAforoAdministrador(Integer.toString(rs.getInt(2)));
+                listaSalaAforo.add(sa);
+            }
+
+        } catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
+
+        return listaSalaAforo;
+    }
+
     public static ArrayList<BSedeYSala> obtenerSedes(){
         ArrayList<BSedeYSala> listaSedes = new ArrayList<>();
         try {

@@ -37,6 +37,7 @@ public class OperadorServlet extends HttpServlet {
         BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
         String rol=usuarioLogueado.getRol();
         RequestDispatcher requestDispatcher;
+        AdminDao adminDao = new AdminDao();
 
         if (Objects.equals(usuarioLogueado.getRol(), "operador")){
             switch (action) {
@@ -47,6 +48,7 @@ public class OperadorServlet extends HttpServlet {
                     request.setAttribute("listapelicula1",operadorDao.obtenerlistaPeliculas());
                     request.setAttribute("listaSalas", operadorDao.obtenerSala()); // Para exportar
                     request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
+                    request.setAttribute("listaSalasAforo",adminDao.listarSalasAforoAdmin());
 
                     requestDispatcher = request.getRequestDispatcher("Operador/Todas_func.jsp");
                     requestDispatcher.forward(request, response);
@@ -159,6 +161,7 @@ public class OperadorServlet extends HttpServlet {
 
         String fil_fecha;
         String fil_sala;
+        AdminDao adminDao = new AdminDao();
         switch (action) {
 
             case "filtro_func" -> {
@@ -175,6 +178,8 @@ public class OperadorServlet extends HttpServlet {
                 request.setAttribute("listaPersonal", operadorDao.obtenerPersonal());
                 request.setAttribute("Funciones", operadorDao.filtradoFunciones(filtro,fechainicio,fechafin));
                 request.setAttribute("listarFunciones", filtro);
+                request.setAttribute("listaSalasAforo",adminDao.listarSalasAforoAdmin());
+
                 view = request.getRequestDispatcher("Operador/Todas_func.jsp");
                 view.forward(request, response);
                 break;

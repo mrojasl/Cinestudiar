@@ -10,6 +10,8 @@
 <jsp:useBean id="listaPersonal" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BEquipoLimpieza>"/>
 <jsp:useBean id="Funciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>"/>
 <jsp:useBean id="listarFunciones" scope="request" type="java.lang.String"/>
+<jsp:useBean id="listaSalasAforo" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>"/>
+
 <html>
 <head>
     <meta charset="UTF-8">
