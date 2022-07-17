@@ -687,12 +687,13 @@ public class OperadorDao extends BaseDao {
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT idsala, nombre_sede FROM salas order by idsala asc;");) {
+             ResultSet rs = stmt.executeQuery("SELECT idsala, nombre_sede,aforo_administrador FROM salas order by idsala asc;");) {
 
             while (rs.next()) {
                 BSedeYSala sedeYSala = new BSedeYSala();
                 sedeYSala.setIdSala(rs.getInt(1));
                 sedeYSala.setSede(rs.getString(2));
+                sedeYSala.setAforoAdministrador(rs.getString(3));
                 listaSala.add(sedeYSala);
             }
         } catch (SQLException e) {
