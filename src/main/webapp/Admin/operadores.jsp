@@ -30,24 +30,51 @@
     <body class='snippet-body' STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
         <jsp:include page="cabecera_admin.jsp"/>
 
-        <ul class="nav nav-tabs topside">
-            <li class="nav-item topsidetxt">
+        <ul class="nav nav-tabs topside" >
+
+            <li class="nav-item topsidetxt "style="margin-left: 350px">
                 <a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/ServAdmin">Salas</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item align-content-center"style="margin-left: 100px">
                 <a class="nav-link active" href="<%=request.getContextPath()%>/ServAdmin?admin=operador">Operadores</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item align-content-center" style="margin-left: 120px">
                 <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=cliente">Clientes</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item align-content-center"style="margin-left: 80px">
                 <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=profesional">Actores/Directores</a>
             </li>
+
         </ul>
         <div id="general">
-            <div>
+
+            <br>
+            <div class="container">
+                <div class="supbarblue row">
+                    <div class="input-group mb-3 col">
+                        <h5 class="col" style="padding: 14px;color: white;width: 250px">Lista de Operadores</h5>
+                    </div>
+                    <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
+                    </div>
+                    <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
+                    </div>
+                    <div class="input-group mb-3 col">
+                        <h5 class="col" style="padding: 14px;color: white;width: 250px">Buscar por nombre:</h5>
+                    </div>
+                    <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
+                        <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=buscaroperador">
+
+                            <input name="txtbuscar" class="form-control" type="text" placeholder="Buscar por nombre"
+                                   aria-label="default input example" value="<%=txtbuscado%>">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary buttonmargin" data-bs-toggle="modal"
+                <button type="button" class="btn btn-info buttonmargin" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                     Asignar Operador
                 </button>
@@ -90,72 +117,62 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="supbarblue row">
-                <div class="input-group mb-3 col">
-                    <h5 class="col" style="padding: 14px;color: white;width: 250px">Lista de Operadores</h5>
-                </div>
-                <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
-                </div>
-                <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
-                </div>
-                <div class="input-group mb-3 col">
-                    <h5 class="col" style="padding: 14px;color: white;width: 250px">Buscar por nombre:</h5>
-                </div>
-                <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
-                    <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=buscaroperador">
-
-                        <input name="txtbuscar" class="form-control" type="text" placeholder="Buscar por nombre"
-                               aria-label="default input example" value="<%=txtbuscado%>">
-                    </form>
-
-                </div>
-            </div>
             <div class="topmargin container" >
-
-                <table class="table" id = "tableUp">
-
-                    <tr>
-                        <th class="text-white">Foto</th>
-                        <th class="text-white">Nombre y Apellido</th>
-                        <th class="text-white">Código PUCP</th>
-                        <th class="text-white">Correo PUCP</th>
-                        <th class="text-white">Celular</th>
-                        <th class="text-white">Eliminar</th>
-
-
-                    </tr>
-                    <tbody>
-
-                        <%
-                            for (BUser op : listaOperadores) { %>
-
-                        <tr>
-                            <td class="text-white">
-                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=op.getCodigoPucp()%>" alt="perfil foto" style="width:30px;height:30px;"/>
-                            </td>
-                            <td class="text-white"><%=op.getNombres()%> </td>
-                            <td class="text-white"><%=op.getCodigoPucp()%></td>
-                            <td class="text-white"><%=op.getCorreo()%></td>
-                            <td class="text-white"><%=op.getTelefono() %></td>
-                            <td>
-                                <a onclick="return confirm('¿Estas seguro de borrar?');"
-                                   href="<%=request.getContextPath()%>/ServAdmin?admin=borraroperador&opcodigo=<%=op.getCodigoPucp()%>"
-                                   type="button" class="btn btn-danger">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
+                <div class="row ">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="tableUp_length">
+                                <label></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div id="tableUp_filter" class="dataTables_filter">
+                                <label class="text-white" style="margin-left: 20px">Buscar: </label>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table" id = "tableUp">
+                            <thead>
+                                <tr>
+                                    <th class="text-white">Foto</th>
+                                    <th class="text-white">Nombre y Apellido</th>
+                                    <th class="text-white">Código PUCP</th>
+                                    <th class="text-white">Correo PUCP</th>
+                                    <th class="text-white">Celular</th>
+                                    <th class="text-white">Eliminar</th>
 
 
-                        </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        <%
-                            } %>
-                    </tbody>
+                                <%
+                                    for (BUser op : listaOperadores) { %>
 
-                    <!-- Large modal -->
+                                <tr>
+                                    <td class="text-white">
+                                        <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=op.getCodigoPucp()%>" alt="perfil foto" style="width:30px;height:30px;"/>
+                                    </td>
+                                    <td class="text-white"><%=op.getNombres()%> </td>
+                                    <td class="text-white"><%=op.getCodigoPucp()%></td>
+                                    <td class="text-white"><%=op.getCorreo()%></td>
+                                    <td class="text-white"><%=op.getTelefono() %></td>
+                                    <td>
+                                        <a onclick="return confirm('¿Estas seguro de borrar?');"
+                                           href="<%=request.getContextPath()%>/ServAdmin?admin=borraroperador&opcodigo=<%=op.getCodigoPucp()%>"
+                                           type="button" class="btn btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </td>
 
-                </table>
+
+                                </tr>
+
+                                <%
+                                    } %>
+                            </tbody>
+                    </table>
+                </div>
             </div>
 
 
@@ -169,4 +186,45 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
             crossorigin="anonymous"></script>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+    </script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tableUp').DataTable({
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "",
+                    lengthMenu: "",
+                    info: "",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                scrollY: 480,
+                lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+            });
+        });
+    </script>
 </html>

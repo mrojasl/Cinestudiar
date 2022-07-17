@@ -23,21 +23,23 @@
     <body class='snippet-body' STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
         <jsp:include page="cabecera_admin.jsp"/>
 
-        <ul class="nav nav-tabs topside">
-            <li class="nav-item topsidetxt">
+        <ul class="nav nav-tabs topside" >
+
+            <li class="nav-item topsidetxt "style="margin-left: 350px">
                 <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/ServAdmin">Salas</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item align-content-center"style="margin-left: 100px">
                 <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=operador">Operadores</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item align-content-center" style="margin-left: 120px">
                 <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=cliente">Clientes</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item align-content-center"style="margin-left: 80px">
                 <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=profesional">Actores/Directores</a>
             </li>
+
         </ul>
-        <div id="general">
+        <div class="container" id="general">
             <div>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn  btn-primary buttonmargin" data-bs-toggle="modal"
