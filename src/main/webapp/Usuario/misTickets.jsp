@@ -364,7 +364,7 @@
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px;left: 45px" disabled>Caducado
                         </button>
-                        <a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>"style="margin-top: 30px;height: 40px;left: 45px"> Calificar </a>
+                        <a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 30px;height: 40px;left: 45px"> Calificar </a>
                     </div>
                     <%} else if (diff < 0) {%>
                     <div class="input-group mb-3 col">
@@ -377,7 +377,7 @@
                     <div class="input-group mb-3 col">
                         <button type="button" class="btn btn-danger" style="margin-top: 30px;height: 40px;left: 45px" disabled>Caducado
                         </button>
-                        <a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>" style="margin-top: 30px;height: 40px;left: 45px"> Calificar </a>
+                        <a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>" style="margin-top: 30px;height: 40px;left: 45px"> Calificar </a>
                     </div>
                     <%} else if (diff2 < 0) {%>
                     <div class="input-group mb-3 col">
