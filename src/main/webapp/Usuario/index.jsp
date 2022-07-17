@@ -6,7 +6,7 @@
 <jsp:useBean id="listaradom" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html style="position:relative;min-height: 100%;padding-bottom: 160px">
     <head>
         <jsp:include page="headerSesionNoIniciada.jsp"/>
         <meta charset='utf-8'>
@@ -15,7 +15,7 @@
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-       <style>
+        <style>
 
             .desc1back{
                 color: white;
@@ -26,9 +26,7 @@
                 padding-right: 0 !important;
                 padding-left: 0 !important;
             }
-            .buttonswipe{
-                text-align: right;
-            }
+
             .rigthup{
                 float:left;
             }
@@ -64,6 +62,9 @@
 
             }
             .boxfuncion{
+                margin-left: 30px;
+                margin-top: 30px;
+                border-radius: 25px;
                 color: white;
                 text-align: center;
                 background-color: #111523;
@@ -113,6 +114,7 @@
             }
             .navbar a[id=forgot]{
                 position: relative;
+                left:65%;
                 color: #78261f;
                 text-decoration: none;
             }
@@ -163,10 +165,7 @@
                 border-radius: 50%;
             }
 
-            .container {
-                padding: 16px;
-                long: 16px;
-            }
+
 
             span.psw {
                 float: right;
@@ -251,9 +250,18 @@
             left2{
                 margin-right: 75px;
             }
+
+            .carousel-control-prev-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+            }
+
+            a {
+                text-decoration: none !important;
+            }
+
+
             .carousel .carousel-indicators li {  background-color: white;border-radius: 100%;height: 10px;width: 10px }
             .carousel .carousel-indicators li.active { background-color: blue;border-radius: 100%;height: 10px;width: 10px }
-
 
             @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
 
@@ -388,6 +396,17 @@
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <br><br>
+    <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+        <div class="container"  style="background-color: #D6D7DA">
+            <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
+            <div class="d-flex bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
+                <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
+            </div>
+
+        </div>
+    </footer>
     </body>
 </html>
 

@@ -26,7 +26,7 @@
 
 
 
-<html>
+<html style="position:relative;min-height: 100%;padding-bottom: 160px">
 <head>
   <meta charset='utf-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -183,10 +183,6 @@
       border-radius: 50%;
     }
 
-    .container {
-      padding: 16px;
-      long: 16px;
-    }
 
     span.psw {
       float: right;
@@ -273,7 +269,7 @@
     }
   </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 
 
@@ -418,6 +414,16 @@
 </script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<br><br><br><br><br><br>
+<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+  <div class="container"  style="background-color: #D6D7DA">
+    <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
+    <div class="d-flex bd-highlight">
+      <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
+      <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
+    </div>
 
+  </div>
+</footer>
 </body>
 </html>

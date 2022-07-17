@@ -15,14 +15,14 @@
 <jsp:useBean id="Carritofallido" scope="session" type="java.lang.String" class="java.lang.String"/>
 
 
-<html>
+<html style="position:relative;min-height: 100%;padding-bottom: 160px">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <head>
     <jsp:include page="/Usuario/headerSesionIniciada.jsp">
 
-    <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+        <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
     </jsp:include>
 
     <meta charset='utf-8'>
@@ -46,8 +46,7 @@
         }
     </style>
 </head>
-<body>
-
+<body class="d-flex flex-column min-vh-100">
 <%  double preciototal = 0;
     int totaldetickets=0;
     String correo_pucp="";
@@ -58,7 +57,8 @@
     <% int contador_carrito=0;
         Integer hitsCount = (Integer)application.getAttribute("hitCounter");  %>
     <div class="d-flex flex-row bd-highlight mb-1">
-        <p class="titulox">Carrito de Compras</p>
+
+        <p class="titulox"><br>Carrito de Compras</p>
 
         <%
 
@@ -114,7 +114,7 @@
         if (restaDeFechas <= 0) {
             fechas_caducadas++;
         }
-        }%>
+    }%>
 
 
     <%if (Objects.equals(session.getAttribute("Carritofallido"), "CompraFallida")) {%>
@@ -189,7 +189,7 @@
                     </span>
                 <br>
                 <% int horas=0;
-                   int minutos=carrito.getDuracionpelicula();
+                    int minutos=carrito.getDuracionpelicula();
                     while (minutos>=60){
                         minutos-=60;
                         horas++;
@@ -234,7 +234,7 @@
             <td><form method="POST" action="<%=request.getContextPath()%>/Checkout?a=borrar">
                 <input type="hidden" name="idborrar" value="<%=carrito.getIdfuncion()%>">
                 <button type="submit" class="btn btn-danger" >Borrar Reserva</button>
-                </form>
+            </form>
             </td>
 
             <%
@@ -369,5 +369,19 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
+
+
+<br><br>
+<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+    <div class="container"  style="background-color: #D6D7DA">
+        <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
+        <div class="d-flex bd-highlight">
+            <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
+            <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
+        </div>
+
+    </div>
+</footer>
+
 </body>
 </html>

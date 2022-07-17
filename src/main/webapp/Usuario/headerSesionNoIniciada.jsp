@@ -31,7 +31,7 @@
   </div>
 </nav>
 
-<body class="bodycolor">
+<body class="bodycolor" STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
 
 </body>
 
@@ -40,12 +40,8 @@
     margin-left: 0px;
   }
   .bodycolor {
-    background: rgb(159,197,245);
-    background: linear-gradient(0deg, rgba(159,197,245,1) 0%, rgba(55,123,215,1) 80%);
-    background-repeat: no-repeat ;
     background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
+    background: #f6f6f6 no-repeat fixed center center;
   }
   @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
 

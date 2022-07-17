@@ -16,7 +16,7 @@
 
 <% ProfesionalesDao profesionalesDao = new ProfesionalesDao() ;%>
 
-<html lang="en">
+<html style="position:relative;min-height: 100%;padding-bottom: 160px">
 <head>
     <meta charset="UTF-8">
     <title>Mis Tickets-Cinestudiar</title>
@@ -43,7 +43,7 @@
 
 
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 
 <style type="text/css">
@@ -290,13 +290,7 @@
         color: white;
     }
 
-    .container {
-        width: 200px;
-        height: 200px;
-        overflow: hidden;
-        margin: 10px;
-        position: relative;
-    }
+
     .container > .crop {
         position:absolute;
         left: -100%;
@@ -392,6 +386,20 @@
         </ul>
     </div>
 </section>
+
+
+<br><br>
+<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+    <div class="container"  style="background-color: #D6D7DA">
+        <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
+        <div class="d-flex bd-highlight">
+            <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
+            <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
+        </div>
+
+    </div>
+</footer>
+
 </body>
 
 </html>

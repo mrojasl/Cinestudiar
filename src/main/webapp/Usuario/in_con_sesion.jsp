@@ -14,7 +14,8 @@
 <jsp:useBean id="listaradom" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="cointaner" scope="request" type="java.lang.Integer"/>
 <jsp:useBean id="valor" scope="request" type="java.lang.Integer"/>
-<html lang="en">
+<html style="position:relative;min-height: 100%;padding-bottom: 160px">
+<title>Inicio-Cinestudiar</title>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
@@ -24,13 +25,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <head>
+    <jsp:include page="headerSesionIniciada.jsp">
+        <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+    </jsp:include>
+
     <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="https://assets.website-files.com/60b56cdf18d38e15ce088579/60c111551dc75d6dc896a30e_pucp-favicon.png" type="image/x-icon">
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Inicio-Cinestudiar</title>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
-    <link rel="stylesheet" href="carritocomprasvacio.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <style>
 
@@ -182,10 +186,7 @@
             border-radius: 50%;
         }
 
-        .container {
-            padding: 16px;
-            long: 16px;
-        }
+
 
         span.psw {
             float: right;
@@ -275,22 +276,21 @@
             background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
         }
 
-
+        a {
+            text-decoration: none !important;
+        }
 
 
         .carousel .carousel-indicators li {  background-color: white;border-radius: 100%;height: 10px;width: 10px }
         .carousel .carousel-indicators li.active { background-color: blue;border-radius: 100%;height: 10px;width: 10px }
 
-
+        @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
 
 
     </style>
 </head>
 
-    <body>
-        <jsp:include page="headerSesionIniciada.jsp">
-            <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
-        </jsp:include>
+<body class="d-flex flex-column min-vh-100">
 
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height: 600px">
             <ol class="carousel-indicators" style="z-index: 999">
@@ -416,5 +416,19 @@
         </script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+        <br><br>
+        <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+            <div class="container"  style="background-color: #D6D7DA">
+                <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
+                    <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
+                </div>
+
+            </div>
+        </footer>
+
     </body>
 </html>
