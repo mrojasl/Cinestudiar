@@ -25,7 +25,7 @@
     />
 </head>
 <body>
-<table class="table" id = "example">
+<table class="table" id = "dataTable">
     <thead class="thead-dark">
         <tr>
             <th class="text-dark">Sala</th>
@@ -52,31 +52,76 @@
     </tr>
 
 </table>
-<button id="txt" class="btn btn-success">EXPORTAR</button>
-<script
-        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"
-></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
-<script src="./tableHTMLExport.js"></script>
+<button id="btnExportToCsv" class="btn btn-success">EXPORTAR</button>
 <script>
-    $("#json").on("click", function () {
-        $("#example").tableHTMLExport({
-            type: "json",
-            filename: "sample.json",
-        });
+    const dataTable = document.getElementById("dataTable");
+    const btnExportToCsv = document.getElementById("btnExportToCsv");
+
+    btnExportToCsv.addEventListener("click", () => {
+        const exporter = new TableCSVExporter(dataTable);
+        const csvOutput = exporter.convertToCSV();
+        const csvBlob = new Blob([csvOutput], { type: "text/csv" });
+        const blobUrl = URL.createObjectURL(csvBlob);
+        const anchorElement = document.createElement("a");
+
+        anchorElement.href = blobUrl;
+        anchorElement.download = "reporte.txt";
+        anchorElement.click();
+
+        setTimeout(() => {
+            URL.revokeObjectURL(blobUrl);
+        }, 500);
     });
-    $("#csv").on("click", function () {
-        $("#example").tableHTMLExport({ type: "csv", filename: "sample.csv" });
-    });
-    $("#pdf").on("click", function () {
-        $("#example").tableHTMLExport({ type: "pdf", filename: "sample.pdf" });
-    });
-    $("#txt").on("click", function () {
-        $("#example").tableHTMLExport({ type: "txt", filename: "sample.txt" });
-    });
+</script>
+<script>
+    class TableCSVExporter {
+        constructor (table, includeHeaders = true) {
+            this.table = table;
+            this.rows = Array.from(table.querySelectorAll("tr"));
+
+            if (!includeHeaders && this.rows[0].querySelectorAll("th").length) {
+                this.rows.shift();
+            }
+        }
+
+        convertToCSV () {
+            const lines = [];
+            const numCols = this._findLongestRowLength();
+
+            for (const row of this.rows) {
+                let line = "";
+
+                for (let i = 0; i < numCols; i++) {
+                    if (row.children[i] !== undefined) {
+                        line += TableCSVExporter.parseCell(row.children[i]);
+                    }
+
+                    line += (i !== (numCols - 1)) ? "," : "";
+                }
+
+                lines.push(line);
+            }
+
+            return lines.join("\n");
+        }
+
+        _findLongestRowLength () {
+            return this.rows.reduce((l, row) => row.childElementCount > l ? row.childElementCount : l, 0);
+        }
+
+        static parseCell (tableCell) {
+            let parsedValue = tableCell.textContent;
+
+            // Replace all double quotes with two double quotes
+            parsedValue = parsedValue.replace(/"/g, `""`);
+
+            // If value contains comma, new-line or double-quote, enclose in double quotes
+            parsedValue = /[",\n]/.test(parsedValue) ? `"${parsedValue}"` : parsedValue;
+
+            return parsedValue;
+        }
+    }
+
 </script>
 </body>
 </html>
