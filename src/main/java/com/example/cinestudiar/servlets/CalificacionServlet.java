@@ -53,18 +53,12 @@ public class CalificacionServlet extends HttpServlet {
                     String iddirector=request.getParameter("idprofesionaldirector"+valor.getIdProfesional());
                     String director= request.getParameter("director"+valor.getIdProfesional());
                     profesionalesDao.agregarCalificaciónProfesional(director,historialCompra, Integer.parseInt(iddirector));
-                    //System.out.println("Director---");
-                    //System.out.println(iddirector);
-                    //System.out.println(director);
                 }
                 if(valor.getRol().equals("a")){
                     String idactor=request.getParameter("idprofesionalactor"+valor.getIdProfesional());
                     String actor=request.getParameter("actor"+valor.getIdProfesional());
                     profesionalesDao.agregarCalificaciónProfesional(actor,historialCompra, Integer.parseInt(idactor));
-                    //System.out.println("Actores---");
-                    //System.out.println(idactor);
 
-                    //System.out.println(actor);
                 }
             }
             funcionesDao.actualizarCalificacionFuncion(historialCompra,funcion);

@@ -881,12 +881,12 @@ public class OperadorDao extends BaseDao {
                 try (ResultSet rs = pstmt.executeQuery()) {
                     while (rs.next()) {
                         BFuncion fu = new BFuncion();
-                        fu.setIdSala(rs.getInt("1"));
-                        fu.setIdFuncion(rs.getInt("2"));
-                        fu.setNombre(rs.getString("3"));
-                        fu.setFecha(rs.getString("4"));
-                        fu.setHora(rs.getString("5"));
-                        fu.setAforoOperador(rs.getInt("6"));
+                        fu.setIdSala(rs.getInt(1));
+                        fu.setIdFuncion(rs.getInt(2));
+                        fu.setNombre(rs.getString(3));
+                        fu.setFecha(rs.getString(4));
+                        fu.setHora(rs.getString(5));
+                        fu.setAforoOperador(rs.getInt(6));
 
                         listaReporte.add(fu);
                     }
