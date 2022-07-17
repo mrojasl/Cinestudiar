@@ -149,78 +149,14 @@
         align-items: center;
     }
 
-    .seccion-perfil-usuario .perfil-usuario-header {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 1.25rem;
-    }
 
-    .seccion-perfil-usuario .perfil-usuario-portada {
-        display: block;
-        position: relative;
-        width: 90%;
-        height: 17rem;
-
-        border-radius: 0 0 20px 20px;
-
-    }
-
-    .seccion-perfil-usuario .perfil-usuario-portada .boton-portada {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        border: 0;
-        border-radius: 8px;
-        padding: 12px 25px;
-        background-color: rgba(0, 0, 0, .5);
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .seccion-perfil-usuario .perfil-usuario-portada .boton-portada i {
-        margin-right: 1rem;
-    }
-
-    .seccion-perfil-usuario .perfil-usuario-avatar {
-        display: flex;
-        width: 160px;
-        height: 160px;
-        align-items: center;
-        justify-content: center;
-        border: rgba(213, 8, 8, 0.2);
-
-        border-radius: 50%;
-
-        position: absolute;
-        bottom: -20px;
-        left: calc(50% - 35px);
-        z-index: 1;
-    }
-
-    .seccion-perfil-usuario .perfil-usuario-avatar img {
-        width: 120%;
-        position: relative;
-        border-radius: 100%;
-    }
-
-    .seccion-perfil-usuario .perfil-usuario-avatar .boton-avatar {
-        position: relative;
-        left: -2px;
-        top: -2px;
-        border: 0;
-        background-color: #fff;
-        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        cursor: pointer;
-    }
 
     .seccion-perfil-usuario .perfil-usuario-body {
         width: 70%;
         position: relative;
         max-width: 750px;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
     }
     .seccion-perfil-usuario .perfil-usuario-nuevo{
         width: 95%;
@@ -237,6 +173,7 @@
         width: 100%;
         font-size: 1.75em;
         margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
     }
 
     .seccion-perfil-usuario .perfil-usuario-body .texto {
@@ -248,7 +185,7 @@
     .seccion-perfil-usuario .perfil-usuario-bio {
         display: flex;
         flex-wrap: wrap;
-        padding: 1.5rem 2rem;
+        padding: 0.75rem 1rem;
         box-shadow: 0 0 12px rgba(0, 0, 0, .2);
         background-color: #fff;
         border-radius: 15px;
@@ -256,40 +193,13 @@
     }
 
     .seccion-perfil-usuario .perfil-usuario-bio {
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
         text-align: center;
     }
 
-    .seccion-perfil-usuario .lista-datos {
-        width: 50%;
-        list-style: none;
-    }
-
-    .seccion-perfil-usuario .lista-datos li {
-        padding: 5px 0;
-    }
-
-    .seccion-perfil-usuario .lista-datos li>.icono {
-        margin-right: 1rem;
-        font-size: 1.2rem;
-        vertical-align: middle;
-    }
 
 
-    .supbarblue{
-        background-color: #003f9e;
-        height: 50px;
-    }
-    .supbarblack{
-        background-color: #3C3C41FF;
-        position: relative;
-        height: 1600px;
-        width: 1000px;
-    }
-    .topmargin{
-        margin-top: 30px;
-        color: white;
-    }
+
 
 
     .container > .crop {
@@ -323,7 +233,7 @@
 
     <div class="perfil-usuario-body">
         <br>
-        <br>
+
         <div class="perfil-usuario-bio">
             <h1 class="titulo" type ="button">Mis tickets</h1>
         </div>
@@ -422,15 +332,15 @@
             $('#tablax').DataTable({
                 language: {
                     processing: "Tratamiento en curso...",
-                    search: "Buscar&nbsp;:",
-                    lengthMenu: "Agrupar de _MENU_ items",
+                    search: "Buscar:",
+                    lengthMenu: "Agrupar de _MENU_ ",
                     info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
-                    infoEmpty: "No existen datos.",
+                    infoEmpty: "No existen datos",
                     infoFiltered: "(filtrado de _MAX_ elementos en total)",
                     infoPostFix: "",
                     loadingRecords: "Cargando...",
                     zeroRecords: "No se encontraron datos con tu busqueda",
-                    emptyTable: "No hay datos disponibles en la tabla.",
+                    emptyTable: "No hay datos disponibles",
                     paginate: {
                         first: "Primero",
                         previous: "Anterior",
@@ -442,8 +352,8 @@
                         sortDescending: ": active para ordenar la columna en orden descendente"
                     }
                 },
-                scrollY: 400,
-                lengthMenu: [ [3, 8, -1], [3, 8, "All"] ],
+                scrollY: 477.5,
+                lengthMenu: [ [4, 8, -1], [4, 8, "All"] ],
             });
         });
     </script>

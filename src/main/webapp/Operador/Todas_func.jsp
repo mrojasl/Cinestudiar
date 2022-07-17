@@ -58,7 +58,7 @@
      <link rel="stylesheet" href="Operador/operador_style.css">
      <jsp:include page="cabecera_operador.jsp"/>
 </head>
-<body class='snippet-body' bgcolor="#191970" STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
+<body class='snippet-body' bgcolor="#191970" STYLE="  background-image: url('<%=request.getContextPath()%>/Imagenes/fondo.jpg'); background-size: cover;">
     <section class="administrador">
         <h3 class="mt-1 p-0 mb-0 ">Operador</h3>
     </section>
@@ -272,10 +272,22 @@
 
     <div class="container">
         <div class="row ">
-
-            <table class="table" id = "tableUp">
-                    <tr>
-                        <th class="text-white">IdFunción</th>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="tableUp_length">
+                        <label></label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div id="tableUp_filter" class="dataTables_filter">
+                        <label class="text-white" style="margin-left: 20px">Buscar: </label>
+                    </div>
+                </div>
+            </div>
+            <table class="table " id = "tableUp">
+                <thead>
+                <tr>
+                        <th class="text-white">IDFunción</th>
                         <th class="text-white">Película</th>
                         <th class="text-white">Fecha</th>
                         <th class="text-white">Hora</th>
@@ -286,6 +298,7 @@
                         <th class="text-white">Editar</th>
                         <th class="text-white">Borrar</th>
                     </tr>
+                </thead>
                 <tbody>
 
                 <%for (BFuncion funcion : Funciones) { %>
@@ -421,5 +434,48 @@
         </div>
     </div>
     </div>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+    </script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tableUp').DataTable({
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "",
+                    lengthMenu: "",
+                    info: "",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                scrollY: 580,
+                lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+            });
+        });
+    </script>
+
+
 </body>
 </html>

@@ -108,19 +108,31 @@
 
 
             <div class="row ">
-
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="tableUp_length">
+                            <label></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="tableUp_filter" class="dataTables_filter">
+                            <label class="text-white" style="margin-left: 20px">Buscar: </label>
+                        </div>
+                    </div>
+                </div>
                 <table class="table" id = "tableUp">
+                    <thead>
+                        <tr>
+                            <th class="text-white">ID</th>
+                            <th class="text-white">Rol</th>
+                            <th class="text-white">Nombre</th>
+                            <th class="text-white">Apellido</th>
+                            <th class="text-white">Calificación</th>
+                            <th class="text-white">Asignar Pelicula</th>
 
-                    <tr>
-                        <th class="text-white">Rol</th>
-                        <th class="text-white">Nombre</th>
-                        <th class="text-white">Apellido</th>
-                        <th class="text-white">Calificación</th>
-                        <th class="text-white">Asignar Pelicula</th>
 
-
-                    </tr>
-
+                        </tr>
+                    </thead>
 
 
                     <%
@@ -128,6 +140,7 @@
                         for (BProfesional p : listaProfesionales) { %>
 
                     <tr>
+                        <td class="text-white"><%=p.getIdProfesional()%> </td>
                         <%if (p.getRol().equals("a")) {%>
                         <td class="text-white">Actor</td>
                         <%}else{%>
@@ -295,6 +308,46 @@
             </div>
         </div>
 
+        <!-- JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+                integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
+        <!-- DATATABLES -->
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+        </script>
+        <!-- BOOTSTRAP -->
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#tableUp').DataTable({
+                    language: {
+                        processing: "Tratamiento en curso...",
+                        search: "",
+                        lengthMenu: "",
+                        info: "",
+                        infoEmpty: "No existen datos.",
+                        infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                        infoPostFix: "",
+                        loadingRecords: "Cargando...",
+                        zeroRecords: "No se encontraron datos con tu busqueda",
+                        emptyTable: "No hay datos disponibles en la tabla.",
+                        paginate: {
+                            first: "Primero",
+                            previous: "Anterior",
+                            next: "Siguiente",
+                            last: "Ultimo"
+                        },
+                        aria: {
+                            sortAscending: ": active para ordenar la columna en orden ascendente",
+                            sortDescending: ": active para ordenar la columna en orden descendente"
+                        }
+                    },
+                    scrollY: 480,
+                    lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+                });
+            });
+        </script>
 
 
     </body>
