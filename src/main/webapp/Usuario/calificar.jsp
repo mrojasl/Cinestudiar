@@ -202,7 +202,8 @@
                                                     max="5"
                                                     step="1"
                                                     type="range"
-                                                    value="3">
+                                                    value="3"
+                                                    name="funcion">
                                         </h4>
 
                                     </div>
