@@ -36,6 +36,7 @@ public class AdminServlet extends HttpServlet {
                     request.setAttribute("listaSedes",listaSedes);
                     RequestDispatcher rd1 =request.getRequestDispatcher("Admin/salas.jsp");
                     rd1.forward(request,response);
+                    break;
 
                 case "operador":
                     ArrayList<BUser> listaOperadores=AdminDao.obtenerOperadores();
@@ -43,6 +44,7 @@ public class AdminServlet extends HttpServlet {
 
                     RequestDispatcher rd2 =request.getRequestDispatcher("Admin/operadores.jsp");
                     rd2.forward(request,response);
+                    break;
 
                 case "cliente":
                     ArrayList<BUser> listaClientes= AdminDao.obtenerClientes();
@@ -52,6 +54,7 @@ public class AdminServlet extends HttpServlet {
 
                     RequestDispatcher rd3 =request.getRequestDispatcher("Admin/clientes.jsp");
                     rd3.forward(request,response);
+                    break;
 
                 case "profesional":
                     ArrayList<BProfesional> listaProfesionales= AdminDao.obtenerProfesionales();
@@ -59,16 +62,19 @@ public class AdminServlet extends HttpServlet {
 
                     RequestDispatcher rd4 =request.getRequestDispatcher("Admin/actoresydirectores.jsp");
                     rd4.forward(request,response);
+                    break;
 
                 case "borraroperador":
                     String opcodigo = request.getParameter("opcodigo");
                     AdminDao.EliminarOperador(opcodigo);
                     response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=operador");
+                    break;
 
                 case "borrarprofesional":
                     int proid = Integer.parseInt(request.getParameter("proid"));
                     AdminDao.BorrarProfesional(proid);
                     response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
+                    break;
 
             }
         }
