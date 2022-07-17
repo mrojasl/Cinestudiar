@@ -406,7 +406,7 @@
 
     </div>
     <br>
-    <br>
+
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
@@ -442,8 +442,8 @@
                         sortDescending: ": active para ordenar la columna en orden descendente"
                     }
                 },
-                scrollY: 520,
-                lengthMenu: [ [4, 8, -1], [4, 8, "All"] ],
+                scrollY: 400,
+                lengthMenu: [ [3, 8, -1], [3, 8, "All"] ],
             });
         });
     </script>
@@ -451,7 +451,7 @@
 
 
 <br><br>
-<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+<footer class="mt-auto" style="background-color: #D6D7DA;position: relative;bottom: 0;width: 100%">
     <div class="container"  style="background-color: #D6D7DA">
         <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
         <div class="d-flex bd-highlight">

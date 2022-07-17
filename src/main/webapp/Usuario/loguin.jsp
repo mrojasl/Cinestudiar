@@ -99,7 +99,7 @@
         </div>
     </section>
     <br><br>
-    <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+    <footer class="mt-auto" style="background-color: #D6D7DA;position: relative;bottom: 0;width: 100%">
         <div class="container"  style="background-color: #D6D7DA">
             <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
             <div class="d-flex bd-highlight">
