@@ -159,7 +159,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="submit" class="btn btn-secondary" data-bs-target="#reporte_exportado">Exportar</button>
+                                            <button type="submit" class="btn btn-secondary" data-bs-target="#reporte_exportado">Previsualizar</button>
                                         </div>
                                     </form>
 

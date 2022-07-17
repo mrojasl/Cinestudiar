@@ -869,10 +869,10 @@ public class OperadorDao extends BaseDao {
 
     String sql_2 = "select fu.idsala, fu.idfuncion, pe.nombre, fu.fecha, fu.hora, fu.aforo_operador\n" +
             "from funciones fu inner join peliculas pe\n" +
-            "on (pe.idpelicula=fu.idpelicula) where fu.fecha = ? and fu.idsala=?;";
+            "on (pe.idpelicula=fu.idpelicula) where (fu.fecha = ? and fu.idsala=?);";
 
     public ArrayList<BSedeYSala> lista_reporte(String fil_sala, String fil_fecha) {
-        if (fil_fecha.equals("") || fil_sala != null) {
+        if (fil_fecha.equals("") && fil_sala != null) {
             ArrayList<BSedeYSala> listaReporte = new ArrayList<>();
             try (Connection conn = this.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql_1);) {
@@ -898,32 +898,34 @@ public class OperadorDao extends BaseDao {
 
             return listaReporte;
         }
-            if (fil_fecha!=null|| fil_sala != null) {
-                ArrayList<BSedeYSala> listaReporte2 = new ArrayList<>();
-                try (Connection conn = this.getConnection();
-                     PreparedStatement pstmt = conn.prepareStatement(sql_2);) {
-                    pstmt.setString(1, fil_fecha);
-                    pstmt.setString(2, fil_sala);
-                    try (ResultSet rs = pstmt.executeQuery()) {
-                        System.out.println(rs);
-                        while (rs.next()) {
-                            BFuncion fu = new BFuncion();
-                            fu.setIdSala(rs.getInt("1"));
-                            fu.setIdFuncion(rs.getInt("2"));
-                            fu.setNombre(rs.getString("3"));
-                            fu.setFecha(rs.getString("4"));
-                            fu.setAforoOperador(rs.getInt("5"));
+        if (fil_fecha!=null && fil_sala != null) {
+            ArrayList<BSedeYSala> listaReporte2 = new ArrayList<>();
+            try (Connection conn = this.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql_2);) {
+                pstmt.setString(1, fil_fecha);
+                pstmt.setString(2, fil_sala);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    System.out.println(rs);
+                    while (rs.next()) {
+                        BFuncion fu = new BFuncion();
+                        fu.setIdSala(rs.getInt(1));
+                        fu.setIdFuncion(rs.getInt(2));
+                        fu.setNombre(rs.getString(3));
+                        fu.setFecha(rs.getString(4));
+                        fu.setHora(rs.getString(5));
+                        fu.setAforoOperador(rs.getInt(6));
 
-                            listaReporte2.add(fu);
-                        }
+
+                        listaReporte2.add(fu);
                     }
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
 
-                return listaReporte2;
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+
+            return listaReporte2;
+        }
             return null;
     }
 }

@@ -33,7 +33,7 @@ public class ReporteServlet extends HttpServlet {
         RequestDispatcher requestDispatcher;
 
         request.setAttribute("Reporte", operadorDao.lista_reporte(fil_sala,fil_fecha));
-        requestDispatcher = request.getRequestDispatcher("Operador/prueba_EXPORTADOR.jsp");
+        requestDispatcher = request.getRequestDispatcher("Operador/preview_export.jsp");
         requestDispatcher.forward(request, response);
 
     }
