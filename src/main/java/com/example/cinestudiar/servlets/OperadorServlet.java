@@ -255,6 +255,9 @@ public class OperadorServlet extends HttpServlet {
             }
             case "crearFunciones"->{
                 funciones =new BFuncion();
+
+                int aforoOperador=Integer.parseInt(request.getParameter("aforoOperador"));
+
                 String fecha = request.getParameter("fecha");
                 String hora = request.getParameter("hora");
                 LocalTime horaTimeInicio = LocalTime.parse(hora);
@@ -278,19 +281,39 @@ public class OperadorServlet extends HttpServlet {
                 }
 
                 if (centi==0){
-                    funciones.setFecha(fecha);
-                    funciones.setHora(hora);
-                    funciones.setIdSala(idSala);
-                    funciones.setIdPelicula(idPelicula);
 
-                    funciones.setPrecioTicket(Integer.parseInt(request.getParameter("precio_ticket")));
-                    funciones.setEdadMinima(Integer.parseInt(request.getParameter("edad_minima")));
-                    funciones.setIdPersonal(Integer.parseInt(request.getParameter("idPersonal")));
-                    funciones.setAforoOperador(Integer.parseInt(request.getParameter("aforoOperador")));
-                    operadorDao.crearFuncion(funciones);
+
+                    ArrayList<BSedeYSala> AforosAdmin=operadorDao.obtenerSala();
+                    int aforoAdmin=0;
+
+                    for(BSedeYSala sala: AforosAdmin){
+                        if (idSala==sala.getIdSala()){
+                            aforoAdmin= Integer.parseInt(sala.getAforoAdministrador());
+                            break;
+                        }
+                    }
+
+                    if ((aforoOperador>0) && (aforoOperador<=aforoAdmin)){
+                        funciones.setFecha(fecha);
+                        funciones.setHora(hora);
+                        funciones.setIdSala(idSala);
+                        funciones.setIdPelicula(idPelicula);
+
+                        funciones.setPrecioTicket(Integer.parseInt(request.getParameter("precio_ticket")));
+                        funciones.setEdadMinima(Integer.parseInt(request.getParameter("edad_minima")));
+                        funciones.setIdPersonal(Integer.parseInt(request.getParameter("idPersonal")));
+                        funciones.setAforoOperador(Integer.parseInt(request.getParameter("aforoOperador")));
+                        operadorDao.crearFuncion(funciones);
+
+                    }
+                    else{
+                        request.getSession().setAttribute("errorAforo", "Error al crear: Valor de Aforo no válido o excede al maximo dado por el administrador");
+                    }
+
                 }
-
                 response.sendRedirect("OperadorServlet");
+
+
 
             }
             case "crearpersonal" ->{

@@ -42,9 +42,9 @@
         <div class="container" id="general">
             <div>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn  btn-primary buttonmargin" data-bs-toggle="modal"
+                <button type="button" class="btn btn-info buttonmargin" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
-                    Crear Sala
+                    Crear Nueva Sala
                 </button>
 
                 <!-- Modal -->

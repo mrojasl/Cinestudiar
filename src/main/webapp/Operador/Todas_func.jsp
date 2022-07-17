@@ -156,6 +156,7 @@
                                                     <option value="<%=sala.getIdSala()%>">Sala <%=sala.getIdSala()%>-<%=sala.getSede()%> </option>
                                                     <% } %>
                                                 </select>
+
                                             </div>
                                             <div class="p-2 bd-highlight">
                                                 <label class="fw-bold" for="fecha">Fecha:</label><br>
@@ -209,18 +210,26 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Sala</span><!--RECIBIRÁ DE BASE -->
-                                        <select type="text" id="idSala" name="idSala" class="form-control form-control-lg">
-                                            <option selected></option>
+                                        <select type="text" id="idSala" name="idSala"   class="form-control form-control-lg">
                                             <% for(BSedeYSala sala: listaSalas) { %>
-                                            <option value="<%=sala.getIdSala()%>"><%=sala.getIdSala()%>: Sede= <%=sala.getSede()%> </option>
+                                            <option id="Sala<%=sala.getIdSala()%>" value="<%=sala.getIdSala()%>"><%=sala.getIdSala()%>: Sede:<%=sala.getSede()%>;Aforo Máximo: <%=sala.getAforoAdministrador()%> </option>
                                             <% } %>
                                         </select>
+
                                     </div>
                                     <div class="input-group mb-3">
+
+
+
+
+
                                         <span class="input-group-text">Aforo</span><!--FALTA COLOCAR COMO AFORO MINIMO LO QU RECIBE DE ADMIN-->
-                                        <input name="aforoOperador" type="number" class="form-control" placeholder="Aforo" required="required"
-                                               aria-label="Sala 1" min="1" max ="50"
+                                        <input name="aforoOperador"   type="number" class="form-control" placeholder="Aforo" required="required"
+                                               aria-label="Sala 1" min="1"  id="aforoDelOperador"
                                                aria-describedby="button-addon1">
+                                        <br>
+
+
 
                                     </div>
 
@@ -274,6 +283,17 @@
         </div>
         <%session.removeAttribute("errorCrear");%>
         <%}%>
+
+
+        <% if (session.getAttribute("errorAforo") != null){%>
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <%=session.getAttribute("errorAforo")%>
+            </div>
+        </div>
+        <%session.removeAttribute("errorAforo");%>
+        <%}%>
+
 
     <div class="container">
         <div class="row ">
@@ -483,4 +503,9 @@
 
 
 </body>
+
+
+
+
+
 </html>
