@@ -35,87 +35,13 @@
   <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-  <style>
-    .desc1back{
-      color: white;
-      background-color: #45698a;
-      height: auto;
-    }
-    .container {
-      padding-right: 0 !important;
-      padding-left: 0 !important;
-    }
-    .buttonswipe{
-      text-align: right;
-    }
-    .rigthup{
-      float:left;
-    }
-    .leftfinal{
-      text-align: center;
-      color: white;
-    }
-    .spaceleft{
-      margin-left: 25px;
-      color: #989898;
-    }
-    .leftrighttext{
-      margin-left: 270px;
-    }
-    .leftlefttext{
-      width: 200px;
-      height: 20px;float: left;
-    }
-    .textchoosereserv{
-      color: white;
-      margin-left: 20px;
-    }
-    .centradoleftstar{
-      margin-left: 105px;
-    }
-    .centradoleft{
-      margin-left: 75px;
-    }
-    .buttonsize{
-      width: 250px;
-      height: 40px;
-      margin-bottom: 10px;
-
-    }
-    .boxfuncion{
-      color: white;
-      text-align: center;
-      background-color: #111523;
-      width: 250px;
-    }
-
-    .funcionestxt{
-      height: 80px;
-      color: white;
-      padding:10px;
-      margin-left: 20px;
-    }
-    .sugerencia {
-      background-color: #111523;
-      height: 80px;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    .rightside{
-      float: right;
-    }
-    .leftside{
-      background-color: #012154;
-    }
-    div#general{
-      margin: auto;
-      width: 1600px;
-      height: 1000px;
-    }
+  <style type="text/css">
+    /*=====================================
+    estilos
+    =====================================*/
 
     .navbar{
-      position: fixed;
+      position: relative;
       width: 100%;
       padding: 20px 10px;
       background-color: #003f9e;
@@ -137,139 +63,158 @@
       text-decoration: none;
     }
 
-    p.emptytxt{
-      margin-top: 45px;
-      font-size:20px;
-      color:white;
-      font-weight: bold;
-
+    body {
+      background-color: #3C3C41FF;
     }
-    /* Full-width input fields */
-    input[type=text], input[type=password] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      color: #2d2e33;
-      position: center;
-    }
-    input[id=rememberme]{
-      font-family: Arial, Helvetica, sans-serif;
-      color: #2b2e31;
-      text-decoration-color: black;
-    }
-
-    /* Extra styles for the cancel button */
-    .cancelbtn {
+    header{
+      background-color: #003f9e;
       width: auto;
-      padding: 10px 18px;
-      margin-right: 0px;
-      background-color: #f44336;
+      height: 11vh;
+      color: white;
     }
-
-    /* Center the image and position the close button */
-    .imgcontainer {
-      text-align: center;
-      margin: 6px 0 3px 0;
-      width: 30%;
-      height: 10%;
-      position: center;
-    }
-
-    img.avatar {
-      width: 40%;
-      border-radius: 50%;
-    }
-
-
-    span.psw {
-      float: right;
-      padding-top: 16px;
-      color: blue;
-    }
-
-    /* The Modal (background) */
-    .modalh1 {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-      padding-top: 60px;
-    }
-
-    /* Modal Content/Box */
-    .modal-contenth1 {
-      background-color: #fefefe;
-      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-      border: 1px solid #888;
-      width: 30%; /* Could be more or less, depending on screen size */
-    }
-
-    /* The Close Button (x) */
-    .close {
+    header h2{
       position: absolute;
-      right: 25px;
-      top: 0;
-      color: #000;
-      font-size: 35px;
-      font-weight: bold;
+      left: 10%;
+      top:4%;
+    }
+    .elementos{
+      position: absolute;
+      left: 25%;
+    }
+    .elementos a{
+      position: relative;
+      left:65%;
+      top:0%;
+      color:white;
+      text-decoration: none;
+      margin-right: 5px;
+    }
+    .administrador{
+      background-color: #7e7878;
+      width: auto;
+      height: 6vh;
+    }
+    .administrador h3{
+      position: absolute;
+      color: #ece9e9;
+      left: 50%;
+    }
+    html {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      line-height: 1.4;
+    }
+    .nav b{
+      position: relative;
+      left:25%;
+      text-decoration: none;
+      margin-right: 10px;
     }
 
-    .close:hover,
-    .close:focus {
-      color: red;
-      cursor: pointer;
+    * {
+      margin: 0;
+      padding: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
     }
 
-    /* Add Zoom Animation */
-    .animate {
-      -webkit-animation: animatezoom 0.6s;
-      animation: animatezoom 0.6s
+    body {
+      color: #404040;
+      font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
     }
 
-    @-webkit-keyframes animatezoom {
-      from {-webkit-transform: scale(0)}
-      to {-webkit-transform: scale(1)}
+    /*=====================================
+    estilos de la utilidad
+
+    =====================================*/
+    .seccion-perfil-usuario .perfil-usuario-body,
+    .seccion-perfil-usuario {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
     }
 
-    @keyframes animatezoom {
-      from {transform: scale(0)}
-      to {transform: scale(1)}
+
+
+    .seccion-perfil-usuario .perfil-usuario-body {
+      width: 70%;
+      position: relative;
+      max-width: 750px;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .seccion-perfil-usuario .perfil-usuario-nuevo{
+      width: 95%;
+      position: relative;
+      background-color: #fff;
+      max-width: 1200px;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+
     }
 
-    /* Change styles for span and cancel button on extra small screens */
-    @media screen and (max-width: 300px) {
-      span.psw {
-        display: block;
-        float: none;
-      }
-      .cancelbtn {
+    .seccion-perfil-usuario .perfil-usuario-body .titulo {
+      display: block;
+      width: 100%;
+      font-size: 1.75em;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .seccion-perfil-usuario .perfil-usuario-body .texto {
+      color: #848484;
+      font-size: 0.95em;
+    }
+
+    .seccion-perfil-usuario .perfil-usuario-footer,
+    .seccion-perfil-usuario .perfil-usuario-bio {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.75rem 1rem;
+      box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+      background-color: #fff;
+      border-radius: 15px;
+      width: 100%;
+    }
+
+    .seccion-perfil-usuario .perfil-usuario-bio {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+
+
+
+
+
+    .container > .crop {
+      position:absolute;
+      left: -100%;
+      right: -100%;
+      top: -100%;
+      bottom: -100%;
+      margin: auto;
+      min-height: 100%;
+      min-width: 100%;
+    }
+    /* adactacion a dispositivos */
+    @media (max-width: 750px) {
+      .seccion-perfil-usuario .lista-datos {
         width: 100%;
       }
-    }
-    button {
-      background-color: #04AA6D;
-      color: white;
-      padding: 14px 20px;
-      margin: 4px 0;
-      border: none;
-      cursor: pointer;
 
-    }
-    left2{
-      margin-right: 75px;
+      .seccion-perfil-usuario .perfil-usuario-portada,
+      .seccion-perfil-usuario .perfil-usuario-body {
+        width: 95%;
+      }
+
     }
   </style>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" >
 
 
 
@@ -296,104 +241,152 @@
 <%session.removeAttribute("indicadorNologuin");%>
 <%}%>
 
+<section class="seccion-perfil-usuario">
+  <br>
+  <br>
+  <div class="perfil-usuario-nuevo">
 
-<section class="h-100 gradient-form" >
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-xl-10">
-        <div class="card rounded-3 text-black">
-          <div class="row g-0">
-            <div class="card-body p-4">
-              <div class="text text-center">
-                <i class="bi bi-camera-reels fa-3x me-3" style="color: #0e0e6b;"></i>
-                <span class="h1 fw-bold mb-0" STYLE="font-family: Akzidenz-Grotesk">Detalles de la obra<hr></span>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="col-sm-6">
-                <div class="p-5">
-                  <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="poster_movie" width="420px" height="600px" >
-                  <br>
-                  <br>
-                  <%int i =1;%>
-                  <%int j=1;%>
-                  <%for(BPeliculas bPeliculas : lista_profesionales) {%>
-                  <% if (bPeliculas.getProfesional().getRol().equals("d")){ %>
-                  <% if(i==1){%>
-                  <H6>Lista de directores:</H6>
-                  <%}%>
-                  <tr ><%=bPeliculas.getProfesional().getNombre()%> </tr >
-                  <tr ><%=bPeliculas.getProfesional().getApellido()%> </tr >
-                  <%i=2;%>
-                  <%}%>
-                  <% if (bPeliculas.getProfesional().getRol().equals("a")){%>
-                  <%if (j==1){%>
-                  <H6 > Lista de actores:</H6 >
-                  <%}%>
-                  <%j=2;%>
-                  <tr > <%=bPeliculas.getProfesional().getNombre()%></tr >
-                  <tr ><%=bPeliculas.getProfesional().getApellido()%></tr >
-                  <%}%>
-                  <%}%>
-                  <table class="table" style="background-color:beige">
-                    <thead>
-                    <tr><th style="color: black">Funcion</th><th style="color: black">Precio</th><th style="color: black">Edad Minima</th><th style="color: black">Sede</th><th style="color: black">Aforo</th><th style="color: black">Reservar</th></tr>
-                    </thead>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Detalles de la obra</th>
+        <th scope="col" size="100px"></th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="poster_movie" width="285px" height="400px" style="margin-top: 20px;margin-left: 20px;margin-right: 20px">
+        </td>
+        <td style="width:20%;margin-right: 20px"><H6 style="margin-top: 15px;margin-right: 30px">Título:</H6>
+          <hr>
+          <p><%=pelicula.getNombre()%></p>
+          <H6>Duración:</H6>
+          <hr>
+          <p><%=pelicula.getDuracion()%> minutos</p>
+          <H6>Género:</H6>
+          <hr>
+          <p><%=pelicula.getGenero()%></p>
+          <%int i =1;%>
+          <%int j=1;%>
+          <%for(BPeliculas bPeliculas : lista_profesionales) {%>
+          <% if (bPeliculas.getProfesional().getRol().equals("d")){ %>
+          <% if(i==1){%>
+          <H6>Elenco:</H6>
+          <hr>
+          <%}%>
+          <p><%=bPeliculas.getProfesional().getNombre()%> <%=bPeliculas.getProfesional().getApellido()%> (Director(a))</p>
+          <%i=2;%>
+          <%}%>
+          <% if (bPeliculas.getProfesional().getRol().equals("a")){%>
+          <%if (j==1){%>
+          <%}%>
+          <%j=2;%>
+          <p> <%=bPeliculas.getProfesional().getNombre()%> <%=bPeliculas.getProfesional().getApellido()%></p >
+          <%}%>
+          <%}%>
+        </td>
+        <td><h6 class="mb-4"style="margin-left: 40px;margin-top: 15px">Sinopsis:</h6>
+          <hr style="margin-left: 40px;margin-right: 40px">
+          <%if (pelicula.getInformación()!=null){%>
+          <p style="margin-left: 40px;margin-right: 40px"><%=pelicula.getInformación()%></p>
+          <%}else{%>
+          <p style="margin-left: 40px">Todavía no contamos con una descripción disponible</p>
+          <%}%></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <br>
 
-                    <%for (BFuncionUsuario bFuncionUsuario: listafunciones) {%>
-                    <tr>
-                      <td> <%=bFuncionUsuario.getFecha()+bFuncionUsuario.getHora()%></td>
-                      <td> <%=bFuncionUsuario.getPrecioTicket()%></td >
-                      <%if (bFuncionUsuario.getEdadMinima()==0){%>
-                      <td> Todas las edades</td>
-                      <%}else{%>
-                      <td> <%=bFuncionUsuario.getEdadMinima()%></td >
-                      <%}%>
-                      <td> <%=bFuncionUsuario.getbSedeUsuario().getSede()%></td >
-                      <td> <%=bFuncionUsuario.getbSedeUsuario().getAforoOperador()%></td >
-                      <td>
-                        <form class="user" method="POST" action="<%=request.getContextPath()%>/DetallesPelicula?action=añadir" >
-                          <input type="hidden" name="peli" value="<%=pelicula.getIdpeliculas()%>">
-                          <button class="btn btn-outline-info" type="submit" role="button" >Agregar</button>
-                        </form>
-                      </td>
-                    </tr>
-                    <%}%>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-              <div class="text-black px-3 py-4 p-md-5 mx-md-4">
-                <H4>Título:</H4>
-                <hr>
-                <p><%=pelicula.getNombre()%></p>
-                <H4>Duración:</H4>
-                <hr>
-                <p><%=pelicula.getDuracion()%> minutos</p>
-                <H4>Género:</H4>
-                <hr>
-                <p><%=pelicula.getGenero()%></p>
-                <h4 class="mb-4">Sinopsis:</h4>
-                <hr>
-                <%if (pelicula.getInformación()!=null){%>
-                <p><%=pelicula.getInformación()%></p>
-                <%}else{%>
-                <p>Todavía no contamos con una descripción disponible</p>
-                <%}%>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <br>
-        <br>
-      </div>
-    </div>
+  <div class="perfil-usuario-nuevo">
+
+    <br>
+
+    <H2>Horarios disponibles</H2>
+
+    <table id="tablax" class="table table-striped table-hover" style="background-color:beige">
+      <thead>
+      <tr>
+        <th scope="col" style="color: black">Día</th>
+        <th scope="col" style="color: black">Hora</th>
+        <th scope="col" style="color: black">Precio</th>
+        <th scope="col" style="color: black">Edad Minima</th>
+        <th scope="col" style="color: black">Sede</th>
+        <th scope="col" style="color: black">Aforo</th>
+        <th scope="col" style="color: black"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <%for (BFuncionUsuario bFuncionUsuario: listafunciones) {%>
+      <tr>
+        <td scope="row"><p> <%=bFuncionUsuario.getFecha()%></p> </td>
+        <td><p>  <%=bFuncionUsuario.getHora()%></p> </td >
+        <td><p>  <%=bFuncionUsuario.getPrecioTicket()%></p> </td >
+        <%if (bFuncionUsuario.getEdadMinima()==0){%>
+        <td>No hay</td>
+        <%}else{%>
+        <td><p>  <%=bFuncionUsuario.getEdadMinima()%></p> </td >
+        <%}%>
+        <td><p>  <%=bFuncionUsuario.getbSedeUsuario().getSede()%></p> </td >
+        <td><p>  <%=bFuncionUsuario.getbSedeUsuario().getAforoOperador()%></p> </td >
+        <td>
+          <form class="user" method="POST" action="<%=request.getContextPath()%>/DetallesPelicula?action=añadir" >
+            <input type="hidden" name="peli" value="<%=pelicula.getIdpeliculas()%>">
+            <button class="btn btn-outline-info" type="submit" role="button" >Agregar</button>
+          </form>
+        </td>
+      </tr>
+      <%}%>
+      </tbody>>
+    </table>
+
+
+  </div>
   </div>
 </section>
 
-
+<!-- JQUERY -->
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+</script>
+<!-- DATATABLES -->
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+</script>
+<!-- BOOTSTRAP -->
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+</script>
+<script>
+  $(document).ready(function () {
+    $('#tablax').DataTable({
+      language: {
+        processing: "Tratamiento en curso...",
+        search: "Buscar:",
+        lengthMenu: "Agrupar de _MENU_ ",
+        info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+        infoEmpty: "No existen datos",
+        infoFiltered: "(filtrado de _MAX_ elementos en total)",
+        infoPostFix: "",
+        loadingRecords: "Cargando...",
+        zeroRecords: "No se encontraron datos con tu busqueda",
+        emptyTable: "No hay datos disponibles",
+        paginate: {
+          first: "Primero",
+          previous: "Anterior",
+          next: "Siguiente",
+          last: "Ultimo"
+        },
+        aria: {
+          sortAscending: ": active para ordenar la columna en orden ascendente",
+          sortDescending: ": active para ordenar la columna en orden descendente"
+        }
+      },
+      scrollY: 250.5,
+      lengthMenu: [ [4, 8, -1], [4, 8, "All"] ],
+    });
+  });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
@@ -415,7 +408,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <br><br><br><br><br><br>
-<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: -610px;width: 100%">
   <div class="container"  style="background-color: #D6D7DA">
     <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
     <div class="d-flex bd-highlight">
