@@ -928,6 +928,34 @@ public class OperadorDao extends BaseDao {
         }
             return null;
     }
+    public int  ObtenercalProf(int  id) {
+
+        Double duracionD = null;
+        int duracionI = 0;
+        
+        String sql = "select avg(calificacion) from calificaciondeprofesionales " +
+                "where idprofesional=? group by idprofesional ;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    duracionD = rs.getDouble(1);
+                    duracionI = (int) Math.round(duracionD);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+
+        return duracionI;
+    }
+
+
 }
 
 

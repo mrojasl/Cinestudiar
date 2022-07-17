@@ -225,7 +225,7 @@
 
 
 
-                        <% int num= (int) p.getCalificacion();%>
+                        <%int num= operadorDao.ObtenercalProf(p.getIdProfesional());%>
                         <%if (num == 0){ %>
                         <td class="text-white">No tiene</td>
                         <%}%>
