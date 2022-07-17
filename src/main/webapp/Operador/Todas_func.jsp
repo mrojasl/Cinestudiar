@@ -3,6 +3,7 @@
 <%@ page import="com.example.cinestudiar.beans.BSedeYSala" %>
 <%@ page import="com.example.cinestudiar.beans.BEquipoLimpieza" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 
 <jsp:useBean id="listapelicula1" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="listaSalas" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>"/>
@@ -56,7 +57,9 @@
     </style>
 
      <link rel="stylesheet" href="Operador/operador_style.css">
-     <jsp:include page="cabecera_operador.jsp"/>
+     <jsp:include page="cabecera_operador.jsp">
+         <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+     </jsp:include>
 </head>
 <body class='snippet-body' bgcolor="#191970" STYLE="  background-image: url('<%=request.getContextPath()%>/Imagenes/fondo.jpg'); background-size: cover;">
     <section class="administrador">
