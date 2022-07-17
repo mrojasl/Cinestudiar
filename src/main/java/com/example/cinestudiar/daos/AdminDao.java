@@ -583,8 +583,9 @@ public class AdminDao extends BaseDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "SELECT idprofesional,nombre,apellido,rol " +
-                "FROM profesionales where rol = ?";
+        String sql = "SELECT idprofesional,nombre,apellido,rol, peliculas_idpelicula " +
+                "FROM profesionales p left join peliculas_has_profesionales php on (p.idprofesional=php.profesionales_idprofesional) " +
+                " where rol = ? group by idprofesional ";
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
 
@@ -597,6 +598,8 @@ public class AdminDao extends BaseDao {
                     pr.setNombre(rs.getString(2));
                     pr.setApellido(rs.getString(3));
                     pr.setRol(rs.getString(4));
+                    pr.setEnPelicula(rs.getInt(5));
+
                     listaProfesionales.add(pr);
                 }
             }

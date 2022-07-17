@@ -58,10 +58,10 @@
                     </div>
                     <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
                     </div>
-                    <div class="input-group mb-3 col">
+                    <div hidden class="input-group mb-3 col">
                         <h5 class="col" style="padding: 14px;color: white;width: 250px">Buscar por nombre:</h5>
                     </div>
-                    <div class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
+                    <div hidden class="input-group mb-3 col"style="margin-top: 6px;margin-right: 20px">
                         <form method="post" action="<%=request.getContextPath()%>/ServAdmin?admin=buscaroperador">
 
                             <input name="txtbuscar" class="form-control" type="text" placeholder="Buscar por nombre"
@@ -73,11 +73,7 @@
             </div>
             <br>
             <div class="container">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-info buttonmargin" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">
-                    Asignar Operador
-                </button>
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -123,6 +119,11 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_length" id="tableUp_length">
                                 <label></label>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-info buttonmargin" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop">
+                                    Asignar Operador
+                                </button>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">

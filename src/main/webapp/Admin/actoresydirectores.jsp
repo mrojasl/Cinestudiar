@@ -79,11 +79,7 @@
             </form>
             <br>
             <div class="container">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-info buttonmargin" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">
-                    Agregar nuevo profesional
-                </button>
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -139,6 +135,11 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_length" id="tableUp_length">
                                 <label></label>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-info buttonmargin" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop">
+                                    Agregar nuevo profesional
+                                </button>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
