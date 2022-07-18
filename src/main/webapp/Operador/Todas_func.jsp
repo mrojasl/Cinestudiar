@@ -378,6 +378,7 @@
             <table class="table " id = "tableUp">
                 <thead>
                 <tr>
+                        <th HIDDEN class="text-white">ID</th>
                         <th class="text-white">ID Función</th>
                         <th class="text-white">Película</th>
                         <th class="text-white">Fecha</th>
@@ -396,6 +397,7 @@
                 <%for (BFuncion funcion : Funciones) { %>
 
                 <tr>
+                    <td hidden class="text-white">a</td>
                     <td class="text-white"><%=funcion.getIdFuncion()%></td>
                     <td class="text-white"><%=funcion.getPelicula()%> </td>
                     <td class="text-white"><%=funcion.getFecha()%></td>

@@ -51,7 +51,7 @@
 
 
         <section class="administrador">
-            <h3 class="mt-1 p-0 mb-0 ">Operador</h3>
+            <h3 class="mt-1 p-0 mb-0 "align="center">Operador</h3>
         </section>
         <section>
             <ul class="navbar navbar-dark bg-dark">
@@ -136,7 +136,7 @@
                             <th class="text-white">Nombre</th>
                             <th class="text-white">Apellido</th>
                             <th class="text-white">Calificación</th>
-                            <th class="text-white">Asignar Pelicula</th>
+                            <th class="text-white">Asignar a Pelicula</th>
 
 
                         </tr>
