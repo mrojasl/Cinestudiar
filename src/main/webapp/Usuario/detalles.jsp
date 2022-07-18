@@ -15,9 +15,12 @@
 <jsp:useBean id="lista_profesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BPeliculas>"/>
 <jsp:useBean id="listafunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncionUsuario>"/>
 <jsp:useBean id="pelicula" class="com.example.cinestudiar.beans.BPeliculas" scope="request" type="com.example.cinestudiar.beans.BPeliculas"/>
-<jsp:useBean id="indicador3" scope="session" type="java.lang.String" class="java.lang.String"/>
+
+<jsp:useBean id="usuarioLogueado" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 
 <jsp:useBean id="indicadorNologin" scope="session" type="java.lang.String" class="java.lang.String"/>
+
+
 
 
 
@@ -453,7 +456,15 @@
             }
 
         }
+
+
+        a {
+            text-decoration: none !important;
+        }
     </style>
+
+
+
 
 
 
@@ -477,7 +488,33 @@
 
         <%session.removeAttribute("indicadorNologuin");%>
         <%}%>
+
+
+
+
+    <% if (session.getAttribute("indicadorReserva") != null){%>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle-fill"></i>Función Reservada con Éxito. Recuerda que se ha reservado un solo ticket, la cual se añadió a su carrito de compras, ahi podrá agregar mas tickets.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <%session.removeAttribute("indicadorReserva");%>
+    <%}%>
+
+
+    <% if (session.getAttribute("indicadorReservaFallida") != null){%>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle-fill"></i>Error al reservar. Por favor, intente de nuevo.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <%session.removeAttribute("indicadorReservaFallida");%>
+    <%}%>
+
+
+
         <section class="seccion-perfil-usuario">
+
             <br>
             <br>
         <div class="perfil-usuario-nuevo">
