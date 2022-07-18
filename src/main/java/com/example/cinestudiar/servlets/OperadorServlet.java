@@ -307,7 +307,7 @@ public class OperadorServlet extends HttpServlet {
                 int idSala = Integer.parseInt(request.getParameter("idSala"));
                 int idPelicula = Integer.parseInt(request.getParameter("idPelicula"));
                 LocalTime horaTimeFinal = horaTimeInicio.plusMinutes(operadorDao.obtenerDuracionPelicula(idPelicula));
-
+                boolean cruce = true;
 
                 int centi = 0;
                 ArrayList<DTOfunciones_peliculas> listaFuConDu = operadorDao.listaFuncionesDuracion();
@@ -315,8 +315,8 @@ public class OperadorServlet extends HttpServlet {
                     if (fu.getIdSala()==idSala && fu.getFecha().equals(fecha)){
                         if((horaTimeInicio.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTimeInicio.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))) || (horaTimeFinal.isAfter(LocalTime.parse(fu.getHora())) && horaTimeFinal.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion())))){
 
-                            request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la funciÃ³n de ID: " + fu.getIdFuncion());
-                            centi = 1;
+                            request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la función de ID: " + fu.getIdFuncion());
+                            cruce = false;
                             break;
 
                         }
@@ -354,7 +354,7 @@ public class OperadorServlet extends HttpServlet {
                         if (p.getRol().equalsIgnoreCase("a")){
                             validarRolA = 1;
                         }
-                        if (p.getRol().equalsIgnoreCase("p")){
+                        if (p.getRol().equalsIgnoreCase("d")){
                             validarRolD = 1;
                         }
                     }
@@ -453,7 +453,7 @@ public class OperadorServlet extends HttpServlet {
 
 
 
-                        if (indicadorProfesionales && indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
+                        if (cruce && indicadorProfesionales && indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
                             funciones.setFecha(fecha);
                             funciones.setHora(hora);
                             funciones.setIdSala(idSala);
@@ -516,7 +516,20 @@ public class OperadorServlet extends HttpServlet {
             case "retirarpelicula" ->{
                 int idProf = Integer.parseInt(request.getParameter("id"));
                 int idPel2 = Integer.parseInt(request.getParameter("idPel2"));
-                operadorDao.borrarProfesionaldePelicula(idPel2,idProf);
+                ArrayList<BPeliculas> listaPelisEnFuncion = operadorDao.listaPeliculaEnFuncion();
+                boolean existeFuncion = true;
+                for (BPeliculas p : listaPelisEnFuncion){
+                    if (idPel2==p.getIdpeliculas()){
+                        request.getSession().setAttribute("errorRetirar", "Error al retirar profesional: La película ya cuenta con funciones.");
+                        existeFuncion=false;
+                    }
+                }
+                if (existeFuncion){
+                    operadorDao.borrarProfesionaldePelicula(idPel2,idProf);
+
+                }
+
+
                 response.sendRedirect("OperadorServlet?action=crearPe");
             }
             case "editarFuncion" ->{

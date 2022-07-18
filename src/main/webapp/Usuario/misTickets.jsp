@@ -229,6 +229,12 @@
         }
 
     }
+
+
+    a {
+        text-decoration: none !important;
+    }
+
 </style>
 <jsp:include page="headerSesionIniciada.jsp">
     <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>

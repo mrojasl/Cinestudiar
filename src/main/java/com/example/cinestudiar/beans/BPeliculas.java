@@ -14,6 +14,15 @@ public class BPeliculas {
 
         private BProfesional profesional;
         private int existeCompra;
+        private int existeFuncion;
+
+        public int getExisteFuncion() {
+                return existeFuncion;
+        }
+
+        public void setExisteFuncion(int existeFuncion) {
+                this.existeFuncion = existeFuncion;
+        }
 
         public int getExisteCompra() {
                 return existeCompra;
