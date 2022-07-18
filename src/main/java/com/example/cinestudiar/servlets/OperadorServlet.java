@@ -361,7 +361,7 @@ public class OperadorServlet extends HttpServlet {
                     if (validarRolA==1 && validarRolD==1){
                         indicadorProfesionales = true;
                     } else {
-                        request.getSession().setAttribute("errorRolesPeli", "Error al crear: Tu película necesita al menos un actor y un director");
+                        request.getSession().setAttribute("errorRolesPeli", "Error al crear: La película necesita al menos un actor y un director");
                     }
 
 
