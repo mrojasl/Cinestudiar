@@ -312,13 +312,14 @@
             <table class="table " id = "tableUp">
                 <thead>
                 <tr>
-                        <th class="text-white">IDFunción</th>
+                        <th class="text-white">ID Función</th>
                         <th class="text-white">Película</th>
                         <th class="text-white">Fecha</th>
                         <th class="text-white">Hora</th>
                         <th class="text-white">Sede</th>
                         <th class="text-white">Sala</th>
-                        <th class="text-white">Precio de ticket</th>
+                        <th class="text-white">Precio</th>
+                        <th class="text-white">Porcentaje asistencia</th>
                         <th class="text-white">Calificacion Promedio</th>
                         <th class="text-white">Editar</th>
                         <th class="text-white">Borrar</th>
@@ -336,7 +337,7 @@
                     <td class="text-white"><%=funcion.getSede() %></td>
                     <td class="text-white"><%=funcion.getIdSala()%></td>
                     <td class="text-white">S/. <%=funcion.getPrecioTicket()%></td>
-                    <td class="text-white">S/. <%=funcion.getAsistencia()%></td>
+                    <td class="text-white"> <%=Math.round(funcion.getAsistencia()*100.0)/100.0%>%</td>
                     <% int num= (int) funcion.getCalificacion();%>
                     <%if (num == 0){ %>
                     <td class="text-white">No tiene</td>
