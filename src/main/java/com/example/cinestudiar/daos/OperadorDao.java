@@ -15,7 +15,7 @@ public class OperadorDao extends BaseDao {
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
 
-    public static void EditarDescripcion(int id, String desc){
+    public static void EditarDescripcion(int id, String desc) {
         String user = "root";
         String pass = "root";
         String url = "jdbc:mysql://localhost:3306/mysystem4?serverTimezone=America/Lima";
@@ -41,7 +41,7 @@ public class OperadorDao extends BaseDao {
     }
 
 
-    public int  promedioFuncion(int  id) {
+    public int promedioFuncion(int id) {
         Double promedioD = null;
         int promedioI = 0;
 
@@ -66,7 +66,7 @@ public class OperadorDao extends BaseDao {
         return promedioI;
     }
 
-    public int  cantidadPorFuncion(int  id) {
+    public int cantidadPorFuncion(int id) {
         int cantidad = 0;
 
         String sql = "select sum(cantidad_por_funcion) from compradefunciones where idfuncion=? group by idfuncion ;";
@@ -78,7 +78,7 @@ public class OperadorDao extends BaseDao {
 
             try (ResultSet rs = pstmt.executeQuery();) {
                 if (rs.next()) {
-                    cantidad= rs.getInt(1);
+                    cantidad = rs.getInt(1);
 
                 }
             }
@@ -91,7 +91,7 @@ public class OperadorDao extends BaseDao {
     }
 
 
-    public int  cantidadAforo(int  id) {
+    public int cantidadAforo(int id) {
         int cantidad = 0;
         String sql = "select aforo_operador from funciones where idfuncion=? ;";
         try (Connection conn = this.getConnection();
@@ -100,7 +100,7 @@ public class OperadorDao extends BaseDao {
 
             try (ResultSet rs = pstmt.executeQuery();) {
                 if (rs.next()) {
-                    cantidad= rs.getInt(1);
+                    cantidad = rs.getInt(1);
 
                 }
             }
@@ -112,18 +112,17 @@ public class OperadorDao extends BaseDao {
     }
 
 
-    public float asistenciaPorcentaje(int  id) {
-        float porcentaje=0;
-        if(this.cantidadAforo(id)!=0){
-            porcentaje=(float) this.cantidadPorFuncion(id)/(this.cantidadPorFuncion(id)+this.cantidadAforo(id))*100;
+    public float asistenciaPorcentaje(int id) {
+        float porcentaje = 0;
+        if (this.cantidadAforo(id) != 0) {
+            porcentaje = (float) this.cantidadPorFuncion(id) / (this.cantidadPorFuncion(id) + this.cantidadAforo(id)) * 100;
 
         }
-       return Math.round(porcentaje);
+        return Math.round(porcentaje);
     }
 
 
-
-    public void actulizarCalificacion(int id,double promedio){
+    public void actulizarCalificacion(int id, double promedio) {
         try (Connection conn = this.getConnection();) {
             String sql = "update funciones set calificacion=?" +
                     " where idfuncion=?;";
@@ -139,13 +138,8 @@ public class OperadorDao extends BaseDao {
     }
 
 
-
-
-
-
-
-    public ArrayList<BFuncion> filtradoFunciones(String filtro ,String inicio , String fin){
-        if (filtro.equals("") || filtro.equals("defecto")){
+    public ArrayList<BFuncion> filtradoFunciones(String filtro, String inicio, String fin) {
+        if (filtro.equals("") || filtro.equals("defecto")) {
             ArrayList<BFuncion> todasLasFunciones = new ArrayList<>();
             try {
                 String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
@@ -167,9 +161,9 @@ public class OperadorDao extends BaseDao {
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
-                while (rs.next()){
+                while (rs.next()) {
                     BFuncion fu = new BFuncion();
-                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                    if ((inicio == null && fin == null) || (inicio.equals("") && fin.equals(""))) {
                         fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                         fu.setPelicula(rs.getString(2));
                         fu.setFecha(rs.getString(3));
@@ -177,28 +171,28 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        int calificacion = this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
-                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                         fu.setExisteCompra(rs.getInt(9));
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         todasLasFunciones.add(fu);
-                    }else{
-                        if(fin==null || fin.equals("")){
-                            fin="2050-01-01";
+                    } else {
+                        if (fin == null || fin.equals("")) {
+                            fin = "2050-01-01";
                         }
-                        if(inicio==null || inicio.equals("")){
-                            inicio="0000-00-00";
+                        if (inicio == null || inicio.equals("")) {
+                            inicio = "0000-00-00";
                         }
                         String[] splitinicio = inicio.split("-");
                         String[] splitfin = fin.split("-");
-                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
-                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
+                        LocalDate date1 = LocalDate.of(Integer.parseInt(splitinicio[0]), Integer.parseInt(splitinicio[1]), Integer.parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer.parseInt(splitfin[0]), Integer.parseInt(splitfin[1]), Integer.parseInt(splitfin[2]));
 
-                        String fecha= rs.getString(3);
+                        String fecha = rs.getString(3);
                         String[] splitfecha = fecha.split("-");
-                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
-                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                        LocalDate date3 = LocalDate.of(Integer.parseInt(splitfecha[0]), Integer.parseInt(splitfecha[1]), Integer.parseInt(splitfecha[2]));
+                        if (date3.compareTo(date1) >= 0 && date2.compareTo(date3) >= 0) {
                             fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                             fu.setPelicula(rs.getString(2));
                             fu.setFecha(fecha);
@@ -206,9 +200,9 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            int calificacion = this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
-                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                             fu.setExisteCompra(rs.getInt(9));
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             todasLasFunciones.add(fu);
@@ -217,14 +211,14 @@ public class OperadorDao extends BaseDao {
 
 
                 }
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
 
             return todasLasFunciones;
         }
 
-        if (filtro.equals("Funciones Disponibles")){
+        if (filtro.equals("Funciones Disponibles")) {
             ArrayList<BFuncion> funcionesDisponibles = new ArrayList<>();
             try {
                 String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
@@ -243,9 +237,9 @@ public class OperadorDao extends BaseDao {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
 
-                while (rs.next()){
+                while (rs.next()) {
                     BFuncion fu = new BFuncion();
-                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                    if ((inicio == null && fin == null) || (inicio.equals("") && fin.equals(""))) {
                         fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                         fu.setPelicula(rs.getString(2));
                         fu.setFecha(rs.getString(3));
@@ -253,27 +247,27 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        int calificacion = this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
-                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         funcionesDisponibles.add(fu);
-                    }else{
-                        if(fin==null || fin.equals("")){
-                            fin="2050-01-01";
+                    } else {
+                        if (fin == null || fin.equals("")) {
+                            fin = "2050-01-01";
                         }
-                        if(inicio==null || inicio.equals("")){
-                            inicio="0000-00-00";
+                        if (inicio == null || inicio.equals("")) {
+                            inicio = "0000-00-00";
                         }
                         String[] splitinicio = inicio.split("-");
                         String[] splitfin = fin.split("-");
-                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
-                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
+                        LocalDate date1 = LocalDate.of(Integer.parseInt(splitinicio[0]), Integer.parseInt(splitinicio[1]), Integer.parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer.parseInt(splitfin[0]), Integer.parseInt(splitfin[1]), Integer.parseInt(splitfin[2]));
 
-                        String fecha= rs.getString(3);
+                        String fecha = rs.getString(3);
                         String[] splitfecha = fecha.split("-");
-                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
-                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                        LocalDate date3 = LocalDate.of(Integer.parseInt(splitfecha[0]), Integer.parseInt(splitfecha[1]), Integer.parseInt(splitfecha[2]));
+                        if (date3.compareTo(date1) >= 0 && date2.compareTo(date3) >= 0) {
                             fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                             fu.setPelicula(rs.getString(2));
                             fu.setFecha(fecha);
@@ -281,9 +275,9 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            int calificacion = this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
-                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             funcionesDisponibles.add(fu);
                         }
@@ -292,7 +286,7 @@ public class OperadorDao extends BaseDao {
 
                 }
 
-            } catch (SQLException e){
+            } catch (SQLException e) {
 
                 throw new RuntimeException(e);
             }
@@ -312,9 +306,9 @@ public class OperadorDao extends BaseDao {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
 
-                while (rs.next()){
+                while (rs.next()) {
                     BFuncion fu = new BFuncion();
-                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                    if ((inicio == null && fin == null) || (inicio.equals("") && fin.equals(""))) {
                         fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                         fu.setPelicula(rs.getString(2));
                         fu.setFecha(rs.getString(3));
@@ -322,27 +316,27 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        int calificacion = this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
-                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMejorCalif.add(fu);
-                    }else{
-                        if(fin==null || fin.equals("")){
-                            fin="2050-01-01";
+                    } else {
+                        if (fin == null || fin.equals("")) {
+                            fin = "2050-01-01";
                         }
-                        if(inicio==null || inicio.equals("")){
-                            inicio="0000-00-00";
+                        if (inicio == null || inicio.equals("")) {
+                            inicio = "0000-00-00";
                         }
                         String[] splitinicio = inicio.split("-");
                         String[] splitfin = fin.split("-");
-                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
-                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
+                        LocalDate date1 = LocalDate.of(Integer.parseInt(splitinicio[0]), Integer.parseInt(splitinicio[1]), Integer.parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer.parseInt(splitfin[0]), Integer.parseInt(splitfin[1]), Integer.parseInt(splitfin[2]));
 
-                        String fecha= rs.getString(3);
+                        String fecha = rs.getString(3);
                         String[] splitfecha = fecha.split("-");
-                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
-                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                        LocalDate date3 = LocalDate.of(Integer.parseInt(splitfecha[0]), Integer.parseInt(splitfecha[1]), Integer.parseInt(splitfecha[2]));
+                        if (date3.compareTo(date1) >= 0 && date2.compareTo(date3) >= 0) {
                             fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                             fu.setPelicula(rs.getString(2));
                             fu.setFecha(fecha);
@@ -350,21 +344,21 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            int calificacion = this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
-                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMejorCalif.add(fu);
                         }
                     }
                 }
 
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             return listaFunMejorCalif;
         }
-        if (filtro.equals("Mas visto")){
+        if (filtro.equals("Mas visto")) {
             ArrayList<BFuncion> listaFunMasVis = new ArrayList<>();
             try {
                 String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
@@ -383,9 +377,9 @@ public class OperadorDao extends BaseDao {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
 
-                while (rs.next()){
+                while (rs.next()) {
                     BFuncion fu = new BFuncion();
-                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                    if ((inicio == null && fin == null) || (inicio.equals("") && fin.equals(""))) {
                         fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                         fu.setPelicula(rs.getString(2));
                         fu.setFecha(rs.getString(3));
@@ -393,27 +387,27 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        int calificacion = this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
-                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMasVis.add(fu);
-                    }else{
-                        if(fin==null || fin.equals("")){
-                            fin="2050-01-01";
+                    } else {
+                        if (fin == null || fin.equals("")) {
+                            fin = "2050-01-01";
                         }
-                        if(inicio==null || inicio.equals("")){
-                            inicio="0000-00-00";
+                        if (inicio == null || inicio.equals("")) {
+                            inicio = "0000-00-00";
                         }
                         String[] splitinicio = inicio.split("-");
                         String[] splitfin = fin.split("-");
-                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
-                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
+                        LocalDate date1 = LocalDate.of(Integer.parseInt(splitinicio[0]), Integer.parseInt(splitinicio[1]), Integer.parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer.parseInt(splitfin[0]), Integer.parseInt(splitfin[1]), Integer.parseInt(splitfin[2]));
 
-                        String fecha= rs.getString(3);
+                        String fecha = rs.getString(3);
                         String[] splitfecha = fecha.split("-");
-                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
-                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                        LocalDate date3 = LocalDate.of(Integer.parseInt(splitfecha[0]), Integer.parseInt(splitfecha[1]), Integer.parseInt(splitfecha[2]));
+                        if (date3.compareTo(date1) >= 0 && date2.compareTo(date3) >= 0) {
                             fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                             fu.setPelicula(rs.getString(2));
                             fu.setFecha(fecha);
@@ -421,21 +415,21 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            int calificacion = this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
-                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMasVis.add(fu);
                         }
                     }
                 }
 
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             return listaFunMasVis;
         }
-        if (filtro.equals("Menos visto")){
+        if (filtro.equals("Menos visto")) {
             ArrayList<BFuncion> listaFunMenVis = new ArrayList<>();
             try {
 
@@ -455,9 +449,9 @@ public class OperadorDao extends BaseDao {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
 
-                while (rs.next()){
+                while (rs.next()) {
                     BFuncion fu = new BFuncion();
-                    if ((inicio==null && fin==null )||(inicio.equals("") && fin.equals(""))){
+                    if ((inicio == null && fin == null) || (inicio.equals("") && fin.equals(""))) {
                         fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                         fu.setPelicula(rs.getString(2));
                         fu.setFecha(rs.getString(3));
@@ -465,27 +459,27 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        int calificacion = this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
-                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMenVis.add(fu);
-                    }else{
-                        if(fin==null || fin.equals("")){
-                            fin="2050-01-01";
+                    } else {
+                        if (fin == null || fin.equals("")) {
+                            fin = "2050-01-01";
                         }
-                        if(inicio==null || inicio.equals("")){
-                            inicio="0000-00-00";
+                        if (inicio == null || inicio.equals("")) {
+                            inicio = "0000-00-00";
                         }
                         String[] splitinicio = inicio.split("-");
                         String[] splitfin = fin.split("-");
-                        LocalDate date1 = LocalDate.of(Integer. parseInt(splitinicio[0]), Integer. parseInt(splitinicio[1]), Integer. parseInt(splitinicio[2]));
-                        LocalDate date2 = LocalDate.of(Integer. parseInt(splitfin[0]), Integer. parseInt(splitfin[1]), Integer. parseInt(splitfin[2]));
+                        LocalDate date1 = LocalDate.of(Integer.parseInt(splitinicio[0]), Integer.parseInt(splitinicio[1]), Integer.parseInt(splitinicio[2]));
+                        LocalDate date2 = LocalDate.of(Integer.parseInt(splitfin[0]), Integer.parseInt(splitfin[1]), Integer.parseInt(splitfin[2]));
 
-                        String fecha= rs.getString(3);
+                        String fecha = rs.getString(3);
                         String[] splitfecha = fecha.split("-");
-                        LocalDate date3 = LocalDate.of(Integer. parseInt(splitfecha[0]), Integer. parseInt(splitfecha[1]), Integer. parseInt(splitfecha[2]));
-                        if(date3.compareTo(date1)>=0 && date2.compareTo(date3)>=0){
+                        LocalDate date3 = LocalDate.of(Integer.parseInt(splitfecha[0]), Integer.parseInt(splitfecha[1]), Integer.parseInt(splitfecha[2]));
+                        if (date3.compareTo(date1) >= 0 && date2.compareTo(date3) >= 0) {
                             fu.setIdFuncion(Integer.parseInt(rs.getString(1)));
                             fu.setPelicula(rs.getString(2));
                             fu.setFecha(fecha);
@@ -493,23 +487,24 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            int calificacion = this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
-                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(), calificacion);
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMenVis.add(fu);
                         }
                     }
                 }
 
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             return listaFunMenVis;
         }
         return null;
     }
-    public int  obtenerDuracionPelicula(int  idpelicula) {
+
+    public int obtenerDuracionPelicula(int idpelicula) {
 
         Integer duracion = null;
         String sql = "select duracion from peliculas where idpelicula=? ;";
@@ -531,7 +526,7 @@ public class OperadorDao extends BaseDao {
         return duracion;
     }
 
-    public int  obtenerDuracionFuncion(int  idfuncion) {
+    public int obtenerDuracionFuncion(int idfuncion) {
 
         Integer duracion = null;
         String sql = "select pe.duracion  from funciones f \n" +
@@ -555,15 +550,15 @@ public class OperadorDao extends BaseDao {
         return duracion;
     }
 
-    public ArrayList<BPeliculas> filtradoPelicula(String filtro2){
-        if (filtro2.equals("") || filtro2.equals("defecto")){
+    public ArrayList<BPeliculas> filtradoPelicula(String filtro2) {
+        if (filtro2.equals("") || filtro2.equals("defecto")) {
             ArrayList<BPeliculas> todasLasPeliculas = new ArrayList<>();
             try {
                 String sql = "SELECT idpelicula, nombre, duracion,genero, round(calificacion) FROM peliculas;;";
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
-                while (rs.next()){
+                while (rs.next()) {
                     BPeliculas fu = new BPeliculas();
                     fu.setIdpeliculas(Integer.parseInt(rs.getString(1)));
                     fu.setNombre(rs.getString(2));
@@ -573,13 +568,13 @@ public class OperadorDao extends BaseDao {
 
                     todasLasPeliculas.add(fu);
                 }
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
 
             return todasLasPeliculas;
         }
-        if (filtro2.equals("Mejor calificado")){
+        if (filtro2.equals("Mejor calificado")) {
             ArrayList<BPeliculas> listaPeliMejorCalif = new ArrayList<>();
             try {
                 String sql = "SELECT idpelicula, nombre, duracion,genero, ROUND(calificacion) FROM peliculas order by calificacion desc;";
@@ -587,7 +582,7 @@ public class OperadorDao extends BaseDao {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
 
-                while (rs.next()){
+                while (rs.next()) {
                     BPeliculas fu = new BPeliculas();
                     fu.setIdpeliculas(Integer.parseInt(rs.getString(1)));
                     fu.setNombre(rs.getString(2));
@@ -596,11 +591,10 @@ public class OperadorDao extends BaseDao {
                     fu.setCalificacion(rs.getInt(5));
 
 
-
                     listaPeliMejorCalif.add(fu);
                 }
 
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             return listaPeliMejorCalif;
@@ -610,9 +604,8 @@ public class OperadorDao extends BaseDao {
     }
 
 
-
     //CREAR FUNCIONES
-    private static String sql_crear_func="INSERT INTO funciones (fecha,hora,precio_ticket,edad_minima,idpersonal,idsala,idpelicula, aforo_operador) VALUES (?,?,?,?,?,?,?,?);";
+    private static String sql_crear_func = "INSERT INTO funciones (fecha,hora,precio_ticket,edad_minima,idpersonal,idsala,idpelicula, aforo_operador) VALUES (?,?,?,?,?,?,?,?);";
 
     public void crearFuncion(BFuncion funcion) {
 
@@ -627,10 +620,10 @@ public class OperadorDao extends BaseDao {
             pstmt.setInt(5, funcion.getIdPersonal());
             pstmt.setInt(6, funcion.getIdSala());
             pstmt.setInt(7, funcion.getIdPelicula());
-            pstmt.setInt(8,funcion.getAforoOperador());
+            pstmt.setInt(8, funcion.getAforoOperador());
             pstmt.executeUpdate();
 
-        }catch (SQLException error) {
+        } catch (SQLException error) {
             error.printStackTrace();
         }
     }
@@ -656,6 +649,7 @@ public class OperadorDao extends BaseDao {
 
         return listaPeliculas;
     }
+
     public ArrayList<BFuncion> listaFuncionesdeunPersonal(int idpersonal) {
 
         ArrayList<BFuncion> listaFuncionesP = new ArrayList<>();
@@ -737,39 +731,39 @@ public class OperadorDao extends BaseDao {
         return listap;
     }
 
-    public void crearPersonal(String jefe,String limpiador1,String limpiador2)  {
+    public void crearPersonal(String jefe, String limpiador1, String limpiador2) {
 
         String sql = "INSERT INTO equiposdelimpieza(jefe,limpiador1, limpiador2)\n" +
                 "VALUES (?,?,?);";
 
-        try(Connection conn= this.getConnection();
-            PreparedStatement pstmt= conn.prepareStatement(sql)){
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, jefe);
             pstmt.setString(2, limpiador1);
-            pstmt.setString(3,limpiador2 );
+            pstmt.setString(3, limpiador2);
             pstmt.executeUpdate();
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Hubo un error en la conexiÃ³n!");
             e.printStackTrace();
         }
     }
 
-    public void asignarProfesionalaPelicula(int peliculas_idpelicula,int profesionales_idprofesional)  {
+    public void asignarProfesionalaPelicula(int peliculas_idpelicula, int profesionales_idprofesional) {
 
         String sql = "INSERT INTO peliculas_has_profesionales (peliculas_idpelicula, profesionales_idprofesional) VALUES (?,?);";
 
-        try(Connection conn= this.getConnection();
-            PreparedStatement pstmt= conn.prepareStatement(sql)){
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, peliculas_idpelicula);
             pstmt.setInt(2, profesionales_idprofesional);
             pstmt.executeUpdate();
-        }catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Hubo un error en la conexiÃ³n!");
             e.printStackTrace();
         }
     }
 
-    public void borrarProfesionaldePelicula(int peliculas_idpelicula,int profesionales_idprofesional) {
+    public void borrarProfesionaldePelicula(int peliculas_idpelicula, int profesionales_idprofesional) {
 
         try (Connection conn = this.getConnection();) {
             String sql = "DELETE FROM peliculas_has_profesionales WHERE (peliculas_idpelicula = ?) and (profesionales_idprofesional = ?);";
@@ -806,8 +800,6 @@ public class OperadorDao extends BaseDao {
     }
 
 
-
-
     public void borrarFuncion(int idfuncion) {
 
         try (Connection conn = this.getConnection();) {
@@ -820,6 +812,7 @@ public class OperadorDao extends BaseDao {
             e.printStackTrace();
         }
     }
+
     public void borrarPersonal(int idPersonal) {
 
         try (Connection conn = this.getConnection();) {
@@ -832,7 +825,6 @@ public class OperadorDao extends BaseDao {
             e.printStackTrace();
         }
     }
-
 
 
     public ArrayList<BEquipoLimpieza> obtenerPersonal() {
@@ -865,18 +857,18 @@ public class OperadorDao extends BaseDao {
 
         ArrayList<BEquipoLimpieza> listaequipoLimpiezas = new ArrayList<>();
 
-        String sql="SELECT * FROM mysystem4.equiposdelimpieza " +
+        String sql = "SELECT * FROM mysystem4.equiposdelimpieza " +
                 "where (lower(jefe) like ?) or (lower(limpiador1) like ?) or (lower(limpiador2) like ?)";
 
-        try (Connection conn= this.getConnection();
-             PreparedStatement pstmt= conn.prepareStatement(sql)) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%" + txtBuscar.toLowerCase() + "%");
             pstmt.setString(2, "%" + txtBuscar.toLowerCase() + "%");
             pstmt.setString(3, "%" + txtBuscar.toLowerCase() + "%");
 
 
-            try(ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
                     equipoLimpieza.setIdpersonal(rs.getInt(1));
@@ -899,17 +891,17 @@ public class OperadorDao extends BaseDao {
 
         ArrayList<BProfesional> lista = new ArrayList<>();
 
-        String sql="SELECT idprofesional,nombre,apellido,rol " +
+        String sql = "SELECT idprofesional,nombre,apellido,rol " +
                 "FROM profesionales where lower(nombre) like ? or lower(apellido) like ?";
 
 
-        try (Connection conn= this.getConnection();
-             PreparedStatement pstmt= conn.prepareStatement(sql)) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%" + txtBuscar.toLowerCase() + "%");
             pstmt.setString(2, "%" + txtBuscar.toLowerCase() + "%");
 
-            try(ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     BProfesional pr = new BProfesional();
                     pr.setIdProfesional(rs.getInt(1));
@@ -964,7 +956,7 @@ public class OperadorDao extends BaseDao {
 
             return listaReporte;
         }
-        if (fil_fecha!=null && fil_sala != null) {
+        if (fil_fecha != null && fil_sala != null) {
             ArrayList<BSedeYSala> listaReporte2 = new ArrayList<>();
             try (Connection conn = this.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql_2);) {
@@ -994,7 +986,8 @@ public class OperadorDao extends BaseDao {
         }
         return null;
     }
-    public int  ObtenercalProf(int  id) {
+
+    public int ObtenercalProf(int id) {
 
         Double duracionD = null;
         int duracionI = 0;
@@ -1019,6 +1012,39 @@ public class OperadorDao extends BaseDao {
 
 
         return duracionI;
+    }
+
+
+    public ArrayList<BProfesional> listaProfPeliculaRol(int idPeli) {
+
+        ArrayList<BProfesional> lista = new ArrayList<>();
+
+        String sql = "SELECT ph.profesionales_idprofesional,p.rol\n" +
+                "FROM peliculas_has_profesionales ph left join profesionales p\n" +
+                "on (ph.profesionales_idprofesional=p.idprofesional)\n" +
+                "where peliculas_idpelicula = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setInt(1, idPeli);
+
+
+            try (ResultSet resultSet = pstmt.executeQuery();) {
+
+                while (resultSet.next()) {
+
+                    BProfesional p = new BProfesional();
+                    p.setIdProfesional(resultSet.getInt(1));
+                    p.setRol(resultSet.getString(2));
+                    lista.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexion!");
+            e.printStackTrace();
+        }
+        return lista;
     }
 
 

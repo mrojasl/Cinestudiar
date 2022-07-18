@@ -344,6 +344,27 @@ public class OperadorServlet extends HttpServlet {
                     boolean indicadorFecha=false;
                     boolean indicadorlimite=false;
 
+                    boolean indicadorProfesionales=false;
+
+
+                    ArrayList<BProfesional> listaProfRol = operadorDao.listaProfPeliculaRol(idPelicula);
+                    int validarRolA= 0;
+                    int validarRolD= 0;
+                    for (BProfesional p : listaProfRol){
+                        if (p.getRol().equalsIgnoreCase("a")){
+                            validarRolA = 1;
+                        }
+                        if (p.getRol().equalsIgnoreCase("p")){
+                            validarRolD = 1;
+                        }
+                    }
+                    if (validarRolA==1 && validarRolD==1){
+                        indicadorProfesionales = true;
+                    } else {
+                        request.getSession().setAttribute("errorRolesPeli", "Error al crear: Tu película necesita al menos un actor y un director");
+                    }
+
+
 
                     for(BSedeYSala sala: AforosAdmin){
                         if (idSala==sala.getIdSala()){
@@ -432,7 +453,7 @@ public class OperadorServlet extends HttpServlet {
 
 
 
-                        if (indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
+                        if (indicadorProfesionales && indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
                             funciones.setFecha(fecha);
                             funciones.setHora(hora);
                             funciones.setIdSala(idSala);
