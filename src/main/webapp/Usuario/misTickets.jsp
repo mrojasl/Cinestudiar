@@ -285,7 +285,7 @@
                             <% if(diff > 0) {%>
                             <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado
                             </button></td>
-                            <%if (!funcionesDao.habilitarBoton(funciones.getHistorialcompra()) && !funcionesDao.habilitarBoton2(funciones.getHistorialcompra()) ) {%>
+                            <%if (!funcionesDao.habilitarBoton(funciones.getHistorialcompra()) ) {%>
                             <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
                             <%}else{%>
                                 <td><p style="font-size: 17px;margin-top: 15px" align="left">Gracias<br>por calificar </p></td>
@@ -301,7 +301,7 @@
 
                             <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado
                             </button></td>
-                            <%if(!funcionesDao.habilitarBoton(funciones.getHistorialcompra()) && !funcionesDao.habilitarBoton2(funciones.getHistorialcompra()) ) {%>
+                            <%if(!funcionesDao.habilitarBoton(funciones.getHistorialcompra())  ) {%>
                             <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
                             <%}else{%>
                             <td><p style="font-size: 17px;margin-top: 15px" align="left">Gracias<br>por calificar</p></td>
@@ -370,7 +370,7 @@
 
 
 <br><br>
-<footer class="mt-auto" style="background-color: #D6D7DA;position: relative;bottom: 0;width: 100%">
+<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
     <div class="container"  style="background-color: #D6D7DA">
         <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
         <div class="d-flex bd-highlight">
