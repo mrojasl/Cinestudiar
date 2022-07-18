@@ -355,7 +355,7 @@
                                     <div class="boxfuncion">
                                         <h5 style="margin-top: 10px;margin-bottom: 10px"><%=listapeliculas.get(k-1).getNombre()%></h5>
                                         <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="180px" height="280px">
-                                        <a type="button" class="btn btn-outline-info btn-sm btn-rounded " data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/DetallesPelicula?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
+                                        <a type="button" class="btn btn-outline-info btn-sm btn-rounded " data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/DetallesPelicula?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver más</a>
                                     </div>
                                 </div>
                                 <% if (k%5==0) {
@@ -386,7 +386,8 @@
             </div>
         </div>
     </div>
-
+    <br>
+    <br>
     <!-- XD-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

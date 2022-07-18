@@ -31,7 +31,7 @@
     </div>
 </nav>
 
-<body class="bodycolor" STYLE="  background-image: url('<%=request.getContextPath()%>/Imagenes/fondo.jpg'); background-size: cover;">
+<body class="bodycolor" STYLE="  background-image: url('<%=request.getContextPath()%>/Imagenes/fondo.jpg'); background-size: cover;background-attachment: fixed;">
 
 </body>
 

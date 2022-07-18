@@ -305,6 +305,9 @@
     <br>
 
     <H2>Horarios disponibles</H2>
+    <H7>(Para comprar debes "Iniciar sesión")</H7>
+    <br>
+    <br>
 
     <table id="tablax" class="table table-striped " style="background-color:#cbe4f1">
       <thead>
@@ -339,7 +342,7 @@
         </td>
       </tr>
       <%}%>
-      </tbody>>
+      </tbody>
     </table>
 
 
@@ -408,7 +411,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <br><br><br><br><br><br>
-<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: -610px;width: 100%">
+<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: -700px;width: 100%">
   <div class="container"  style="background-color: #D6D7DA">
     <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
     <div class="d-flex bd-highlight">
