@@ -56,16 +56,22 @@
         <section>
             <ul class="navbar navbar-dark bg-dark">
                 <li class="nav-item">
+                    <a ></a>
+                </li>
+                <li class="nav-item">
                     <a  href="<%=request.getContextPath()%>/OperadorServlet?action=peliculas" class="navbar-brand">Películas</a>
                 </li>
                 <li class="nav-item">
                     <a  href="<%=request.getContextPath()%>/OperadorServlet?action=funciones" class="navbar-brand">Funciones</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-brand" aria-current="page">Profesionales</a>
+                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-link active" aria-current="page">Profesionales</a>
                 </li>
                 <li class="nav-item">
                     <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-brand" aria-current="page">Personal</a>
+                </li>
+                <li class="nav-item">
+                    <a ></a>
                 </li>
             </ul>
 

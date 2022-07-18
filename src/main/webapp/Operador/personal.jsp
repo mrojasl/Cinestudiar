@@ -53,6 +53,9 @@
         <section>
             <ul class="navbar navbar-dark bg-dark">
                 <li class="nav-item">
+                    <a ></a>
+                </li>
+                <li class="nav-item">
                     <a  href="<%=request.getContextPath()%>/OperadorServlet?action=peliculas" class="navbar-brand">Películas</a>
                 </li>
                 <li class="nav-item">
@@ -61,8 +64,11 @@
                 <li class="nav-item">
                     <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-brand" aria-current="page">Profesionales</a>
                 </li>
-                <li class="nav-item align-content-center">
-                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="nav-link active" aria-current="page">Personal</a>
+                <li class="nav-item">
+                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-link active" aria-current="page">Personal</a>
+                </li>
+                <li class="nav-item">
+                    <a ></a>
                 </li>
             </ul>
 
@@ -78,16 +84,7 @@
 
                 <div class="input-group mb-3 col">
 
-
-
-
-
                 </div>
-
-
-
-
-
 
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"

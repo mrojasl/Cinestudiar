@@ -52,7 +52,10 @@
         <section>
             <ul class="navbar navbar-dark bg-dark">
                 <li class="nav-item">
-                    <a  href="<%=request.getContextPath()%>/OperadorServlet?action=peliculas" class="navbar-brand">Películas</a>
+                    <a ></a>
+                </li>
+                <li class="nav-item">
+                    <a  href="<%=request.getContextPath()%>/OperadorServlet?action=peliculas" class="navbar-link active">Películas</a>
                 </li>
                 <li class="nav-item">
                     <a  href="<%=request.getContextPath()%>/OperadorServlet?action=funciones" class="navbar-brand">Funciones</a>
@@ -62,6 +65,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-brand" aria-current="page">Personal</a>
+                </li>
+                <li class="nav-item">
+                    <a ></a>
                 </li>
             </ul>
 
@@ -77,19 +83,10 @@
 
                 <div class="input-group mb-3 col">
 
-                <!-- Button trigger modal -->
-                <button style="height: 40px"
-                        type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
-                                 data-bs-target="#staticBackdrop">
-                    Crear Película
-                </button>
+
 
                 </div>
 
-                <div class="input-group mb-3 col">
-                </div>
-                <div class="input-group mb-3 col">
-                </div>
 
 
 
@@ -160,16 +157,6 @@
                 </div>
             </div>
 
-                <div class="input-group mb-3 col">
-
-
-                    <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=buscarpelicula">
-
-                        <input
-                                name="txtbuscar" class="form-control" type="text" placeholder="Buscar por titulo"
-                               aria-label="default input example" value="<%=txtbuscado%>">
-                    </form>
-                </div>
 
 
 
@@ -183,6 +170,12 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="dataTables_length" id="tableUp_length">
                             <label></label>
+                            <!-- Button trigger modal -->
+                            <button style="height: 40px"
+                                    type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                Crear Película
+                            </button>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
