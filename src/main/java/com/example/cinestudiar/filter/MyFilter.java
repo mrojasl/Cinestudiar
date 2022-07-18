@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "MyFilter",servletNames = {"CarritoServlet","PerfilServlet","YaComproServlet","ServAdmin","inicioServlet","DetallesServlet","OperadorServlet"})
+@WebFilter(filterName = "MyFilter",servletNames = {"CarritoServlet","PerfilServlet","YaComproServlet","ServAdmin","inicioServlet","DetallesServlet","OperadorServlet","CalificacionServlet","ReporteServlet"})
 public class MyFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
