@@ -287,7 +287,7 @@
                             <%if (!funcionesDao.habilitarBoton(funciones.getHistorialcompra()) && !funcionesDao.habilitarBoton2(funciones.getHistorialcompra()) ) {%>
                             <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
                             <%}else{%>
-                                <p>Muchas gracias por calificar </p>
+                                <td><p style="font-size: 17px;margin-top: 15px" align="left">Gracias<br>por calificar </p></td>
                             <%}%>
                             <%} else if (diff < 0) {%>
                             <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente
@@ -303,7 +303,7 @@
                             <%if(!funcionesDao.habilitarBoton(funciones.getHistorialcompra()) && !funcionesDao.habilitarBoton2(funciones.getHistorialcompra()) ) {%>
                             <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
                             <%}else{%>
-                            <p>Muchas gracias por calificar </p>
+                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Gracias<br>por calificar</p></td>
                             <%}%>
                             <%} else if (diff2 < 0) {%>
 

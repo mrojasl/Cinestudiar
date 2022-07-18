@@ -251,10 +251,9 @@
 
                                 </div>
                                 <!-- Foto-->
-                                <div class="form-outline mb-4">
+                                <div hidden class="form-outline mb-4">
                                     <div class="input-group">
-                                        <div class="input-group-text">Foto: </div>
-                                        <input style="margin-left: 20px" type="file" name="picture">
+                                        <input hiddenstyle="margin-left: 20px" type="file" name="picture">
                                     </div>
                                 </div>
 
