@@ -43,7 +43,7 @@ public class OperadorDao extends BaseDao {
         if (filtro.equals("") || filtro.equals("defecto")){
             ArrayList<BFuncion> todasLasFunciones = new ArrayList<>();
             try {
-                String sql = "select f.idfuncion as 'IdFunción',p.nombre as `Título de Película`,\n" +
+                String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
                         "                        f.fecha,f.hora,\n" +
                         "                        se.nombre_sede as `Sede`,\n" +
                         "                        sa.idsala as `Sala`,\n" +
@@ -116,7 +116,7 @@ public class OperadorDao extends BaseDao {
         if (filtro.equals("Funciones Disponibles")){
             ArrayList<BFuncion> funcionesDisponibles = new ArrayList<>();
             try {
-                String sql = "select f.idfuncion as 'IdFunción',p.nombre as `Título de Película`,\n" +
+                String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
                         "f.fecha,f.hora,\n" +
                         "se.nombre_sede as `Sede`,\n" +
                         "sa.idsala as `Sala`,\n" +
@@ -185,7 +185,7 @@ public class OperadorDao extends BaseDao {
         if (filtro.equals("Mejor calificado")) {
             ArrayList<BFuncion> listaFunMejorCalif = new ArrayList<>();
             try {
-                String sql = "select f.idfuncion as 'IdFunción',p.nombre as `Título de Película`,\n" +
+                String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
                         "f.fecha,f.hora,\n" +
                         "se.nombre_sede as `Sede`,\n" +
                         "sa.idsala as `Sala`,\n" +
@@ -249,7 +249,7 @@ public class OperadorDao extends BaseDao {
         if (filtro.equals("Mas visto")){
             ArrayList<BFuncion> listaFunMasVis = new ArrayList<>();
             try {
-                String sql = "select f.idfuncion as 'IdFunción',p.nombre as `Título de Película`,\n" +
+                String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
                         "f.fecha,f.hora,\n" +
                         "se.nombre_sede as `Sede`,\n" +
                         "sa.idsala as `Sala`,\n" +
@@ -315,7 +315,7 @@ public class OperadorDao extends BaseDao {
             ArrayList<BFuncion> listaFunMenVis = new ArrayList<>();
             try {
 
-                String sql = "select f.idfuncion as 'IdFunción',p.nombre as `Título de Película`,\n" +
+                String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
                         "f.fecha,f.hora,\n" +
                         "se.nombre_sede as `Sede`,\n" +
                         "sa.idsala as `Sala`,\n" +
@@ -629,7 +629,7 @@ public class OperadorDao extends BaseDao {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Hubo un error en la conexión!");
+            System.out.println("Hubo un error en la conexiÃ³n!");
             e.printStackTrace();
         }
         return listap;
@@ -647,7 +647,7 @@ public class OperadorDao extends BaseDao {
             pstmt.setString(3,limpiador2 );
             pstmt.executeUpdate();
         }catch(SQLException e) {
-            System.out.println("Hubo un error en la conexión!");
+            System.out.println("Hubo un error en la conexiÃ³n!");
             e.printStackTrace();
         }
     }
@@ -662,7 +662,7 @@ public class OperadorDao extends BaseDao {
             pstmt.setInt(2, profesionales_idprofesional);
             pstmt.executeUpdate();
         }catch(SQLException e) {
-            System.out.println("Hubo un error en la conexión!");
+            System.out.println("Hubo un error en la conexiÃ³n!");
             e.printStackTrace();
         }
     }
@@ -779,7 +779,9 @@ public class OperadorDao extends BaseDao {
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM mysystem4.equiposdelimpieza;");) {
+             ResultSet rs = stmt.executeQuery("SELECT e.idpersonal,e.jefe,e.limpiador1,e.limpiador2,f.idfuncion\n" +
+                     "FROM equiposdelimpieza e inner join funciones f\n" +
+                     "on(f.idpersonal=e.idpersonal) group by e.idpersonal;");) {
 
             while (rs.next()) {
                 BEquipoLimpieza equipoLimpieza = new BEquipoLimpieza();
@@ -787,6 +789,7 @@ public class OperadorDao extends BaseDao {
                 equipoLimpieza.setJefe(rs.getString(2));
                 equipoLimpieza.setLimpiador1(rs.getString(3));
                 equipoLimpieza.setLimpiador2(rs.getString(4));
+                equipoLimpieza.setEnFuncion(rs.getInt(5));
                 listaequipoLimpiezas.add(equipoLimpieza);
             }
         } catch (SQLException e) {
@@ -927,13 +930,13 @@ public class OperadorDao extends BaseDao {
 
             return listaReporte2;
         }
-            return null;
+        return null;
     }
     public int  ObtenercalProf(int  id) {
 
         Double duracionD = null;
         int duracionI = 0;
-        
+
         String sql = "select avg(calificacion) from calificaciondeprofesionales " +
                 "where idprofesional=? group by idprofesional ;";
 
