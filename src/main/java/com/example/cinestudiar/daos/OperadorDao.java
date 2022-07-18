@@ -609,35 +609,7 @@ public class OperadorDao extends BaseDao {
         return null;
     }
 
-    public ArrayList<BProfesional> obtenerProfesionalesMejorCalificados(){
-        ArrayList<BProfesional> listaProMejorCalif = new ArrayList<>();
-        try {
-            String sql = "select pro.nombre,pro.apellido,\n" +
-                    "cali.calificacion as `Calificacion`,\n" +
-                    "pro.rol as `Rol`\n" +
-                    "from peliculas p \n" +
-                    "inner join peliculas_has_profesionales php on (p.idpelicula = php.peliculas_idpelicula)\n" +
-                    "inner join profesionales pro on (php.profesionales_idprofesional=pro.idprofesional)\n" +
-                    "inner join calificaciondeprofesionales cali on (cali.idprofesional=pro.idprofesional)\n" +
-                    "order by cali.calificacion desc;";
-            Connection conn = this.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
 
-            while (rs.next()){
-                BProfesional pr = new BProfesional();
-                pr.setNombre(rs.getString(1));
-                pr.setApellido(rs.getString(2));
-                pr.setCalificacion(rs.getFloat(3));
-                pr.setRol(rs.getString(4));
-
-                listaProMejorCalif.add(pr);
-            }
-        } catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-        return listaProMejorCalif;
-    }
 
     //CREAR FUNCIONES
     private static String sql_crear_func="INSERT INTO funciones (fecha,hora,precio_ticket,edad_minima,idpersonal,idsala,idpelicula, aforo_operador) VALUES (?,?,?,?,?,?,?,?);";
@@ -832,50 +804,10 @@ public class OperadorDao extends BaseDao {
 
         return listaSala;
     }
-    public BSedeYSala obtenerAforoAdmin(int idSala) {
-
-        BSedeYSala aforoAdmin = null;
-
-        String sql = "SELECT aforo_administrador FROM mysystem4.salas;";
-        try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);) {
-            pstmt.setInt(1, idSala);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    aforoAdmin = new BSedeYSala();
-                    aforoAdmin.setAforoAdministrador(rs.getString(1));
-
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return aforoAdmin;
-    }
 
 
-    public void actualizarFunción(String fecha, String hora, int precioTicket, int edadMinima, int idpersonal, int idsala, int idpelicula, int aforoOperador) {
 
-        try (Connection conn = this.getConnection();) {
-            String sql = "UPDATE funciones SET fecha = ?, hora = ?, precio_ticket = ?, edad_minima=?, idpersonal=?, idsala=?, idpelicula=?, aforo_operador=? "
-                    + "WHERE idfuncion = ?";
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, fecha);
-                pstmt.setString(2, hora);
-                pstmt.setInt(3, precioTicket);
-                pstmt.setInt(4, edadMinima);
-                pstmt.setInt(5, idpersonal);
-                pstmt.setInt(6, idsala);
-                pstmt.setInt(7, idpelicula);
-                pstmt.setInt(8, aforoOperador);
-                pstmt.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
     public void borrarFuncion(int idfuncion) {
 
         try (Connection conn = this.getConnection();) {
