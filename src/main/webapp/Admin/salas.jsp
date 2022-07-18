@@ -105,7 +105,23 @@
                     </div>
                 </div>
                 <div class="margintopsala">
+                    <% if (session.getAttribute("errorEditarAforo") != null){%>
+                    <div>
+                        <div class="alert alert-danger" role="alert">
+                            <%=session.getAttribute("errorEditarAforo")%>
+                        </div>
+                    </div>
+                    <%session.removeAttribute("errorEditarAforo");%>
+                    <%}%>
 
+                    <% if (session.getAttribute("errorEditarSede") != null){%>
+                    <div>
+                        <div class="alert alert-danger" role="alert">
+                            <%=session.getAttribute("errorEditarSede")%>
+                        </div>
+                    </div>
+                    <%session.removeAttribute("errorEditarSede");%>
+                    <%}%>
 
 
                         <div class="accordion" id="accordionPanelsStayOpenExample">
