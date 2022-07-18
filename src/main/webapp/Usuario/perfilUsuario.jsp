@@ -296,7 +296,7 @@
                     <li><i class="icono fas fa-briefcase"></i> Correo:</li>
                     <label><%=perfil.getCorreo()%></label>
                     <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>
-                    <label>05/04/2001</label>
+                    <label><%=usuario.getFechaNacimiento()%></label>
                     <li><i class="icono fas fa-user-check"></i> Contraseña:</li>
 
                     <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#demo1" aria-expanded="false">Actualizar Contraseña</button>
