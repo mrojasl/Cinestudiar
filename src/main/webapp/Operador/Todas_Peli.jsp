@@ -76,6 +76,32 @@
 
         <div class="container">
 
+            <% if (session.getAttribute("errorDuracion") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorDuracion")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorDuracion");%>
+            <%}%>
+
+            <% if (session.getAttribute("errorGenero") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorGenero")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorGenero");%>
+            <%}%>
+
+            <% if (session.getAttribute("crearPelicula") != null){%>
+            <div>
+                <div class="alert alert-success" role="alert">
+                    <%=session.getAttribute("crearPelicula")%>
+                </div>
+            </div>
+            <%session.removeAttribute("crearPelicula");%>
+            <%}%>
 
 
             <div class="row">

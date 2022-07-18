@@ -241,14 +241,44 @@ public class OperadorServlet extends HttpServlet {
             }
             case "crearpeli" ->{
                 String titulo = request.getParameter("titulo");
-                int duracion = Integer.parseInt(request.getParameter("duracion"));
                 String genero = request.getParameter("genero");
                 String descripcion = request.getParameter("descripcion");
                 Part foto = request.getPart("fotopeli");
                 InputStream fotoinput = null;
                 fotoinput = foto.getInputStream();
+                int centi = 0;
+                try{
+                    int duracion = Integer.parseInt(request.getParameter("duracion"));
 
-                peliculasDao.crearPelicula(titulo,duracion,genero,fotoinput,descripcion);
+                    if (duracion<=0){
+                        request.getSession().setAttribute("errorDuracion", "Duración de película inválida");
+                        centi = 1;
+                    }
+
+                    if (genero.equalsIgnoreCase("accion") || genero.equalsIgnoreCase("animación")
+                    || genero.equalsIgnoreCase("aventura") || genero.equalsIgnoreCase("ciencia ficcion")
+                    || genero.equalsIgnoreCase("comedia") || genero.equalsIgnoreCase("misterio")
+                    || genero.equalsIgnoreCase("suspenso") || genero.equalsIgnoreCase("drama")
+                    || genero.equalsIgnoreCase("terror")){
+
+                    } else {
+                        request.getSession().setAttribute("errorGenero", "Género de película inválido");
+                        centi = 1;
+                    }
+
+
+                    if(centi==0){
+                        request.getSession().setAttribute("crearPelicula", "Película creada con éxito");
+
+                        peliculasDao.crearPelicula(titulo,duracion,genero,fotoinput,descripcion);
+                    }
+
+                } catch (NumberFormatException e){
+                    request.getSession().setAttribute("errorDuracion", "Duración de película inválida");
+                }
+
+
+
                 response.sendRedirect(request.getContextPath() + "/OperadorServlet?action=peliculas");
 
             }
