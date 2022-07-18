@@ -47,7 +47,7 @@ public class AdminServlet extends HttpServlet {
                     break;
 
                 case "cliente":
-                    ArrayList<BUser> listaClientes= AdminDao.obtenerClientes();
+                    ArrayList<BUser> listaClientes= adminDao.obtenerClientes();
                     request.setAttribute("listaClientes",listaClientes);
                     ArrayList<BCompra> historialesCompras = AdminDao.ObtenerHistorialCompra();
                     request.setAttribute("historialdecompracliente",historialesCompras);
@@ -67,6 +67,8 @@ public class AdminServlet extends HttpServlet {
                 case "borraroperador":
                     String opcodigo = request.getParameter("opcodigo");
                     AdminDao.EliminarOperador(opcodigo);
+                    request.getSession().setAttribute("borrarOp", "Operador borrado con éxito");
+
                     response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=operador");
                     break;
 
@@ -123,6 +125,7 @@ public class AdminServlet extends HttpServlet {
 
                         } else{
                             AdminDao.crearSala(aforo, sede);
+                            request.getSession().setAttribute("creadoSala", "La sala se ha creado con exito");
 
                         }
 
@@ -163,6 +166,7 @@ public class AdminServlet extends HttpServlet {
 
                             } else{
                                 AdminDao.editarSala(id,aforo2,aforo2,sede2);
+                                request.getSession().setAttribute("editadoSala", "La sala se ha editado con éxito");
 
                             }
 
@@ -170,6 +174,8 @@ public class AdminServlet extends HttpServlet {
 
                     } else if (request.getParameter("borrar")!=null){
                         AdminDao.borrarSala(id);
+                        request.getSession().setAttribute("borradoSala", "La sala se ha eliminado con éxito");
+
                     }
                     response.sendRedirect(request.getContextPath() + "/ServAdmin");
                     break;
@@ -209,7 +215,24 @@ public class AdminServlet extends HttpServlet {
                 }
                 case "crearoperador" ->{
                     String operadorcodigo = request.getParameter("operadorcodigo");
-                    AdminDao.AsignarOperador(operadorcodigo);
+                    ArrayList<BUser> listaCli = adminDao.obtenerClientes();
+                    int centinela = 0;
+                    for (BUser cli : listaCli){
+                        if (cli.getCodigoPucp().equals(operadorcodigo)){
+                            centinela=1;
+                        }
+                    }
+                    if (centinela==0){
+                        request.getSession().setAttribute("errorCrearOp", "El código ingresado es inválido");
+                    } else{
+                        AdminDao.AsignarOperador(operadorcodigo);
+                        request.getSession().setAttribute("CrearOp", "Operador asignado con éxito");
+
+                    }
+
+
+
+
                     response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=operador");
                     break;
                 }

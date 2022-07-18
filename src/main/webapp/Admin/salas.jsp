@@ -105,6 +105,36 @@
                     </div>
                 </div>
                 <div class="margintopsala">
+                    <% if (session.getAttribute("borradoSala") != null){%>
+                    <div>
+                        <div class="alert alert-success" role="alert">
+                            <%=session.getAttribute("borradoSala")%>
+                        </div>
+                    </div>
+                    <%session.removeAttribute("borradoSala");%>
+                    <%}%>
+
+
+                    <% if (session.getAttribute("editadoSala") != null){%>
+                    <div>
+                        <div class="alert alert-success" role="alert">
+                            <%=session.getAttribute("editadoSala")%>
+                        </div>
+                    </div>
+                    <%session.removeAttribute("editadoSala");%>
+                    <%}%>
+
+
+                    <% if (session.getAttribute("creadoSala") != null){%>
+                    <div>
+                        <div class="alert alert-success" role="alert">
+                            <%=session.getAttribute("creadoSala")%>
+                        </div>
+                    </div>
+                    <%session.removeAttribute("creadoSala");%>
+                    <%}%>
+
+
                     <% if (session.getAttribute("errorEditarAforo") != null){%>
                     <div>
                         <div class="alert alert-danger" role="alert">

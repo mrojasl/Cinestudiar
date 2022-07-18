@@ -36,7 +36,7 @@ public class AdminDao extends BaseDao {
 
         return listaOperadores;
     }
-    public static ArrayList<BUser> obtenerClientes(){
+    public ArrayList<BUser> obtenerClientes(){
         ArrayList<BUser> listaClientes = new ArrayList<>();
         try {
             String user = "root";

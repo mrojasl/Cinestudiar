@@ -119,6 +119,34 @@
                     </div>
                 </div>
             </div>
+            <% if (session.getAttribute("borrarOp") != null){%>
+            <div>
+                <div class="alert alert-success" role="alert">
+                    <%=session.getAttribute("borrarOp")%>
+                </div>
+            </div>
+            <%session.removeAttribute("borrarOp");%>
+            <%}%>
+
+
+            <% if (session.getAttribute("CrearOp") != null){%>
+            <div>
+                <div class="alert alert-success" role="alert">
+                    <%=session.getAttribute("CrearOp")%>
+                </div>
+            </div>
+            <%session.removeAttribute("CrearOp");%>
+            <%}%>
+
+            <% if (session.getAttribute("errorCrearOp") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorCrearOp")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorCrearOp");%>
+            <%}%>
+
             <div class="container" >
                 <div class="row ">
                     <div class="row">
