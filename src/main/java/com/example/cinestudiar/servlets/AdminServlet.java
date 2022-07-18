@@ -32,7 +32,7 @@ public class AdminServlet extends HttpServlet {
         if (Objects.equals(usuarioLogueado.getRol(), "admin")){
             switch(action){
                 case "sala":
-                    ArrayList<BSedeYSala> listaSedes = AdminDao.obtenerSedes();
+                    ArrayList<BSedeYSala> listaSedes = adminDao.obtenerSedes();
                     request.setAttribute("listaSedes",listaSedes);
                     RequestDispatcher rd1 =request.getRequestDispatcher("Admin/salas.jsp");
                     rd1.forward(request,response);
@@ -97,14 +97,40 @@ public class AdminServlet extends HttpServlet {
         BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
 
         String action = request.getParameter("admin") == null? "sala" : request.getParameter("admin");
-
+        AdminDao adminDao = new AdminDao();
 
         if (Objects.equals(usuarioLogueado.getRol(), "admin")){
             switch (action) {
                 case "crearsala" -> {
                     int aforo = Integer.parseInt(request.getParameter("aforo"));
                     String sede = request.getParameter("sede");
-                    AdminDao.crearSala(aforo, sede);
+                    ArrayList<BSedeYSala> listaSedes = adminDao.obtenerSedes();
+
+                    if (aforo<=0 || aforo>100){
+                        request.getSession().setAttribute("errorEditarAforo", "El aforo ingresado es inválido");
+
+                    }else{
+                        int centinela = 0;
+                        for (BSedeYSala sedee : listaSedes){
+                            if (sedee.getSede().equals(sede)){
+                                centinela=1;
+                            }
+                        }
+
+                        if(centinela==0){
+
+                            request.getSession().setAttribute("errorEditarSede", "La sede ingresada es inválida");
+
+                        } else{
+                            AdminDao.crearSala(aforo, sede);
+
+                        }
+
+
+
+
+                    }
+
                     response.sendRedirect(request.getContextPath() + "/ServAdmin");
                     break;
                 }
@@ -114,10 +140,34 @@ public class AdminServlet extends HttpServlet {
                     int aforo2 = Integer.parseInt(request.getParameter("aforo2"));
                     String sede2 = request.getParameter("sede2");
                     int id = Integer.parseInt(request.getParameter("id"));
+                    ArrayList<BSedeYSala> listaSedes = adminDao.obtenerSedes();
 
 
                     if (request.getParameter("editar")!=null){
-                        AdminDao.editarSala(id,aforo2,aforo2,sede2);
+
+
+                        if(aforo2<=0 || aforo2>100){
+                            request.getSession().setAttribute("errorEditarAforo", "El aforo ingresado es inválido");
+
+                        } else{
+                            int centinela = 0;
+                            for (BSedeYSala sede : listaSedes){
+                                if (sede.getSede().equals(sede2)){
+                                    centinela=1;
+                                }
+                            }
+
+                            if(centinela==0){
+
+                                request.getSession().setAttribute("errorEditarSede", "La sede ingresada es inválida");
+
+                            } else{
+                                AdminDao.editarSala(id,aforo2,aforo2,sede2);
+
+                            }
+
+                        }
+
                     } else if (request.getParameter("borrar")!=null){
                         AdminDao.borrarSala(id);
                     }

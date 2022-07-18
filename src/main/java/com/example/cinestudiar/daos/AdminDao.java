@@ -125,7 +125,7 @@ public class AdminDao extends BaseDao {
         return listaSalaAforo;
     }
 
-    public static ArrayList<BSedeYSala> obtenerSedes(){
+    public ArrayList<BSedeYSala> obtenerSedes(){
         ArrayList<BSedeYSala> listaSedes = new ArrayList<>();
         try {
             String user = "root";
