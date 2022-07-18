@@ -80,12 +80,7 @@
 
 
 
-                    <!-- Button trigger modal -->
-                    <button style="height: 40px"
-                            type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                        Crear Equipo de Personal
-                    </button>
+
 
                 </div>
 
@@ -149,7 +144,7 @@
 
 
 
-                <div class="input-group mb-3 col">
+                <div hidden class="input-group mb-3 col">
 
 
                     <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=buscarpersonal">
@@ -174,6 +169,12 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_length" id="tableUp_length">
                                 <label></label>
+                                <!-- Button trigger modal -->
+                                <button style="height: 40px"
+                                        type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop">
+                                    Crear Equipo de Personal
+                                </button>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">

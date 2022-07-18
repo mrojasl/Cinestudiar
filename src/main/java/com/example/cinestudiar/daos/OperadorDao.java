@@ -780,7 +780,7 @@ public class OperadorDao extends BaseDao {
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT e.idpersonal,e.jefe,e.limpiador1,e.limpiador2,f.idfuncion\n" +
-                     "FROM equiposdelimpieza e inner join funciones f\n" +
+                     "FROM equiposdelimpieza e left join funciones f\n" +
                      "on(f.idpersonal=e.idpersonal) group by e.idpersonal;");) {
 
             while (rs.next()) {

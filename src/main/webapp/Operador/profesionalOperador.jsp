@@ -91,7 +91,7 @@
 
 
 
-                <div class="input-group mb-3 col">
+                <div hidden class="input-group mb-3 col">
 
 
                     <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=buscarprofesional">

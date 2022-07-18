@@ -117,7 +117,7 @@ public class OperadorServlet extends HttpServlet {
                 }
                 case "borrarpersonal" ->{
                     operadorDao.borrarPersonal(Integer.parseInt(request.getParameter("id")));
-                    response.sendRedirect("OperadorServlet=action=crearFu");
+                    response.sendRedirect("OperadorServlet?action=crearFu");
 
                     break;
                 }
