@@ -118,6 +118,9 @@ public class OperadorDao extends BaseDao {
             porcentaje = (float) this.cantidadPorFuncion(id) / (this.cantidadPorFuncion(id) + this.cantidadAforo(id)) * 100;
 
         }
+        if(this.cantidadAforo(id)==0){
+            porcentaje=100;
+        }
         return Math.round(porcentaje);
     }
 
