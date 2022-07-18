@@ -10,6 +10,7 @@
 <jsp:useBean id="indicador2" scope="session" type="java.lang.String" class="java.lang.String"/>
 
 
+<jsp:useBean id="usuarionolog" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 
 
 
@@ -40,7 +41,105 @@
 
 </head>
 <body onload="disabledButton()" class="d-flex flex-column min-vh-100">
-<!-- Navbar -->
+
+
+<!-- VALIDACIONES -->
+<% if (session.getAttribute("errorNombre") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%=session.getAttribute("errorNombre")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorNombre");%>
+<%}%>
+
+<% if (session.getAttribute("errorApellido") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+        <%=session.getAttribute("errorApellido")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorApellido");%>
+<%}%>
+
+<% if (session.getAttribute("errorDni") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%=session.getAttribute("errorDni")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorDni");%>
+<%}%>
+
+<% if (session.getAttribute("errorCodigo") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%=session.getAttribute("errorCodigo")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorCodigo");%>
+<%}%>
+
+<% if (session.getAttribute("errorEmail") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%=session.getAttribute("errorEmail")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorEmail");%>
+<%}%>
+
+<% if (session.getAttribute("errorDireccion") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%=session.getAttribute("errorDireccion")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorDireccion");%>
+<%}%>
+
+<% if (session.getAttribute("errorCel") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%=session.getAttribute("errorCel")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorCel");%>
+<%}%>
+
+<% if (session.getAttribute("errorNacimiento") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%=session.getAttribute("errorNacimiento")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorNacimiento");%>
+<%}%>
+
+<% if (session.getAttribute("errorContra") != null){%>
+<div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%=session.getAttribute("errorContra")%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<%session.removeAttribute("errorContra");%>
+<%}%>
+
+
+
+
+
+
 
 <%if (session.getAttribute("indicador2").equals("error")){%>
 
@@ -89,7 +188,7 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Nombre: </div>
-                                        <input type="text" placeholder="Nombre"  style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" required="required">
+                                        <input type="text" placeholder="Nombre"  style="" class="form-control" id="nombre" name="nombre"  title="Ingrese su nombre" >
                                     </div>
                                 </div>
 
@@ -97,15 +196,15 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Apellido: </div>
-                                        <input type="text" placeholder="Apellido" class="form-control form-control-user" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" id="apellidos"
-                                               name="apellido" required="required">
+                                        <input type="text" placeholder="Apellido" class="form-control form-control-user"  title="Ingrese su apellido" id="apellidos"
+                                               name="apellido" >
                                     </div>
                                 </div>
                                 <!-- DNI--->
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">DNI: </div>
-                                        <input type="text" placeholder="DNI" class="form-control" id="exampleDNI" name="dni" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" maxlength="8" >
+                                        <input type="text" placeholder="DNI" class="form-control" id="exampleDNI" name="dni"  title="Debe ingresar 8 dígitos numericos"  >
 
                                     </div>
                                 </div>
@@ -113,7 +212,7 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Código PUCP: </div>
-                                        <input type="text" placeholder="Codigo PUCP" class="form-control" id="exampleCodigo" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" name="codigo_pucp" maxlength="8" >
+                                        <input type="text" placeholder="Codigo PUCP" class="form-control" id="exampleCodigo"  title="Debe ingresar 8 dígitos numericos"  name="codigo_pucp"  >
 
                                     </div>
                                 </div>
@@ -121,7 +220,7 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Correo: </div>
-                                        <input type="email" placeholder="Correo" class="form-control form-control-user" id="exampleInputEmail"  name="correo" title="Debe ingresar un correo válido" required="required">
+                                        <input type="text" placeholder="Correo" class="form-control form-control-user" id="exampleInputEmail"  name="correo" title="Debe ingresar un correo válido" >
                                     </div>
 
                                 </div>
@@ -129,7 +228,7 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Dirección: </div>
-                                        <input type="text" placeholder="Dirección" class="form-control form-control-user" id="exampleFirstName"  name="direccion" pattern="^[a-zA-Z0-9][\sa-zA-Z0-9]*" title="Ingrese direccion válida"required="required">
+                                        <input type="text" placeholder="Dirección" class="form-control form-control-user" id="exampleFirstName"  name="direccion" title="Ingrese direccion válida">
                                     </div>
 
                                 </div>
@@ -137,7 +236,7 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Celular: </div>
-                                        <input type="text" placeholder="Celular" class="form-control form-control-user" id="exampleInputNumber"  name="telefono" pattern="[0-9]*" minlength="9" maxlength = "9" title="Debe ingresar 9 dígitos numericos" required="required">
+                                        <input type="text" placeholder="Celular" class="form-control form-control-user" id="exampleInputNumber"  name="telefono"  title="Debe ingresar 9 dígitos numericos" >
                                     </div>
 
                                 </div>
@@ -145,17 +244,16 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Fecha de nacimiento: </div>
-                                        <input style="margin-left: 80px" type="date" id="start" name="fecha_nacimiento" required="required"
-                                               value="--/--/--"
-                                               min="1980-01-01" max="2005-12-31">
+                                        <input style="margin-left: 80px" type="date" id="start" name="fecha_nacimiento"
+                                               value="1900-05-01"
+                                               >
                                     </div>
 
                                 </div>
                                 <!-- Foto-->
-                                <div class="form-outline mb-4">
+                                <div hidden class="form-outline mb-4">
                                     <div class="input-group">
-                                        <div class="input-group-text">Foto: </div>
-                                        <input style="margin-left: 20px" type="file" name="picture">
+                                        <input hiddenstyle="margin-left: 20px" type="file" name="picture">
                                     </div>
                                 </div>
 
@@ -163,8 +261,8 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Contraseña: </div>
-                                        <input type="password" placeholder="Contraseña" onkeyup='check();' class="form-control form-control-user" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
-                                               id="exampleInputPassword" name="password" required="required">
+                                        <input type="password" placeholder="Contraseña"  class="form-control form-control-user"  title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
+                                               id="exampleInputPassword" name="password" >
                                     </div>
 
                                 </div>
@@ -173,8 +271,8 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text">Confirmar contraseña: </div>
-                                        <input type="password" placeholder="Confirmar contraseña" onkeyup='check();' class="form-control form-control-user"
-                                               id="confirmPassword"  name="confirmPassword" required="required">
+                                        <input type="password" placeholder="Confirmar contraseña"  class="form-control form-control-user"
+                                               id="confirmPassword"  name="confirmPassword" >
                                     </div>
 
 
@@ -221,7 +319,7 @@
 <script>
 
     var disabledButton=function (){
-        document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button" disabled>Registrarse</button>';
+        document.getElementById('ocultocontra').innerHTML = '<button class="btn btn-dark btn-lg btn-block" type="submit" role="button" >Registrarse</button>';
     }
 
     var check = function() {

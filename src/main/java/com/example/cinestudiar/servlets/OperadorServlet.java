@@ -533,30 +533,5 @@ public class OperadorServlet extends HttpServlet {
 
         }
     }
-    public BFuncion leerParametrosCrearFuncion (HttpServletRequest request) throws IOException, ServletException {
-        String pelicula = request.getParameter("pelicula");
-        String hora = request.getParameter("hora_func");
-        String precio = request.getParameter("precio");
-        String edad_min = request.getParameter("edad_min");
-        String id_personal = request.getParameter("id_perso");
-        String id_sala = request.getParameter("id_sala");
-        String id_peli = request.getParameter("id_pelicula");
-        //Codigo para guardar una imagen en sql
 
-
-        return new BFuncion(pelicula, hora, precio, edad_min, id_personal, id_sala, id_peli);
-
-    }
-    public BPeliculas leerParametroPelicula (HttpServletRequest request) throws IOException, ServletException{
-        String nombre = request.getParameter("nombre_peli");
-        System.out.println(nombre + "LLEGO NOMBRE");
-        int duracion = Integer.parseInt(request.getParameter("duracion"));
-        String genero = request.getParameter("genero");
-        Part foto_peli = request.getPart("image_peli");
-        InputStream fotoinput = null;
-        if (foto_peli.getSize() > 0) {
-            fotoinput = foto_peli.getInputStream();
-        }
-        return new BPeliculas(nombre, duracion, genero, fotoinput);
-    }
 }
