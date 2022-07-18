@@ -211,6 +211,7 @@
                                         <input name="edad_minima" type="number" class="form-control" placeholder="Escribir 0 si no hay restricción"
                                                min="0"
                                                max="25"
+                                               required="required"
                                                aria-label="Sala 1"
                                                aria-describedby="button-addon1" autocomplete="on">
 
