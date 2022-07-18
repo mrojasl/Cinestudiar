@@ -13,11 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "DetallesServlet", value = "/detalles")
 public class DetallesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        BUser usuarioLogueado = (BUser) request.getSession().getAttribute("usuarioLogueado");
+
         String action = request.getParameter("action");
         FuncionesDao funcionesDao = new FuncionesDao();
         PeliculasDao peliculasDao = new PeliculasDao();
@@ -48,6 +52,9 @@ public class DetallesServlet extends HttpServlet {
         String action = request.getParameter("action");
         FuncionesDao funcionesDao = new FuncionesDao();
         PeliculasDao peliculasDao = new PeliculasDao();
+        CarritoDao carritoDao= new CarritoDao();
+
+        ArrayList<BCarrito> carritoClientes= carritoDao.listarUsuario((String) request.getSession().getAttribute("codigo_pucp"));
 
 
 
@@ -60,14 +67,30 @@ public class DetallesServlet extends HttpServlet {
                 String idFuncion = request.getParameter("idFuncion");
                 String id = request.getParameter("id");
 
+                int idPeli= Integer.parseInt(request.getParameter("idFuncion"));
 
-                if (idFuncion != null) {
+
+                boolean coincidencia=false;
+
+
+                for (BCarrito carrito : carritoClientes) {
+
+                    if (carrito.getIdfuncion() == idPeli) {
+                        coincidencia = true;
+                        break;
+                    }
+
+                }
+
+
+                if (idFuncion != null && !coincidencia) {
                     funcionesDao.agregarCarrito((String) request.getSession().getAttribute("codigo_pucp"), Integer.parseInt(idFuncion));
-                    //System.out.println("Se agrego al carrito");
+                    //System.out.println("Se agrego al carrito")x;
+                    request.getSession().setAttribute("indicadorReserva", "success");
                     response.sendRedirect(request.getContextPath()+"/detalles?action=detalles&id="+id);
                 } else {
-                    request.getSession().setAttribute("indicador3", "error");
-                    response.sendRedirect(request.getContextPath() + "/inicio?action=detalles");
+                    request.getSession().setAttribute("indicadorReservaFallida", "failure");
+                    response.sendRedirect(request.getContextPath()+"/detalles?action=detalles&id="+id);
                 }
             }
 
