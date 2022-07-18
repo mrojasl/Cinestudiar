@@ -345,7 +345,7 @@
                 <div class="carousel-inner">
                     <%  int h=1;
                         int b=1;
-                        for (int n = 1; n<cointaner+1; n++) {%>
+                        for (int n = 1; n<=cointaner+1; n++) {%>
                     <div class="<%=(n==1)?"carousel-item active":"carousel-item"%>">
                         <div class="container">
                             <%for (int m= b; m<valor+1;m++){%>
