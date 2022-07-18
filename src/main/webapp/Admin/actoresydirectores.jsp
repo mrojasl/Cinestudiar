@@ -26,7 +26,33 @@
     <body class='snippet-body' STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
 
         <jsp:include page="cabecera_admin.jsp"/>
+        <style type="text/css">
+            .seccion-perfil-usuario {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+            }
 
+
+
+            .seccion-perfil-usuario .perfil-usuario-body {
+                width: 70%;
+                position: relative;
+                max-width: 750px;
+                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .seccion-perfil-usuario .perfil-usuario-nuevo{
+                width: 95%;
+                position: relative;
+                background-color: #fff;
+                max-width: 1200px;
+                border-radius: 5px;
+                padding: 1.5rem 2rem;
+
+            }
+        </style>
         <section class="administrador" style="background: #2b2e31" style="padding: 5rem;">
             <div style="padding: 0.4rem;">
                 <h3 class="mt-1 p-0 mb-0 " align="center" style="color: white;margin-top: 20px;margin-bottom: 20px">Administrador</h3>
@@ -156,7 +182,8 @@
                 <%session.removeAttribute("crearProf");%>
                 <%}%>
 
-
+                <section class="seccion-perfil-usuario">
+                    <div class="perfil-usuario-nuevo">
                 <div class="row ">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
@@ -171,19 +198,19 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div id="tableUp_filter" class="dataTables_filter">
-                                <label class="text-white" style="margin-left: 20px">Buscar: </label>
+                                <label class="text-black" style="margin-left: 20px">Buscar: </label>
                             </div>
                         </div>
                     </div>
 
-                    <table class="table" id = "tableUp">
+                    <table class="table table-striped table-hover" id = "tableUp">
                         <thead>
                             <tr>
-                                <th class="text-white">Foto</th>
-                                <th class="text-white">Nombre y Apellido</th>
-                                <th class="text-white">Rol</th>
-                                <th class="text-white">Editar foto</th>
-                                <th class="text-white">Eliminar</th>
+                                <th class="text-black">Foto</th>
+                                <th class="text-black">Nombre y Apellido</th>
+                                <th class="text-black">Rol</th>
+                                <th class="text-black">Editar foto</th>
+                                <th class="text-black">Eliminar</th>
 
 
                             </tr>
@@ -208,8 +235,8 @@
 
                                             </td>
 
-                                        <td class="text-white"><%=p.getNombre()%> <%=p.getApellido()%> </td>
-                                        <td class="text-white"><%=rol%> </td>
+                                        <td class="text-black"><%=p.getNombre()%> <%=p.getApellido()%> </td>
+                                        <td class="text-black"><%=rol%> </td>
 
 
 
@@ -270,6 +297,9 @@
 
                     </table>
                 </div>
+                    </div>
+                </section>
+                <br>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -297,7 +327,7 @@
                         lengthMenu: "",
                         info: "",
                         infoEmpty: "No existen datos.",
-                        infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                        infoFiltered: "",
                         infoPostFix: "",
                         loadingRecords: "Cargando...",
                         zeroRecords: "No se encontraron datos con tu busqueda",
@@ -313,8 +343,8 @@
                             sortDescending: ": active para ordenar la columna en orden descendente"
                         }
                     },
-                    scrollY: 480,
-                    lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+                    scrollY: 410,
+                    lengthMenu: [ [7, 15, -1], [7, 15, "All"] ],
                 });
             });
         </script>

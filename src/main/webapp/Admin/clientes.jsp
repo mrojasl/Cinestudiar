@@ -27,6 +27,33 @@
     </head>
     <body class='snippet-body' STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
         <jsp:include page="cabecera_admin.jsp"/>
+        <style type="text/css">
+            .seccion-perfil-usuario {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+            }
+
+
+
+            .seccion-perfil-usuario .perfil-usuario-body {
+                width: 70%;
+                position: relative;
+                max-width: 750px;
+                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .seccion-perfil-usuario .perfil-usuario-nuevo{
+                width: 95%;
+                position: relative;
+                background-color: #fff;
+                max-width: 1200px;
+                border-radius: 5px;
+                padding: 1.5rem 2rem;
+
+            }
+        </style>
 
         <section class="administrador" style="background: #2b2e31" style="padding: 5rem;">
             <div style="padding: 0.4rem;">
@@ -83,30 +110,21 @@
                 </div>
             </div>
             </form>
+            <br>
+            <div class="container" >
+            <section class="seccion-perfil-usuario">
+                <div class="perfil-usuario-nuevo">
 
-            <div class="topmargin container">
                 <div class="row ">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_length" id="tableUp_length">
-                                <label></label>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div id="tableUp_filter" class="dataTables_filter">
-                                <label class="text-white" style="margin-left: 20px">Buscar: </label>
-                            </div>
-                        </div>
-                    </div>
-                        <table class="table" id = "tableUp">
+                        <table class="table table-striped table-hover" id = "tableUp">
                             <thead>
                                 <tr>
-                                    <th class="text-white">Foto</th>
-                                    <th class="text-white">Nombre y Apellido</th>
-                                    <th class="text-white">Código PUCP</th>
-                                    <th class="text-white">Correo PUCP</th>
-                                    <th class="text-white">Celular</th>
-                                    <th class="text-white">Historial</th>
+                                    <th class="text-black">Foto</th>
+                                    <th class="text-black">Nombre y Apellido</th>
+                                    <th class="text-black">Código PUCP</th>
+                                    <th class="text-black">Correo PUCP</th>
+                                    <th class="text-black">Celular</th>
+                                    <th class="text-black">Historial</th>
 
                                 </tr>
                             </thead>
@@ -115,13 +133,13 @@
                                 <%for (BUser cl : listaClientes) { %>
 
                                 <tr>
-                                    <td class="text-white">
+                                    <td class="text-black">
                                         <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=cl.getCodigoPucp()%>" alt="perfil foto" style="width:30px;height:30px;"/>
                                     </td>
-                                    <td class="text-white"><%=cl.getNombres()%> </td>
-                                    <td class="text-white"><%=cl.getCodigoPucp()%></td>
-                                    <td class="text-white"><%=cl.getCorreo()%></td>
-                                    <td class="text-white"><%=cl.getTelefono() %></td>
+                                    <td class="text-black"><%=cl.getNombres()%> </td>
+                                    <td class="text-black"><%=cl.getCodigoPucp()%></td>
+                                    <td class="text-black"><%=cl.getCorreo()%></td>
+                                    <td class="text-black"><%=cl.getTelefono() %></td>
                                     <td>
 
                                         <!-- Button trigger modal -->
@@ -170,9 +188,12 @@
 
                         </table>
                 </div>
+                </div>
+            </section>
+                <br>
 
             </div>
-        </div>
+
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -198,11 +219,11 @@
                 $('#tableUp').DataTable({
                     language: {
                         processing: "Tratamiento en curso...",
-                        search: "",
-                        lengthMenu: "",
+                        search: "Buscar:",
+                        lengthMenu: "Agrupar de _MENU_ ",
                         info: "",
                         infoEmpty: "No existen datos.",
-                        infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                        infoFiltered: "",
                         infoPostFix: "",
                         loadingRecords: "Cargando...",
                         zeroRecords: "No se encontraron datos con tu busqueda",
@@ -218,8 +239,8 @@
                             sortDescending: ": active para ordenar la columna en orden descendente"
                         }
                     },
-                    scrollY: 480,
-                    lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+                    scrollY: 410,
+                    lengthMenu: [ [7, 15, -1], [7, 15, "All"] ],
                 });
             });
         </script>

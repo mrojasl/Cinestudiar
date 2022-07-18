@@ -29,6 +29,33 @@
     </head>
     <body class='snippet-body' STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
         <jsp:include page="cabecera_admin.jsp"/>
+        <style type="text/css">
+            .seccion-perfil-usuario {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+            }
+
+
+
+            .seccion-perfil-usuario .perfil-usuario-body {
+                width: 70%;
+                position: relative;
+                max-width: 750px;
+                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .seccion-perfil-usuario .perfil-usuario-nuevo{
+                width: 95%;
+                position: relative;
+                background-color: #fff;
+                max-width: 1200px;
+                border-radius: 5px;
+                padding: 1.5rem 2rem;
+
+            }
+        </style>
         <section class="administrador" style="background: #2b2e31" style="padding: 5rem;">
             <div style="padding: 0.4rem;">
                 <h3 class="mt-1 p-0 mb-0 " align="center" style="color: white;margin-top: 20px;margin-bottom: 20px">Administrador</h3>
@@ -149,66 +176,73 @@
                 </div>
                 <%session.removeAttribute("errorCrearOp");%>
                 <%}%>
-                <div class="row ">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_length" id="tableUp_length">
-                                <label></label>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-info buttonmargin" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
-                                    Asignar Operador
-                                </button>
+                <section class="seccion-perfil-usuario">
+                    <div class="perfil-usuario-nuevo">
+                        <div class="row ">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="tableUp_length">
+                                        <label></label>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-info buttonmargin" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop">
+                                            Asignar Operador
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="tableUp_filter" class="dataTables_filter">
+                                        <label  style="margin-left: 20px">Buscar: </label>
+                                    </div>
+                                </div>
                             </div>
+
+                            <table class="table table-striped table-hover" id = "tableUp">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-black">Foto</th>
+                                            <th class="text-black">Nombre y Apellido</th>
+                                            <th class="text-black">Código PUCP</th>
+                                            <th class="text-black">Correo PUCP</th>
+                                            <th class="text-black">Celular</th>
+                                            <th class="text-black">Eliminar</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <%
+                                            for (BUser op : listaOperadores) { %>
+
+                                        <tr>
+                                            <td class="text-black">
+                                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=op.getCodigoPucp()%>" alt="perfil foto" style="width:30px;height:30px;"/>
+                                            </td>
+                                            <td class="text-black"><%=op.getNombres()%> </td>
+                                            <td class="text-black"><%=op.getCodigoPucp()%></td>
+                                            <td class="text-black"><%=op.getCorreo()%></td>
+                                            <td class="text-black"><%=op.getTelefono() %></td>
+                                            <td>
+                                                <a onclick="return confirm('¿Estas seguro de borrar?');"
+                                                   href="<%=request.getContextPath()%>/ServAdmin?admin=borraroperador&opcodigo=<%=op.getCodigoPucp()%>"
+                                                   type="button" class="btn btn-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <%
+                                            } %>
+                                    </tbody>
+                            </table>
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div id="tableUp_filter" class="dataTables_filter">
-                                <label class="text-white" style="margin-left: 20px">Buscar: </label>
-                            </div>
-                        </div>
+
                     </div>
-                    <table class="table" id = "tableUp">
-                            <thead>
-                                <tr>
-                                    <th class="text-white">Foto</th>
-                                    <th class="text-white">Nombre y Apellido</th>
-                                    <th class="text-white">Código PUCP</th>
-                                    <th class="text-white">Correo PUCP</th>
-                                    <th class="text-white">Celular</th>
-                                    <th class="text-white">Eliminar</th>
-
-
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <%
-                                    for (BUser op : listaOperadores) { %>
-
-                                <tr>
-                                    <td class="text-white">
-                                        <img class="crop" src="${pageContext.request.contextPath}/Image?action=usuarios&id=<%=op.getCodigoPucp()%>" alt="perfil foto" style="width:30px;height:30px;"/>
-                                    </td>
-                                    <td class="text-white"><%=op.getNombres()%> </td>
-                                    <td class="text-white"><%=op.getCodigoPucp()%></td>
-                                    <td class="text-white"><%=op.getCorreo()%></td>
-                                    <td class="text-white"><%=op.getTelefono() %></td>
-                                    <td>
-                                        <a onclick="return confirm('¿Estas seguro de borrar?');"
-                                           href="<%=request.getContextPath()%>/ServAdmin?admin=borraroperador&opcodigo=<%=op.getCodigoPucp()%>"
-                                           type="button" class="btn btn-danger">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
-
-
-                                </tr>
-
-                                <%
-                                    } %>
-                            </tbody>
-                    </table>
-                </div>
+                </section>
+                <br>
             </div>
 
 
@@ -258,8 +292,8 @@
                         sortDescending: ": active para ordenar la columna en orden descendente"
                     }
                 },
-                scrollY: 480,
-                lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+                scrollY: 350,
+                lengthMenu: [ [6, 15, -1], [6, 15, "All"] ],
             });
         });
     </script>
