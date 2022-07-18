@@ -27,22 +27,29 @@
 
         <jsp:include page="cabecera_admin.jsp"/>
 
-        <ul class="nav nav-tabs topside" >
+        <section class="administrador" style="background: #2b2e31" style="padding: 5rem;">
+            <div style="padding: 0.4rem;">
+                <h3 class="mt-1 p-0 mb-0 " align="center" style="color: white;margin-top: 20px;margin-bottom: 20px">Administrador</h3>
+            </div>
+        </section>
+        <section>
+            <ul class="nav nav-tabs topside" >
 
-                <li class="nav-item topsidetxt "style="margin-left: 350px">
-                    <a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/ServAdmin">Salas</a>
-                </li>
-                <li class="nav-item align-content-center"style="margin-left: 100px">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=operador">Operadores</a>
-                </li>
-                <li class="nav-item align-content-center" style="margin-left: 120px">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=cliente">Clientes</a>
-                </li>
-                <li class="nav-item align-content-center"style="margin-left: 80px">
-                    <a class="nav-link active" href="<%=request.getContextPath()%>/ServAdmin?admin=profesional">Actores/Directores</a>
-                </li>
+                    <li class="nav-item topsidetxt "style="margin-left: 350px">
+                        <a class="nav-link" aria-current="page" href="<%=request.getContextPath()%>/ServAdmin">Salas</a>
+                    </li>
+                    <li class="nav-item align-content-center"style="margin-left: 100px">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=operador">Operadores</a>
+                    </li>
+                    <li class="nav-item align-content-center" style="margin-left: 120px">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/ServAdmin?admin=cliente">Clientes</a>
+                    </li>
+                    <li class="nav-item align-content-center"style="margin-left: 80px">
+                        <a class="nav-link active" href="<%=request.getContextPath()%>/ServAdmin?admin=profesional">Actores/Directores</a>
+                    </li>
 
-        </ul>
+            </ul>
+        </section>
         <div id="general">
 
             <br>
