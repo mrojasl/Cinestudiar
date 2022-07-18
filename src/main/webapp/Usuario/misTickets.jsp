@@ -248,6 +248,7 @@
 
                     <thead>
                     <tr>
+                        <th HIDDEN scope="col">ID</th>
                         <th scope="col">Imagen</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Sede</th>
@@ -262,8 +263,8 @@
                     <tbody>
                     <% for (BUsuarioFuncion funciones: usuarioFunciones){ %>
                         <tr>
-
-                            <td scope="row">  <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=funciones.getIdpelicula()%>" alt="poster_movie" width="60px" height="90px"/></td>
+                            <td hidden class="text-white"><p>a</p>></td>
+                            <td >  <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=funciones.getIdpelicula()%>" alt="poster_movie" width="60px" height="90px"/></td>
 
                             <td><p style="font-size: 20px;margin-top: 20px"><%=funciones.getNombrepelicula()%></p></td>
                             <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getSede()%> </p></td>
