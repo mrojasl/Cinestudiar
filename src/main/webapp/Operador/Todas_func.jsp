@@ -465,7 +465,7 @@
                         <i class="fa fa-star checked"></i>
                     </td>
                     <%}%>
-
+                    <%if(funcion.getAsistencia()==0){%>
                     <td>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=funcion.getIdFuncion()%>">
@@ -475,7 +475,9 @@
                             </svg>
                         </button>
                     </td>
-
+                    <%}else{%>
+                    <td class="text-white">No aplica</td>
+                    <%}%>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal<%=funcion.getIdFuncion()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -520,7 +522,7 @@
                             </div>
                         </div>
                     </div>
-                    <%if (funcion.getExisteCompra()==0){%>
+                    <%if (funcion.getExisteCompra()==0 && (funcion.getAsistencia()==100 || funcion.getAsistencia()==0)){%>
                     <td>
                         <a onclick="return confirm('¿Estas seguro de borrar?');"
                            href="<%=request.getContextPath()%>/OperadorServlet?action=borrarfuncion&id=<%=funcion.getIdFuncion()%>"

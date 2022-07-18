@@ -234,7 +234,7 @@ public class OperadorDao extends BaseDao {
                         "inner join salas sa on (f.idsala=sa.idsala)\n" +
                         "inner join sedes se on (sa.nombre_sede=se.nombre_sede)\n" +
                         "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
-                        "where datediff(f.fecha,now())>=0\n" +
+                        "where datediff(f.fecha,now())>=0 and f.aforo_operador!=0\n" +
                         "order by f.idfuncion asc;";
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
@@ -802,6 +802,17 @@ public class OperadorDao extends BaseDao {
         return listaSala;
     }
 
+    public  void  borrarCompraFunciones(int idfunion){
+        try (Connection conn = this.getConnection();) {
+            String sql = "delete from compradefunciones where idfuncion=?;";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, idfunion);
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void borrarFuncion(int idfuncion) {
 
@@ -809,6 +820,7 @@ public class OperadorDao extends BaseDao {
             String sql = "DELETE FROM funciones WHERE idfuncion = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, idfuncion);
+                this.borrarCompraFunciones(idfuncion);
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {
