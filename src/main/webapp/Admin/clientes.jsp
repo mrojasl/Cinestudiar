@@ -156,7 +156,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 style="color:black;" class="modal-title" id="exampleModalLabel2">Historia de compras</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                                     </div>
                                                     <div style="color: black" class="modal-body">
 
@@ -172,7 +172,7 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                     </div>
                                                 </div>
                                             </div>

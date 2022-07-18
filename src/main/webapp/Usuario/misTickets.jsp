@@ -258,8 +258,7 @@
 
                     <thead>
                     <tr>
-                        <th scope="col">Imagen</th>
-                        <th scope="col">IDCompra</th>
+                        <th scope="col">Poster</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Sede</th>
                         <th scope="col">Fecha</th>
@@ -275,7 +274,6 @@
                         <tr>
 
                             <td >  <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=funciones.getIdpelicula()%>" alt="poster_movie" width="60px" height="90px"/></td>
-                            <td><%=funciones.getIdCompras()%></td>
                             <td><p style="font-size: 20px;margin-top: 20px"><%=funciones.getNombrepelicula()%></p></td>
                             <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getSede()%> </p></td>
                             <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getFechapelicula()%> </p></td>
@@ -435,7 +433,7 @@
 
 
 <br><br>
-<footer class="mt-auto" style="background-color: #D6D7DA;bottom: 0;width: 100%">
+<footer class="mt-auto" style="background-color: #D6D7DA;bottom: -50px;width: 100%">
     <div class="container"  style="background-color: #D6D7DA">
         <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
         <div class="d-flex bd-highlight">

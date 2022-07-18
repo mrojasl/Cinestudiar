@@ -258,17 +258,17 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 style="color: black" class="modal-title" id="exampleModalLabel">Editar</h5>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                                                     </div>
                                                                     <div style="color: black" class="modal-body">
-                                                                        <input type="hidden" name="id" value="<%=p.getIdProfesional()%>"/>
-                                                                        <label class="input-group-text" for="inputGroupFile01">Foto de Perfil</label>
+                                                                        <input hidden type="hidden" name="id" value="<%=p.getIdProfesional()%>"/>
+                                                                        <label style="margin-left: 10px">Foto de Perfil</label>
                                                                         <input type="file" class="form-control" name="fotonueva">
 
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
