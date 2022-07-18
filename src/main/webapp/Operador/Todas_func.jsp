@@ -554,7 +554,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <%if (funcion.getExisteCompra()==0 && (funcion.getAsistencia()==100 || funcion.getAsistencia()==0)){%>
+                                <%if ( (funcion.getAsistencia()==0)){%>
                                 <td>
                                     <a onclick="return confirm('¿Estas seguro de borrar?');"
                                        href="<%=request.getContextPath()%>/OperadorServlet?action=borrarfuncion&id=<%=funcion.getIdFuncion()%>"
