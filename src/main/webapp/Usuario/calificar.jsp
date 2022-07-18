@@ -2,7 +2,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cinestudiar.beans.BProfesional" %>
-
+<%@ page import="com.example.cinestudiar.daos.FuncionesDao" %>
 
 
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
@@ -34,6 +34,8 @@
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     </head>
+    <% FuncionesDao funcionesDao= new FuncionesDao();%>
+       <% if (funcionesDao.ObtenerCalificacion(historial)==null){ %>
     <body>
     <style type="text/css">
         .ratingg {
@@ -191,73 +193,76 @@
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5" align="center">Función: <%=nombre%></h3>
-                                <form class="form-login" method="POST" action="<%=request.getContextPath()%>/calificacion?a=calificar">
-                                    <input type="hidden" name="historial" value="<%=historial%>">
-                                    <div class="mb-3 mt-3 ms-4 me-4" align="center">
-                                        <hr>
-                                        <h4 class="rating-label"><strong>¿Te gustó la pelicula? <code></code></strong>
-                                            <h6 ><strong><code>(Califica de 1 a 5 estrellas)</code></strong></h6>
-                                            <input
-                                                    class="ratingg ratingg--nojs"
-                                                    max="5"
-                                                    step="1"
-                                                    type="range"
-                                                    value="3"
-                                                    name="funcion">
-                                        </h4>
 
-                                    </div>
+                            <form class="form-login" method="POST" action="<%=request.getContextPath()%>/calificacion?a=calificar">
+                                <input type="hidden" name="historial" value="<%=historial%>">
 
-                                    <%if (listaProfesionales.size()!=0 ){%>
+
+                                <div class="mb-3 mt-3 ms-4 me-4" align="center">
                                     <hr>
-                                    <%for (BProfesional pf : listaProfesionales){%>
-                                    <%if (pf.getRol().equals("d")){%>
-                                    <div class="mb-3 mt-3 ms-4 me-4" align="center">
-                                        <h6 >Calificacion Director:</h6>
-                                        <label ><%=pf.getNombre() + " "+ pf.getApellido()%></label>
-                                    </div>
+                                    <h4 class="rating-label"><strong>¿Te gustó la pelicula? <code></code></strong>
+                                        <h6 ><strong><code>(Califica de 1 a 5 estrellas)</code></strong></h6>
+                                        <input
+                                                class="ratingg ratingg--nojs"
+                                                max="5"
+                                                step="1"
+                                                type="range"
+                                                value="3"
+                                                name="funcion">
+                                    </h4>
 
-                                    <div class="mb-3 mt-3 ms-4 me-4" align="center">
+                                </div>
 
-                                        <input class="rating rating--nojs"
-                                               max="5"
-                                               step="1"
-                                               type="range"
-                                               value="3"
-                                               name="director<%=pf.getIdProfesional()%>" required>
-                                        <input type="hidden" name="idprofesionaldirector<%=pf.getIdProfesional()%>" value="<%=pf.getIdProfesional()%>">
-                                    </div>
-                                    <%}%>
+                                <%if (listaProfesionales.size()!=0 ){%>
+                                <hr>
+                                <%for (BProfesional pf : listaProfesionales){%>
+                                <%if (pf.getRol().equals("d")){%>
+                                <div class="mb-3 mt-3 ms-4 me-4" align="center">
+                                    <h6 >Calificacion Director:</h6>
+                                    <label ><%=pf.getNombre() + " "+ pf.getApellido()%></label>
+                                </div>
 
-                                    <%}%>
-                                    <hr>
-                                    <div class="mb-3 mt-3 ms-4 me-4" align="center">
-                                        <h6 >Calificacion Actor(es): </h6>
-                                    </div>
-                                    <%for (BProfesional pf : listaProfesionales){%>
-                                    <%if (pf.getRol().equals("a")){%>
-                                    <div class="mb-3 mt-3 ms-4 me-4" align="center">
-                                        <label ><%=pf.getNombre() + " "+ pf.getApellido()%></label>
-                                    </div>
-                                    <div class="mb-3 mt-3 ms-4 me-4" align="center">
-                                        <input class="rating rating--nojs"
-                                               max="5"
-                                               step="1"
-                                               type="range"
-                                               value="3" name="actor<%=pf.getIdProfesional()%>" placeholder="actor" required>
-                                        <input type="hidden" name="idprofesionalactor<%=pf.getIdProfesional()%>" value="<%=pf.getIdProfesional()%>">
-                                    </div>
-                                    <%}%>
-                                    <%}%>
-                                    <hr>
+                                <div class="mb-3 mt-3 ms-4 me-4" align="center">
 
-                                    <%}%>
-                                    <div class="mb-3 mt-3 ms-4 me-4" align="center">
-                                        <a type="button" class="btn btn-secondary btn-lg" href="<%=request.getContextPath()%>/PerfildeUsuario?a=tickets" style="height: 47px;width: 100px">Volver </a>
-                                        <button type="submit" class="btn btn-primary btn-lg" style="left: 10px" value="Calificar">Calificar</button>
-                                    </div>
+                                    <input class="rating rating--nojs"
+                                           max="5"
+                                           step="1"
+                                           type="range"
+                                           value="3"
+                                           name="director<%=pf.getIdProfesional()%>" required>
+                                    <input type="hidden" name="idprofesionaldirector<%=pf.getIdProfesional()%>" value="<%=pf.getIdProfesional()%>">
+                                </div>
+                                <%}%>
 
-                                </form>
+                                <%}%>
+                                <hr>
+                                <div class="mb-3 mt-3 ms-4 me-4" align="center">
+                                    <h6 >Calificacion Actor(es): </h6>
+                                </div>
+                                <%for (BProfesional pf : listaProfesionales){%>
+                                <%if (pf.getRol().equals("a")){%>
+                                <div class="mb-3 mt-3 ms-4 me-4" align="center">
+                                    <label ><%=pf.getNombre() + " "+ pf.getApellido()%></label>
+                                </div>
+                                <div class="mb-3 mt-3 ms-4 me-4" align="center">
+                                    <input class="rating rating--nojs"
+                                           max="5"
+                                           step="1"
+                                           type="range"
+                                           value="3" name="actor<%=pf.getIdProfesional()%>" placeholder="actor" required>
+                                    <input type="hidden" name="idprofesionalactor<%=pf.getIdProfesional()%>" value="<%=pf.getIdProfesional()%>">
+                                </div>
+                                <%}%>
+                                <%}%>
+                                <hr>
+
+                                <%}%>
+                                <div class="mb-3 mt-3 ms-4 me-4" align="center">
+                                    <a type="button" class="btn btn-secondary btn-lg" href="<%=request.getContextPath()%>/PerfildeUsuario?a=tickets" style="height: 47px;width: 100px">Volver </a>
+                                    <button type="submit" class="btn btn-primary btn-lg" style="left: 10px" value="Calificar">Calificar</button>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                     <br>
@@ -270,15 +275,65 @@
             <br>
         </div>
     </section>
-        <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
-            <div class="container"  style="background-color: #D6D7DA">
-                <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
-                <div class="d-flex bd-highlight">
-                    <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
-                    <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
-                </div>
-
+    <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+        <div class="container"  style="background-color: #D6D7DA">
+            <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
+            <div class="d-flex bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
+                <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
             </div>
-        </footer>
+
+        </div>
+    </footer>
     </body>
+
+
+
+
+       <% }else{%>
+
+    <body>
+
+    <jsp:include page="headerSesionIniciada.jsp">
+        <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+    </jsp:include>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5" align="center">¡ Gracias por calificar la función! :)</h3>
+
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+                <br>
+                <br>
+            </div>
+            <br>
+            <br>
+        </div>
+    </section>
+    <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+        <div class="container"  style="background-color: #D6D7DA">
+            <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
+            <div class="d-flex bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
+                <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
+            </div>
+
+        </div>
+    </footer>
+    </body>
+
+
+    <%}%>
+
+
+
+
+
 </html>

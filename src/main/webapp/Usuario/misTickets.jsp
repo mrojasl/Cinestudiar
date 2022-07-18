@@ -11,6 +11,10 @@
 <%@ page import="com.example.cinestudiar.beans.BProfesional" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.cinestudiar.daos.FuncionesDao" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.Date" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="usuarioFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BUsuarioFuncion>" />
 
@@ -248,8 +252,8 @@
 
                     <thead>
                     <tr>
-                        <th HIDDEN scope="col">ID</th>
                         <th scope="col">Imagen</th>
+                        <th scope="col">IDCompra</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Sede</th>
                         <th scope="col">Fecha</th>
@@ -263,57 +267,112 @@
                     <tbody>
                     <% for (BUsuarioFuncion funciones: usuarioFunciones){ %>
                         <tr>
-                            <td hidden class="text-white"><p>a</p>></td>
-                            <td >  <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=funciones.getIdpelicula()%>" alt="poster_movie" width="60px" height="90px"/></td>
 
+                            <td >  <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=funciones.getIdpelicula()%>" alt="poster_movie" width="60px" height="90px"/></td>
+                            <td><%=funciones.getIdCompras()%></td>
                             <td><p style="font-size: 20px;margin-top: 20px"><%=funciones.getNombrepelicula()%></p></td>
                             <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getSede()%> </p></td>
                             <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getFechapelicula()%> </p></td>
                             <td><p style="font-size: 18px;margin-top: 20px"><%=funciones.getHorapelicula()%> </p></td>
                             <td><p style="font-size: 18px;margin-top: 20px" align="center"><%=funciones.getCantidadtickets()%> </p></td>
 
-                            <% String[] split = funciones.getFechapelicula().split("-");
-                                String[] split2 = funciones.getHorapelicula().split(":");%>
-                            <%  LocalDate date1 = LocalDate.now();
-                                LocalDate date2 = LocalDate.of(Integer. parseInt(split[0]), Integer. parseInt(split[1]), Integer. parseInt(split[2]));
-                                LocalTime time1 = LocalTime.now();
-                                LocalTime time2 = LocalTime.of(Integer. parseInt(split2[0]), Integer. parseInt(split2[1]), Integer. parseInt(split2[2]));
-                                // compareTo() method
-                                int diff = date1.compareTo(date2);
-                                int diff2 = time1.compareTo(time2);%>
+                            <%  boolean indicadorFecha=false;
+                                LocalDate fechainput=LocalDate.parse(funciones.getFechapelicula());
+                                DateFormat fechaActual = new SimpleDateFormat("yyyy-MM-dd");
+                                Date fechas = new Date();
+                                LocalDate hoy= LocalDate.parse(fechaActual.format(fechas));
 
-                            <% if(diff > 0) {%>
-                            <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado
-                            </button></td>
-                            <%if (!funcionesDao.habilitarBoton(funciones.getHistorialcompra()) ) {%>
-                            <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
-                            <%}else{%>
-                                <td><p style="font-size: 17px;margin-top: 15px" align="left">Gracias<br>por calificar </p></td>
-                            <%}%>
-                            <%} else if (diff < 0) {%>
-                            <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente
-                            </button></td>
+                                String horasActuales = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+                                String[] parts = horasActuales.split(":");
+                                int horaActual= Integer.parseInt(parts[0]);
+                                int minutoActual= Integer.parseInt(parts[1]);
+                                String[] partsinput=funciones.getHorapelicula().split(":");
+                                int horaInput=Integer.parseInt(partsinput[0]);
+                                int minutoInput=Integer.parseInt(partsinput[1]);
+
+                                if (fechainput.isAfter(hoy)){
+                                    indicadorFecha=true;}
+                                if( fechainput.isEqual(hoy)){
+                                    if (horaInput>horaActual){
+                                        indicadorFecha=true;
+                                    }
+                                    else if (horaInput==horaActual){
+                                        if(minutoInput>minutoActual){
+                                            indicadorFecha=true;
+                                        }
+                                    }
+                                }
+
+
+                            %>
+
+                            <% if (indicadorFecha){ %>
+                            <td> <button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente</button></td>
                             <td><p style="font-size: 17px;margin-top: 15px" align="left">Aún no<br> disponible</p></td>
-
-                            <%} else {
-                                /*System.out.println(date1 + " is equal to " + date2);*/
-                                if(diff2 > 0) {%>
-
-                            <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado
-                            </button></td>
-                            <%if(!funcionesDao.habilitarBoton(funciones.getHistorialcompra())  ) {%>
-                            <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
                             <%}else{%>
-                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Gracias<br>por calificar</p></td>
-                            <%}%>
-                            <%} else if (diff2 < 0) {%>
 
-                            <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente
-                            </button></td>
-                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Aún no<br> disponible</p></td>
+                            <td> <button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado</button></td>
+                            <% if (funcionesDao.ObtenerCalificacion(funciones.getHistorialcompra())==null){ %>
+
+
+                            <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>" style="margin-top: 20px"> Calificar </a></td>
+                            <%}else{%>
+
+                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Gracias<br>por calificar </p></td>
 
                             <%}%>
+
                             <%}%>
+
+
+
+
+<%--                            <% String[] split = funciones.getFechapelicula().split("-");--%>
+<%--                                String[] split2 = funciones.getHorapelicula().split(":");%>--%>
+<%--                            <%  LocalDate date1 = LocalDate.now();--%>
+<%--                                LocalDate date2 = LocalDate.of(Integer. parseInt(split[0]), Integer. parseInt(split[1]), Integer. parseInt(split[2]));--%>
+<%--                                LocalTime time1 = LocalTime.now();--%>
+<%--                                LocalTime time2 = LocalTime.of(Integer. parseInt(split2[0]), Integer. parseInt(split2[1]), Integer. parseInt(split2[2]));--%>
+<%--                                // compareTo() method--%>
+<%--                                int diff = date1.compareTo(date2);--%>
+<%--                                int diff2 = time1.compareTo(time2);%>--%>
+
+<%--                            <% if(diff > 0) {%>--%>
+<%--                            <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado--%>
+<%--                            </button></td>--%>
+
+<%--                            <%if((funcionesDao.ObtenerCalificacion(funciones.getHistorialcompra())==null)){%>--%>
+<%--                            <%="??:"+funcionesDao.ObtenerCalificacion(funciones.getHistorialcompra())%>--%>
+<%--                            --%>
+<%--                            <%}%>--%>
+
+<%--                            <%if(!(funcionesDao.ObtenerCalificacion(funciones.getHistorialcompra())==null)){%>--%>
+<%--                                --%>
+<%--                            <%}%>--%>
+<%--                            <%} else if (diff < 0) {%>--%>
+<%--                            <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente--%>
+<%--                            </button></td>--%>
+<%--                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Aún no<br> disponible</p></td>--%>
+
+<%--                            <%} else {--%>
+<%--                                /*System.out.println(date1 + " is equal to " + date2);*/--%>
+<%--                                if(diff2 > 0) {%>--%>
+
+<%--                            <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado--%>
+<%--                            </button></td>--%>
+<%--                            <%if(!funcionesDao.habilitarBoton(funciones.getHistorialcompra())  ) {%>--%>
+<%--                            <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>--%>
+<%--                            <%}else{%>--%>
+<%--                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Gracias<br>por calificar</p></td>--%>
+<%--                            <%}%>--%>
+<%--                            <%} else if (diff2 < 0) {%>--%>
+
+<%--                            <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente--%>
+<%--                            </button></td>--%>
+<%--                            <td><p style="font-size: 17px;margin-top: 15px" align="left">Aún no<br> disponible</p></td>--%>
+
+<%--                            <%}%>--%>
+<%--                            <%}%>--%>
 
 
                         </tr>

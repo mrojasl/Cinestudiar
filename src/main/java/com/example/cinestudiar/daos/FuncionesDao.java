@@ -138,6 +138,33 @@ public class FuncionesDao extends BaseDao{
 
 
 
+    public String ObtenerCalificacion(String idhistorial){
+
+        String ObtenerCalificacion="";
+
+        String query="select calificacion from compradefunciones where idhistorialdecompras=? ;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query);) {
+            pstmt.setString(1, idhistorial);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()){
+
+                    ObtenerCalificacion= rs.getString(1);
+
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ObtenerCalificacion;
+
+    }
+
+
+
 
 
 
