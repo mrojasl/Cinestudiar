@@ -312,7 +312,7 @@
 <jsp:include page="cabecera_operador.jsp">
     <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
 </jsp:include>
-
+<% int puerto=request.getLocalPort();%>
 <section class="seccion-perfil-usuario">
 
     <div class="perfil-usuario-header">
@@ -325,7 +325,7 @@
 
                 <%String contextpath= request.getContextPath() ;%>
                 <%String stringcode=foto.getCodigopucp(); %>
-                <% String rutaImagen="http://localhost:8080"+contextpath+"/Image?action=usuarios&id="+stringcode;%>
+                <% String rutaImagen="http://localhost:"+puerto+contextpath+"/Image?action=usuarios&id="+stringcode;%>
 
                 <% URL url=new URL(rutaImagen);
                     int cant=url.openConnection().getContentLength();%>

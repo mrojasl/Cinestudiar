@@ -175,10 +175,10 @@
 
 <section class="vh-100 bg-image">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-        <div class="container h-100">
+        <div class="container h-100" >
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                    <div class="card" style="border-radius: 1rem;">
+                    <div class="card" style="border-radius: 1rem;position: relative;" align="center">
                         <div class="card-body p-5">
                             <div class="text text-center mb-5">
                                 <i class="bi bi-people fa-3x me-3" style="color: #0e0e6b;"></i>
@@ -249,7 +249,7 @@
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
                                         <div class="input-group-text" data-bs-toggle="tooltip" title="Ingrese su fecha de nacimiento. Solo se permiten personas con edad mayor o igual a 15 años"><i class="bi bi-info-circle-fill"></i> Fecha de nacimiento: </div>
-                                        <input style="margin-left: 80px" type="date" id="start" name="fecha_nacimiento"
+                                        <input style="margin-left: 40px" type="date" id="start" name="fecha_nacimiento"
                                                value="1900-05-01" required
                                                >
                                     </div>
