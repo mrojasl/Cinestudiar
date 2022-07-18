@@ -6,11 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="com.example.cinestudiar.beans.BFuncion" %>
-<%@ page import="com.example.cinestudiar.beans.BPeliculas" %>
-<%@ page import="com.example.cinestudiar.beans.BSedeYSala" %>
-<%@ page import="com.example.cinestudiar.beans.BEquipoLimpieza" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="Reporte" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BFuncion>" />
 
