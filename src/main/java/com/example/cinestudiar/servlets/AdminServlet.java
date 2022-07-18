@@ -75,6 +75,8 @@ public class AdminServlet extends HttpServlet {
                 case "borrarprofesional":
                     int proid = Integer.parseInt(request.getParameter("proid"));
                     AdminDao.BorrarProfesional(proid);
+                    request.getSession().setAttribute("borrarPro", "Profesional borrado con éxito");
+
                     response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
                     break;
 
@@ -199,6 +201,11 @@ public class AdminServlet extends HttpServlet {
                         AdminDao.crearProfesional(nombre, apellido, profesion,null);
                     }
 
+                    if (profesion.equals("a")) {
+                        request.getSession().setAttribute("crearProf", "El actor se ha creado con éxito");
+                    } else {
+                        request.getSession().setAttribute("crearProf", "El director se ha creado con éxito");
+                    }
                     response.sendRedirect(request.getContextPath() + "/ServAdmin?admin=profesional");
                     break;
 

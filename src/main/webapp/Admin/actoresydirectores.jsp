@@ -137,6 +137,26 @@
                 </div>
             </div>
             <div class="container">
+
+                <% if (session.getAttribute("borrarPro") != null){%>
+                <div>
+                    <div class="alert alert-success" role="alert">
+                        <%=session.getAttribute("borrarPro")%>
+                    </div>
+                </div>
+                <%session.removeAttribute("borrarPro");%>
+                <%}%>
+
+                <% if (session.getAttribute("crearProf") != null){%>
+                <div>
+                    <div class="alert alert-success" role="alert">
+                        <%=session.getAttribute("crearProf")%>
+                    </div>
+                </div>
+                <%session.removeAttribute("crearProf");%>
+                <%}%>
+
+
                 <div class="row ">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">

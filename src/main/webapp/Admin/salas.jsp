@@ -48,6 +48,53 @@
         <div id="general">
             <br>
             <div class="container">
+                <% if (session.getAttribute("borradoSala") != null){%>
+                <div>
+                    <div class="alert alert-success" role="alert">
+                        <%=session.getAttribute("borradoSala")%>
+                    </div>
+                </div>
+                <%session.removeAttribute("borradoSala");%>
+                <%}%>
+
+
+                <% if (session.getAttribute("editadoSala") != null){%>
+                <div>
+                    <div class="alert alert-success" role="alert">
+                        <%=session.getAttribute("editadoSala")%>
+                    </div>
+                </div>
+                <%session.removeAttribute("editadoSala");%>
+                <%}%>
+
+
+                <% if (session.getAttribute("creadoSala") != null){%>
+                <div>
+                    <div class="alert alert-success" role="alert">
+                        <%=session.getAttribute("creadoSala")%>
+                    </div>
+                </div>
+                <%session.removeAttribute("creadoSala");%>
+                <%}%>
+
+
+                <% if (session.getAttribute("errorEditarAforo") != null){%>
+                <div>
+                    <div class="alert alert-danger" role="alert">
+                        <%=session.getAttribute("errorEditarAforo")%>
+                    </div>
+                </div>
+                <%session.removeAttribute("errorEditarAforo");%>
+                <%}%>
+
+                <% if (session.getAttribute("errorEditarSede") != null){%>
+                <div>
+                    <div class="alert alert-danger" role="alert">
+                        <%=session.getAttribute("errorEditarSede")%>
+                    </div>
+                </div>
+                <%session.removeAttribute("errorEditarSede");%>
+                <%}%>
                 <div class="supbarblue row">
                     <div class="input-group mb-3 col">
                         <h5 class="col" style="padding: 14px;color: white;width: 250px">Lista de Salas</h5>
@@ -105,53 +152,7 @@
                     </div>
                 </div>
                 <div class="margintopsala">
-                    <% if (session.getAttribute("borradoSala") != null){%>
-                    <div>
-                        <div class="alert alert-success" role="alert">
-                            <%=session.getAttribute("borradoSala")%>
-                        </div>
-                    </div>
-                    <%session.removeAttribute("borradoSala");%>
-                    <%}%>
 
-
-                    <% if (session.getAttribute("editadoSala") != null){%>
-                    <div>
-                        <div class="alert alert-success" role="alert">
-                            <%=session.getAttribute("editadoSala")%>
-                        </div>
-                    </div>
-                    <%session.removeAttribute("editadoSala");%>
-                    <%}%>
-
-
-                    <% if (session.getAttribute("creadoSala") != null){%>
-                    <div>
-                        <div class="alert alert-success" role="alert">
-                            <%=session.getAttribute("creadoSala")%>
-                        </div>
-                    </div>
-                    <%session.removeAttribute("creadoSala");%>
-                    <%}%>
-
-
-                    <% if (session.getAttribute("errorEditarAforo") != null){%>
-                    <div>
-                        <div class="alert alert-danger" role="alert">
-                            <%=session.getAttribute("errorEditarAforo")%>
-                        </div>
-                    </div>
-                    <%session.removeAttribute("errorEditarAforo");%>
-                    <%}%>
-
-                    <% if (session.getAttribute("errorEditarSede") != null){%>
-                    <div>
-                        <div class="alert alert-danger" role="alert">
-                            <%=session.getAttribute("errorEditarSede")%>
-                        </div>
-                    </div>
-                    <%session.removeAttribute("errorEditarSede");%>
-                    <%}%>
 
 
                         <div class="accordion" id="accordionPanelsStayOpenExample">
