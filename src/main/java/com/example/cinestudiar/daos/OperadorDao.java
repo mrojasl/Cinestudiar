@@ -1063,6 +1063,35 @@ public class OperadorDao extends BaseDao {
     }
 
 
+    public ArrayList<BPeliculas> listaPeliculaEnFuncion() {
+
+        ArrayList<BPeliculas> lista = new ArrayList<>();
+
+        String sql = "SELECT p.idpelicula,f.idfuncion FROM peliculas p left join funciones f\n" +
+                "on (p.idpelicula=f.idpelicula) where f.idfuncion is not null\n" +
+                "group by p.idpelicula;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+
+            try (ResultSet resultSet = pstmt.executeQuery();) {
+
+                while (resultSet.next()) {
+                    BPeliculas p = new BPeliculas();
+                    p.setIdpeliculas(resultSet.getInt(1));
+                    p.setExisteFuncion(resultSet.getInt(2));
+                    lista.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Hubo un error en la conexion!");
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+
 }
 
 

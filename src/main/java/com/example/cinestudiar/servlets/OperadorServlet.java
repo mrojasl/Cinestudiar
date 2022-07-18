@@ -453,7 +453,7 @@ public class OperadorServlet extends HttpServlet {
 
 
 
-                        if (indicadorProfesionales && indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
+                        if (indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
                             funciones.setFecha(fecha);
                             funciones.setHora(hora);
                             funciones.setIdSala(idSala);
@@ -516,7 +516,20 @@ public class OperadorServlet extends HttpServlet {
             case "retirarpelicula" ->{
                 int idProf = Integer.parseInt(request.getParameter("id"));
                 int idPel2 = Integer.parseInt(request.getParameter("idPel2"));
-                operadorDao.borrarProfesionaldePelicula(idPel2,idProf);
+                ArrayList<BPeliculas> listaPelisEnFuncion = operadorDao.listaPeliculaEnFuncion();
+                boolean existeFuncion = true;
+                for (BPeliculas p : listaPelisEnFuncion){
+                    if (idPel2==p.getIdpeliculas()){
+                        request.getSession().setAttribute("errorRetirar", "Error al retirar profesional: La película ya cuenta con funciones.");
+                        existeFuncion=false;
+                    }
+                }
+                if (existeFuncion){
+                    operadorDao.borrarProfesionaldePelicula(idPel2,idProf);
+
+                }
+
+
                 response.sendRedirect("OperadorServlet?action=crearPe");
             }
             case "editarFuncion" ->{

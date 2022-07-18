@@ -105,6 +105,14 @@
 
         <div class="container">
 
+            <% if (session.getAttribute("errorRetirar") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorRetirar")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorRetirar");%>
+            <%}%>
 
 
             <div class="row">
