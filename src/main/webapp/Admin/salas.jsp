@@ -4,6 +4,7 @@
 <%@ page import="com.example.cinestudiar.daos.AdminDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BSedeYSala>" scope="request" id="listaSedes"/>
+<jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 
 <html lang="es">
     <head>
@@ -21,7 +22,9 @@
         <link rel="stylesheet" href="Admin/style_admin.css">
     </head>
     <body class='snippet-body' STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
-        <jsp:include page="cabecera_admin.jsp"/>
+    <jsp:include page="cabecera_admin.jsp">
+        <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+    </jsp:include>
         <section class="administrador" style="background: #2b2e31" style="padding: 5rem;">
             <div style="padding: 0.4rem;">
                 <h3 class="mt-1 p-0 mb-0 " align="center" style="color: white;margin-top: 20px;margin-bottom: 20px">Administrador</h3>

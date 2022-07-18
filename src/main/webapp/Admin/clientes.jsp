@@ -10,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BUser>" scope="request" id="listaClientes"/>
 <jsp:useBean type="java.util.ArrayList<com.example.cinestudiar.beans.BCompra>" scope="request" id="historialdecompracliente"/>
+<jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <html lang="en">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -26,7 +27,9 @@
        <link rel="stylesheet" href="Admin/style_admin.css">
     </head>
     <body class='snippet-body' STYLE="  background-image: url('Imagenes/fondo.jpg'); background-size: cover;">
-        <jsp:include page="cabecera_admin.jsp"/>
+    <jsp:include page="cabecera_admin.jsp">
+        <jsp:param name="perfil" value="<%=usuario.getNombres()%>"/>
+    </jsp:include>
         <style type="text/css">
             .seccion-perfil-usuario {
                 display: flex;
