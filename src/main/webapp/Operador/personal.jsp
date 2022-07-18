@@ -100,7 +100,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Crear Película</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">Crear Personal</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -189,6 +189,8 @@
                             <th class="text-white">Personal 1</th>
                             <th class="text-white">Personal 2</th>
                             <th class="text-white">Funciones</th>
+                            <th class="text-white">Eliminar</th>
+
 
 
                         </tr>
@@ -218,6 +220,20 @@
                                 </svg>
                             </button>
                         </td>
+
+                        <%if (p.getEnFuncion()==0){%>
+                        <td>
+                            <a onclick="return confirm('¿Estas seguro de borrar?');"
+                               href="<%=request.getContextPath()%>/OperadorServlet?action=borrarpersonal&id=<%=p.getIdpersonal()%>"
+                               type="button" class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                        <%} else{%>
+                        <td class="text-white">No aplica</td>
+                        <%}%>
+
+
                     </tr>
 
                     <%
