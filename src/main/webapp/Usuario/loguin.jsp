@@ -33,6 +33,19 @@
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
         <style>
+            html {
+                height: 100%;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100%;
+            }
+
+            footer {
+                margin-top: auto;
+            }
             @font-face { font-family: "Akzidenz-Grotesk"; src: url('<%=request.getContextPath()%>/Imagenes/akzidenz.otf'); }
             a {
                 text-decoration: none !important;
@@ -99,7 +112,7 @@
         </div>
     </section>
     <br><br>
-    <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+    <footer class="mt-auto" style="background-color: #D6D7DA;bottom: 0;width: 100%">
         <div class="container"  style="background-color: #D6D7DA">
             <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
             <div class="d-flex bd-highlight">
