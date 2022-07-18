@@ -542,6 +542,8 @@
 
                                         <H2>Horarios disponibles</H2>
 
+                                        <H7>(Al darle en "Agregar" la funcion se añadirá a su carrito de compras, ahi podrá agregar mas tickets)</H7>
+                <br>
                                         <table id="tablax" class="table table-striped table-hover" style="background-color:beige">
                                             <thead>
                                                 <tr>

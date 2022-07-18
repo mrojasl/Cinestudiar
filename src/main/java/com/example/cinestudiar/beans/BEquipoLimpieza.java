@@ -5,6 +5,15 @@ public class BEquipoLimpieza {
     private String jefe;
     private String limpiador1;
     private String limpiador2;
+    private int enFuncion;
+
+    public int getEnFuncion() {
+        return enFuncion;
+    }
+
+    public void setEnFuncion(int enFuncion) {
+        this.enFuncion = enFuncion;
+    }
 
     public int getIdpersonal() {
         return idpersonal;

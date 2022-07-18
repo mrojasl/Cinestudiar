@@ -62,7 +62,7 @@ public class OperadorServlet extends HttpServlet {
                 }
                 case "reporte_send"-> {
                     fil_sala = request.getParameter("sala");
-                    System.out.println("LLEGA SEÑAL");
+                    System.out.println("LLEGA SEÃ‘AL");
                     fil_fecha = request.getParameter("fecha");
                     System.out.println(fil_fecha + fil_sala);
                     response.sendRedirect(request.getContextPath() + "/reporte?sala=" + fil_sala + "&fecha=" + fil_fecha);
@@ -102,17 +102,23 @@ public class OperadorServlet extends HttpServlet {
 
                         BPeliculas peli = peliculasDao.obtenerPelicula(idpeli);
 
-                    if ( peli != null) {
-                        peliculasDao.borrarFunciondeunaPelicula(idpeli);
-                        peliculasDao.borrarPelicula(idpeli);
+                        if ( peli != null) {
+                            peliculasDao.borrarFunciondeunaPelicula(idpeli);
+                            peliculasDao.borrarPelicula(idpeli);
+                        }
                     }
-                }
-                response.sendRedirect("OperadorServlet?action=peliculas");
-                break;
+                    response.sendRedirect("OperadorServlet?action=peliculas");
+                    break;
                 }
                 case "borrarfuncion" ->{
                     operadorDao.borrarFuncion(Integer.parseInt(request.getParameter("id")));
                     response.sendRedirect("OperadorServlet");
+                    break;
+                }
+                case "borrarpersonal" ->{
+                    operadorDao.borrarPersonal(Integer.parseInt(request.getParameter("id")));
+                    response.sendRedirect("OperadorServlet=action=crearFu");
+
                     break;
                 }
 
@@ -205,7 +211,7 @@ public class OperadorServlet extends HttpServlet {
             case "reporte"-> {
                 fil_sala= request.getParameter("filtro_sala");
 
-                System.out.println("LLEGA SEÑAL");
+                System.out.println("LLEGA SEÃ‘AL");
                 fil_fecha = request.getParameter("filtro_fecha");
                 System.out.println("HOLA" + fil_sala + fil_fecha);
                 response.sendRedirect(request.getContextPath()+"/OperadorServlet?action=reporte_send&sala="+fil_sala+"&fecha="+fil_fecha);
@@ -270,13 +276,13 @@ public class OperadorServlet extends HttpServlet {
                 ArrayList<DTOfunciones_peliculas> listaFuConDu = operadorDao.listaFuncionesDuracion();
                 for (DTOfunciones_peliculas fu : listaFuConDu){
                     if (fu.getIdSala()==idSala && fu.getFecha().equals(fecha)){
-                            if((horaTimeInicio.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTimeInicio.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))) || (horaTimeFinal.isAfter(LocalTime.parse(fu.getHora())) && horaTimeFinal.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion())))){
+                        if((horaTimeInicio.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTimeInicio.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))) || (horaTimeFinal.isAfter(LocalTime.parse(fu.getHora())) && horaTimeFinal.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion())))){
 
-                                    request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la función de ID: " + fu.getIdFuncion());
-                                    centi = 1;
-                                    break;
+                            request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la funciÃ³n de ID: " + fu.getIdFuncion());
+                            centi = 1;
+                            break;
 
-                            }
+                        }
                     }
                 }
 
@@ -307,7 +313,7 @@ public class OperadorServlet extends HttpServlet {
 
                     }
                     else{
-                        request.getSession().setAttribute("errorAforo", "Error al crear: Valor de Aforo no válido o excede al maximo dado por el administrador");
+                        request.getSession().setAttribute("errorAforo", "Error al crear: Valor de Aforo no vÃ¡lido o excede al maximo dado por el administrador");
                     }
 
                 }
@@ -369,7 +375,7 @@ public class OperadorServlet extends HttpServlet {
                     if (fu.getIdSala()==idSala && fu.getFecha().equals(fecha)){
                         if((horaTimeInicio.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTimeInicio.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))) || (horaTimeFinal.isAfter(LocalTime.parse(fu.getHora())) && horaTimeFinal.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion())))){
                             if (idFuncion!=fu.getIdFuncion()) {
-                                request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la función de ID: " + fu.getIdFuncion());
+                                request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la funciÃ³n de ID: " + fu.getIdFuncion());
                                 centi = 1;
                                 break;
                             }
