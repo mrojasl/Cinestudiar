@@ -336,6 +336,7 @@
                     <td class="text-white"><%=funcion.getSede() %></td>
                     <td class="text-white"><%=funcion.getIdSala()%></td>
                     <td class="text-white">S/. <%=funcion.getPrecioTicket()%></td>
+                    <td class="text-white">S/. <%=funcion.getAsistencia()%></td>
                     <% int num= (int) funcion.getCalificacion();%>
                     <%if (num == 0){ %>
                     <td class="text-white">No tiene</td>

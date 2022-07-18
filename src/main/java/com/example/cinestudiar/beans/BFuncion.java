@@ -16,6 +16,7 @@ public class BFuncion extends BSedeYSala{
     private int existeCompra;
     private String nombre;
 
+
     public String getNombre() {
         return nombre;
     }

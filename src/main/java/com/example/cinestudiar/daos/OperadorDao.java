@@ -39,6 +39,94 @@ public class OperadorDao extends BaseDao {
         }
 
     }
+
+
+    public int  promedioFuncion(int  id) {
+        Double promedioD = null;
+        int promedioI = 0;
+
+        String sql = "select avg(calificacion) from compradefunciones where idfuncion=? group by idfuncion ;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    promedioD = rs.getDouble(1);
+                    promedioI = (int) Math.round(promedioD);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+
+        return promedioI;
+    }
+
+    public int  cantidadPorFuncion(int  id) {
+        int cantidad = 0;
+
+        String sql = "select sum(cantidad_por_funcion) from compradefunciones where idfuncion=? group by idfuncion ;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    cantidad= rs.getInt(1);
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+
+        return cantidad;
+    }
+
+
+    public int  cantidadAforo(int  id) {
+        int cantidad = 0;
+        String sql = "select aforo_operador from funciones where idfuncion=? ;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    cantidad= rs.getInt(1);
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return cantidad;
+    }
+
+
+    public float asistenciaPorcentaje(int  id) {
+        float porcentaje=0;
+        if(this.cantidadAforo(id)!=0){
+            porcentaje=(float) this.cantidadPorFuncion(id)/(this.cantidadPorFuncion(id)+this.cantidadAforo(id))*100;
+
+        }
+       return porcentaje;
+    }
+
+
+
+
+
+
+
     public ArrayList<BFuncion> filtradoFunciones(String filtro ,String inicio , String fin){
         if (filtro.equals("") || filtro.equals("defecto")){
             ArrayList<BFuncion> todasLasFunciones = new ArrayList<>();
@@ -72,8 +160,10 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        fu.setCalificacion(rs.getInt(8));
+                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        fu.setCalificacion(calificacion);
                         fu.setExisteCompra(rs.getInt(9));
+                        fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         todasLasFunciones.add(fu);
                     }else{
                         if(fin==null || fin.equals("")){
@@ -98,8 +188,10 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            fu.setCalificacion(rs.getInt(8));
+                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            fu.setCalificacion(calificacion);
                             fu.setExisteCompra(rs.getInt(9));
+                            fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             todasLasFunciones.add(fu);
                         }
                     }
@@ -142,7 +234,9 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        fu.setCalificacion(rs.getInt(8));
+                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        fu.setCalificacion(calificacion);
+                        fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         funcionesDisponibles.add(fu);
                     }else{
                         if(fin==null || fin.equals("")){
@@ -167,7 +261,9 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            fu.setCalificacion(rs.getInt(8));
+                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            fu.setCalificacion(calificacion);
+                            fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             funcionesDisponibles.add(fu);
                         }
                     }
@@ -210,7 +306,9 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        fu.setCalificacion(rs.getInt(8));
+                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        fu.setCalificacion(calificacion);
+                        fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMejorCalif.add(fu);
                     }else{
                         if(fin==null || fin.equals("")){
@@ -235,7 +333,9 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            fu.setCalificacion(rs.getInt(8));
+                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            fu.setCalificacion(calificacion);
+                            fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMejorCalif.add(fu);
                         }
                     }
@@ -275,7 +375,9 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        fu.setCalificacion(rs.getInt(8));
+                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        fu.setCalificacion(calificacion);
+                        fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMasVis.add(fu);
                     }else{
                         if(fin==null || fin.equals("")){
@@ -300,7 +402,9 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            fu.setCalificacion(rs.getInt(8));
+                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            fu.setCalificacion(calificacion);
+                            fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMasVis.add(fu);
                         }
                     }
@@ -341,7 +445,9 @@ public class OperadorDao extends BaseDao {
                         fu.setSede(rs.getString(5));
                         fu.setIdSala(rs.getInt(6));
                         fu.setPrecioTicket(rs.getInt(7));
-                        fu.setCalificacion(rs.getInt(8));
+                        int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                        fu.setCalificacion(calificacion);
+                        fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMenVis.add(fu);
                     }else{
                         if(fin==null || fin.equals("")){
@@ -366,7 +472,9 @@ public class OperadorDao extends BaseDao {
                             fu.setSede(rs.getString(5));
                             fu.setIdSala(rs.getInt(6));
                             fu.setPrecioTicket(rs.getInt(7));
-                            fu.setCalificacion(rs.getInt(8));
+                            int calificacion= this.promedioFuncion(fu.getIdFuncion());
+                            fu.setCalificacion(calificacion);
+                            fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMenVis.add(fu);
                         }
                     }
