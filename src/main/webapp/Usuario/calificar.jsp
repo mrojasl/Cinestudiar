@@ -10,7 +10,7 @@
 <jsp:useBean id="nombre" scope="request" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="listaProfesionales" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BProfesional>"/>
 
-
+<%--XD--%>
 <html>
     <head>
         <title>Calificacion</title>

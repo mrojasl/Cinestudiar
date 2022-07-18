@@ -20,7 +20,7 @@
 
 <% ProfesionalesDao profesionalesDao = new ProfesionalesDao() ;%>
 <% FuncionesDao funcionesDao = new FuncionesDao();%>
-
+<%--XD--%>
 <html style="position:relative;min-height: 100%;padding-bottom: 160px">
 <head>
     <meta charset="UTF-8">

@@ -35,7 +35,7 @@ public class CalificacionServlet extends HttpServlet {
 
 
     }
-
+//XD
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FuncionesDao funcionesDao = new FuncionesDao();
