@@ -591,7 +591,7 @@
                                                     <th scope="col" style="color: black">Precio</th>
                                                     <th scope="col" style="color: black">Edad Minima</th>
                                                     <th scope="col" style="color: black">Sede</th>
-                                                    <th scope="col" style="color: black">Aforo</th>
+                                                    <th scope="col" style="color: black"># Tickets Disponibles</th>
                                                     <th scope="col" style="color: black"></th>
                                                 </tr>
                                             </thead>
@@ -607,6 +607,7 @@
                                                     <td><p>  <%=bFuncionUsuario.getEdadMinima()%></p> </td >
                                                     <%}%>
                                                     <td><p>  <%=bFuncionUsuario.getbSedeUsuario().getSede()%></p> </td >
+                                                    <%%>
                                                     <td><p>  <%=bFuncionUsuario.getbSedeUsuario().getAforoOperador()%></p> </td >
                                                     <td>
                                                         <form class="user" method="POST" action="<%=request.getContextPath()%>/detalles?action=agregar" >
@@ -623,10 +624,13 @@
 
                                                             <%}%>
 
-                                                            <%if (coincidencia){%>
-                                                            <button class="btn btn-info disabled" type="submit">Agregar</button>
-                                                            <%}else{%>
+                                                            <%int disponibilidad= Integer.parseInt(bFuncionUsuario.getbSedeUsuario().getAforoOperador());%>
+
+                                                            <%if (!coincidencia && disponibilidad>0){%>
                                                             <button class="btn btn-outline-info" type="submit">Agregar</button>
+
+                                                            <%}else{%>
+                                                            <button class="btn btn-info disabled" type="submit">Agregar</button>
                                                             <%}%>
 
                                                         </form>
