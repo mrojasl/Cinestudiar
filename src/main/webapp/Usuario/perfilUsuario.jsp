@@ -346,6 +346,16 @@
                     <% } %>
 
                 </ul>
+
+                <% if (session.getAttribute("errorEditarSede") != null){%>
+                <div>
+                    <div class="alert alert-danger" role="alert">
+                        <%=session.getAttribute("errorEditarSede")%>
+                    </div>
+                </div>
+                <%session.removeAttribute("errorEditarSede");%>
+                <%}%>
+
             </div>
             <br>
             <br>

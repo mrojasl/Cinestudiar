@@ -17,6 +17,8 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @MultipartConfig
 @WebServlet(name = "PerfilServlet", value = "/PerfildeUsuario")
@@ -104,9 +106,21 @@ public class PerfilServlet extends HttpServlet {
             BPerfil bPerfil= new BPerfil();
             String codigo=request.getParameter("codigopuke");
             String contrasenha=request.getParameter("contranueva");
+
+
             bPerfil.setContrasenha(contrasenha);
             bPerfil.setCodigopucp(codigo);
-            perfilDao.actualizacontra(bPerfil);
+
+            Pattern patterncontra = Pattern.compile("(?=.*\\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{5,}", Pattern.CASE_INSENSITIVE);
+            Matcher matchercontra = patterncontra.matcher(contrasenha);
+            boolean contra = matchercontra.find();
+
+            if (!contra){request.getSession().setAttribute("errorContra", "Error al actualizar: Contraseña ingresada no válida");}
+
+            if(contra){
+                perfilDao.actualizacontra(bPerfil);
+            }
+
             response.sendRedirect(request.getContextPath() + "/PerfildeUsuario?a=perfil");
         }
         if ("actualizarfoto".equals(action)) {
