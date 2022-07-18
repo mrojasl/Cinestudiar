@@ -34,7 +34,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     <style>
+        html {
+            height: 100%;
+        }
 
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        footer {
+            margin-top: auto;
+        }
         a {
             text-decoration: none !important;
         }
@@ -363,7 +375,7 @@
 
 
 <br><br><br><br><br><br><br>
-<footer class="mt-auto" style="background-color: #D6D7DA;position: relative;bottom: 0;width: 100%">
+<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: -38rem;width: 100%">
     <div class="container"  style="background-color: #D6D7DA">
         <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
         <div class="d-flex bd-highlight">
