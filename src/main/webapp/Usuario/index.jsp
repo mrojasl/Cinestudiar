@@ -309,7 +309,7 @@
                         <h6 style="font-size: 30px"><%=listaradom.get(l).getNombre()%></h6>
                         <br>
                         <br>
-                        <div class="card" style="width: 45rem;background-color: transparent">
+                        <div class="card mb-4 border-0" style="width: 45rem;background-color: transparent">
                             <div class="card-body">
                                 <%if (listaradom.get(l).getInformación()!=null){%>
                                 <p class="card-text"><%=listaradom.get(l).getInformación()%></p>
