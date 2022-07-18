@@ -111,23 +111,28 @@ public class FuncionesDao extends BaseDao{
 
     String query="select * from compradefunciones where idhistorialdecompras=? ;";
 
-    public boolean habilitarBoton2(String idhistorial){
-        boolean valor=false;
-        String query="select * from compradefunciones where idhistorialdecompras=? ;";
+    public String habilitarBoton2(String idhistorial){
+        String calificacion="";
+        String query="select calificacion from compradefunciones where idhistorialdecompras=? ;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, idhistorial);
             try (ResultSet rs = pstmt.executeQuery()) {
-                valor= rs.next();
-                return valor;
+                while (rs.next()){
+
+                    calificacion=rs.getString(1);
+
+                }
+
+
 
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return valor;
+        return calificacion;
 
     }
 

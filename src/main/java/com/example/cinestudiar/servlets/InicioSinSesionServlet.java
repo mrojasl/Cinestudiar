@@ -101,7 +101,7 @@ public class InicioSinSesionServlet extends HttpServlet {
 
         /* Dirección de domicilio  */
 
-        Pattern patterndireccion = Pattern.compile("^[a-zA-Z0-9][\\sa-zA-Z0-9]*", Pattern.CASE_INSENSITIVE);
+        Pattern patterndireccion = Pattern.compile("^[a-zA-Z0-9][\\sa-zA-Z0-9]{1,45}$", Pattern.CASE_INSENSITIVE);
         Matcher matcherdireccion= patterndireccion.matcher(usuario.getDireccion());
         boolean direccion = matcherdireccion.find();
 

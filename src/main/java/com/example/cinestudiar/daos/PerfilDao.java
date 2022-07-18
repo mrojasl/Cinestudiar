@@ -14,7 +14,7 @@ public class PerfilDao extends BaseDao{
             "                     inner join funciones f on (f.idfuncion=cf.idfuncion)\n" +
             "                     inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
             "                     inner join salas sala on (sala.idsala=f.idsala)\n" +
-            "                     where u.codigo_pucp=? AND cf.asistencia=5 order by cf.idcompra desc;";
+            "                     where u.codigo_pucp=? AND cf.asistencia=5 order by f.fecha desc;";
     private static String sql_select2="select concat(u.nombre,' ',u.apellido) as `nombre`, " +
             "u.codigo_pucp,u.telefono,u.dni,u.direccion,u.correo,u.foto,u.contraseña from usuarios u\n" +
             "where u.codigo_pucp=?;";
