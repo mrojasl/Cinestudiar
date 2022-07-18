@@ -244,7 +244,7 @@
                                 <!-- Dirección de domicilio-->
                                 <div class="form-outline mb-4">
                                     <div class="input-group">
-                                        <div class="input-group-text" data-bs-toggle="tooltip" title="Ingrese su direccion.Puede escribir un máximo de 45 caracteres."><i class="bi bi-info-circle-fill"></i> Correo: </div>
+                                        <div class="input-group-text" data-bs-toggle="tooltip" title="Ingrese su direccion.Puede escribir un máximo de 45 caracteres."><i class="bi bi-info-circle-fill"></i> Direccion: </div>
                                         <input type="text" placeholder="Dirección" class="form-control form-control-user" required id="exampleFirstName"  name="direccion" title="Ingrese direccion válida" maxlength="45">
                                     </div>
 
@@ -375,16 +375,6 @@
 
 
 <br><br><br><br><br><br><br>
-<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: -38rem;width: 100%">
-    <div class="container"  style="background-color: #D6D7DA">
-        <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
-        <div class="d-flex bd-highlight">
-            <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
-            <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
-        </div>
-
-    </div>
-</footer>
 
 </body>
 </html>

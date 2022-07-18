@@ -38,6 +38,19 @@
        <% if (funcionesDao.ObtenerCalificacion(historial)==null){ %>
     <body>
     <style type="text/css">
+        html {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        footer {
+            margin-top: auto;
+        }
         .ratingg {
             --dir: right;
             --fill: gold;
@@ -281,16 +294,7 @@
             <br>
         </div>
     </section>
-    <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
-        <div class="container"  style="background-color: #D6D7DA">
-            <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
-            <div class="d-flex bd-highlight">
-                <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
-                <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
-            </div>
 
-        </div>
-    </footer>
     </body>
 
 
@@ -323,16 +327,7 @@
             <br>
         </div>
     </section>
-    <footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
-        <div class="container"  style="background-color: #D6D7DA">
-            <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
-            <div class="d-flex bd-highlight">
-                <div class="p-2 flex-grow-1 bd-highlight"><img style="width: 320px;height: 95px"  src="${pageContext.request.contextPath}/Imagenes/footer_logo.png"></div>
-                <div class="p-2 bd-highlight"><p style="margin-top: 30px;margin-left: -40px" class="text-muted">© 2022 Proyecto CinEstudiar</p></div>
-            </div>
 
-        </div>
-    </footer>
     </body>
 
 
