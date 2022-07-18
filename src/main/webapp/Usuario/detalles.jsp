@@ -693,7 +693,7 @@
             // Get the modal
             var modalh1 = document.getElementById('id01');
 
-            // When the user clicks anywhere outside of the modal, close it
+            // When the user clicks anywhere outside of the modal, close dt
             window.onclick = function(event) {
                 if (event.target == modalh1) {
                     modalh1.style.display = "none";

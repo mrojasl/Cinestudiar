@@ -85,7 +85,7 @@ public class DetallesServlet extends HttpServlet {
 
                 if (idFuncion != null && !coincidencia) {
                     funcionesDao.agregarCarrito((String) request.getSession().getAttribute("codigo_pucp"), Integer.parseInt(idFuncion));
-                    //System.out.println("Se agrego al carrito");
+                    //System.out.println("Se agrego al carrito")x;
                     request.getSession().setAttribute("indicadorReserva", "success");
                     response.sendRedirect(request.getContextPath()+"/detalles?action=detalles&id="+id);
                 } else {

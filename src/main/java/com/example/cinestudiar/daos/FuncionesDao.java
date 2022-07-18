@@ -1,5 +1,7 @@
 package com.example.cinestudiar.daos;
 
+//xd
+
 import com.example.cinestudiar.beans.BFuncionUsuario;
 import com.example.cinestudiar.beans.BPeliculas;
 import com.example.cinestudiar.beans.BSedeUsuario;
