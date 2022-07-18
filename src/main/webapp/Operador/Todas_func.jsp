@@ -396,7 +396,7 @@
                         <th class="text-white">Sede</th>
                         <th class="text-white">Sala</th>
                         <th class="text-white">Precio</th>
-                        <th class="text-white">Porcentaje asistencia</th>
+                        <th class="text-white">Porcentaje Compra</th>
                         <th class="text-white">Calificacion Promedio</th>
                         <th class="text-white">Editar</th>
                         <th class="text-white">Borrar</th>
