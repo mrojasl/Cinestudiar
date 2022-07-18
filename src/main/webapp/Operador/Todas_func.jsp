@@ -282,6 +282,15 @@
 
         </div>
 
+        <% if (session.getAttribute("errorRolesPeli") != null){%>
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <%=session.getAttribute("errorRolesPeli")%>
+            </div>
+        </div>
+        <%session.removeAttribute("errorRolesPeli");%>
+        <%}%>
+
         <% if (session.getAttribute("errorCrear") != null){%>
         <div>
             <div class="alert alert-danger" role="alert">
