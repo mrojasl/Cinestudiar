@@ -44,6 +44,179 @@
             font-size: 35px;
             margin-top:17px;
         }
+
+
+        .navbar{
+            position: relative;
+            width: 100%;
+            padding: 20px 10px;
+            background-color: #003f9e;
+        }
+        .navbar img{
+            width:300px;
+            height:80px;
+        }
+        .navbar a{
+            position: relative;
+            color:white;
+            text-decoration: none;
+            margin-right: 18px;
+        }
+        .navbar a[id=forgot]{
+            position: relative;
+            left:65%;
+            color: #78261f;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #3C3C41FF;
+        }
+        header{
+            background-color: #003f9e;
+            width: auto;
+            height: 11vh;
+            color: white;
+        }
+        header h2{
+            position: absolute;
+            left: 10%;
+            top:4%;
+        }
+        .elementos{
+            position: absolute;
+            left: 25%;
+        }
+        .elementos a{
+            position: relative;
+            left:65%;
+            top:0%;
+            color:white;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+        .administrador{
+            background-color: #7e7878;
+            width: auto;
+            height: 6vh;
+        }
+        .administrador h3{
+            position: absolute;
+            color: #ece9e9;
+            left: 50%;
+        }
+        html {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            line-height: 1.4;
+        }
+        .nav b{
+            position: relative;
+            left:25%;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            color: #404040;
+            font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
+        }
+
+        /*=====================================
+        estilos de la utilidad
+
+        =====================================*/
+        .seccion-perfil-usuario .perfil-usuario-body,
+        .seccion-perfil-usuario {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+
+        .seccion-perfil-usuario .perfil-usuario-body {
+            width: 70%;
+            position: relative;
+            max-width: 750px;
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .seccion-perfil-usuario .perfil-usuario-nuevo{
+            width: 95%;
+            position: relative;
+            background-color: #fff;
+            max-width: 1200px;
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+
+        }
+
+        .seccion-perfil-usuario .perfil-usuario-body .titulo {
+            display: block;
+            width: 100%;
+            font-size: 1.75em;
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .seccion-perfil-usuario .perfil-usuario-body .texto {
+            color: #848484;
+            font-size: 0.95em;
+        }
+
+        .seccion-perfil-usuario .perfil-usuario-footer,
+        .seccion-perfil-usuario .perfil-usuario-bio {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+            background-color: #fff;
+            border-radius: 15px;
+            width: 100%;
+        }
+
+        .seccion-perfil-usuario .perfil-usuario-bio {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+
+
+        .container > .crop {
+            position:absolute;
+            left: -100%;
+            right: -100%;
+            top: -100%;
+            bottom: -100%;
+            margin: auto;
+            min-height: 100%;
+            min-width: 100%;
+        }
+        /* adactacion a dispositivos */
+        @media (max-width: 750px) {
+            .seccion-perfil-usuario .lista-datos {
+                width: 100%;
+            }
+
+            .seccion-perfil-usuario .perfil-usuario-portada,
+            .seccion-perfil-usuario .perfil-usuario-body {
+                width: 95%;
+            }
+
+        }
+
+
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -53,12 +226,35 @@
     int fechas_caducadas=0;
 
     String codigo_puke="";%>
-<div class="container">
+
+
+
+
+    <section class="seccion-perfil-usuario">
+
+
+
+
+
     <% int contador_carrito=0;
         Integer hitsCount = (Integer)application.getAttribute("hitCounter");  %>
-    <div class="d-flex flex-row bd-highlight mb-1">
 
-        <p class="titulox"><br>Carrito de Compras</p>
+
+
+
+
+
+        <div class="perfil-usuario-body">
+            <br>
+
+            <div class="perfil-usuario-bio">
+                <h1 class="titulo" type ="button">Carrito de Compras</h1>
+            </div>
+
+        </div>
+
+        <div class="perfil-usuario-nuevo">
+
 
         <%
 
@@ -74,7 +270,7 @@
             application.setAttribute("hitCounter", hitsCount);
         %>
 
-    </div>
+
 
 
     <% ArrayList<String> fechacompleta = new ArrayList<String>();
@@ -140,14 +336,14 @@
     </div>
     <%}%>
 
-    <table class="table">
+    <table id="tablax" class="table table-striped table-hover">
         <thead>
         <tr class="titulos">
-            <th style="color:White ">Película(s)</th>
-            <th style="color:White ">Información</th>
-            <th style="color:White ">Entradas</th>
-            <th style="color:White ">Precio por Entrada</th>
-            <th style="color:White ">Subtotal</th>
+            <th scope="col">Película(s)</th>
+            <th scope="col">Información</th>
+            <th scope="col">Entradas</th>
+            <th scope="col">Precio por Entrada</th>
+            <th scope="col">Subtotal</th>
             <th></th>
             <th></th>
         </tr>
@@ -169,8 +365,8 @@
                     <% contador_carrito++;%>
                 </div>
             </td>
-            <td style="color:White ">
-                <div style="color:White;font-size: 20px "><strong><%=carrito.getNombre_pelicula()%></strong></div>
+            <td>
+                <div style="font-size: 20px "><strong><%=carrito.getNombre_pelicula()%></strong></div>
                 <br>
                 <strong>Sede:</strong> <%=carrito.getNombre_sede()%>
                 <br>
@@ -218,16 +414,16 @@
                     <input type="hidden" name="codigoEstudiante" value="<%=usuario.getCodigoPucp()%>" />
 
                     <input type="hidden" class="form-control" name="idcompra" id="idcompra" value="<%=carrito.getIdcompra()%>" >
-                    <p STYLE="color: White"> Entradas Disponibles: <%=carrito.getAforoOperador()%></p>
+                    <p > Entradas Disponibles: <%=carrito.getAforoOperador()%></p>
                     <input type="number" class="form-control" name="cantidad_funcion" id="Cantidad_funcion" min="1" max="<%=carrito.getAforoOperador()%>" value="<%=carrito.getCantidad_funcion()%>" > <br>
                     <%totaldetickets=totaldetickets+carrito.getCantidad_funcion();%>
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
             </td>
-            <td style="color:White ">
+            <td >
                 <%="S/." +carrito.getPrecio_ticket()%>
             </td>
-            <td style="color:White ">
+            <td >
 
                 <%="S/." + carrito.getPrecio_ticket() * carrito.getCantidad_funcion()%>
             </td>
@@ -240,7 +436,7 @@
             <%
                 } %>
             <% if (contador_carrito==0){ %>
-            <td STYLE="color: White; font-size: 15px">Usted no ha agregado nada al carrito </td>
+            <td STYLE="font-size: 15px">Usted no ha agregado nada al carrito </td>
 
             <%}%>
         </tr>
@@ -252,7 +448,7 @@
 
     <% if (contador_carrito!=0 && fechaigual==0 && fechas_caducadas==0){ %>
 
-    <div class="d-flex justify-content-end" style="color:White;font-size: 25px;margin-top: 0px" >Total a pagar: S/<%=preciototal%></div>
+    <div class="d-flex justify-content-end" style="font-size: 25px;margin-top: 0px" >Total a pagar: S/<%=preciototal%></div>
 
     <div class="d-flex justify-content-start" style="margin-top: -35px"><button type="button"  class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#extraLargeModal">Procesar Compra</button></div>
     <%}%>
@@ -260,7 +456,7 @@
 
 
     <% if (contador_carrito==0) { %>
-    <div class="d-flex justify-content-end" style="color:White;font-size: 25px;margin-top: 0px" >Total a pagar: S/<%=preciototal%></div>
+    <div class="d-flex justify-content-end" style="font-size: 25px;margin-top: 0px" >Total a pagar: S/<%=preciototal%></div>
 
     <div class="d-flex justify-content-start" style="margin-top: -35px"><button type="button"  class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#extraLargeModal" disabled>Procesar Compra</button></div>
     <%}%>
@@ -331,12 +527,13 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 
 <!-- Modal -->
 
+        </div>
 
 
 <script>
@@ -382,6 +579,6 @@
 
     </div>
 </footer>
-
+    </section>
 </body>
 </html>
