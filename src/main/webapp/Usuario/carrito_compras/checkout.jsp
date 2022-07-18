@@ -339,8 +339,56 @@
     <%}%>
 
 
+            <% if (session.getAttribute("errorTarjeta") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorTarjeta")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorTarjeta");%>
+            <%}%>
 
-    <% if (fechas_caducadas >= 1){ %>
+            <% if (session.getAttribute("errorNombre") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorNombre")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorNombre");%>
+            <%}%>
+
+            <% if (session.getAttribute("errorMes") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorMes")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorMes");%>
+            <%}%>
+
+            <% if (session.getAttribute("errorYear") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorYear")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorYear");%>
+            <%}%>
+
+
+            <% if (session.getAttribute("errorCvv") != null){%>
+            <div>
+                <div class="alert alert-danger" role="alert">
+                    <%=session.getAttribute("errorCvv")%>
+                </div>
+            </div>
+            <%session.removeAttribute("errorCvv");%>
+            <%}%>
+
+
+
+
+            <% if (fechas_caducadas >= 1){ %>
     <div class="alert alert-danger d-flex justify-content-start" role="alert">
 
         <div>
@@ -501,12 +549,12 @@
                                         </div>
                                         <div class="col-lg-5">
                                             <div class="row px-2">
-                                                <div class="form-group col-md-6"> <label class="form-control-label"  STYLE="color: white;font-weight: bold">Nombre del Titular</label> <input type="text" id="cname" name="cname" required="required" placeholder="Ingrese su nombre"> </div>
-                                                <div class="form-group col-md-6"> <label for="cnum" class="form-control-label"  STYLE="color: white;font-weight: bold">Número de Tarjeta</label> <input type="text" onkeyup="modifyInputcard(this)" id="cnum" name="cnum" required="required" placeholder="1111 2222 3223 4204" > </div>
+                                                <div class="form-group col-md-6"> <label class="form-control-label"  STYLE="color: white;font-weight: bold">Nombre del Titular</label> <input type="text" name="nombreTitular" id="cname"  required="required" placeholder="Ingrese su nombre"> </div>
+                                                <div class="form-group col-md-6"> <label for="cnum" class="form-control-label"  STYLE="color: white;font-weight: bold">Número de Tarjeta</label> <input type="text"  id="cnum" name="tarjetaTitular" minlength="16" maxlength="16" required="required" placeholder="1111222232234204" > </div>
                                             </div>
                                             <div class="row px-2" STYLE="background-color: #3577d7">
-                                                <div class="form-group col-md-6"> <label class="form-control-label"  STYLE="color: white;font-weight: bold">Fecha de Expiración</label> <input type="text" onkeyup="modifyInput(this)" id="exp" name="exp" required="required" placeholder="MM/YYYY"> </div>
-                                                <div class="form-group col-md-6" > <label  class="form-control-label" for="cvv"  STYLE="color: white;font-weight: bold">cvv</label><input type="number" STYLE="background-color: #a8c2ef" id="cvv" name="cvv" min="1" max="9999" placeholder="0000" required="required"> </div>
+                                                <div class="form-group col-md-6"> <label class="form-control-label"  STYLE="color: white;font-weight: bold">Fecha de Expiración</label> <input type="text"  name="mesTitular" minlength="2" maxlength="2" required="required" placeholder="MM"> <label class="form-control-label" ></label> <input type="text"  minlength="4" maxlength="4" name="yearTitular" required="required" placeholder="YYYY"> </div>
+                                                <div class="form-group col-md-6" > <label  class="form-control-label" for="cvv"  STYLE="color: white;font-weight: bold">cvv</label><input type="text" STYLE="background-color: #a8c2ef" id="cvv" name="cvv" minlength="3" maxlength="4" placeholder="123-1234" required="required"> </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 mt-2">

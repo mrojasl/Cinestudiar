@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet(name = "CarritoServlet", urlPatterns = {"/Checkout"})
 public class CarritoServlet extends HttpServlet {
@@ -93,18 +95,59 @@ public class CarritoServlet extends HttpServlet {
                 }
             }
 
-                if (sePuedeComprar){
+
+
+
+
+
+            String tarjetaTitular=request.getParameter("tarjetaTitular");
+            Pattern patternTarjeta = Pattern.compile("^[0-9]{16}$", Pattern.CASE_INSENSITIVE);
+            Matcher matcherTarjeta = patternTarjeta.matcher(tarjetaTitular);
+            boolean inputTarjeta = matcherTarjeta.find();
+
+            String nombreTitular=request.getParameter("nombreTitular");
+            Pattern patternnombre = Pattern.compile("^\\pL+[\\pL\\pZ\\pP]{1,45}$", Pattern.CASE_INSENSITIVE);
+            Matcher matchernombre = patternnombre.matcher(nombreTitular);
+            boolean inputnombre = matchernombre.find();
+
+            String mesTitular=request.getParameter("mesTitular");
+            Pattern patternmes = Pattern.compile("^[0-9]{2}$", Pattern.CASE_INSENSITIVE);
+            Matcher matchermes = patternmes.matcher(mesTitular);
+            boolean inputmes = matchermes.find();
+
+            String yearTitular=request.getParameter("yearTitular");
+            Pattern patternyear = Pattern.compile("^[0-9]{4}$", Pattern.CASE_INSENSITIVE);
+            Matcher matcheryear = patternyear.matcher(yearTitular);
+            boolean inputyear = matcheryear.find();
+
+            String cvvTitular=request.getParameter("cvv");
+            Pattern patterncvv = Pattern.compile("^[0-9]{3,4}$", Pattern.CASE_INSENSITIVE);
+            Matcher matchercvv = patterncvv.matcher(cvvTitular);
+            boolean inputcvv = matchercvv.find();
+
+            if (!inputTarjeta){request.getSession().setAttribute("errorTarjeta", "Error al Comprar: tarjeta no válida");}
+            if (!inputnombre){request.getSession().setAttribute("errorNombre", "Error al Comprar: Nombre no válido");}
+            if (!inputmes){request.getSession().setAttribute("errorMes", "Error al Comprar: mes de expiración no válido");}
+            if (!inputyear){request.getSession().setAttribute("errorYear", "Error al Comprar: año de expiración no válido");}
+            if (!inputcvv){request.getSession().setAttribute("errorCvv", "Error al Comprar: Código de Seguridad de la tarjeta no válido");}
+
+
+
+
+                if (sePuedeComprar && inputnombre && inputmes && inputyear && inputcvv){
                     int cantidad_tickets = Integer.parseInt(cantidad_ticketsStr);
                     double pago_total=Double.parseDouble(pago_totalStr);
-
                     request.getSession().setAttribute("cantidad_tickets", cantidad_tickets);
                     request.getSession().setAttribute("pago_total", pago_total);
 
 
                     response.sendRedirect(request.getContextPath() + "/ola");
                 }
-                else{
+                else if (!sePuedeComprar){
                     request.getSession().setAttribute("Carritofallido", "CompraFallida");
+                    response.sendRedirect(request.getContextPath() + "/Checkout");
+                }
+                else{
                     response.sendRedirect(request.getContextPath() + "/Checkout");
                 }
 
