@@ -354,7 +354,7 @@ public class OperadorServlet extends HttpServlet {
                         if (p.getRol().equalsIgnoreCase("a")){
                             validarRolA = 1;
                         }
-                        if (p.getRol().equalsIgnoreCase("p")){
+                        if (p.getRol().equalsIgnoreCase("d")){
                             validarRolD = 1;
                         }
                     }
@@ -453,7 +453,7 @@ public class OperadorServlet extends HttpServlet {
 
 
 
-                        if (indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
+                        if (indicadorProfesionales && indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
                             funciones.setFecha(fecha);
                             funciones.setHora(hora);
                             funciones.setIdSala(idSala);
