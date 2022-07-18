@@ -10,11 +10,12 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="com.example.cinestudiar.beans.BProfesional" %>
 <%@ page import="java.util.ArrayList" %>
-
+<%@ page import="com.example.cinestudiar.daos.FuncionesDao" %>
 <jsp:useBean id="usuario" scope="session" type="com.example.cinestudiar.beans.BUser" class="com.example.cinestudiar.beans.BUser"/>
 <jsp:useBean id="usuarioFunciones" scope="request" type="java.util.ArrayList<com.example.cinestudiar.beans.BUsuarioFuncion>" />
 
 <% ProfesionalesDao profesionalesDao = new ProfesionalesDao() ;%>
+<% FuncionesDao funcionesDao = new FuncionesDao();%>
 
 <html style="position:relative;min-height: 100%;padding-bottom: 160px">
 <head>
@@ -283,7 +284,11 @@
                             <% if(diff > 0) {%>
                             <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado
                             </button></td>
+                            <%if (!funcionesDao.habilitarBoton(funciones.getHistorialcompra()) && !funcionesDao.habilitarBoton2(funciones.getHistorialcompra()) ) {%>
                             <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
+                            <%}else{%>
+                                <p>Muchas gracias por calificar </p>
+                            <%}%>
                             <%} else if (diff < 0) {%>
                             <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente
                             </button></td>
@@ -295,8 +300,11 @@
 
                             <td><button type="button" class="btn btn-danger" style="margin-top: 20px" disabled>Caducado
                             </button></td>
-                            <td> <a type="button" class="btn btn-btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px;"> Calificar </a></td>
-
+                            <%if(!funcionesDao.habilitarBoton(funciones.getHistorialcompra()) && !funcionesDao.habilitarBoton2(funciones.getHistorialcompra()) ) {%>
+                            <td> <a type="button" class="btn btn-info" href="<%=request.getContextPath()%>/calificacion?historial=<%=funciones.getHistorialcompra()%>&nombre=<%=funciones.getNombrepelicula()%>"style="margin-top: 20px"> Calificar </a></td>
+                            <%}else{%>
+                            <p>Muchas gracias por calificar </p>
+                            <%}%>
                             <%} else if (diff2 < 0) {%>
 
                             <td><button type="button" class="btn btn-success" style="margin-top: 20px" disabled>Vigente
