@@ -5,6 +5,8 @@ import com.example.cinestudiar.daos.AdminDao;
 import com.example.cinestudiar.daos.OperadorDao;
 import com.example.cinestudiar.daos.PeliculasDao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javax.crypto.spec.PSource;
 import javax.servlet.*;
@@ -17,6 +19,8 @@ import java.sql.Array;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 @MultipartConfig
@@ -62,7 +66,7 @@ public class OperadorServlet extends HttpServlet {
                 }
                 case "reporte_send"-> {
                     fil_sala = request.getParameter("sala");
-                    System.out.println("LLEGA SEÃ‘AL");
+                    System.out.println("LLEGA SEÑAL");
                     fil_fecha = request.getParameter("fecha");
                     System.out.println(fil_fecha + fil_sala);
                     response.sendRedirect(request.getContextPath() + "/reporte?sala=" + fil_sala + "&fecha=" + fil_fecha);
@@ -102,13 +106,13 @@ public class OperadorServlet extends HttpServlet {
 
                         BPeliculas peli = peliculasDao.obtenerPelicula(idpeli);
 
-                        if ( peli != null) {
-                            peliculasDao.borrarFunciondeunaPelicula(idpeli);
-                            peliculasDao.borrarPelicula(idpeli);
-                        }
+                    if ( peli != null) {
+                        peliculasDao.borrarFunciondeunaPelicula(idpeli);
+                        peliculasDao.borrarPelicula(idpeli);
                     }
-                    response.sendRedirect("OperadorServlet?action=peliculas");
-                    break;
+                }
+                response.sendRedirect("OperadorServlet?action=peliculas");
+                break;
                 }
                 case "borrarfuncion" ->{
                     operadorDao.borrarFuncion(Integer.parseInt(request.getParameter("id")));
@@ -211,7 +215,7 @@ public class OperadorServlet extends HttpServlet {
             case "reporte"-> {
                 fil_sala= request.getParameter("filtro_sala");
 
-                System.out.println("LLEGA SEÃ‘AL");
+                System.out.println("LLEGA SEÑAL");
                 fil_fecha = request.getParameter("filtro_fecha");
                 System.out.println("HOLA" + fil_sala + fil_fecha);
                 response.sendRedirect(request.getContextPath()+"/OperadorServlet?action=reporte_send&sala="+fil_sala+"&fecha="+fil_fecha);
@@ -263,6 +267,9 @@ public class OperadorServlet extends HttpServlet {
                 funciones =new BFuncion();
 
                 int aforoOperador=Integer.parseInt(request.getParameter("aforoOperador"));
+                int precio_ticket=Integer.parseInt(request.getParameter("precio_ticket"));
+                int edad_minima=Integer.parseInt(request.getParameter("edad_minima"));
+                int idPersonal=Integer.parseInt(request.getParameter("idPersonal"));
 
                 String fecha = request.getParameter("fecha");
                 String hora = request.getParameter("hora");
@@ -285,39 +292,141 @@ public class OperadorServlet extends HttpServlet {
                         }
                     }
                 }
+                //Si no existe cruce de funciones, se inicia con las validaciones de los campos correspondientes::
 
                 if (centi==0){
 
 
                     ArrayList<BSedeYSala> AforosAdmin=operadorDao.obtenerSala();
+                    ArrayList<BPeliculas> ListaPelis=peliculasDao.listasPeliculas();
+                    ArrayList<BEquipoLimpieza> obtenerPersonal=operadorDao.obtenerPersonal();
+
+
+
                     int aforoAdmin=0;
+                    boolean existeSala=false;
+                    boolean existePersonal=false;
+
+                    boolean existePeli=false;
+
+                    boolean indicadorAforo=false;
+                    boolean indicadorEdad=false;
+                    boolean indicadorFecha=false;
+                    boolean indicadorlimite=false;
+
 
                     for(BSedeYSala sala: AforosAdmin){
                         if (idSala==sala.getIdSala()){
                             aforoAdmin= Integer.parseInt(sala.getAforoAdministrador());
+                            existeSala=true;
                             break;
                         }
                     }
 
-                    if ((aforoOperador>0) && (aforoOperador<=aforoAdmin)){
-                        funciones.setFecha(fecha);
-                        funciones.setHora(hora);
-                        funciones.setIdSala(idSala);
-                        funciones.setIdPelicula(idPelicula);
+                    for(BEquipoLimpieza limpieza: obtenerPersonal){
+                        if (idPersonal==limpieza.getIdpersonal()){
+                            existePersonal=true;
+                            break;
+                        }
+                    }
 
-                        funciones.setPrecioTicket(Integer.parseInt(request.getParameter("precio_ticket")));
-                        funciones.setEdadMinima(Integer.parseInt(request.getParameter("edad_minima")));
-                        funciones.setIdPersonal(Integer.parseInt(request.getParameter("idPersonal")));
-                        funciones.setAforoOperador(Integer.parseInt(request.getParameter("aforoOperador")));
-                        operadorDao.crearFuncion(funciones);
+                    if (!existePersonal){
+                        request.getSession().setAttribute("errorPersonal", "Error al crear:Personal seleccionado no existe. ");
+                    }
 
+
+
+                    /* -------Sala y Pelicula------- */
+                    if (!existeSala){
+                        request.getSession().setAttribute("errorIDSala", "Error al crear: Sala seleccionada no existe. ");
+                        response.sendRedirect(request.getContextPath() + "/OperadorServlet");
                     }
                     else{
-                        request.getSession().setAttribute("errorAforo", "Error al crear: Valor de Aforo no vÃ¡lido o excede al maximo dado por el administrador");
+                        /* -------Aforo------- */
+                        if ((aforoOperador>0) && (aforoOperador<=aforoAdmin)) { indicadorAforo=true;}
+                        else { request.getSession().setAttribute("errorAforo", "Error al crear: Valor de Aforo no válido o excede al maximo dado por el administrador.");
+                        }
+                        /* -------edad_minima------- */
+
+                        if ( (edad_minima>=0) && (edad_minima/25<=1) ) {indicadorEdad=true;}
+                        else {request.getSession().setAttribute("errorEdad", "Error al crear: Valor de Edad no válido .");
+                        }
+                        /* -------Fecha y hora------- */
+                        LocalDate fechainput=LocalDate.parse(fecha);
+                        DateFormat fechaActual = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fechas = new Date();
+                        LocalDate hoy= LocalDate.parse(fechaActual.format(fechas));
+
+
+                        String[] limitefechas=fecha.split("-");
+                        int inputlimite=Integer.parseInt(limitefechas[0]);
+                        String hoylimitess= String.valueOf(hoy);
+                        String[] hoylimites=hoylimitess.split("-");
+                        int hoylimite=(Integer.parseInt(hoylimites[0]))+2;
+                        //System.out.println(Integer.parseInt(hoylimites[0]));
+                        //System.out.println(hoylimite);
+
+                        if (inputlimite<=hoylimite){indicadorlimite=true;}
+                        else{request.getSession().setAttribute("fueradelimite", "La fecha de la función está fuera de rango (Solo se crean funciones con un año no superior a: Año actual+2) ");
+                        }
+                        String horasActuales = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+                        String[] parts = horasActuales.split(":");
+                        int horaActual= Integer.parseInt(parts[0]);
+                        int minutoActual= Integer.parseInt(parts[1]);
+
+                        String[] partsinput=hora.split(":");
+                        int horaInput=Integer.parseInt(partsinput[0]);
+                        int minutoInput=Integer.parseInt(partsinput[1]);
+
+                        if (fechainput.isAfter(hoy)){
+                            indicadorFecha=true;}
+                        if( fechainput.isEqual(hoy)){
+                            if (horaInput>horaActual){
+                                indicadorFecha=true;
+                            }
+                            else if (horaInput==horaActual){
+                                if(minutoInput>minutoActual){
+                                    indicadorFecha=true;
+                                }
+                            }
+                        }
+
+                        if (!indicadorFecha){request.getSession().setAttribute("errorFechas", "Error al crear: Fecha u Hora no válidas. ");}
+
+
+
+                        /* -------Personal de mantenimiento------- */
+
+
+
+
+
+
+                        if (indicadorAforo && indicadorEdad && indicadorFecha && indicadorlimite && existePersonal){
+                            funciones.setFecha(fecha);
+                            funciones.setHora(hora);
+                            funciones.setIdSala(idSala);
+                            funciones.setIdPelicula(idPelicula);
+                            funciones.setPrecioTicket(precio_ticket);
+                            funciones.setEdadMinima(edad_minima);
+                            funciones.setIdPersonal(idPersonal);
+                            funciones.setAforoOperador(aforoOperador);
+                            operadorDao.crearFuncion(funciones);
+                            request.getSession().setAttribute("success", "Funcion creada correctamente. ");
+                        }
+                            response.sendRedirect(request.getContextPath() + "/OperadorServlet");
                     }
 
+
+
+
+
+
+
+
+
                 }
-                response.sendRedirect("OperadorServlet");
+
 
 
 
@@ -375,7 +484,7 @@ public class OperadorServlet extends HttpServlet {
                     if (fu.getIdSala()==idSala && fu.getFecha().equals(fecha)){
                         if((horaTimeInicio.isAfter(LocalTime.parse(fu.getHora()).minusMinutes(1)) && horaTimeInicio.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion()))) || (horaTimeFinal.isAfter(LocalTime.parse(fu.getHora())) && horaTimeFinal.isBefore(LocalTime.parse(fu.getHora()).plusMinutes(fu.getDuracion())))){
                             if (idFuncion!=fu.getIdFuncion()) {
-                                request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la funciÃ³n de ID: " + fu.getIdFuncion());
+                                request.getSession().setAttribute("errorCrear", "Intento fallido, cruce con la función de ID: " + fu.getIdFuncion());
                                 centi = 1;
                                 break;
                             }

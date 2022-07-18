@@ -202,8 +202,10 @@
                                         </select>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Edad mínima</span>
-                                        <input name="edad_minima" type="text" class="form-control" placeholder="Edad Mínima" required="required"
+                                        <span class="input-group-text">Edad mínima(Máximo:25)</span>
+                                        <input name="edad_minima" type="number" class="form-control" placeholder="Escribir 0 si no hay restricción"
+                                               min="0"
+                                               max="25"
                                                aria-label="Sala 1"
                                                aria-describedby="button-addon1" autocomplete="on">
 
@@ -293,6 +295,65 @@
         </div>
         <%session.removeAttribute("errorAforo");%>
         <%}%>
+
+        <% if (session.getAttribute("errorIDSala") != null){%>
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <%=session.getAttribute("errorIDSala")%>
+            </div>
+        </div>
+        <%session.removeAttribute("errorIDSala");%>
+        <%}%>
+
+        <% if (session.getAttribute("errorEdad") != null){%>
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <%=session.getAttribute("errorEdad")%>
+            </div>
+        </div>
+        <%session.removeAttribute("errorEdad");%>
+        <%}%>
+
+        <% if (session.getAttribute("errorFechas") != null){%>
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <%=session.getAttribute("errorFechas")%>
+            </div>
+        </div>
+        <%session.removeAttribute("errorFechas");%>
+        <%}%>
+
+        <% if (session.getAttribute("success") != null){%>
+        <div>
+            <div class="alert alert-primary" role="alert">
+                <%=session.getAttribute("success")%>
+            </div>
+        </div>
+        <%session.removeAttribute("success");%>
+        <%}%>
+
+        <% if (session.getAttribute("fueradelimite") != null){%>
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <%=session.getAttribute("fueradelimite")%>
+            </div>
+        </div>
+        <%session.removeAttribute("fueradelimite");%>
+        <%}%>
+
+        <% if (session.getAttribute("errorPersonal") != null){%>
+        <div>
+            <div class="alert alert-danger" role="alert">
+                <%=session.getAttribute("errorPersonal")%>
+            </div>
+        </div>
+        <%session.removeAttribute("errorPersonal");%>
+        <%}%>
+
+
+
+
+
 
 
     <div class="container">
