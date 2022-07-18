@@ -46,6 +46,19 @@
 <body onload="disabledButton()" class="d-flex flex-column min-vh-100">
 
 <style type="text/css">
+    html {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+    }
+
+    footer {
+        margin-top: auto;
+    }
     /*=====================================
     estilos
     =====================================*/
@@ -390,7 +403,7 @@
     }
 </script>
 
-<footer class="mt-auto" style="background-color: #D6D7DA;position: absolute;bottom: 0;width: 100%">
+<footer class="mt-auto" style="background-color: #D6D7DA;bottom: 0;width: 100%">
     <div class="container"  style="background-color: #D6D7DA">
         <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
         <div class="d-flex bd-highlight">
