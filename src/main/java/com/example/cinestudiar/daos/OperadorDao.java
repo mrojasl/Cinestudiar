@@ -123,6 +123,23 @@ public class OperadorDao extends BaseDao {
 
 
 
+    public void actulizarCalificacion(int id,double promedio){
+        try (Connection conn = this.getConnection();) {
+            String sql = "update funciones set calificacion=?" +
+                    " where idfuncion=?;";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setDouble(1, promedio);
+                pstmt.setString(2, String.valueOf(id));
+
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 
@@ -162,6 +179,7 @@ public class OperadorDao extends BaseDao {
                         fu.setPrecioTicket(rs.getInt(7));
                         int calificacion= this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                         fu.setExisteCompra(rs.getInt(9));
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         todasLasFunciones.add(fu);
@@ -190,6 +208,7 @@ public class OperadorDao extends BaseDao {
                             fu.setPrecioTicket(rs.getInt(7));
                             int calificacion= this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                             fu.setExisteCompra(rs.getInt(9));
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             todasLasFunciones.add(fu);
@@ -236,6 +255,7 @@ public class OperadorDao extends BaseDao {
                         fu.setPrecioTicket(rs.getInt(7));
                         int calificacion= this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         funcionesDisponibles.add(fu);
                     }else{
@@ -263,6 +283,7 @@ public class OperadorDao extends BaseDao {
                             fu.setPrecioTicket(rs.getInt(7));
                             int calificacion= this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             funcionesDisponibles.add(fu);
                         }
@@ -281,17 +302,12 @@ public class OperadorDao extends BaseDao {
         if (filtro.equals("Mejor calificado")) {
             ArrayList<BFuncion> listaFunMejorCalif = new ArrayList<>();
             try {
-                String sql = "select f.idfuncion as 'IdFunciÃ³n',p.nombre as `TÃ­tulo de PelÃ­cula`,\n" +
-                        "f.fecha,f.hora,\n" +
-                        "se.nombre_sede as `Sede`,\n" +
-                        "sa.idsala as `Sala`,\n" +
-                        "f.precio_ticket as `Precio`,\n" +
-                        "round(p.calificacion) as `Calificacion`\n" +
-                        "from funciones f\n" +
-                        "inner join salas sa on (f.idsala=sa.idsala)\n" +
+                String sql = "select f.idfuncion as 'IdFunción',p.nombre as `TÃ\u00ADtulo de PelÃ\u00ADcula`,f.fecha,f.hora,se.nombre_sede as `Sede`,\n" +
+                        "sa.idsala as `Sala`,f.precio_ticket as `Precio`,\n" +
+                        "f.calificacion as `Calificacion`from funciones f inner join salas sa on (f.idsala=sa.idsala)\n" +
                         "inner join sedes se on (sa.nombre_sede=se.nombre_sede)\n" +
                         "inner join peliculas p on (p.idpelicula=f.idpelicula)\n" +
-                        "order by p.calificacion desc";
+                        "where f.calificacion!=0 order by f.calificacion desc  ;";
                 Connection conn = this.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
@@ -308,6 +324,7 @@ public class OperadorDao extends BaseDao {
                         fu.setPrecioTicket(rs.getInt(7));
                         int calificacion= this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMejorCalif.add(fu);
                     }else{
@@ -335,6 +352,7 @@ public class OperadorDao extends BaseDao {
                             fu.setPrecioTicket(rs.getInt(7));
                             int calificacion= this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMejorCalif.add(fu);
                         }
@@ -377,6 +395,7 @@ public class OperadorDao extends BaseDao {
                         fu.setPrecioTicket(rs.getInt(7));
                         int calificacion= this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMasVis.add(fu);
                     }else{
@@ -404,6 +423,7 @@ public class OperadorDao extends BaseDao {
                             fu.setPrecioTicket(rs.getInt(7));
                             int calificacion= this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMasVis.add(fu);
                         }
@@ -447,6 +467,7 @@ public class OperadorDao extends BaseDao {
                         fu.setPrecioTicket(rs.getInt(7));
                         int calificacion= this.promedioFuncion(fu.getIdFuncion());
                         fu.setCalificacion(calificacion);
+                        this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                         fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                         listaFunMenVis.add(fu);
                     }else{
@@ -474,6 +495,7 @@ public class OperadorDao extends BaseDao {
                             fu.setPrecioTicket(rs.getInt(7));
                             int calificacion= this.promedioFuncion(fu.getIdFuncion());
                             fu.setCalificacion(calificacion);
+                            this.actulizarCalificacion(fu.getIdFuncion(),calificacion);
                             fu.setAsistencia(this.asistenciaPorcentaje(fu.getIdFuncion()));
                             listaFunMenVis.add(fu);
                         }
