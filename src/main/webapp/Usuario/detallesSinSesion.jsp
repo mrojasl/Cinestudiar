@@ -306,7 +306,7 @@
 
     <H2>Horarios disponibles</H2>
 
-    <table id="tablax" class="table table-striped table-hover" style="background-color:beige">
+    <table id="tablax" class="table table-striped " style="background-color:#cbe4f1">
       <thead>
       <tr>
         <th scope="col" style="color: black">Día</th>

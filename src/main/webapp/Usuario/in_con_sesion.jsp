@@ -351,7 +351,6 @@
 
         </div>
 
-
         <div align="center"style="margin-bottom: 10px">
             <div class="boxfuncion2" align="center" style="margin-top: 40px">
 
@@ -359,11 +358,13 @@
 
             </div>
         </div>
+
         <div class="d-flex justify-content-around">
             <div >
 
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
                     <div class="carousel-inner">
+
                         <%  int h=1;
                             int b=1;
                             for (int n = 1; n<cointaner+1; n++) {%>
@@ -373,10 +374,11 @@
                                 <div class="row align-items-start">
                                     <%for (int k=h;k<listapeliculas.size()+1;k++){%>
                                     <div class="col">
+                                        <br>
                                         <div class="boxfuncion">
-                                            <h5 style="margin-top: 10px;margin-bottom: 10px"><%=listapeliculas.get(k-1).getNombre()%></h5>
+                                            <h5><%=listapeliculas.get(k-1).getNombre()%></h5>
                                             <img src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>" alt="poster_movie" width="180px" height="280px">
-                                            <a type="button" class="btn btn-outline-info btn-sm btn-rounded " data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/DetallesPelicula?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
+                                            <a type="button" class="btn btn-outline-info btn-rounded" data-mdb-ripple-color="dark" href="<%=request.getContextPath()%>/detalles?action=detalles&id=<%=listapeliculas.get(k-1).getIdpeliculas()%>">Ver detalles</a>
                                         </div>
                                     </div>
                                     <% if (k%5==0) {
@@ -395,7 +397,6 @@
 
                         <%}%>
                     </div>
-
                 </div>
                 <div align="center" style="margin-top: 40px">
                     <button  type="button" class="btn btn-light btn-rounded" data-mdb-ripple-color="dark" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
@@ -407,6 +408,7 @@
                 </div>
             </div>
         </div>
+
         <!-- XD-->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
                 integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

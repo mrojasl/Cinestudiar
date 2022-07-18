@@ -544,7 +544,7 @@
 
                                         <H7>(Al darle en "Agregar" la funcion se añadirá a su carrito de compras, ahi podrá agregar mas tickets)</H7>
                 <br>
-                                        <table id="tablax" class="table table-striped table-hover" style="background-color:beige">
+                                        <table id="tablax" class="table table-striped " style="background-color:#cbe4f1">
                                             <thead>
                                                 <tr>
                                                     <th scope="col" style="color: black">Día</th>
