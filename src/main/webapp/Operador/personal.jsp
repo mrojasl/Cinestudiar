@@ -33,6 +33,31 @@
         <!--link--stars-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
+            .seccion-perfil-usuario {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+            }
+
+
+
+            .seccion-perfil-usuario .perfil-usuario-body {
+                width: 70%;
+                position: relative;
+                max-width: 750px;
+                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .seccion-perfil-usuario .perfil-usuario-nuevo{
+                width: 95%;
+                position: relative;
+                background-color: #fff;
+                max-width: 1200px;
+                border-radius: 5px;
+                padding: 1.5rem 2rem;
+
+            }
             .checked {
                 color: orange;
             }
@@ -158,90 +183,94 @@
 
 
 
+            <section class="seccion-perfil-usuario">
+                <div class="perfil-usuario-nuevo">
+                    <div class="row ">
 
-            <div class="row ">
+                        <table class="table" id = "tableUp">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="tableUp_length">
+                                        <label></label>
+                                        <!-- Button trigger modal -->
+                                        <button style="height: 40px"
+                                                type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop">
+                                            Crear Equipo de Personal
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="tableUp_filter" class="dataTables_filter">
+                                        <label class="text-black" style="margin-left: 20px">Buscar: </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <thead>
+                                <tr>
+                                    <th class="text-black">ID</th>
+                                    <th class="text-black">Jefe</th>
+                                    <th class="text-black">Personal 1</th>
+                                    <th class="text-black">Personal 2</th>
+                                    <th class="text-black">Funciones</th>
+                                    <th class="text-black">Eliminar</th>
 
-                <table class="table" id = "tableUp">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_length" id="tableUp_length">
-                                <label></label>
-                                <!-- Button trigger modal -->
-                                <button style="height: 40px"
-                                        type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
-                                    Crear Equipo de Personal
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div id="tableUp_filter" class="dataTables_filter">
-                                <label class="text-white" style="margin-left: 20px">Buscar: </label>
-                            </div>
-                        </div>
+
+
+                                </tr>
+                            </thead>
+
+
+                            <%
+
+                                for (BEquipoLimpieza p : listaPersonal) { %>
+
+
+
+
+                            <tr>
+
+                                <td class="text-black"><%=p.getIdpersonal()%> </td>
+                                <td class="text-black"><%=p.getJefe()%></td>
+
+                                <td class="text-black"><%=p.getLimpiador1()%></td>
+                                <td class="text-black"><%=p.getLimpiador2()%></td>
+
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%=p.getIdpersonal()%>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
+                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+
+                                <%if (p.getEnFuncion()==0){%>
+                                <td>
+                                    <a onclick="return confirm('¿Estas seguro de borrar?');"
+                                       href="<%=request.getContextPath()%>/OperadorServlet?action=borrarpersonal&id=<%=p.getIdpersonal()%>"
+                                       type="button" class="btn btn-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                                <%} else{%>
+                                <td class="text-black">No aplica</td>
+                                <%}%>
+
+
+                            </tr>
+
+                            <%
+                                } %>
+
+
+                            <!-- Large modal -->
+
+                        </table>
                     </div>
-                    <thead>
-                        <tr>
-                            <th class="text-white">ID</th>
-                            <th class="text-white">Jefe</th>
-                            <th class="text-white">Personal 1</th>
-                            <th class="text-white">Personal 2</th>
-                            <th class="text-white">Funciones</th>
-                            <th class="text-white">Eliminar</th>
-
-
-
-                        </tr>
-                    </thead>
-
-
-                    <%
-
-                        for (BEquipoLimpieza p : listaPersonal) { %>
-
-
-
-
-                    <tr>
-
-                        <td class="text-white"><%=p.getIdpersonal()%> </td>
-                        <td class="text-white"><%=p.getJefe()%></td>
-
-                        <td class="text-white"><%=p.getLimpiador1()%></td>
-                        <td class="text-white"><%=p.getLimpiador2()%></td>
-
-                        <td>
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%=p.getIdpersonal()%>">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
-                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
-                                </svg>
-                            </button>
-                        </td>
-
-                        <%if (p.getEnFuncion()==0){%>
-                        <td>
-                            <a onclick="return confirm('¿Estas seguro de borrar?');"
-                               href="<%=request.getContextPath()%>/OperadorServlet?action=borrarpersonal&id=<%=p.getIdpersonal()%>"
-                               type="button" class="btn btn-danger">
-                                <i class="bi bi-trash"></i>
-                            </a>
-                        </td>
-                        <%} else{%>
-                        <td class="text-white">No aplica</td>
-                        <%}%>
-
-
-                    </tr>
-
-                    <%
-                        } %>
-
-
-                    <!-- Large modal -->
-
-                </table>
-            </div>
+                </div>
+            </section>
+            <br>
         </div>
         <!-- JQUERY -->
         <script src="https://code.jquery.com/jquery-3.4.1.js"
@@ -278,8 +307,8 @@
                             sortDescending: ": active para ordenar la columna en orden descendente"
                         }
                     },
-                    scrollY: 480,
-                    lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+                    scrollY: 440,
+                    lengthMenu: [ [7, 15, -1], [7, 15, "All"] ],
                 });
             });
         </script>

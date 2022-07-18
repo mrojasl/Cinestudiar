@@ -36,6 +36,31 @@
         <!--link--stars-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
+            .seccion-perfil-usuario {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+            }
+
+
+
+            .seccion-perfil-usuario .perfil-usuario-body {
+                width: 70%;
+                position: relative;
+                max-width: 750px;
+                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .seccion-perfil-usuario .perfil-usuario-nuevo{
+                width: 95%;
+                position: relative;
+                background-color: #fff;
+                max-width: 1200px;
+                border-radius: 5px;
+                padding: 1.5rem 2rem;
+
+            }
             .checked {
                 color: orange;
             }
@@ -114,29 +139,19 @@
 
 
 
+            <section class="seccion-perfil-usuario">
+                <div class="perfil-usuario-nuevo">
+                    <div class="row ">
 
-            <div class="row ">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_length" id="tableUp_length">
-                            <label></label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="tableUp_filter" class="dataTables_filter">
-                            <label class="text-white" style="margin-left: 20px">Buscar: </label>
-                        </div>
-                    </div>
-                </div>
-                <table class="table" id = "tableUp">
+                <table class="table table-striped table-hover" id = "tableUp">
                     <thead>
                         <tr>
-                            <th class="text-white">ID</th>
-                            <th class="text-white">Rol</th>
-                            <th class="text-white">Nombre</th>
-                            <th class="text-white">Apellido</th>
-                            <th class="text-white">Calificación</th>
-                            <th class="text-white">Asignar a Pelicula</th>
+                            <th class="text-black">ID</th>
+                            <th class="text-black">Rol</th>
+                            <th class="text-black">Nombre</th>
+                            <th class="text-black">Apellido</th>
+                            <th class="text-black">Calificación</th>
+                            <th class="text-black">Asignar a Pelicula</th>
 
 
                         </tr>
@@ -148,14 +163,14 @@
                         for (BProfesional p : listaProfesionales) { %>
 
                     <tr>
-                        <td class="text-white"><%=p.getIdProfesional()%> </td>
+                        <td class="text-black"><%=p.getIdProfesional()%> </td>
                         <%if (p.getRol().equals("a")) {%>
-                        <td class="text-white">Actor</td>
+                        <td class="text-black">Actor</td>
                         <%}else{%>
-                        <td class="text-white">Director</td>
+                        <td class="text-black">Director</td>
                         <%}%>
-                        <td class="text-white"><%=p.getNombre()%> </td>
-                        <td class="text-white"><%=p.getApellido()%></td>
+                        <td class="text-black"><%=p.getNombre()%> </td>
+                        <td class="text-black"><%=p.getApellido()%></td>
 
 
                         <!-- ModalDescripcion -->
@@ -314,6 +329,9 @@
 
                 </table>
             </div>
+                </div>
+            </section>
+            <br>
         </div>
 
         <!-- JQUERY -->
@@ -331,8 +349,8 @@
                 $('#tableUp').DataTable({
                     language: {
                         processing: "Tratamiento en curso...",
-                        search: "",
-                        lengthMenu: "",
+                        search: "Buscar:",
+                        lengthMenu: "Agrupar de _MENU_ ",
                         info: "",
                         infoEmpty: "No existen datos.",
                         infoFiltered: "(filtrado de _MAX_ elementos en total)",
@@ -351,8 +369,8 @@
                             sortDescending: ": active para ordenar la columna en orden descendente"
                         }
                     },
-                    scrollY: 480,
-                    lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+                    scrollY: 420,
+                    lengthMenu: [ [7, 15, -1], [7, 15, "All"] ],
                 });
             });
         </script>

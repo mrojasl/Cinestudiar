@@ -32,6 +32,31 @@
         <!--link--stars-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
+            .seccion-perfil-usuario {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+            }
+
+
+
+            .seccion-perfil-usuario .perfil-usuario-body {
+                width: 70%;
+                position: relative;
+                max-width: 750px;
+                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .seccion-perfil-usuario .perfil-usuario-nuevo{
+                width: 95%;
+                position: relative;
+                background-color: #fff;
+                max-width: 1200px;
+                border-radius: 5px;
+                padding: 1.5rem 2rem;
+
+            }
             .checked {
                 color: orange;
             }
@@ -190,266 +215,271 @@
 
 
 
+                <section class="seccion-perfil-usuario">
+                    <div class="perfil-usuario-nuevo">
 
-            <div class="row ">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_length" id="tableUp_length">
-                            <label></label>
-                            <!-- Button trigger modal -->
-                            <button style="height: 40px"
-                                    type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">
-                                Crear Película
-                            </button>
-                        </div>
+                            <div class="row ">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length" id="tableUp_length">
+                                            <label></label>
+                                            <!-- Button trigger modal -->
+                                            <button style="height: 40px"
+                                                    type="button" class="btn btn-success buttonmargin" data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop">
+                                                Crear Película
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div id="tableUp_filter" class="dataTables_filter">
+                                            <label class="text-black" style="margin-left: 20px">Buscar: </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-hover" id = "tableUp">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-black">ID</th>
+                                            <th class="text-black">Título</th>
+                                            <th class="text-black">Duración (minutos)</th>
+                                            <th class="text-black">Género</th>
+                                            <th class="text-black">Calificación Promedio</th>
+                                            <th class="text-black">Profesionales</th>
+                                            <th class="text-black">Descripción</th>
+                                            <th class="text-black">Portada</th>
+                                            <th class="text-black">Borrar</th>
+
+                                        </tr>
+                                    </thead>
+
+
+                                    <%
+
+                                        for (BPeliculas pelicula : Peliculas) { %>
+
+                                    <tr>
+                                        <td class="text-black"><%=pelicula.getIdpeliculas()%></td>
+                                        <td class="text-black"><%=pelicula.getNombre()%> </td>
+                                        <td class="text-black"><%=pelicula.getDuracion()%></td>
+                                        <td class="text-black"><%=pelicula.getGenero()%></td>
+
+
+
+                                        <!-- ModalDescripcion -->
+                                        <div class="modal fade" id="descripcion<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="descripcion<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
+                                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarDesc">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Descripción</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
+                                                            <div class="input-group">
+                                                                <textarea name="descripcion" style="height:500px;font-size:14pt;" maxlength="1000" class="form-control"><%=pelicula.getInformación()%></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+
+                                        <!-- ModalPortada -->
+                                        <div class="modal fade" id="foto<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="foto<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
+                                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarPort" enctype="multipart/form-data">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel2">Descripción</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
+                                                            <div class="input-group">
+                                                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="portada" style="width:250px;height:380px;margin-left: 100px "/>
+
+                                                            </div>
+                                                            <div style="margin-top: 20px">
+                                                                <label class="input-group-text" for="inputGroupFile01">Editar Portada</label>
+                                                                <input type="file" class="form-control" name="fotonueva">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+
+
+
+                                        <!-- ModalProfesionales -->
+                                        <div class="modal fade" id="profesionales<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="profesionales<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel3">Descripción</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Director:
+                                                            <br>
+                                                            <%for (BProfesional dir : directores){%>
+                                                            <%if (dir.getIdPelicula()==pelicula.getIdpeliculas()){%>
+                                                            <%=dir.getNombre()%> <%=dir.getApellido()%>
+                                                            <br>
+                                                            <%}%>
+                                                            <%}%>
+                                                            <br>
+                                                            Actores:
+                                                            <br>
+                                                            <%for (BProfesional act : actores){%>
+                                                            <%if (act.getIdPelicula()==pelicula.getIdpeliculas()){%>
+                                                            <%=act.getNombre()%> <%=act.getApellido()%>
+                                                            <br>
+                                                            <%}%>
+                                                            <%}%>
+
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+
+
+
+
+
+
+                                        <% int num= (int) pelicula.getCalificacion();%>
+                                        <%if (num == 0){ %>
+                                        <td class="text-black">No tiene</td>
+                                        <%}%>
+                                        <%if (num == 1){ %>
+                                        <td>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </td>
+                                        <%}%>
+                                        <%if(num==2){%>
+                                        <td>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </td>
+                                        <%}%>
+                                        <%if(num==3){%>
+                                        <td>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </td>
+                                        <%}%>
+                                        <%if(num==4){%>
+                                        <td>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star"></i>
+                                        </td>
+                                        <%}%>
+                                        <%if(num==5){%>
+                                        <td>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                            <i class="fa fa-star checked"></i>
+                                        </td>
+                                        <%}%>
+
+
+
+
+
+
+                                        <td class="text-black">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#profesionales<%=pelicula.getIdpeliculas()%>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                                </svg>
+                                            </button>
+                                        </td>
+
+
+
+
+
+                                        <td class="text-black">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#descripcion<%=pelicula.getIdpeliculas()%>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                                </svg>
+                                            </button>
+                                        </td>
+
+
+
+
+                                        <td>
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#foto<%=pelicula.getIdpeliculas()%>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
+                                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
+                                                </svg>
+                                            </button>
+                                        </td>
+
+
+                                        <%if (pelicula.getExisteCompra()==0){%>
+                                        <td>
+
+                                            <a onclick="return confirm('¿Estas seguro de borrar?\nSe eliminarán todas las funciones que contengan esta película');"
+                                               href="<%=request.getContextPath()%>/OperadorServlet?action=borrarpeli&id=<%=pelicula.getIdpeliculas()%>"
+                                               type="button" class="btn btn-danger">
+
+                                               <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                        <%} else{%>
+                                        <td class="text-black">No aplica</td>
+                                        <%}%>
+                                    </tr>
+
+                                    <%
+                                        } %>
+
+
+                                    <!-- Large modal -->
+
+                                </table>
+                            </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="tableUp_filter" class="dataTables_filter">
-                            <label class="text-white" style="margin-left: 20px">Buscar: </label>
-                        </div>
-                    </div>
-                </div>
-                <table class="table" id = "tableUp">
-                    <thead>
-                        <tr>
-                            <th class="text-white">ID</th>
-                            <th class="text-white">Título</th>
-                            <th class="text-white">Duración (minutos)</th>
-                            <th class="text-white">Género</th>
-                            <th class="text-white">Calificación Promedio</th>
-                            <th class="text-white">Profesionales</th>
-                            <th class="text-white">Descripción</th>
-                            <th class="text-white">Portada</th>
-                            <th class="text-white">Borrar</th>
-
-                        </tr>
-                    </thead>
-
-
-                    <%
-
-                        for (BPeliculas pelicula : Peliculas) { %>
-
-                    <tr>
-                        <td class="text-white"><%=pelicula.getIdpeliculas()%></td>
-                        <td class="text-white"><%=pelicula.getNombre()%> </td>
-                        <td class="text-white"><%=pelicula.getDuracion()%></td>
-                        <td class="text-white"><%=pelicula.getGenero()%></td>
-
-
-
-                        <!-- ModalDescripcion -->
-                        <div class="modal fade" id="descripcion<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="descripcion<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
-                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarDesc">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Descripción</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
-                                            <div class="input-group">
-                                                <textarea name="descripcion" style="height:500px;font-size:14pt;" maxlength="1000" class="form-control"><%=pelicula.getInformación()%></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-
-                        <!-- ModalPortada -->
-                        <div class="modal fade" id="foto<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="foto<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
-                            <form method="post" action="<%=request.getContextPath()%>/OperadorServlet?action=editarPort" enctype="multipart/form-data">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel2">Descripción</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input name="id" hidden type="text" value="<%=pelicula.getIdpeliculas()%>">
-                                            <div class="input-group">
-                                                <img class="crop" src="${pageContext.request.contextPath}/Image?action=peliculas&id=<%=pelicula.getIdpeliculas()%>" alt="portada" style="width:250px;height:380px;margin-left: 100px "/>
-
-                                            </div>
-                                            <div style="margin-top: 20px">
-                                                <label class="input-group-text" for="inputGroupFile01">Editar Portada</label>
-                                                <input type="file" class="form-control" name="fotonueva">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-
-
-
-                        <!-- ModalProfesionales -->
-                        <div class="modal fade" id="profesionales<%=pelicula.getIdpeliculas()%>" tabindex="-1" aria-labelledby="profesionales<%=pelicula.getIdpeliculas()%>" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel3">Descripción</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Director:
-                                            <br>
-                                            <%for (BProfesional dir : directores){%>
-                                            <%if (dir.getIdPelicula()==pelicula.getIdpeliculas()){%>
-                                            <%=dir.getNombre()%> <%=dir.getApellido()%>
-                                            <br>
-                                            <%}%>
-                                            <%}%>
-                                            <br>
-                                            Actores:
-                                            <br>
-                                            <%for (BProfesional act : actores){%>
-                                            <%if (act.getIdPelicula()==pelicula.getIdpeliculas()){%>
-                                            <%=act.getNombre()%> <%=act.getApellido()%>
-                                            <br>
-                                            <%}%>
-                                            <%}%>
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-
-
-
-
-
-
-                        <% int num= (int) pelicula.getCalificacion();%>
-                        <%if (num == 0){ %>
-                        <td class="text-white">No tiene</td>
-                        <%}%>
-                        <%if (num == 1){ %>
-                        <td>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </td>
-                        <%}%>
-                        <%if(num==2){%>
-                        <td>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </td>
-                        <%}%>
-                        <%if(num==3){%>
-                        <td>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </td>
-                        <%}%>
-                        <%if(num==4){%>
-                        <td>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star"></i>
-                        </td>
-                        <%}%>
-                        <%if(num==5){%>
-                        <td>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                            <i class="fa fa-star checked"></i>
-                        </td>
-                        <%}%>
-
-
-
-
-
-
-                        <td class="text-white">
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#profesionales<%=pelicula.getIdpeliculas()%>">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
-                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
-                                </svg>
-                            </button>
-                        </td>
-
-
-
-
-
-                        <td class="text-white">
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#descripcion<%=pelicula.getIdpeliculas()%>">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
-                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
-                                </svg>
-                            </button>
-                        </td>
-
-
-
-
-                        <td>
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#foto<%=pelicula.getIdpeliculas()%>">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
-                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
-                                </svg>
-                            </button>
-                        </td>
-
-
-                        <%if (pelicula.getExisteCompra()==0){%>
-                        <td>
-
-                            <a onclick="return confirm('¿Estas seguro de borrar?\nSe eliminarán todas las funciones que contengan esta película');"
-                               href="<%=request.getContextPath()%>/OperadorServlet?action=borrarpeli&id=<%=pelicula.getIdpeliculas()%>"
-                               type="button" class="btn btn-danger">
-
-                               <i class="bi bi-trash"></i>
-                            </a>
-                        </td>
-                        <%} else{%>
-                        <td class="text-white">No aplica</td>
-                        <%}%>
-                    </tr>
-
-                    <%
-                        } %>
-
-
-                    <!-- Large modal -->
-
-                </table>
-            </div>
+                </section>
+            <br>
         </div>
 
         <!-- JQUERY -->
@@ -487,8 +517,8 @@
                             sortDescending: ": active para ordenar la columna en orden descendente"
                         }
                     },
-                    scrollY: 520,
-                    lengthMenu: [ [8, 15, -1], [8, 15, "All"] ],
+                    scrollY: 460,
+                    lengthMenu: [ [7, 15, -1], [7, 15, "All"] ],
                 });
             });
         </script>
