@@ -61,8 +61,8 @@
                 <li class="nav-item">
                     <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearPe" class="navbar-brand" aria-current="page">Profesionales</a>
                 </li>
-                <li class="nav-item">
-                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="navbar-brand" aria-current="page">Personal</a>
+                <li class="nav-item align-content-center">
+                    <a href="<%=request.getContextPath()%>/OperadorServlet?action=crearFu" class="nav-link active" aria-current="page">Personal</a>
                 </li>
             </ul>
 
