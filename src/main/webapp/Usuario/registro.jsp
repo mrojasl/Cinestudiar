@@ -85,71 +85,98 @@
                             <form class="user" method="POST" action="<%=request.getContextPath()%>/registro?action=añadir" enctype="multipart/form-data" >
 
                                 <!-- Nombre completo-->
+
                                 <div class="form-outline mb-4">
-
-                                    <input type="text" placeholder="Nombre"  style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" required="required">
-
+                                    <div class="input-group">
+                                        <div class="input-group-text">Nombre: </div>
+                                        <input type="text" placeholder="Nombre"  style="" class="form-control" id="nombre" name="nombre" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" required="required">
+                                    </div>
                                 </div>
+
                                 <!-- Apellido completo-->
                                 <div class="form-outline mb-4">
-
-                                    <input type="text" placeholder="Apellido" class="form-control form-control-user" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" id="apellidos"
-                                           name="apellido" required="required">
-
+                                    <div class="input-group">
+                                        <div class="input-group-text">Apellido: </div>
+                                        <input type="text" placeholder="Apellido" class="form-control form-control-user" pattern="^[a-zA-Z][\sa-zA-Z]*" title="Ingrese solo letras" id="apellidos"
+                                               name="apellido" required="required">
+                                    </div>
                                 </div>
                                 <!-- DNI--->
                                 <div class="form-outline mb-4">
+                                    <div class="input-group">
+                                        <div class="input-group-text">DNI: </div>
+                                        <input type="text" placeholder="DNI" class="form-control" id="exampleDNI" name="dni" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" maxlength="8" >
 
-                                    <input type="text" placeholder="DNI" class="form-control" id="exampleDNI" name="dni" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" maxlength="8" >
-
+                                    </div>
                                 </div>
                                 <!-- Código-->
                                 <div class="form-outline mb-4">
+                                    <div class="input-group">
+                                        <div class="input-group-text">Código PUCP: </div>
+                                        <input type="text" placeholder="Codigo PUCP" class="form-control" id="exampleCodigo" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" name="codigo_pucp" maxlength="8" >
 
-                                    <input type="text" placeholder="Codigo PUCP" class="form-control" id="exampleCodigo" pattern="[0-9]{8}" title="Debe ingresar 8 dígitos numericos" required="required" name="codigo_pucp" maxlength="8" >
-
+                                    </div>
                                 </div>
                                 <!-- Correo-->
                                 <div class="form-outline mb-4">
-                                    <input type="email" placeholder="Correo" class="form-control form-control-user" id="exampleInputEmail"  name="correo" title="Debe ingresar un correo válido" required="required">
+                                    <div class="input-group">
+                                        <div class="input-group-text">Correo: </div>
+                                        <input type="email" placeholder="Correo" class="form-control form-control-user" id="exampleInputEmail"  name="correo" title="Debe ingresar un correo válido" required="required">
+                                    </div>
 
                                 </div>
                                 <!-- Dirección de domicilio-->
                                 <div class="form-outline mb-4">
-                                    <input type="text" placeholder="Dirección" class="form-control form-control-user" id="exampleFirstName"  name="direccion" pattern="^[a-zA-Z0-9][\sa-zA-Z0-9]*" title="Ingrese direccion válida"required="required">
+                                    <div class="input-group">
+                                        <div class="input-group-text">Dirección: </div>
+                                        <input type="text" placeholder="Dirección" class="form-control form-control-user" id="exampleFirstName"  name="direccion" pattern="^[a-zA-Z0-9][\sa-zA-Z0-9]*" title="Ingrese direccion válida"required="required">
+                                    </div>
 
                                 </div>
                                 <!-- Número de Celular-->
                                 <div class="form-outline mb-4">
-                                    <input type="text" placeholder="Celular" class="form-control form-control-user" id="exampleInputNumber"  name="telefono" pattern="[0-9]*" minlength="9" maxlength = "9" title="Debe ingresar 9 dígitos numericos" required="required">
+                                    <div class="input-group">
+                                        <div class="input-group-text">Celular: </div>
+                                        <input type="text" placeholder="Celular" class="form-control form-control-user" id="exampleInputNumber"  name="telefono" pattern="[0-9]*" minlength="9" maxlength = "9" title="Debe ingresar 9 dígitos numericos" required="required">
+                                    </div>
 
                                 </div>
                                 <!-- Fecha de nacimiento-->
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="start">Fecha de nacimiento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
-                                    <input type="date" id="start" name="fecha_nacimiento" required="required"
-                                           value="--/--/--"
-                                           min="1980-01-01" max="2005-12-31">
+                                    <div class="input-group">
+                                        <div class="input-group-text">Fecha de nacimiento: </div>
+                                        <input style="margin-left: 80px" type="date" id="start" name="fecha_nacimiento" required="required"
+                                               value="--/--/--"
+                                               min="1980-01-01" max="2005-12-31">
+                                    </div>
 
                                 </div>
                                 <!-- Foto-->
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="start">Foto (opcional) &nbsp;&nbsp; </label>
-                                    <input type="file" name="picture">
+                                    <div class="input-group">
+                                        <div class="input-group-text">Foto: </div>
+                                        <input style="margin-left: 20px" type="file" name="picture">
+                                    </div>
                                 </div>
 
                                 <!-- Contraseña-->
                                 <div class="form-outline mb-4">
-
-                                    <input type="password" placeholder="Contraseña" onkeyup='check();' class="form-control form-control-user" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
-                                           id="exampleInputPassword" name="password" required="required">
+                                    <div class="input-group">
+                                        <div class="input-group-text">Contraseña: </div>
+                                        <input type="password" placeholder="Contraseña" onkeyup='check();' class="form-control form-control-user" pattern="(?=.*\d)(?=.*[A-Z])(?=.*?[#?!@$%^&*-]).{3,}" title="La contraseña debe tener, como mínimo, una mayúscula, un número y un carácter especial (#?!@$%^&*-)"
+                                               id="exampleInputPassword" name="password" required="required">
+                                    </div>
 
                                 </div>
 
                                 <!-- Confirmar Contraseña-->
                                 <div class="form-outline mb-4">
-                                    <input type="password" placeholder="Confirmar contraseña" onkeyup='check();' class="form-control form-control-user"
-                                           id="confirmPassword"  name="confirmPassword" required="required">
+                                    <div class="input-group">
+                                        <div class="input-group-text">Confirmar contraseña: </div>
+                                        <input type="password" placeholder="Confirmar contraseña" onkeyup='check();' class="form-control form-control-user"
+                                               id="confirmPassword"  name="confirmPassword" required="required">
+                                    </div>
+
 
                                 </div>
                                 <span id='message'></span>
@@ -174,11 +201,18 @@
 
                             </form>
                         </div>
+
                     </div>
                     <br>
                     <br>
+                    <br>
+                    <br>
                 </div>
+                <br>
+                <br>
             </div>
+            <br>
+            <br>
         </div>
     </div>
 </section>
@@ -230,7 +264,7 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
 <br><br><br><br><br><br><br>
-<footer class="mt-auto" style="background-color: #D6D7DA;position: relative;bottom: -160px;width: 100%">
+<footer class="mt-auto" style="background-color: #D6D7DA;position: relative;bottom: -190px;width: 100%">
     <div class="container"  style="background-color: #D6D7DA">
         <%--            <div class="d-flex justify-content-start"><p class="text-muted">© 2022 Proyecto CinEstudiar</p></div>--%>
         <div class="d-flex bd-highlight">
